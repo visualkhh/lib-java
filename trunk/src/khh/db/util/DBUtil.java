@@ -1,0 +1,198 @@
+package khh.db.util;
+
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.Array;
+import java.sql.Blob;
+import java.sql.Clob;
+import java.sql.NClob;
+import java.sql.PreparedStatement;
+import java.sql.Ref;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.RowId;
+import java.sql.SQLException;
+import java.sql.SQLXML;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import khh.db.resultset.ResultRow;
+import khh.db.resultset.ResultSetContainer;
+
+public class DBUtil {
+
+    public static PreparedStatement setPreparedStatementValue(PreparedStatement psmt,ArrayList param) throws Exception{
+        
+        int addindex=0;
+        for (int index = 0; index < param.size(); index++) {
+            addindex=(index+1);
+            Object value  = param.get(index);
+            
+            if(value instanceof Array){
+                psmt.setArray( addindex,  (Array)value)  ;
+            }else if(value instanceof InputStream){
+            psmt.setAsciiStream( addindex, (InputStream) value)  ;
+           // }else if(arg1 instanceof eger){
+           // psmt.setAsciiStream( arg0, InputStream arg1,  arg2)  ;
+           // }else if(arg1 instanceof eger){
+            //psmt.setAsciiStream( arg0, InputStream arg1, long arg2)  ;
+            }else if(value instanceof BigDecimal){
+            psmt.setBigDecimal( addindex, (BigDecimal) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setBinaryStream( arg0, InputStream arg1)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setBinaryStream( arg0, InputStream arg1,  arg2)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setBinaryStream( arg0, InputStream arg1, long arg2)  ;
+            }else if(value instanceof Blob){
+            psmt.setBlob( addindex, (Blob) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setBlob( arg0, InputStream arg1)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setBlob( arg0, InputStream arg1, long arg2)  ;
+            }else if(value instanceof Boolean){
+            psmt.setBoolean( addindex, (Boolean) value)  ;
+            }else if(value instanceof Byte){
+            psmt.setByte( addindex, (Byte) value)  ;
+            }else if(value instanceof byte[]){
+            psmt.setBytes( addindex, (byte[]) value)  ;
+            }else if(value instanceof Reader){
+            psmt.setCharacterStream( addindex, (Reader) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setCharacterStream( arg0, Reader arg1,  arg2)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setCharacterStream( arg0, Reader arg1, long arg2)  ;
+            }else if(value instanceof Clob){
+            psmt.setClob( addindex, (Clob) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setClob( arg0, Reader arg1)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setClob( arg0, Reader arg1, long arg2)  ;
+            }else if(value instanceof java.sql.Date){
+            psmt.setDate( addindex, (java.sql.Date) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setDate( arg0, Date arg1, Calendar arg2)  ;
+            }else if(value instanceof Double){
+            psmt.setDouble( addindex, (Double) value)  ;
+            }else if(value instanceof Float){
+            psmt.setFloat( addindex, (Float) value)  ;
+            }else if(value instanceof Integer){
+            psmt.setInt( addindex,  (Integer)value)  ;
+            }else if(value instanceof Long){
+            psmt.setLong( addindex, (Long) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setNCharacterStream( arg0, Reader arg1)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setNCharacterStream( arg0, Reader arg1, long arg2)  ;
+            }else if(value instanceof NClob){
+            psmt.setNClob( addindex, (NClob) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setNClob( arg0, Reader arg1)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setNClob( arg0, Reader arg1, long arg2)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setNString( arg0, String arg1)  ;
+            
+//            }else if(arg1 instanceof Null){
+//            psmt.setNull( arg0,  arg1)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setNull( arg0,  arg1, String arg2)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setObject( arg0, Object arg1,  arg2)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setObject( arg0, Object arg1,  arg2,  arg3)  ;
+            }else if(value instanceof Ref){
+            psmt.setRef( addindex, (Ref) value)  ;
+            }else if(value instanceof RowId){
+            psmt.setRowId( addindex, (RowId) value)  ;
+            }else if(value instanceof SQLXML){
+            psmt.setSQLXML( addindex, (SQLXML) value)  ;
+            }else if(value instanceof Short){
+            psmt.setShort( addindex, (Short) value)  ;
+            }else if(value instanceof String){
+            psmt.setString( addindex, (String) value)  ;
+            }else if(value instanceof Time){
+            psmt.setTime( addindex, (Time) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setTime( arg0, Time arg1, Calendar arg2)  ;
+            }else if(value instanceof Timestamp){
+            psmt.setTimestamp( addindex, (Timestamp) value)  ;
+//            }else if(arg1 instanceof eger){
+//            psmt.setTimestamp( arg0, Timestamp arg1, Calendar arg2)  ;
+            }else if(value instanceof URL){
+            psmt.setURL( addindex, (URL) value)  ;
+//            }else if(arg1 instanceof InputStream){
+//            psmt.setUnicodeStream( arg0, InputStream arg1,  arg2) ;
+            }else if(value instanceof Object){
+                psmt.setObject( addindex, (Object) value)  ;
+            }
+
+        }
+        return psmt;
+    }
+    
+    public static ResultSetContainer makeResultSetContainer(ResultSet rset) throws SQLException, Exception {
+        ResultSetMetaData   rsmd = rset.getMetaData();
+        ResultSetContainer rstc = new ResultSetContainer();
+            for (int i = 1; i <= rsmd.getColumnCount(); i++)
+            {
+                rstc.addColumnName(rsmd.getColumnName(i));
+            }
+            Long index = (long) 0 ;
+            while(rset.next()){
+                ResultRow row = new ResultRow();
+                for (int i = 1; i <= rsmd.getColumnCount(); i++)
+                {
+//                    row.add(rstc.getColumnName(i-1), rset.getString(i));
+                    row.add(rsmd.getColumnName(i), rset.getString(i));
+                }
+                rstc.add(index++, row);
+            }
+        return rstc;
+    }
+    
+    // table 테그
+    public static String getTableHTMLTag(ResultSet rs) throws SQLException {
+        ResultSetMetaData rsm = rs.getMetaData();
+        String returnString = "";
+        returnString += "<table border='1'>";
+        returnString += "           <tr> ";
+        int columncnt = rsm.getColumnCount();
+        for (int i = 1; i <= columncnt; i++) {
+            returnString += "<td>" + rsm.getColumnName(i) + "</td> ";
+        }
+        while (rs.next()) {
+            returnString += "<tr>";
+            for (int i = 1; i <= columncnt; i++) {
+                returnString += "<td>" + rs.getString(i) + "</td>";
+            }
+            returnString += "</tr>";
+        }
+        returnString += "</tr>";
+        return returnString += "</table>";
+    }
+    
+    
+    // table 테그
+    public static String getTableTag(ResultSet rs) throws SQLException {
+        ResultSetMetaData rsm = rs.getMetaData();
+        String returnString = "";
+        int columncnt = rsm.getColumnCount();
+        
+        returnString += "<table>";
+        while (rs.next()) {
+            returnString+="<recode>";
+            for (int i = 1; i <= columncnt; i++) {
+                    returnString += "   <"+rsm.getColumnName(i)+">" + rs.getString(i)+ "</"+rsm.getColumnName(i)+"> ";
+            }
+            returnString += "</recode>";
+        }
+        return returnString += "</table>";
+    }
+    
+    
+    
+}
