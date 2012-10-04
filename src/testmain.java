@@ -33,5 +33,6 @@ class tt {
 public class testmain {
     public static void main(String[] args) throws InterruptedException {
         new tt().gogo();
+//테스트입니다.
     }
 }
