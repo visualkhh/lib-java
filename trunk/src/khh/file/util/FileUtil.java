@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 
 import khh.property.util.PropertyUtil;
@@ -245,7 +246,6 @@ public class FileUtil
        }
        public static File[] getFileList(File directory,final String rexFilenamefilter) throws IOException{
            FilenameFilter fnf = new FilenameFilter() {
-            @Override
             public boolean accept(File dir, String name) {
                 StringUtil.isFind(rexFilenamefilter, name);
                 return false;
@@ -275,7 +275,6 @@ public class FileUtil
          }
          public static File[] getFileListOnlyFile(File file) throws IOException {
              FileFilter ff = new FileFilter() {
-                 @Override
                  public boolean accept(File arg0) {
                      return arg0.isFile();
                  }
@@ -288,7 +287,6 @@ public class FileUtil
           }
           public static File[] getFileListOnlyFolder(File file) throws IOException {
               FileFilter ff = new FileFilter() {
-                  @Override
                   public boolean accept(File arg0) {
                       return arg0.isDirectory();
                   }
@@ -586,7 +584,23 @@ public class FileUtil
 //	        writer.close();
 //	    }
 	    
-	
+        
+	//finger
+        /*
+MIME은 확장 가능하다. MIME 표준은 새로운 content-type과 또 다른 MIME 속성 값을 등록할 수 있는 방법을 정의하고 있다.
+MIME의 명시적인 목표 중 하나는 기존 전자우편 시스템과의 호환성이다. MIME을 지원하는 클라이언트에서 비 MIME가 제대로 표시될 수 있고, 반대로 MIME을 지원하지 않는 클라이언트에서 간단한 MIME 메시지가 표시될 수 있다.
+Content-Type
+이 헤더는 메시지의 타입과 서브타입을 나타낸다. 예를 들면
+Content-Type: text/plain
+         */
+        public static String getMIMEType(String file){
+        	return getMIMEType(new File(file));
+        }
+        public static String getMIMEType(File file){
+            String contentType =
+                    new MimetypesFileTypeMap().getContentType(file);
+        	return contentType;
+        }
         
 	
 	
