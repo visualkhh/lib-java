@@ -6,9 +6,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.StringTokenizer;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
+import khh.conversion.util.ConversionUtil;
 
 public class StringUtil {
 
@@ -63,6 +67,7 @@ public class StringUtil {
         Matcher m = p.matcher(str);
         return m.find();
     }
+    
     static public boolean  isMatches(String str,String regex){
     //  System.out.println(Utilities.isMatches(str, ".*R001.*"));
             boolean sw = false;
@@ -205,4 +210,209 @@ public class StringUtil {
          h = replaceAll(h,map);
          return h;
      }
+    
+    //finger
+    public static String SQLInjectionFilter(String sInvalid)
+    {
+
+        String sValid = sInvalid;
+
+        if (sValid == null || sValid.equals(""))
+            return "";
+
+        sValid = sValid.replaceAll("OR", "");
+        sValid = sValid.replaceAll("AND", "");
+        sValid = sValid.replaceAll("or", "");
+        sValid = sValid.replaceAll("and", "");
+        sValid = sValid.replaceAll(";", "");
+        sValid = sValid.replaceAll(":", "");
+        sValid = sValid.replaceAll("--", "");
+        sValid = sValid.replaceAll("-", "");
+        sValid = sValid.replaceAll("`","");
+        sValid = sValid.replaceAll("\'","");
+        sValid = sValid.replaceAll("\"","");
+
+        return sValid;
+    }
+    
+    
+    public static int getMatchingCount(String matching_keyword,String full_str){
+    		int count = 0;
+    		int index = 0;
+
+    		while( (index = full_str.indexOf(matching_keyword, index)) > 0 ) {
+    		count++;
+    		index += matching_keyword.length();
+    		}
+    		return count;
+    }
+    
+    /**
+     * <p>문자열을 지정 구분자로 나눈 뒤 배열값으로 반환. (join과 반대의 기능을 함)</p>
+     *
+     * @param    대상 문자열.
+     * @param    구분자.
+     * @return   문자열 토큰배열.
+     */
+    public final static String[] split(String s, String delimiter) {
+
+        Vector v = new Vector();
+        StringTokenizer st = new StringTokenizer(s, delimiter);
+        while(st.hasMoreTokens())
+            v.addElement(st.nextToken());
+
+        String array[] = new String[v.size()];
+        v.copyInto(array);
+
+        return(array);
+    }
+
+
+
+    /**
+     * <p>문자열 토큰배열에 구분자를 넣어서 합친 문자열 반환. (spilit와 반대의 기능을 함)</p>
+     *
+     * @param    문자열 토큰배열.
+     * @param    구분자.
+     * @return   합쳐진 문자열.
+     */
+    public final static String join(String array[], String delimiter) {
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < array.length; i++){
+            if(i > 0) sb.append(delimiter);
+                sb.append(array[i]);
+        }
+        return(sb.toString());
+    }
+    
+    /**
+     * <p>문자열을 일정길이 만큼만 보여주고
+     * 그 길이에 초과되는 문자열일 경우 "..."를 덧붙여 보여줌.</p>
+     *
+     * @param    원본 문자열.
+     * @param    잘라야 될 길이.
+     * @return   변경된 문자열.
+     */
+    public static String fixLength(String s, int limit) {
+        return fixLength(s, limit, "...");
+    }
+
+
+    /**
+     * <p>문자열을 일정길이 만큼만 보여주고
+     * 그 길이에 초과되는 문자열일 경우 특정문자를 덧붙여 보여줌.</p>
+     *
+     * @param    원본 문자열.
+     * @param    잘라야 될 길이.
+     * @param    덧붙일 문자열.
+     * @return   변경된 문자열.
+     */
+    public static String fixLength(String s, int limit, String postfix) {
+        char[] charArray = s.toCharArray();
+
+        if (limit >= charArray.length)
+            return s;
+        return new String( charArray, 0, limit ).concat( postfix );
+    }
+
+
+    /**
+     * <p>문자열을 일정길이 만큼만 보여주고
+     * 그 길이에 초과되는 문자열일 경우 "..."를 덧붙여 보여줌.</p>
+     * <p>단 fixLength와의 차이는 제한길이의 기준이 char가 아니라 byte로
+     * 처리함으로해서 한글문제를 해결할수 있다.</p>
+     *
+     * @param    원본 문자열.
+     * @param    잘라야 될 길이 (byte).
+     * @return   변경된 문자열.
+     */
+    public static String fixUnicodeLength(String s, int limitByte) {
+        return fixUnicodeLength(s, limitByte, "...");
+    }
+
+
+    /**
+     * <p>문자열을 일정길이 만큼만 보여주고
+     * 그 길이에 초과되는 문자열일 경우 특정문자를 덧붙여 보여줌.</p>
+     *
+     * @param    원본 문자열.
+     * @param    잘라야 될 길이 (byte).
+     * @param    덧붙일 문자열.
+     * @return   변경된 문자열.
+     */
+    public static String fixUnicodeLength(String s, int limitByte, String postfix) {
+
+        // Cut empty string
+        s = s.trim();
+
+        byte[] outputBytes = s.getBytes();
+        String output = null;
+
+        if (outputBytes.length <= limitByte) {
+            output = s;
+        }else {
+            output = new String( outputBytes, 0, limitByte );
+
+            if(output.length() == 0)
+                output = new String( outputBytes, 0, limitByte-1 );
+            //output.concat( postfix );
+            //Minkoo : upper code do not work. I don't know exatly why...
+            output += postfix;
+        }
+        return output;
+    }
+    
+    
+    
+    
+    public static String lpad (String padStr,int totLength,String src){
+    	return pad("L",padStr,totLength,src);
+    }
+    public static String rpad (String padStr,int totLength,String src){
+    	return pad("R",padStr,totLength,src);
+    }
+    /**
+     * <p>원본 문자열에 지정한 문자열/자리수/방향 으로 문자열을 첨가.</p>
+     * ex) paddingStr( "L", "0", 7,"1234")   ==>   return "0001234"
+     *
+     * @param    원본 문자열.
+     * @param    첨가 방향.
+     * @param    첨가 문자.
+     * @param    전체 문자열 length.
+     * @return   변경된 문자열.
+     */
+    public static String pad( String direction, String padStr, int totLength,String src) {
+
+        String convStr = null;
+
+        if("".equals(ConversionUtil.nullToString(src,""))) {  // 원본 분자열이 null 이거나  ""이면  ""을 넘김.
+            return convStr = "";
+        }else if(!(src.length() < totLength)) {  // 원본 문자열이 전체 문자열 크기보다 같거나 작다면 원본 반환.
+            return convStr = src;
+        }else if("L:;:;R".indexOf(direction) < 0) { // pad 방향값이 L / R 이 아닐때 원본 반환.
+            return convStr = src;
+        }else if(ConversionUtil.nullToString(src,"").length() != 1) { // 첨가 문자열 길이가 0이거나 2이상일  때 원본 반환.
+            return convStr = src;
+        }
+
+        try {
+            int gapSize = totLength - src.length();
+            String tempStr = "";
+            for(int i=0; i < gapSize; i ++) {
+                tempStr += padStr;
+            }
+
+            if("L".equals(direction)) {
+                convStr = tempStr + src;
+            }else{
+                convStr = src + tempStr;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return convStr;
+    }
+    
+    
 }
