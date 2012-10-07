@@ -300,21 +300,24 @@ public class LogK  implements Serializable {
     
     
     
-   synchronized public void log(String level,Object message){
+   synchronized private void log(String level,Object message){
         log(level,message,null);
     }
-   synchronized  public void log(String level,Object message,Throwable e){
-       StackTraceElement st = StackTraceUtil.getBeforeStackTraceElement(LogK.class);
-       String classpath = st.getClassName();
-       String filename = st.getFileName();
-       String methodname = st.getMethodName();
-       int classlinenumber = st.getLineNumber();
+   synchronized  private void log(String level,Object message,Throwable e){
+       StackTraceElement st = 	StackTraceUtil.getBeforeStackTraceElement(LogK.class);
+       String classpath 	=	st.getClassName();
+       String filename 		=	st.getFileName();
+       String methodname 	=	st.getMethodName();
+       int classlinenumber 	=	st.getLineNumber();
+       
        ArrayList<LogKTarget> gettarget =  getLogKTarget(classpath);
        for (int i = 0; i < gettarget.size(); i++) {
            LogKTarget attarget = (LogKTarget) gettarget.get(i);
          
            if(getGrant(level, attarget)==false)
                continue;
+           
+           
            
            String logerDateformat = attarget.getLoger_dateformat();
            String logerformat = attarget.getLoger_logformat();
