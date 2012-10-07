@@ -232,6 +232,7 @@ public class LogK  implements Serializable {
         FilenameFilter filenamefilter = new FilenameFilter() {
             public boolean accept(File arg0, String filename) {
 //                System.out.println(Util.isFind("^logk.*.\\.xml", filename)+"    "+filename);
+//            	 System.out.println("LOGK --- > "+filename);
                 return StringUtil.isFind("^logk[A-Za-z0-9\\.\\@_\\-~#]+\\.xml", filename);
 //                return filename.startsWith("logk") && filename.endsWith(".xml"); 
             }
@@ -341,7 +342,7 @@ public class LogK  implements Serializable {
                    buffer.append(PropertyUtil.getSeparator());
                    buffer.append(av[j].getClassName()+av[j].getMethodName()+"("+av[j].getFileName()+":"+av[j].getLineNumber()+")");
                }
-               logerformat = logerformat.replaceAll("%e",buffer.toString());
+               logerformat = logerformat.replaceAll("%e",StringUtil.regexMetaCharToEscapeChar(buffer.toString()));
            }
            
            try{
