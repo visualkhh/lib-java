@@ -180,9 +180,22 @@ public class StackTraceUtil
     
 
     
+    //finger
     
-    
-    
+    /**
+     * <p>Throwable 객체에 대한 예외추적 문자열을 얻음.</p>
+	 *
+	 * @param    Throwable 예외객체.
+     * @return   예외추적 문자열.
+     */
+	public static String getStackTrace(Throwable e) {
+
+		java.io.ByteArrayOutputStream bos = new java.io.ByteArrayOutputStream();
+		java.io.PrintWriter writer = new java.io.PrintWriter(bos);
+		e.printStackTrace(writer);
+		writer.flush();
+		return bos.toString();
+	}
     
     
     
