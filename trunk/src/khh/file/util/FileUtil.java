@@ -28,6 +28,13 @@ import khh.string.util.StringUtil;
 
 public class FileUtil
 {
+    /** 1 KB */
+    public static final int KB = 1024;
+    /** 1 MB. */
+    public static final int MB = KB * KB;
+    /** 1 GB */
+    public static final int GB = KB * MB;
+    
 	
 	public static void replaceFileName(String path,String oldName,String newName){
 		
@@ -446,6 +453,7 @@ public class FileUtil
             return getFileSize(new File(path));
         }
         public static long getFileSize(File file) {
+        	//return (new Long(file.length())).intValue();
             return file.length();
         }
         //존재유무
