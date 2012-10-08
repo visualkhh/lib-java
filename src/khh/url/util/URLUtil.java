@@ -53,6 +53,9 @@ public class URLUtil
 		   return getURLString(new URL(urlStr),"UTF-8");
 	}
 	public static String getURLString(URL url,String charset) throws IOException{
+	
+		/*
+		
 		String returnvalue="";
 		//url = new URL("http://jmkim.com/utf8test.txt");
 //	        System.out.println("url=["+url+"]");
@@ -84,6 +87,19 @@ public class URLUtil
 //	            	returnvalue+=(char)ch ;
 //	            }
 		return returnvalue;
+		
+		*/
+		
+		//finger
+		StringBuffer buffer = new StringBuffer();
+		InputStream in = url.openStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(in,charset));
+		String line = null;
+
+		while ( (line = br.readLine()) != null )
+			buffer.append(line);
+
+		return buffer.toString();
 	}
 	
 	
