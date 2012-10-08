@@ -336,12 +336,14 @@ public class LogK  implements Serializable {
                logerformat = logerformat.replaceAll("%e","");
            }else{
                StringBuffer buffer = new StringBuffer();
-               StackTraceElement[] av = e.getStackTrace();
+               /*StackTraceElement[] av = e.getStackTrace();
                buffer.append("Exception "+e.toString()+" "+(e.getMessage()==null?"":e.getMessage()));
                for (int j = 0; attarget.getException_stacktrace()!=null&&attarget.getException_stacktrace()==true&&j < av.length; j++) {
                    buffer.append(PropertyUtil.getSeparator());
                    buffer.append(av[j].getClassName()+av[j].getMethodName()+"("+av[j].getFileName()+":"+av[j].getLineNumber()+")");
-               }
+               }*/
+               buffer.append(StackTraceUtil.getStackTrace(e)); //finger
+               
                logerformat = logerformat.replaceAll("%e",StringUtil.regexMetaCharToEscapeChar(buffer.toString()));
            }
            
