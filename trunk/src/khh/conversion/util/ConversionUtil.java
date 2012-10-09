@@ -15,8 +15,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
+
+import khh.std.adapter.Adapter_Std;
+
+import org.bouncycastle.jce.provider.JDKDSASigner.stdDSA;
 
 public class ConversionUtil {
 
@@ -309,6 +315,27 @@ public class ConversionUtil {
    public static int toInt(String data,int read_bit){
        return Integer.parseInt(data, 16);
    }
+   
+   
+   
+   public static Adapter_Std mapToAdapter(Map map) throws Exception{
+//	   if(map==null){
+//		   return null;
+//	   }
+	   Adapter_Std adapter = new Adapter_Std();
+	   
+	   Set keyset = map.keySet();
+	   Iterator i = keyset.iterator();
+	   while(i.hasNext()){
+			Object key 		= i.next();
+			Object value  	= map.get(key);
+			adapter.add(key, value);
+//			System.out.println("key:"+key+"    value:"+value);	
+		}
+	return adapter;
+	   
+   }
+   
    
    
    
