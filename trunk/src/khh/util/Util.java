@@ -199,8 +199,13 @@ public class Util {
             count++;
         }
         return returnvalue;
-    }
+    };
     
+    //finger
+    //프로그램이 강제 종료 될때  실행되는거!!  컨트롤+C
+    public static void addShutdownHook(Thread tread) throws Exception {
+        Runtime.getRuntime().addShutdownHook(tread);
+    };
     
     
     
