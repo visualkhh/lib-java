@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -13,6 +14,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import khh.conversion.util.ConversionUtil;
+import khh.std.adapter.Adapter_Std;
 
 public class StringUtil {
 
@@ -290,6 +292,49 @@ public class StringUtil {
     		}
     		return count;
     }
+    
+    
+    
+    public static String concatenate(Map<String,String> map,String divisionString){
+    	return concatenate(map,"=",divisionString);
+    }
+    public static String concatenate(Map<String,String> map,String assignmentstring,String divisionString){
+    	Iterator it = map.keySet().iterator(); 
+		StringBuffer buffer = new StringBuffer();
+		
+		while(it.hasNext()) {
+			String key   = it.next().toString();
+			String value = map.get(key).toString();
+			buffer.append(key).append(assignmentstring).append(value);
+			//buffer.append(key).append("=").append(value);
+			if (it.hasNext())
+				buffer.append(divisionString);
+				//buffer.append("&");
+		}
+		return buffer.toString();
+    }
+
+  public static String concatenate(Adapter_Std<String,String> map,String divisionString) throws Exception{
+		
+    	return concatenate(map,"=",divisionString);
+    }
+    public static String concatenate(Adapter_Std<String,String> map,String assignmentstring,String divisionString) throws Exception{
+    	StringBuffer buffer = new StringBuffer();
+		for(int i = 0 ; i < map.size() ; i ++ ) {
+				if (i!=0)
+				buffer.append(divisionString);
+			
+			String key   =	map.getKey(i);
+			String value = 	map.get(key);
+			buffer.append(key).append(assignmentstring).append(value);
+			//buffer.append(key).append("=").append(value);
+				//buffer.append("&");
+		}
+		return buffer.toString();
+    }
+    
+    
+    
     
     /**
      * <p>문자열을 지정 구분자로 나눈 뒤 배열값으로 반환. (join과 반대의 기능을 함)</p>
