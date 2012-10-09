@@ -59,6 +59,50 @@ public class StringUtil {
        }
        return null;
    }
+//    /**
+//     * <p>특정문자로 둘러?맛? 알맹이 문자 얻기</p>
+//	 * <p>ex) getLapOutText("<!Text!>", "<!", "!>") --> Text</p>
+//     *
+//     * @param    대상 문자열.
+//	 * @param    제거될 시작문자열.
+//	 * @param    제거될 끝문자열.
+//	 * @param    몇번제 시작문자열 부터 작업할 것인지 Index (1부터 시작).
+//     * @return   알맹이 문자열.
+//     */
+//     public static String getLapOutText(String str, String startTag, String endTag, int index) {
+//        String  l_String        =   str;
+//        int     l_posStartTag   =   0;
+//        int     l_lookUpPoint   =   0;
+//        int     l_findCnt       =   0;
+//        //---------------------------------------------------------------------
+//        // 시작 Tag 위치 알아 내기
+//        //---------------------------------------------------------------------
+//        do {
+//			//-- 시작 Tag의 위치 알아 내기
+//            l_posStartTag = l_String.indexOf(startTag, l_lookUpPoint);
+//			//-- 찾은 수 증가
+//            l_findCnt++;
+//			//-- 다음 검색 위치조정
+//            l_lookUpPoint = l_posStartTag + 1;
+//			//-- 찾은 수가 찾을 번째 수와 같을때 까지 Loop
+//        }   while (l_findCnt < index && l_posStartTag >= 0 );
+//
+//        if  (l_posStartTag < 0)  return "";
+//        //---------------------------------------------------------------------
+//        // 종료 Tag의 위치 알아 내기
+//        //---------------------------------------------------------------------
+//        int l_posEndTag = l_String.indexOf(endTag, l_posStartTag);
+//
+//        if  ( l_posEndTag < 0 ) return "";
+//
+//        //---------------------------------------------------------------------
+//        // Column Name 가져오기
+//        //---------------------------------------------------------------------
+//        l_String = l_String.substring(l_posStartTag + startTag.length(), l_posEndTag).trim();
+//
+//        return l_String;
+//    }
+//     
     
     //아래꺼 index나오게 바꿔야될듯.
     // String rex="^one cat.*.yard"; . 찍어서 붙쳐줘야함. 오리지널 문자로바꾸는건 \\. 이런식
@@ -195,10 +239,10 @@ public class StringUtil {
     }
     public static String tagMetaCharToEscapeChar(String h){
         HashMap<String,String> map = new HashMap();
-        map.put("&", "&#38;");
+        map.put("&", "&#38;"); //buf.append("&amp;");
         h = replaceAll(h,map);
         map = new HashMap();
-        map.put("<", "&lt;");
+        map.put("<", "&lt;");  
         map.put(">", "&gt;");
         map.put("(", "&#40;");
         map.put(")", "&#41;");
