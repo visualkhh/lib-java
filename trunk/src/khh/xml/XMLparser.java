@@ -250,7 +250,7 @@ public class XMLparser
 	}
 	
 	
-	
+//  System.out.println(parser.getString("//*[@id=\"Attribution1\"]/div[1]/a"));
 //	String xPathUrl="/beans/bean[name='factory_a']/@class";
 //	String xPathUrl="/beans/bean";
 //	PathExpression expr = xpath.compile("//book[author='Neal Stephenson']/title/text()");
