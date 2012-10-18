@@ -16,8 +16,16 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import khh.conversion.util.ConversionUtil;
+import khh.io.inputstream.InputMemoryStream;
+import khh.io.outputstream.OutputMemoryStream;
 import khh.string.util.StringUtil;
 
+import org.htmlcleaner.CleanerProperties;
+import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.PrettyHtmlSerializer;
+import org.htmlcleaner.PrettyXmlSerializer;
+import org.htmlcleaner.TagNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -156,7 +164,7 @@ public class XMLparser
 	
 	public void setURL(URL url) throws IOException, SAXException  {
 		this.url = url;
-		
+		try{
             URLConnection urlConnection = url.openConnection();
             urlConnection.setConnectTimeout(getConnectionTimeout());
             urlConnection.setReadTimeout(getReadTimeout());
@@ -166,8 +174,24 @@ public class XMLparser
                     InputStream inputStream = httpConnection.getInputStream();
                     setInputStremStream(inputStream);
             } else {
-                    System.err.println("HTTP Response is not \"HTTP Status-Code 200: OK.\"");
+                    throw new IOException("HTTP Response is not \"HTTP Status-Code 200: OK.\"");
             }
+            System.out.println("a");
+		}catch (Exception e) {
+			CleanerProperties props = new CleanerProperties();
+		    TagNode tagNode = new HtmlCleaner(props).clean(url);
+		    PrettyXmlSerializer s = new PrettyXmlSerializer(props);
+//		    OutputMemoryStream outputstream = new OutputMemoryStream();
+//		    System.out.println( s.getAsString(tagNode));
+//		    s.writeToStream(tagNode, outputstream);
+//		    InputMemoryStream inputStream = new InputMemoryStream(outputstream.getBuffer());
+		   InputStream inputStream =  ConversionUtil.toInputStream( s.getAsString(tagNode));
+		    setInputStremStream(inputStream);
+		   /*  new PrettyXmlSerializer(props).writeToFile(
+		             tagNode, "chinadaily.xml", "utf-8"
+		         );*/
+			
+		}
 	}
 	
 	public int getConnectionTimeout() {
