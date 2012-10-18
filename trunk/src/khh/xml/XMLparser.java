@@ -17,19 +17,17 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import khh.conversion.util.ConversionUtil;
-import khh.io.inputstream.InputMemoryStream;
-import khh.io.outputstream.OutputMemoryStream;
 import khh.string.util.StringUtil;
 
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.PrettyHtmlSerializer;
 import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public class XMLparser
 {
@@ -49,7 +47,7 @@ public class XMLparser
 		setFilePath(filePath);
 	}
 	public XMLparser (InputStream fileStream) throws SAXException, IOException{
-		setInputStremStream(fileStream);
+		setInputStrem(fileStream);
 	}
 	public XMLparser (File file) throws SAXException, IOException{
 		setFile(file);
@@ -149,11 +147,14 @@ public class XMLparser
 	public void setDocument(Document document) {
 		this.document = document;
 	}
+	public void setString(String stringXML) throws SAXException, IOException {
+		makeDocument(ConversionUtil.toInputStream(stringXML));
+	}
 	public void setFilePath(String filePath) throws SAXException, IOException {
 		this.filePath = filePath;
 		makeDocument(filePath);
 	}
-	public void setInputStremStream(InputStream inputStream) throws SAXException, IOException {
+	public void setInputStrem(InputStream inputStream) throws SAXException, IOException {
 		this.inputStream = inputStream;
 		makeDocument(inputStream);
 	}
@@ -172,13 +173,16 @@ public class XMLparser
             int responseCode = httpConnection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = httpConnection.getInputStream();
-                    setInputStremStream(inputStream);
+                    setInputStrem(inputStream);
             } else {
                     throw new IOException("HTTP Response is not \"HTTP Status-Code 200: OK.\"");
             }
             System.out.println("a");
-		}catch (Exception e) {
+		}catch (SAXParseException e) {
 			CleanerProperties props = new CleanerProperties();
+			props.setTranslateSpecialEntities(true);
+			props.setTransResCharsToNCR(true);
+			props.setOmitComments(true);
 		    TagNode tagNode = new HtmlCleaner(props).clean(url);
 		    PrettyXmlSerializer s = new PrettyXmlSerializer(props);
 //		    OutputMemoryStream outputstream = new OutputMemoryStream();
@@ -186,7 +190,7 @@ public class XMLparser
 //		    s.writeToStream(tagNode, outputstream);
 //		    InputMemoryStream inputStream = new InputMemoryStream(outputstream.getBuffer());
 		   InputStream inputStream =  ConversionUtil.toInputStream( s.getAsString(tagNode));
-		    setInputStremStream(inputStream);
+		    setInputStrem(inputStream);
 		   /*  new PrettyXmlSerializer(props).writeToFile(
 		             tagNode, "chinadaily.xml", "utf-8"
 		         );*/
@@ -359,6 +363,11 @@ public class XMLparser
 //			e.printStackTrace();
 //		}
 		return nodesresult;
+	}
+	
+	
+	public String getString(){
+		return null;
 	}
 	
 	

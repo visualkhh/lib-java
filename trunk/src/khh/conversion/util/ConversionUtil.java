@@ -23,6 +23,7 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 
 import khh.std.adapter.Adapter_Std;
+import khh.string.util.StringUtil;
 
 import org.bouncycastle.jce.provider.JDKDSASigner.stdDSA;
 
@@ -227,6 +228,14 @@ public class ConversionUtil {
    public static InputStream toInputStream(String contents){
 	   //InputStream input = new ByteArrayInputStream(contents.getBytes("UTF-8"));
 	   InputStream input = new ByteArrayInputStream(contents.getBytes());
+	   return input;
+   }
+   
+   //StringUtil.SET_UTF_8
+   public static InputStream toInputStream(String contents,String char_set) throws UnsupportedEncodingException{
+	   //InputStream input = new ByteArrayInputStream(contents.getBytes("UTF-8"));
+	   //StringUtil.SET_UTF_8
+	   InputStream input = new ByteArrayInputStream(contents.getBytes(char_set));
 	   return input;
    }
    
