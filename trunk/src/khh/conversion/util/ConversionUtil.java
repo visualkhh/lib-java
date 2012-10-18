@@ -1,8 +1,10 @@
 package khh.conversion.util;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
@@ -214,7 +216,19 @@ public class ConversionUtil {
            return buff.getFloat();
        }
 
-
+   public static String toString(InputStream inputStream) throws IOException{
+	   StringBuffer sb = new StringBuffer();
+	     byte[] b = new byte[4096];
+	     for (int n; (n = inputStream.read(b)) != -1;) {
+	         sb.append(new String(b, 0, n));
+	     }
+	  return sb.toString();
+   }
+   public static InputStream toInputStream(String contents){
+	   //InputStream input = new ByteArrayInputStream(contents.getBytes("UTF-8"));
+	   InputStream input = new ByteArrayInputStream(contents.getBytes());
+	   return input;
+   }
    
    ////////////////
    
