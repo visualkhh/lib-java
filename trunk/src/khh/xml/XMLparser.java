@@ -177,8 +177,9 @@ public class XMLparser
             } else {
                     throw new IOException("HTTP Response is not \"HTTP Status-Code 200: OK.\"");
             }
-            System.out.println("a");
+//            System.out.println("a");
 		}catch (SAXParseException e) {
+//			System.out.println("b");
 			CleanerProperties props = new CleanerProperties();
 			props.setTranslateSpecialEntities(true);
 			props.setTransResCharsToNCR(true);
@@ -366,7 +367,11 @@ public class XMLparser
 	}
 	
 	
-	public String getString(){
+	public String getString() throws IOException{
+		if(inputStream!=null){
+			inputStream.reset();
+			return ConversionUtil.toString(inputStream);
+		}
 		return null;
 	}
 	
