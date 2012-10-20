@@ -19,8 +19,8 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import khh.db.resultset.ResultRow;
-import khh.db.resultset.ResultSetContainer;
+import khh.db.terminal.resultset.DBTResultRecord;
+import khh.db.terminal.resultset.DBTResultSetContainer;
 
 public class DBUtil {
 
@@ -134,16 +134,16 @@ public class DBUtil {
         return psmt;
     }
     
-    public static ResultSetContainer makeResultSetContainer(ResultSet rset) throws SQLException, Exception {
+    public static DBTResultSetContainer makeResultSetContainer(ResultSet rset) throws SQLException, Exception {
         ResultSetMetaData   rsmd = rset.getMetaData();
-        ResultSetContainer rstc = new ResultSetContainer();
+        DBTResultSetContainer rstc = new DBTResultSetContainer();
             for (int i = 1; i <= rsmd.getColumnCount(); i++)
             {
                 rstc.addColumnName(rsmd.getColumnName(i));
             }
             Long index = (long) 0 ;
             while(rset.next()){
-                ResultRow row = new ResultRow();
+                DBTResultRecord row = new DBTResultRecord();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++)
                 {
 //                    row.add(rstc.getColumnName(i-1), rset.getString(i));
