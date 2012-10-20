@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import khh.db.connection.ConnectionCreator_I;
-import khh.db.resultset.ResultSetContainer;
 import khh.db.statement.LogPreparedStatement;
+import khh.db.terminal.resultset.DBTResultSetContainer;
 import khh.db.util.DBUtil;
 import khh.debug.LogK;
 
@@ -30,11 +30,11 @@ public class DBTerminal {
         autoCommit=watnAutoCommit;
     }
     
-    public ResultSetContainer executeQuery(String sql) throws Exception{
+    public DBTResultSetContainer executeQuery(String sql) throws Exception{
         Connection connection =null;
         Statement stmt=null;
         ResultSet rset=null;
-        ResultSetContainer rsc=null;
+        DBTResultSetContainer rsc=null;
         try {
             connection = getConnection();
             
@@ -106,11 +106,11 @@ public class DBTerminal {
     
     
     
-    public ResultSetContainer executeQuery(String sql,ArrayList param) throws Exception{
+    public DBTResultSetContainer executeQuery(String sql,ArrayList param) throws Exception{
         Connection connection =null;
         PreparedStatement pstmt=null;
         ResultSet rset=null;
-        ResultSetContainer rsc=null;
+        DBTResultSetContainer rsc=null;
         try {
             connection = getConnection();
             pstmt = new LogPreparedStatement(connection,sql);

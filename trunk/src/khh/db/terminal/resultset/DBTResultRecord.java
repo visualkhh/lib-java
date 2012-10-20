@@ -1,9 +1,9 @@
-package khh.db.resultset;
+package khh.db.terminal.resultset;
 
 import khh.std.adapter.Adapter_Base;
 
 //String columnName ,  String Data
-public class ResultRow extends Adapter_Base<String, String> {
+public class DBTResultRecord extends Adapter_Base<String, String> {
 
 
     @Override
