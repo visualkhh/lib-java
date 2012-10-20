@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import khh.callstack.util.StackTraceUtil;
+import khh.collection.DuplicationArrayList;
 import khh.date.util.DateUtil;
 import khh.file.util.FileUtil;
 import khh.property.util.PropertyUtil;
@@ -57,8 +58,8 @@ public class LogK  implements Serializable {
     long recycle_ms=10000;
     boolean recycle=true;
     
-    
-    ArrayList<String> configfile_add = new ArrayList<String>();
+    DuplicationArrayList<String> configfile_add = new DuplicationArrayList<String>();
+    //ArrayList<String> configfile_add = new ArrayList<String>();
     ArrayList<String> path_add = new ArrayList<String>();
     
     private LogK(){
@@ -257,8 +258,9 @@ public class LogK  implements Serializable {
         
         
         //user driect Add 
-        for (int i = 0; i < configfile_add.size(); i++) {
-        	configfile.add(new File(configfile_add.get(i)));
+        ArrayList<String> distinct = configfile_add.getDistinct();
+        for (int i = 0; i < distinct.size(); i++) {
+        	configfile.add(new File(distinct.get(i)));
 		};
         
         
