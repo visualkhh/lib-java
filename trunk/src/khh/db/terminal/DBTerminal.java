@@ -40,6 +40,15 @@ public class DBTerminal {
     private static HashMap<String,String> sql = new HashMap<String, String>();
     private static LogK log = LogK.getInstance();
     
+    
+    private ConnectionCreator_I connectioncreator=null;
+    private Connection connection=null;
+    private LogK logk  = LogK.getInstance();
+    private Boolean autoCommit=null;
+    
+    
+    
+    
     synchronized public static void addConfigfile(String configfilepath){
         configfile_add.add(configfilepath);
         reload() ;
@@ -166,10 +175,7 @@ public class DBTerminal {
     
     
     
-    ConnectionCreator_I connectioncreator=null;
-    Connection connection=null;
-    private LogK logk  = LogK.getInstance();
-    Boolean autoCommit=null;
+
     
     public DBTerminal(ConnectionCreator_I connectioncreator) {
         this.connectioncreator=connectioncreator;
@@ -207,7 +213,6 @@ public class DBTerminal {
             log.error("not Found find SqlMap id "+sqlid);
             throw new Exception("not Found find SqlMap id "+sqlid);
         }
-        /////////
         String sql_get  = sql.get(sqlid);
         StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
         for (int i = 0; i < param.size(); i++) {
@@ -215,7 +220,6 @@ public class DBTerminal {
             ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
            log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
            for (int j = 0; j < size.size(); j++) {
-             //System.out.println(size.get(j));
              datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
            }
            sql_get = StringUtil.replaceAll(sql_get, findstr, "?");
@@ -268,6 +272,44 @@ public class DBTerminal {
     
     
     
+    
+    
+    
+    
+    public int executeMapUpdate(String sqlid) throws Exception{
+        if(sql.get(sqlid)==null){
+            log.error("not Found find SqlMap id "+sqlid);
+            throw new Exception("not Found find SqlMap id "+sqlid);
+        }
+        return executeMapUpdate(sql.get(sqlid));
+    }
+    public int executeMapUpdate(String sqlid,Adapter_Base<String,Object> param) throws Exception{
+        if(sql.get(sqlid)==null){
+            log.error("not Found find SqlMap id "+sqlid);
+            throw new Exception("not Found find SqlMap id "+sqlid);
+        }
+        String sql_get  = sql.get(sqlid);
+        StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
+        for (int i = 0; i < param.size(); i++) {
+            String findstr="#"+param.getKey(i)+"#";
+            ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
+           log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
+           for (int j = 0; j < size.size(); j++) {
+             datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
+           }
+           sql_get = StringUtil.replaceAll(sql_get, findstr, "?");
+        }
+        
+        SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
+        return executeUpdate(sql_get,datafull.getValueArrayList());
+    }
+    
+    
+    
+    
+    
+    
+    
     public int executeUpdate(String sql) throws Exception{
        return executeUpdate(sql,null);
     }
@@ -309,17 +351,22 @@ public class DBTerminal {
     
     public void commit() throws Exception{
         
-        if(connection!=null && connection.isClosed()==false){
-            connection.commit();
-            connection.close();
+        if(getConnection()!=null && getConnection().isClosed()==false){
+        	if(getConnection().getAutoCommit()==false){
+        		getConnection().commit();
+        	}
+        	getConnection().close();
             closeConnection();
         }
     }
     
     public void rollback() throws Exception{
-        if(connection!=null && connection.isClosed()==false){
-            connection.rollback();
-            connection.close();
+        if(getConnection()!=null && getConnection().isClosed()==false ){
+        	if(getConnection().getAutoCommit()==false){
+        		getConnection().rollback();
+        	}
+        	
+        	getConnection().close();
             closeConnection();
         }
     }
