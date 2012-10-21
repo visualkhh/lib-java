@@ -260,10 +260,9 @@ public class LogK  implements Serializable {
         //user driect Add 
         ArrayList<String> distinct = configfile_add.getDistinct();
         for (int i = 0; i < distinct.size(); i++) {
+        	System.out.println("LogK ConfigAddFile loading  : "+distinct.get(i));
         	configfile.add(new File(distinct.get(i)));
 		};
-        
-        
     }
    synchronized  private String[] getConfigPath() {
 	   //System.out.println("----------- "+ FileUtil.getFilePath(LogK.class,""));
@@ -333,7 +332,10 @@ public class LogK  implements Serializable {
            logerformat = logerformat.replaceAll("%f", methodname);
            logerformat = logerformat.replaceAll("%n", classlinenumber+"");
            logerformat = logerformat.replaceAll("%r", PropertyUtil.getSeparator());
+           message = (message==null?"null":message);
            logerformat = logerformat.replaceAll("%m", StringUtil.regexMetaCharToEscapeChar(message.toString()));
+           
+           
            if(e==null){
                logerformat = logerformat.replaceAll("%e","");
            }else{

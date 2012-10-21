@@ -57,6 +57,7 @@ public class XMLparser
 	}
 
 	public void finalize(){
+		
 		if(inputStream!=null){
 			try
 			{
@@ -64,10 +65,10 @@ public class XMLparser
 			}
 			catch (IOException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 	private DocumentBuilder getBuilder(){

@@ -24,6 +24,9 @@ import khh.db.terminal.resultset.DBTResultSetContainer;
 
 public class DBUtil {
 
+    public static PreparedStatement setPreparedStatementValueName(PreparedStatement psmt,ArrayList param) throws Exception{
+        return psmt;
+    }
     public static PreparedStatement setPreparedStatementValue(PreparedStatement psmt,ArrayList param) throws Exception{
         
         int addindex=0;
