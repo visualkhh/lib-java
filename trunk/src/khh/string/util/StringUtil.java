@@ -105,6 +105,28 @@ public class StringUtil {
 //        return l_String;
 //    }
 //     
+
+    
+    
+    public static ArrayList<Integer> getFindIndex(String findstr, String str) {
+        ArrayList<Integer> returnval = new ArrayList<Integer>();
+        int findindex =-1;
+        int nextindex =0;
+        while((findindex = str.indexOf(findstr,nextindex))!=-1){
+            nextindex=findindex+1;
+            returnval.add(findindex);
+        }        
+        return returnval;
+    }
+    //아래꺼 index나오게 바꿔야될듯.
+    // String rex="^one cat.*.yard"; . 찍어서 붙쳐줘야함. 오리지널 문자로바꾸는건 \\. 이런식
+    public static boolean getFind(String rex, String str) {
+        Pattern p = Pattern.compile(rex);
+        Matcher m = p.matcher(str);
+        return m.find();
+    }
+    
+
     
     //아래꺼 index나오게 바꿔야될듯.
     // String rex="^one cat.*.yard"; . 찍어서 붙쳐줘야함. 오리지널 문자로바꾸는건 \\. 이런식
