@@ -19,13 +19,31 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import khh.collection.StandardArrayList;
 import khh.db.terminal.resultset.DBTResultRecord;
 import khh.db.terminal.resultset.DBTResultSetContainer;
+import khh.sort.SortUtil;
+import khh.sort.comparator.CompareBase;
+import khh.sort.comparator.CompareIntegerStandard;
+import khh.std.Standard;
+import khh.std.adapter.Adapter_Base;
+import khh.string.util.StringUtil;
 
 public class DBUtil {
 
-    public static PreparedStatement setPreparedStatementValueName(PreparedStatement psmt,ArrayList param) throws Exception{
-        return psmt;
+    public static ArrayList setPreparedStatementValueName(String sql_naming,Adapter_Base<String,Object> param) throws Exception{
+        StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
+        for (int i = 0; i < param.size(); i++) {
+            String findstr="#"+param.getKey(i)+"#";
+            ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_naming);
+           for (int j = 0; j < size.size(); j++) {
+             datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
+           }
+           sql_naming = StringUtil.replaceAll(sql_naming, findstr, "?");
+        }
+        //select * from w where a=#a#...
+        SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
+        return datafull;
     }
     public static PreparedStatement setPreparedStatementValue(PreparedStatement psmt,ArrayList param) throws Exception{
         
