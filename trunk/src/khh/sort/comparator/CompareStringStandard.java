@@ -9,7 +9,6 @@ public class CompareStringStandard extends CompareBase<Standard<String, Object>>
         super(sorttype);
     }
     
-    @Override
     public int compare(Standard<String, Object> o1, Standard<String, Object> o2) {
         if(getSortType() == TYPE_ASC){
             // 오름차순(ASC)
