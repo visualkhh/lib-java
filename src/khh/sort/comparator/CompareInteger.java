@@ -8,7 +8,6 @@ public class CompareInteger extends CompareBase<Integer> {
         super(sorttype);
     }
     
-    @Override
     public int compare(Integer o1, Integer o2) {
         if(getSortType() == TYPE_ASC){
             // 오름차순(ASC)

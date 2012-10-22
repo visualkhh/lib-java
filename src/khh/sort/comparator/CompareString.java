@@ -8,7 +8,6 @@ public class CompareString extends CompareBase<String> {
         super(sorttype);
     }
 
-    @Override
     public int compare(String o1, String o2) {
         if(getSortType() == TYPE_ASC){
             // 오름차순(ASC)
