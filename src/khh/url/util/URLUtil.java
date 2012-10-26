@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import khh.property.util.PropertyUtil;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -96,8 +98,10 @@ public class URLUtil
 		BufferedReader br = new BufferedReader(new InputStreamReader(in,charset));
 		String line = null;
 
-		while ( (line = br.readLine()) != null )
+		while ( (line = br.readLine()) != null ){
 			buffer.append(line);
+			buffer.append(PropertyUtil.getSeparator());
+		}
 
 		return buffer.toString();
 	}
