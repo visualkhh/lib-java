@@ -1,31 +1,17 @@
 package khh.conversion.util;
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
-
 import khh.std.adapter.Adapter_Std;
-import khh.string.util.StringUtil;
-
-import org.bouncycastle.jce.provider.JDKDSASigner.stdDSA;
 
 public class ConversionUtil {
 
