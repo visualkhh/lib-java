@@ -101,7 +101,7 @@ public class TelnetKClient  extends TelnetClient{
     
     
     private void init() {
-        System.out.println("a");
+     //   System.out.println("a");
         clear();
             receiver = new Thread(receiver_run);
             receiver.start();
