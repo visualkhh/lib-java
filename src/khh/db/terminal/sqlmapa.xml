@@ -12,7 +12,7 @@
 	<update id="cool_update" >
 		update insert_test set seq = #seq# 
 	</update>
-	
+	 
 	<delete id="cool_delete" >
 		delete from insert_test where seq=#seq#;
 	</delete>
