@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlmap>
+	<select id="cool_select" >
+		select * from gd_bd_notice where hit=#hit#
+		and name=#name# and hit=#hit#;
+	</select>
+	
+	<insert id="cool_insert" >
+		insert into insert_test (seq) values (#seq#)
+	</insert>
+	
+	<update id="cool_update" >
+		update insert_test set seq = #seq# 
+	</update>
+	
+	<delete id="cool_delete" >
+		delete from insert_test where seq=#seq#;
+	</delete>
+	
+</sqlmap>
+
+
+
+
+
+
+
+
+
+
+
+
+

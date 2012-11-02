@@ -395,7 +395,7 @@ public class DBTerminal {
         connection = connectioncreator.getMakeConnection();
         logk.debug("GetConnection ConnectionCreator.getMakeConnection      Call  makeConnection AutoCommit("+connection.getAutoCommit()+")   settingAutoCommit("+autoCommit+")");
         
-        //사용자가 셋팅한게있음 그걸로 셋팅
+        //사용자가 셋팅한게있음 그걸로 셋팅 
         if(autoCommit!=null){
             connection.setAutoCommit(autoCommit);
         }
