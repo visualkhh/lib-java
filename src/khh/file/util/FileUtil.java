@@ -36,6 +36,31 @@ public class FileUtil
     public static final int GB = KB * MB;
     
 	
+
+	//MIME에서 제공하는 content-type
+	//http://gissmmo.tistory.com/entry/%ED%8E%8CMIME-Type%EA%B3%BC-Content-Type%EC%9D%98-%EC%9D%B4%ED%95%B4
+	final public static String MIME_TEXT_HTML="text/html";
+	final public static String MIME_TEXT_TEXT="text/plain";
+	final public static String MIME_TEXT_XML="text/xml";
+	final public static String MIME_TEXT_XSL="text/xsl";
+	final public static String MIME_TEXT_JAVASCRIPT="text/javascript";
+	final public static String MIME_APPLICATION_AUTOCAD="application/acad";
+	final public static String MIME_APPLICATION_MSACCESS="application/msaccess";
+	final public static String MIME_APPLICATION_MSWORD="application/msword";
+	final public static String MIME_APPLICATION_BIN="application/octet-stream";
+	final public static String MIME_APPLICATION_PDF="application/pdf";
+	final public static String MIME_APPLICATION_MSEXCEL="application/vnd.ms-excel";
+	final public static String MIME_APPLICATION_MSPPT="application/vnd.ms-powerpoint";
+	final public static String MIME_APPLICATION_JAVASCRIPT="application/x-javascript";
+	final public static String MIME_APPLICATION_ZIP="application/zip";
+	final public static String MIME_MULTIPART_ZIP="multipart/x-zip";
+	final public static String MIME_IMAGE_GIF="image/gif";
+	
+    
+    
+    
+    
+    
 	public static void replaceFileName(String path,String oldName,String newName){
 		
 		File file = new File(path);

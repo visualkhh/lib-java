@@ -84,7 +84,7 @@ public class PropertyUtil
 	public static String getTempDir(){
 		return getProperty("java.io.tmpdir");
 	}
-	//separator     줄바꿈..
+	//separator     줄바꿈..엔터
 	public static String getSeparator(){
 		return getProperty("line.separator");
 	}
