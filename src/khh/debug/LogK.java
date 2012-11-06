@@ -95,14 +95,13 @@ public class LogK  implements Serializable {
         targets.clear();
         String targetxpath="//target";
         for (int i = 0; i < configfile.size(); i++) {
-        	
             XMLparser parser = null;
             try {
                 parser = new XMLparser((File) configfile.get(i));
                 recycle_ms = parser.getInt("//logkattribute/recycle_ms")==null?recycle_ms:parser.getInt("//logkattribute/recycle_ms");
                 recycle = parser.getBoolean("//logkattribute/recycle")==null?false:parser.getBoolean("//logkattribute/recycle");
-                int targetcnt = parser.getInt("count("+targetxpath+")");
-                
+                Integer targetcnt = parser.getInt("count("+targetxpath+")");
+                targetcnt=targetcnt==null?0:targetcnt;
                 
                 System.out.println("LogK: ConfigFilePath : "+configfile.get(i)+" \t recycle_ms :"+recycle_ms+" \t recycle : "+recycle+" \t targetcnt : "+targetcnt);
                 

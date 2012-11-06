@@ -344,6 +344,20 @@ public class ConversionUtil {
 	return adapter;
 	   
    }
+   //child에 없는걸 super에서 가져와라  즉   super에있는것중에 child에 없으면 거기에넣어라	KEY값으로.
+	public static Adapter_Std merge(Adapter_Std superitem, Adapter_Std childitem) throws Exception{
+	for (int i = 0; i < superitem.size(); i++) {
+		Object key = superitem.getKey(i);
+		Object value = superitem.get(i);
+		if(childitem.get(key)==null){
+			childitem.add(key, value);
+		}
+	}
+	
+	
+		return childitem;
+		
+   }
    
    
    
