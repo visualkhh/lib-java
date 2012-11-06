@@ -58,17 +58,23 @@ public class XMLparser
 
 	public void finalize(){
 		
-		if(inputStream!=null){
-			try
-			{
+		if (inputStream != null) {
+			try {
 				inputStream.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
+				this.close();
+			} catch (IOException e) {
 			}
 		}
-		
+		try {
+			super.finalize();
+		} catch (Throwable e) {
+		}
+	}
+	public void close(){
+		try {
+			inputStream.close();
+		} catch (IOException e) {
+		}
 	}
 	
 	private DocumentBuilder getBuilder(){

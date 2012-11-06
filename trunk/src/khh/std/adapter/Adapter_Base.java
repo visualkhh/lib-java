@@ -50,7 +50,7 @@ public abstract class Adapter_Base<K,T>  implements Serializable {
     		if(i<0){		
     			container.set(index,new Standard(key,value));
     		}else{
-    			throw new Exception("duplicate set Object index("+i+")");
+    			throw new Exception("duplicate set Object index->("+i+")");
     		}
 	    }
 	}

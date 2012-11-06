@@ -337,11 +337,22 @@ public class StringUtil {
 		return buffer.toString();
     }
 
-  public static String concatenate(Adapter_Std<String,String> map,String divisionString) throws Exception{
-		
-    	return concatenate(map,"=",divisionString);
+    public static String concatenateToAttribute(Adapter_Std<String,String> map) throws Exception{
+    	return concatenate(map,"="," ","'");
     }
-    public static String concatenate(Adapter_Std<String,String> map,String assignmentstring,String divisionString) throws Exception{
+    public static String concatenateToParameter(Adapter_Std<String,String> map) throws Exception{
+    	return concatenate(map,"=","&","");
+    }
+    public static String concatenate(Adapter_Std<String,String> map,String unionString,String divisionString,String pairString) throws Exception{
+//    	if(unionString==null){
+//    		unionString="";
+//    	}
+//    	if(divisionString==null){
+//    		divisionString="";
+//    	}
+//    	if(pairString==null){
+//    		pairString="";
+//    	}
     	StringBuffer buffer = new StringBuffer();
 		for(int i = 0 ; i < map.size() ; i ++ ) {
 				if (i!=0)
@@ -349,7 +360,7 @@ public class StringUtil {
 			
 			String key   =	map.getKey(i);
 			String value = 	map.get(key);
-			buffer.append(key).append(assignmentstring).append(value);
+			buffer.append(key).append(unionString).append(pairString).append(value).append(pairString);
 			//buffer.append(key).append("=").append(value);
 				//buffer.append("&");
 		}
