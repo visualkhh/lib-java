@@ -10,7 +10,6 @@ import khh.std.realworld.TPoint;
 public class MouseUtil {
 
     public static Point getPoint(){
-    	
         return MouseInfo.getPointerInfo().getLocation();
     }
     public static int getX(){
