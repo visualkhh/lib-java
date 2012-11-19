@@ -7,8 +7,7 @@ public class Queue<T> {
 	private   java.util.Queue<T> queue = null;
 	
 	public Queue() {
-		synchronized (this)
-		{
+		synchronized (queue) {
 //			queue =new LinkedList<T>();
 			queue =new PriorityQueue<T>();
 		}
@@ -22,10 +21,11 @@ public class Queue<T> {
 	}
 	synchronized public T pop() throws NoSuchElementException
 	{
-		
-		T item = queue.element();		
-		queue.poll();
-		return item;
+		synchronized (queue) {
+			T item = queue.element();		
+			queue.poll();
+			return item;
+		}
 		
 	}
 	synchronized public int size()
@@ -36,7 +36,7 @@ public class Queue<T> {
 	}
 	
 	@Override
-	synchronized public String toString() {
+	public String toString() {
 		return queue.toString();
 	}
 	
