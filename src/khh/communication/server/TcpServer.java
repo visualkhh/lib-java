@@ -64,7 +64,7 @@ public class TcpServer
 		eventQueue = EventQueue.getInstance();
 		clientProcessManager = new ClientProcessManager(eventQueue,getTcpServerCommunication(), getProcessManagerCount());	
 		clientSelectManager = new ClientSelectorManager(eventQueue, getSelectorManagerCount());
-		acceptSelectThread = new AcceptSelector(clientSelectManager,port);
+		acceptSelectThread = new AcceptSelector(clientSelectManager,getPort());
 		acceptSelectThread.start();
 	}
 
