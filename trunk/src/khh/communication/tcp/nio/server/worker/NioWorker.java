@@ -50,7 +50,7 @@ public class NioWorker extends Thread
 				log.info(String.format("Worker!!!!  execute WorkerBusiness End [%03d]", getId()));
 			}catch (Exception e){
 				close(channel);
-				log.error(String.format("Worker!!!!  execute WorkerBusiness End [%03d]", getId(), getId()),e);
+				log.error(String.format("Worker!!!!  execute WorkerBusiness End [%03d] "+channel.socket().getInetAddress(), getId(), getId()),e);
 			}
 			finally{
 				if(key != null)
