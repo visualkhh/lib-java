@@ -7,7 +7,7 @@ public class Queue<T> {
 	private   java.util.Queue<T> queue = null;
 	
 	public Queue() {
-		synchronized (queue) {
+		synchronized (this) {
 //			queue =new LinkedList<T>();
 			queue =new PriorityQueue<T>();
 		}

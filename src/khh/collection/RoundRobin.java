@@ -14,7 +14,7 @@ import java.util.ArrayList;
 	public synchronized T getNext(){
 		synchronized (this)
 		{
-			return get(getNextIndex());
+				return get(getNextIndex());
 		}
 	}
 	public synchronized  T getPrevious(){
