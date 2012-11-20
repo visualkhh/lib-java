@@ -8,13 +8,14 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
+import khh.communication.Communication_I;
 import khh.communication.Connection_Interface;
 import khh.communication.tcp.nio.worker.NioWorkerBusiness;
 import khh.debug.LogK;
 import khh.std.adapter.Adapter_Base;
 import khh.util.Util;
 
-public class NioClient extends Thread{
+public class NioClient extends Thread implements Communication_I{
 	private SocketChannel socketChannel	= null;
 	private String serverAddr			= "120.0.0.1";
 	private int	serverPort				= 9090;
@@ -39,7 +40,6 @@ public class NioClient extends Thread{
 	}
 	public void init() throws IOException{
 		clientSelector = Selector.open();		
-		connection();
 	}
 	public SocketChannel connection() throws IOException{
 		InetSocketAddress	addr = new InetSocketAddress(getServerAddr(), getServerPort());
@@ -56,8 +56,6 @@ public class NioClient extends Thread{
 		socketChennel.register(clientSelector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		return socketChennel;
 	}
-
-	
 	public NioWorkerBusiness getNioworkerbusiness() {
 		return nioworkerbusiness;
 	}
@@ -69,10 +67,15 @@ public class NioClient extends Thread{
 			return false;
 		return socketChannel.isConnected() && socketChannel.socket().isConnected()  ;//&& socket.isOpen()&&socket.finishConnect();
 	}
-	
 	@Override
 	public void run() {
-		log.debug(String.format("NioSelector(id:%d) Running...Thread Run", getId() ));
+		try {
+			if(isConnected()==false)
+			connection();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		log.debug(String.format("NioClient(id:%d) Running...Thread Run", getId() ));
 		while(true){
 				try {
 					if(clientSelector.select(3) > 0){
@@ -117,21 +120,18 @@ public class NioClient extends Thread{
 				}
 		}
 	}
-	
-	
 	private void finish(SelectionKey key){
 		if (key.isValid()) {
 			key.interestOps( SelectionKey.OP_READ | SelectionKey.OP_WRITE );
 		}
 	}
-	public void close() throws IOException{
+	public void close(){
 		try{
 			if(socketChannel!=null)
 				socketChannel.close();
 		}catch (IOException e1){
 		}
 	}
-	
 	private void close(SocketChannel socket){
 		try{
 			if(socket!=null)
@@ -139,74 +139,7 @@ public class NioClient extends Thread{
 		}catch (IOException e1){
 		}
 	}
-	
-//	public void write(String data) throws Exception{
-//		write(data.getBytes());
-//	}
-//	public void write(byte[] data) throws Exception{
-//		ByteBuffer bytebuff  = ByteBuffer.allocate(data.length);
-//		bytebuff.put(data);
-//		bytebuff.clear();
-//		write(bytebuff);
-//	}
-//
-//	synchronized public int write(ByteBuffer data) throws Exception{
-//		int write_length=0;
-//		try{
-//			log.debug("1) IsConnected  "+isConnected());
-//			write_length = getSocketChennel().write(data);
-//			log.debug("2) WriteLength "+write_length);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			try{
-//				socketChannel.close();
-//			}catch (Exception ze) {
-//				ze.printStackTrace();
-//			}
-//			socketChannel=null;
-//			log.debug("3) Write Fail Socket=null  isConnected? -> "+isConnected());
-//			throw e;
-//		}
-//		return write_length;
-//	}
-//	synchronized public  int read(byte[] buffer, int timeout_daly_mm) throws IOException{
-//		ByteBuffer bytebuff  = ByteBuffer.allocate(buffer.length);
-//		bytebuff.clear();
-//		int r = read(buffer, timeout_daly_mm);
-//		bytebuff.clear();
-//		bytebuff.get(buffer);
-//		bytebuff.clear();
-//		return r;
-//	}
-//	
-//	synchronized public  int read(ByteBuffer buffer, int timeout) throws Exception{
-//		int len = 0;
-//		long start_mm = System.currentTimeMillis();
-//		while (true){
-//			len = getSocketChennel().read(buffer);
-//			if(len > 0) {
-//				if ( buffer.position() == buffer.limit() ) {
-//					return len;
-//				}
-//			}
-//			//timeout Chk
-//			if (Util.isTimeOver(start_mm, timeout)) {
-//				throw new IOException("readBlock Time-Out  readbuffer Info"+buffer.toString());
-//			}
-//			try{
-//				Thread.sleep(1);
-//			}
-//			catch (InterruptedException e){
-//				e.printStackTrace();
-//			}
-//			
-//			
-//		}
-//	}	
-	
-	
-	
-	public SocketChannel getSocketChennel() throws Exception{
+	public SocketChannel getSocketChennel() throws IOException{
 		if(isConnected()==false){
 			socketChannel = connection();
 		}
@@ -218,7 +151,7 @@ public class NioClient extends Thread{
 	public int getServerConnectionTimeout() {
 		return serverConnectionTimeout;
 	}
-	public void setServerConnectionTimeout(int serverConnectionTimeout) {
+	public void setServerConnectionTimeout(int serverConnectionTimeout){
 		this.serverConnectionTimeout = serverConnectionTimeout;
 	}
 	public String getServerAddr() {
@@ -236,14 +169,12 @@ public class NioClient extends Thread{
 	public void setFServerPort(int fServerPort) {
 		serverPort = fServerPort;
 	}
-	
-	
 	@Override
-		protected void finalize() throws Throwable {
-			close();
-			super.finalize();
-		}
-	
-	
+	protected void finalize() throws Throwable {
+		close();
+		super.finalize();
+	}
+
+
 	
 }

@@ -9,7 +9,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import khh.collection.RoundRobin;
-import khh.communication.Server_I;
+import khh.communication.Communication_I;
 import khh.communication.tcp.nio.server.accept.NioAcceptManager;
 import khh.communication.tcp.nio.server.selector.NioSelector;
 import khh.communication.tcp.nio.server.worker.NioWorker;
@@ -17,7 +17,7 @@ import khh.communication.tcp.nio.worker.NioWorkerBusiness;
 import khh.debug.LogK;
 import khh.reflection.ReflectionUtil;
 
-public class NioServer implements Server_I
+public class NioServer implements Communication_I
 {
 	
 	private int port = 9090;

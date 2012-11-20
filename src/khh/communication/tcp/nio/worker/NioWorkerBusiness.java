@@ -39,9 +39,9 @@ abstract public class NioWorkerBusiness{
 	synchronized public int write(ByteBuffer data) throws IOException{
 		int write_length=0;
 		try{
-			log.debug("1) IsConnected  "+isConnected());
+//			log.debug("1) IsConnected  "+isConnected());
 			write_length = getSocketChannel().write(data);
-			log.debug("2) WriteLength "+write_length);
+//			log.debug("2) WriteLength "+write_length);
 		}catch(IOException e){
 			log.debug("3) Exception : Write Fail Socket=null  isConnected? -> "+isConnected());
 			throw e;
@@ -71,8 +71,8 @@ abstract public class NioWorkerBusiness{
 			}
 			//timeout Chk
 			if (Util.isTimeOver(start_mm, timeout_daly_mm)) {
-				log.debug("readBlock Time-Out : readbuffer Info"+ buffer.toString() );
-				throw new IOException("readBlock Time-Out  readbuffer Info"+buffer.toString());
+				log.debug("readBlock Time-Out : readbuffer Info"+ buffer.toString()+" daly_mm:"+timeout_daly_mm);
+				throw new IOException("readBlock Time-Out  readbuffer Info"+buffer.toString()+" daly_mm:"+timeout_daly_mm);
 			}
 			try{
 				Thread.sleep(1);
