@@ -14,10 +14,7 @@ import java.util.Set;
 import khh.std.adapter.Adapter_Std;
 
 public class ConversionUtil {
-
-    
-    
-    
+	
     public static String nullToString(String input, String out){
         String  a = (String)nullToObject(input,out);
         return a;
