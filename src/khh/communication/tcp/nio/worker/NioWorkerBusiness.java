@@ -18,15 +18,15 @@ abstract public class NioWorkerBusiness{
 	public static final int MODE_FIREST_RW		= SelectionKey.OP_READ | SelectionKey.OP_WRITE;
 	public static final int MODE_FIREST_W		= SelectionKey.OP_WRITE;
 	public static final int MODE_FIREST_R		= SelectionKey.OP_READ;
-	private int firestMode = MODE_FIREST_R;
-	private SocketChannel		socketChannel		= null;
-	private LogK log = LogK.getInstance();
+	private int firestMode 						= MODE_FIREST_R;
+	private SocketChannel socketChannel			= null;
+	private LogK log 							= LogK.getInstance();
 	
 	public void write(String data) throws IOException{
 		write(data.getBytes());
 	}
 	public void write(byte[] data) throws IOException{
-		ByteBuffer bytebuff  = ByteBuffer.allocate(data.length);
+		ByteBuffer bytebuff = ByteBuffer.allocate(data.length);
 		bytebuff.put(data);
 		bytebuff.clear();
 		write(bytebuff);
@@ -51,7 +51,6 @@ abstract public class NioWorkerBusiness{
 	
 	synchronized public  int read(byte[] buffer, int timeout_daly_mm) throws IOException{
 		ByteBuffer bytebuff  = ByteBuffer.allocate(buffer.length);
-//		bytebuff.put(data);
 		bytebuff.clear();
 		int r = read(buffer, timeout_daly_mm);
 		bytebuff.clear();
@@ -81,33 +80,21 @@ abstract public class NioWorkerBusiness{
 			}
 		}
 	}	
-	
-	
-	
-	
-	
-	public boolean isConnected()
-	{
+	public boolean isConnected(){
 		if ( getSocketChannel() == null )
 			return false;
 		return getSocketChannel().isConnected()   ;//&& socket.isOpen()&&socket.finishConnect();
 	}
-	
-	
 	public void setSocketChannel(SocketChannel socketChannel){
 		this.socketChannel = socketChannel;
 	}
 	public SocketChannel getSocketChannel(){
 		return this.socketChannel;
 	}
-
-	
-	
-
-	public int getFirestMode() {
+	public int getFirestMode(){
 		return firestMode;
 	}
-	public void setFirestMode(int firestMode) {
+	public void setFirestMode(int firestMode){
 		this.firestMode = firestMode;
 	}
 	@Override
@@ -115,7 +102,5 @@ abstract public class NioWorkerBusiness{
 		getSocketChannel().close();
 		super.finalize();
 	}
-	
-	
 	
 }
