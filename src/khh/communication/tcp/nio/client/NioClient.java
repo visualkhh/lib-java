@@ -68,11 +68,12 @@ public class NioClient extends Thread implements Communication_I{
 		return socketChannel.isConnected() && socketChannel.socket().isConnected()  ;//&& socket.isOpen()&&socket.finishConnect();
 	}
 	@Override
-	public void run() {
-		try {
-			if(isConnected()==false)
-			connection();
-		} catch (IOException e1) {
+	public void run(){
+		try{
+			if(isConnected()==false){
+				connection();
+			}
+		}catch(IOException e1){
 			e1.printStackTrace();
 		}
 		log.debug(String.format("NioClient(id:%d) Running...Thread Run", getId() ));
