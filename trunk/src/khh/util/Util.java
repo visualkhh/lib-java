@@ -276,4 +276,8 @@ public class Util {
         }
     }
     
+    public void arraycopy(Object oriArray,int startOriArrayIndex,Object outputArray,int startOutIndex,int endOutIndex){
+    	System.arraycopy(oriArray, startOriArrayIndex, outputArray, startOutIndex, endOutIndex);
+    }
+    
 }

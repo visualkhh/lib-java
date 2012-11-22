@@ -1,6 +1,7 @@
 package khh.communication.tcp.nio.worker;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
@@ -12,7 +13,7 @@ import khh.debug.util.DebugUtil;
 import khh.std.adapter.Adapter_Base;
 import khh.util.Util;
 
-abstract public class NioWorkerBusiness{
+abstract public class NioWorker{
 	
 	public static final int MODE_FIREST_NONE 	= 0;
 	public static final int MODE_FIREST_RW		= SelectionKey.OP_READ | SelectionKey.OP_WRITE;
@@ -37,10 +38,13 @@ abstract public class NioWorkerBusiness{
 	
 	
 	synchronized public int write(ByteBuffer data) throws IOException{
+		return write(data,getSocketChannel());
+	}
+	synchronized public int write(ByteBuffer data,SocketChannel socketChannel) throws IOException{
 		int write_length=0;
 		try{
 //			log.debug("1) IsConnected  "+isConnected());
-			write_length = getSocketChannel().write(data);
+			write_length = socketChannel.write(data);
 //			log.debug("2) WriteLength "+write_length);
 		}catch(IOException e){
 			log.debug("3) Exception : Write Fail Socket=null  isConnected? -> "+isConnected());
@@ -48,6 +52,8 @@ abstract public class NioWorkerBusiness{
 		}
 		return write_length;
 	}
+	
+	
 	
 	synchronized public  int read(byte[] buffer, int timeout_daly_mm) throws IOException{
 		ByteBuffer bytebuff  = ByteBuffer.allocate(buffer.length);
@@ -58,7 +64,10 @@ abstract public class NioWorkerBusiness{
 		bytebuff.clear();
 		return r;
 	}
-	synchronized public  int read(ByteBuffer buffer, int timeout_daly_mm) throws IOException{
+	synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms) throws IOException{
+		return read(buffer,timeout_daly_ms,getSocketChannel());
+	}
+	synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms,SocketChannel socketChannel) throws IOException{
 		int len = 0;
 		long start_mm = System.currentTimeMillis();
 		while (true){
@@ -69,10 +78,11 @@ abstract public class NioWorkerBusiness{
 				}
 			}
 			//timeout Chk
-			if (Util.isTimeOver(start_mm, timeout_daly_mm)) {
-				log.debug("readBlock Time-Out : readbuffer Info"+ buffer.toString()+" daly_mm:"+timeout_daly_mm);
-				throw new IOException("readBlock Time-Out  readbuffer Info"+buffer.toString()+" daly_mm:"+timeout_daly_mm);
+			if (Util.isTimeOver(start_mm, timeout_daly_ms)) {
+				log.debug("readBlock Time-Out : readbuffer Info"+ buffer.toString()+" daly_ms:"+timeout_daly_ms);
+				throw new SocketTimeoutException("readBlock Time-Out  readbuffer Info"+buffer.toString()+" daly_ms:"+timeout_daly_ms+"  isConnected:"+getSocketChannel().isConnected());
 			}
+			
 			try{
 				Thread.sleep(1);
 			}catch (InterruptedException e){

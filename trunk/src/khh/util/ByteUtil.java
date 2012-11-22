@@ -1,4 +1,5 @@
 package khh.util;
+import java.nio.ByteBuffer;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -416,5 +417,42 @@ public class ByteUtil {
          }  
 	     return return_str;
 	 } 
+	
+	
+	
+	public static byte[] toByteArray(ByteBuffer buffer){
+		   int limit 	= buffer.limit();
+		   int position = buffer.position();
+		   byte[] b = new byte[limit-position];
+		   buffer.get(b);
+		   buffer.limit(limit);
+		   buffer.position(position);
+		   return b;
+		   //return buffer.array();
+		   
+	   }
+	   public static ByteBuffer copyByteBuffer( ByteBuffer orig ){
+	       int pos = orig.position();
+	       try
+	       {
+	           ByteBuffer toReturn;
+	           // try to maintain implementation to keep performance
+	           if( orig.isDirect() )
+	               toReturn = ByteBuffer.allocateDirect(orig.remaining());
+	           else
+	               toReturn = ByteBuffer.allocate(orig.remaining());
+
+	           toReturn.put(orig);
+	           toReturn.order(orig.order());
+
+	           return (ByteBuffer) toReturn.position(0);
+	       }
+	       finally
+	       {
+	           orig.position(pos);
+	       }
+	   }
+	   
+	   
 			
 }

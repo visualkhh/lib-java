@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -106,9 +108,13 @@ public class ConversionUtil {
 
 // CONVERTING
    public static String toString(ByteBuffer bytebuff){
+	   int limit=bytebuff.limit();
+	   int position=bytebuff.position();
        byte[] bytearr = new byte[bytebuff.remaining()];
        bytebuff.get(bytearr);
        String s = new String(bytearr);
+       bytebuff.limit(limit);
+       bytebuff.position(position);
        return s;
    }
    
@@ -221,6 +227,9 @@ public class ConversionUtil {
 	   InputStream input = new ByteArrayInputStream(contents.getBytes(char_set));
 	   return input;
    }
+   
+   
+   
    
    ////////////////
    
@@ -350,14 +359,14 @@ public class ConversionUtil {
 			childitem.add(key, value);
 		}
 	}
-	
-	
 		return childitem;
-		
    }
    
    
-   
+   public static SocketChannel getSocketChannel(SelectionKey selectionKey){
+	   SocketChannel channel = (SocketChannel)selectionKey.channel();
+	   return channel;
+   }
    
    
    
