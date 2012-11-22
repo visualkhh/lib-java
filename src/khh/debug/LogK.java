@@ -5,16 +5,19 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import khh.callstack.util.StackTraceUtil;
 import khh.collection.DuplicationArrayList;
+import khh.conversion.util.ConversionUtil;
 import khh.date.util.DateUtil;
 import khh.file.util.FileUtil;
 import khh.property.util.PropertyUtil;
 import khh.reflection.ReflectionUtil;
 import khh.schedule.Scheduler;
 import khh.string.util.StringUtil;
+import khh.util.ByteUtil;
 import khh.xml.XMLparser;
 
 
@@ -302,8 +305,12 @@ public class LogK  implements Serializable {
     
     
    synchronized private void log(String level,Object message){
-        log(level,message,null);
-    }
+       log(level,message,null);
+   }
+   synchronized private void logByte(String level,Object message,byte[] data){
+       log(level,message.toString()+"("+data.length+")"+PropertyUtil.getSeparator()+toHexlog(data),null);
+   }
+   
    synchronized  private void log(String level,Object message,Throwable e){
        StackTraceElement st = 	StackTraceUtil.getBeforeStackTraceElement(LogK.class);
        String classpath 	=	st.getClassName();
@@ -347,7 +354,7 @@ public class LogK  implements Serializable {
                }*/
                buffer.append(StackTraceUtil.getStackTrace(e)); //finger
                
-               logerformat = logerformat.replaceAll("%e",StringUtil.regexMetaCharToEscapeChar(buffer.toString()));
+               logerformat = logerformat.replaceAll("%e",PropertyUtil.getSeparator()+StringUtil.regexMetaCharToEscapeChar(buffer.toString()));
            }
            
            try{
@@ -389,43 +396,138 @@ public class LogK  implements Serializable {
    }
    
    
+	public String toHexlog(ByteBuffer tby) {
+		StringBuffer str = new StringBuffer();
+		String charbuffer = "";
+		for (int i = tby.position(); i < tby.limit(); i++) {
+			if (i % 16 == 0 && i != 0)
+				str.append("\t| " + (charbuffer));
+			if (i % 8 == 0 && i != 0) {
+				if (i % 16 != 0)
+					str.append("|");
+			}
+
+			if (i % 16 == 0 && i != 0)
+				charbuffer = "";
+
+			charbuffer += (char) tby.get(i);
+			str.append(String.format(" %02X ", tby.get(i)));
+
+			// 16개 꽉안찼을때..채운다.
+			if (i + 1 < tby.limit() == false) {
+				int z = 16 - (i % 16);
+				String fill_space = "";
+				for (int a = 0; a < z; a++)
+					fill_space += "    ";
+
+				str.append(fill_space + "\t| " + new String(charbuffer));
+			}
+		}
+		return str.toString();
+	}
+	
+	public String toHexlog(byte[] tby) {
+		StringBuffer str = new StringBuffer();
+		String charbuffer = "";
+		for (int i =0; i < tby.length; i++) {
+			if (i % 16 == 0 && i != 0)
+				str.append("\t| " + (charbuffer));
+			if (i % 8 == 0 && i != 0) {
+				if (i % 16 != 0)
+					str.append("|");
+			}
+
+			if (i % 16 == 0 && i != 0)
+				charbuffer = "";
+
+			charbuffer += (char) tby[i];
+			str.append(String.format(" %02X ", tby[i]));
+
+			// 16개 꽉안찼을때..채운다.
+			if (i + 1 < tby.length == false) {
+				int z = 16 - (i % 16);
+				String fill_space = "";
+				for (int a = 0; a < z; a++)
+					fill_space += "    ";
+
+				str.append(fill_space + "\t| " + new String(charbuffer));
+			}
+		}
+		return str.toString();
+	}
    
-   
-   
+   //fatal
    synchronized public void fatal(Object message){
-       fatal(message,null);
+	   log(LogKTarget.FATAL,message,null);
+   }
+   synchronized public void fatal(Object message,ByteBuffer buffer){
+	   fatal(message,ByteUtil.toByteArray(buffer));
+   }
+   synchronized public void fatal(Object message,byte[] data){
+	   logByte(LogKTarget.FATAL,message,data);
    }
    synchronized public void fatal(Object message,Throwable e){
        log(LogKTarget.FATAL,message,e);
    };
    
+   
+   //error
    synchronized public void error(Object message){
-       error(message,null);
+	   log(LogKTarget.ERROR,message,null);
+   }
+   synchronized public void error(Object message,ByteBuffer buffer){
+	   error(message,ByteUtil.toByteArray(buffer));
+   }
+   synchronized public void error(Object message,byte[] data){
+	   logByte(LogKTarget.ERROR,message,data);
    }
    synchronized public void error(Object message,Throwable e){
        log(LogKTarget.ERROR,message,e);
    };
    
+   //warn
    synchronized public void warn(Object message){
-       warn(message,null);
+	   log(LogKTarget.WARN,message,null);
+   }
+   synchronized public void warn(Object message,ByteBuffer buffer){
+	   warn(message,ByteUtil.toByteArray(buffer));
+   }
+   synchronized public void warn(Object message,byte[] data){
+	   logByte(LogKTarget.WARN,message,data);
    }
    synchronized public void warn(Object message,Throwable e){
        log(LogKTarget.WARN,message,e);
    };
    
+   //info
    synchronized public void info(Object message){
-       info(message,null);
+	   log(LogKTarget.INFO,message,null);
+   }
+   synchronized public void info(Object message,ByteBuffer buffer){
+	   info(message,ByteUtil.toByteArray(buffer));
+   }
+   synchronized public void info(Object message,byte[] data){
+	   logByte(LogKTarget.INFO,message,data);
    }
    synchronized public void info(Object message,Throwable e){
        log(LogKTarget.INFO,message,e);
    };
    
+   //debug
    synchronized public void debug(Object message){
-       debug(message,null);
+	   log(LogKTarget.DEBUG,message,null);
+   }
+   synchronized public void debug(Object message,ByteBuffer buffer){
+	   info(message,ByteUtil.toByteArray(buffer));
+   }
+   synchronized public void debug(Object message,byte[] data){
+	   logByte(LogKTarget.INFO,message,data);
    }
    synchronized public void debug(Object message,Throwable e){
        log(LogKTarget.DEBUG,message,e);
    };
+   
+   
    synchronized private boolean getGrant(String grant, LogKTarget target){
         String[] grants = target.getLoger_level();
         boolean sw = false;

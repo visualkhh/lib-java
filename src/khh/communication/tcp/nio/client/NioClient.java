@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 import khh.communication.Communication_I;
 import khh.communication.Connection_Interface;
-import khh.communication.tcp.nio.worker.NioWorkerBusiness;
+import khh.communication.tcp.nio.worker.NioWorker;
 import khh.debug.LogK;
 import khh.std.adapter.Adapter_Base;
 import khh.util.Util;
@@ -22,7 +22,7 @@ public class NioClient extends Thread implements Communication_I{
 	private int serverConnectionTimeout	= 0;
 	private Selector clientSelector		= null;
 	private LogK log 					= LogK.getInstance();
-	private NioWorkerBusiness nioworkerbusiness = null;
+	private NioWorker nioworkerbusiness = null;
 	public NioClient() throws IOException{
 		init();
 	}
@@ -56,10 +56,10 @@ public class NioClient extends Thread implements Communication_I{
 		socketChennel.register(clientSelector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		return socketChennel;
 	}
-	public NioWorkerBusiness getNioworkerbusiness() {
+	public NioWorker getNioworkerbusiness() {
 		return nioworkerbusiness;
 	}
-	public void setNioworkerbusiness(NioWorkerBusiness nioworkerbusiness) {
+	public void setNioworkerbusiness(NioWorker nioworkerbusiness) {
 		this.nioworkerbusiness = nioworkerbusiness;
 	}
 	public boolean isConnected(){
@@ -87,11 +87,11 @@ public class NioClient extends Thread implements Communication_I{
 							try{
 								Thread.sleep(1);
 								key = it.next();
-								if((getNioworkerbusiness().getFirestMode()==NioWorkerBusiness.MODE_FIREST_R) && (key.isReadable()==false)){
+								if((getNioworkerbusiness().getFirestMode()==NioWorker.MODE_FIREST_R) && (key.isReadable()==false)){
 									continue;//읽기부터인데 읽기가 활성화안되면 넘겨
-								}else if((getNioworkerbusiness().getFirestMode()==NioWorkerBusiness.MODE_FIREST_W) && (key.isWritable()==false)){
+								}else if((getNioworkerbusiness().getFirestMode()==NioWorker.MODE_FIREST_W) && (key.isWritable()==false)){
 									continue;//쓰기인데 쓰기가 활성화안되어있으면 넘겨
-								}else if((getNioworkerbusiness().getFirestMode()==NioWorkerBusiness.MODE_FIREST_RW) &&(key.isReadable()==false && key.isWritable()==false)){
+								}else if((getNioworkerbusiness().getFirestMode()==NioWorker.MODE_FIREST_RW) &&(key.isReadable()==false || key.isWritable()==false)){
 									continue;//일기쓰기 인데 둘다 안되어있으면 넘겨
 								}
 								
