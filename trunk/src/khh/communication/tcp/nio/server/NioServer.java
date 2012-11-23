@@ -32,7 +32,7 @@ public class NioServer implements Communication_I
 	private LogK log = LogK.getInstance();
 	private Class nioWorkerBusiness 							= null;
 	private ArrayList<NioWorker> nioWorker						= null;
-	
+	private String name											= null;
 	public NioServer(int port,Class nioWorkerBusiness){
 		setPort(port);
 		setNioWorkerBusiness(nioWorkerBusiness);
@@ -133,6 +133,13 @@ public class NioServer implements Communication_I
 	}
 	private void setNioWorker(ArrayList<NioWorker> nioWorker) {
 		this.nioWorker = nioWorker;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	public void setName(String name){
+		this.name = name;
 	}
 	public static void main(String[] args) throws IOException{
 //		System.out.println("=============a");

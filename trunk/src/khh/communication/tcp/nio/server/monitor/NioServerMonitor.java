@@ -24,7 +24,6 @@ public class NioServerMonitor {
 	public void init() throws IOException{
 		clientSelector = Selector.open();
 	}
-	
 //	@Override
 //	public void run() {
 //		while (true) {
@@ -36,8 +35,7 @@ public class NioServerMonitor {
 //			log.debug("Monitor  ConnectedClientSize: " + getSelectionKey());
 //		}
 //	}
-	
-	public ArrayList<SelectionKey> getSelectionKey(){
+	public ArrayList<SelectionKey> getSelectionKeys(){
 		ArrayList<SelectionKey> ret = new ArrayList<SelectionKey>();
 		for (int i = 0; i < getSelectorPool().size(); i++) {
 			NioServerSelector selector = getSelectorPool().get(i);
