@@ -23,10 +23,10 @@ abstract public class NioWorker{
 	private SocketChannel socketChannel			= null;
 	private LogK log 							= LogK.getInstance();
 	
-	public void write(String data) throws IOException{
+	final synchronized public void write(String data) throws IOException{
 		write(data.getBytes());
 	}
-	public void write(byte[] data) throws IOException{
+	final synchronized public void write(byte[] data) throws IOException{
 		ByteBuffer bytebuff = ByteBuffer.allocate(data.length);
 		bytebuff.put(data);
 		bytebuff.clear();
@@ -37,10 +37,10 @@ abstract public class NioWorker{
 	abstract public void execute(SelectionKey selectionKey) throws Exception;
 	
 	
-	synchronized public int write(ByteBuffer data) throws IOException{
+	final synchronized public int write(ByteBuffer data) throws IOException{
 		return write(data,getSocketChannel());
 	}
-	synchronized public int write(ByteBuffer data,SocketChannel socketChannel) throws IOException{
+	final synchronized public int write(ByteBuffer data,SocketChannel socketChannel) throws IOException{
 		int write_length=0;
 		try{
 //			log.debug("1) IsConnected  "+isConnected());
@@ -55,7 +55,7 @@ abstract public class NioWorker{
 	
 	
 	
-	synchronized public  int read(byte[] buffer, int timeout_daly_mm) throws IOException{
+	final synchronized public  int read(byte[] buffer, int timeout_daly_mm) throws IOException{
 		ByteBuffer bytebuff  = ByteBuffer.allocate(buffer.length);
 		bytebuff.clear();
 		int r = read(buffer, timeout_daly_mm);
@@ -64,10 +64,10 @@ abstract public class NioWorker{
 		bytebuff.clear();
 		return r;
 	}
-	synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms) throws IOException{
+	final synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms) throws IOException{
 		return read(buffer,timeout_daly_ms,getSocketChannel());
 	}
-	synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms,SocketChannel socketChannel) throws IOException{
+	final synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms,SocketChannel socketChannel) throws IOException{
 		int len = 0;
 		long start_mm = System.currentTimeMillis();
 		while (true){
@@ -90,21 +90,21 @@ abstract public class NioWorker{
 			}
 		}
 	}	
-	public boolean isConnected(){
+	final public boolean isConnected(){
 		if ( getSocketChannel() == null )
 			return false;
 		return getSocketChannel().isConnected()   ;//&& socket.isOpen()&&socket.finishConnect();
 	}
-	public void setSocketChannel(SocketChannel socketChannel){
+	final public void setSocketChannel(SocketChannel socketChannel){
 		this.socketChannel = socketChannel;
 	}
-	public SocketChannel getSocketChannel(){
+	final public SocketChannel getSocketChannel(){
 		return this.socketChannel;
 	}
-	public int getFirestMode(){
+	final public int getFirestMode(){
 		return firestMode;
 	}
-	public void setFirestMode(int firestMode){
+	final public void setFirestMode(int firestMode){
 		this.firestMode = firestMode;
 	}
 	@Override
@@ -112,5 +112,17 @@ abstract public class NioWorker{
 		getSocketChannel().close();
 		super.finalize();
 	}
+	
+	final synchronized public void close(){
+		close(getSocketChannel());
+	}
+	final synchronized public void close(SocketChannel socket){
+		try{
+			if(socket!=null)
+			socket.close();
+		}catch (IOException e1){
+		}
+	}
+	
 	
 }
