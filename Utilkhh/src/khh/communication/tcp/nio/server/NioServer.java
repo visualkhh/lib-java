@@ -30,17 +30,17 @@ public class NioServer implements Communication_I
 	private ArrayList<NioServerWorker> workerPool    			= null;
 	private RoundRobin<NioServerSelector> selectorPool 			= null;
 	private LogK log = LogK.getInstance();
-	private Class nioWorkerBusiness 							= null;
-	private ArrayList<NioWorker> nioWorker						= null;
+	private Class nioWorkerClass       							= null;
+	private ArrayList<NioWorker> nioWorkerList					= null;
 	private String name											= null;
-	public NioServer(int port,Class nioWorkerBusiness){
+	public NioServer(int port,Class nioWorkerClass){
 		setPort(port);
-		setNioWorkerBusiness(nioWorkerBusiness);
+		setNioWorkerClass(nioWorkerClass);
 		init();
 	}
-	public NioServer(int port,ArrayList<NioWorker> nioWorker){
+	public NioServer(int port,ArrayList<NioWorker> nioWorkerList){
 		setPort(port);
-		setNioWorker(nioWorker);
+		setNioWorkerList(nioWorkerList);
 		init();
 	}
 	
@@ -82,13 +82,15 @@ public class NioServer implements Communication_I
 	public int getPort() {
 		return port;
 	}
-	public Class getNioWorkerBusiness() {
-		return nioWorkerBusiness;
-	}
-	public void setNioWorkerBusiness(Class nioWorkerBusiness) {
-		this.nioWorkerBusiness = nioWorkerBusiness;
-	}
-	//start
+
+
+    public Class getNioWorkerClass() {
+        return nioWorkerClass;
+    }
+    public void setNioWorkerClass(Class nioWorkerClass) {
+        this.nioWorkerClass = nioWorkerClass;
+    }
+    //start
 	public void start() throws Exception{
 		log.debug(String.format("Server Start Port (%d)  SelectorPoolSize(%d)  WorkerPoolSize(%d)",getPort(),getSelectorPoolSize(),getWorkerPoolSize()));
 		selectorPoolSetting();
@@ -109,16 +111,16 @@ public class NioServer implements Communication_I
 		}
 	}
 	private void workerPoolSetting() throws IOException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-		if(getNioWorker()!=null && getNioWorker().size()>0){
-			for(int i = 0 ; i < getNioWorker().size() ; i++){
-				NioServerWorker worker = new NioServerWorker(eventQueue,getNioWorker().get(i));
+		if(getNioWorkerList()!=null && getNioWorkerList().size()>0){
+			for(int i = 0 ; i < getNioWorkerList().size() ; i++){
+				NioServerWorker worker = new NioServerWorker(eventQueue,getNioWorkerList().get(i));
 				worker.start();
 				workerPool.add(worker);
 			}	
-			setWorkerPoolSize(getNioWorker().size());
+			setWorkerPoolSize(getNioWorkerList().size());
 		}else{
 			for(int i = 0 ; i < getWorkerPoolSize() ; i++){
-				NioServerWorker worker = new NioServerWorker(eventQueue,(NioWorker) ReflectionUtil.newClass(getNioWorkerBusiness()));
+				NioServerWorker worker = new NioServerWorker(eventQueue,(NioWorker) ReflectionUtil.newClass(getNioWorkerClass()));
 				worker.start();
 				workerPool.add(worker);
 			}	
@@ -128,11 +130,11 @@ public class NioServer implements Communication_I
 		return monitor;
 	}
 	
-	private ArrayList<NioWorker> getNioWorker() {
-		return nioWorker;
+	private ArrayList<NioWorker> getNioWorkerList() {
+		return nioWorkerList;
 	}
-	private void setNioWorker(ArrayList<NioWorker> nioWorker) {
-		this.nioWorker = nioWorker;
+	private void setNioWorkerList(ArrayList<NioWorker> nioWorker) {
+		this.nioWorkerList = nioWorker;
 	}
 	
 	public String getName(){
