@@ -8,7 +8,6 @@ import khh.debug.LogK;
 
 public class ReadWorker extends NioWorker {
     LogK log = LogK.getInstance();
-
     public ReadWorker() {
         setFirestMode(MODE_FIREST_R);
     }
@@ -19,6 +18,10 @@ public class ReadWorker extends NioWorker {
             read(b, 100);
             b.clear();
             System.out.print((char)b.get());
+        }else if(selectionKey.isWritable()){
+            //writer 
+            b.clear();
+            write(b);
         }
 
     }
