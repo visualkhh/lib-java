@@ -23,5 +23,4 @@ public class EchoNioClientWorker extends NioWorker {
             write(a); //bytebuffer도가능
         }
     }
-
 }
