@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title>빈페이지</title>
+		<link rel="stylesheet" href="/desktop/style.css" type="text/css" media="screen" />
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="navigationBox">
+				<div id="navigation">
+					<h1>
+						<a href="/">beenpage</a>
+						<img src="/desktop/img/beta.png" id="beta" />
+					</h1>
+					<div id="searchBox">
+						<form name="search" action="" method="get">
+							<fieldset>
+								<input type="hidden" name="type" value="sentence" />
+								<input type="text" id="inputSearch" name="word" value="대한민국 제19대 국회" maxlength="50" />
+							</fieldset>
+						</form>
+						<div>
+							<ul id="inputSearchList" />
+						</div>
+					</div>
+					<ul class="topMenu" id="menu">
+						<li>
+							<a href="/?type=timeline">시간</a>
+						</li>
+						<li>
+							<a href="/?type=sentence" class="selected">사건</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="content">
+				<div id="viewBox">
+					<table id="sentenceList" class="resultList" cellspacing="0">
+						<colgroup>
+							<col width="4%" />
+							<col width="42%" />
+							<col width="8%" />
+							<col width="44%" />
+							<col width="2%" />
+						</colgroup>
+						<tbody>
+							<tr class="year">
+								<td colspan="5">
+									<a href="?type=sentence&amp;year=2012">2012</a>
+								</td>
+							</tr>
+							<tr class="sentence" id="item771">
+								<td class="date">
+									<a href="?type=sentence&amp;date=530">5.30</a>
+								</td>
+								<td class="subject">
+									<a href="?type=sentence&amp;word=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD+%EC%A0%9C19%EB%8C%80+%EA%B5%AD%ED%9A%8C">
+										<strong>대한민국 제19대 국회</strong>
+									</a>
+								</td>
+								<td class="verb">
+									<a href="?type=sentence&amp;verb=%EC%8B%9C%EC%9E%91%EB%90%98%EB%8B%A4">시작되다</a>
+								</td>
+								<td class="oc">
+									<a href="?type=sentence&amp;word=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD">대한민국</a>
+									<a href="?type=sentence&amp;word=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD+%EA%B5%AD%ED%9A%8C">대한민국 국회</a>
+								</td>
+								<td class="profile">
+									<a href="?type=sentence&amp;profile=true&amp;id=771">▶</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--
+			<span id="about"><a href="/?type=beenpage">Beenpage</a> &copy; 2012</span>
+			-->
+		</div>
+		<script type="text/javascript" src="/desktop/js/jquery-1.7.1.min.js" />
+		<script type="text/javascript" src="/desktop/js/common.js" />
+		<script type="text/javascript"><![CDATA[
+			var $j = jQuery.noConflict();
+			$j(document).ready(function() {
+			setInputFocus("#wrap");
+			getAjaxSuggestionList("#inputSearch","#inputSearchList","1");
+			getAjaxSentenceList("#ajax a","#sentenceList tbody");
+			});
+		]]></script>
+		<script type="text/javascript"><![CDATA[
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-20478092-4']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		]]></script>
+	</body>
+</html>

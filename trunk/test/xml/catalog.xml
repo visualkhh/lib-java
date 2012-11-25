@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="catalog.xsl"?>
+
+<Catalog>
+   <Book id="1861003323">
+      <Title part="XML">Professional VB6 XML</Title>
+      <Authors>
+         <Author>James Britt</Author>
+         <Author>Teun Duynstee</Author>
+      </Authors>
+      <Publisher>Wrox Press, Ltd.</Publisher>
+      <PubDate>March 2000</PubDate>
+      <ISBN>1-861003-32-3</ISBN>
+      <Price>49.99</Price>
+      <CoverImage>3323.gif</CoverImage>
+   </Book>
+   <Book id="1861003129">
+      <Title part="XSLT">XSLT Programmer's Reference</Title>
+      <Authors>
+         <Author>Michael Kay</Author>
+      </Authors>
+      <Publisher>Wrox Press, Ltd.</Publisher>
+      <PubDate>April 2000</PubDate>
+      <Pages>800</Pages>
+      <ISBN>1-861003-12-9</ISBN>
+      <Price>34.99</Price>
+      <CoverImage>3129.gif</CoverImage>
+   </Book>
+</Catalog>

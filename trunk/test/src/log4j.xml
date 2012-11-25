@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- Level can be  ALL, DEBUG, INFO, WARN, ERROR, FATAL, OFF -->
+	<!--
+		Pattern to output
+			%d : date
+			%p : priority (level)
+			%c : category (where the log is from)
+			%m : message
+			%n : line_separator
+	 -->
+
+	<!-- appender for console -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="ALL"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - &lt;%m&gt;%n"/>
+		</layout>
+	</appender>
+
+	<!-- appender for framework logger -->
+	<appender name="frameworkLogger" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${logdir}/ebiz.framework.log" />
+		<param name="Append" value="true"/>
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="Threshold" value="ALL"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - &lt;%m&gt;%n"/>
+		</layout>
+	</appender>
+
+	<!-- appender for sqlMonitor logger -->
+	<appender name="sqlmonitorLogger" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${logdir}/sql.log" />
+		<param name="Append" value="true"/>
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="Threshold" value="ALL"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- appender for additinal application logger -->
+	<appender name="applicationLogger" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${logdir}/application.log" />
+		<param name="Append" value="true"/>
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="Threshold" value="ALL"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - &lt;%m&gt;%n"/>
+		</layout>
+	</appender>
+
+    <!-- appender for bulk upload -->
+    <appender name="bulkuploadLogger" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${logdir}/bulkupload.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="Threshold" value="ALL"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %m%n"/>
+        </layout>
+    </appender>
+    
+	<!-- Spring Framework logger -->
+	<category name="org.springframework">
+		<priority value="WARN" />
+		<appender-ref ref="frameworkLogger" />
+	</category>
+        
+	<category name="org.springmodules">
+		<priority value="WARN" />
+		<appender-ref ref="frameworkLogger" />
+	</category>
+
+    <category name="com.ibatis">
+		<priority value="WARN" />
+		<appender-ref ref="frameworkLogger" />
+	</category>
+        
+	<!-- Jakarta Commons logger -->
+	<category name="org.apache">
+		<priority value="WARN" />
+		<appender-ref ref="frameworkLogger" />
+	</category>
+		
+	<category name="java.sql.Connection">
+	    <priority value="DEBUG" />
+	    <appender-ref ref="sqlmonitorLogger" />
+	</category>
+	<category name="java.sql.Statement">
+	    <priority value="DEBUG" />
+	    <appender-ref ref="sqlmonitorLogger" />
+	</category>
+	<category name="java.sql.PreparedStatement">
+	    <priority value="DEBUG" />
+	    <appender-ref ref="sqlmonitorLogger" />
+	</category>
+	<category name="java.sql.ResultSet">
+	    <priority value="WARN" />
+	    <appender-ref ref="sqlmonitorLogger" />
+	</category>
+        
+	<category name="kv">
+	    <priority value="ALL" />
+	    <appender-ref ref="applicationLogger" />
+	</category>        
+        
+	<category name="common.lib">
+	    <priority value="DEBUG" />
+	    <appender-ref ref="frameworkLogger" />
+	</category>
+	
+	<root>
+		<priority value ="ALL" />
+		<appender-ref ref="STDOUT" />
+	</root>
+</log4j:configuration>
