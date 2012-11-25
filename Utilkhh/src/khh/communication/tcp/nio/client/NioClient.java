@@ -26,16 +26,18 @@ public class NioClient extends Thread implements Communication_I{
 	public NioClient() throws IOException{
 		init();
 	}
-	public NioClient(String serverAddr, int serverPort,int serverConnectionTimeout) throws IOException{
+	public NioClient(String serverAddr, int serverPort,int serverConnectionTimeout,NioWorker nioWorker) throws IOException{
 		setServerAddr(serverAddr);
 		setServerPort(serverPort);
 		setServerConnectionTimeout(serverConnectionTimeout);
+		setNioWorker(nioWorker);
 		init();
 	}
-	public NioClient(String ServerAddr, int ServerPort) throws IOException{
+	public NioClient(String ServerAddr, int ServerPort,NioWorker nioWorker) throws IOException{
 		setServerAddr(ServerAddr);
 		setServerPort(ServerPort);
 		setServerConnectionTimeout(0);
+		setNioWorker(nioWorker);
 		init();
 	}
 	public void init() throws IOException{
