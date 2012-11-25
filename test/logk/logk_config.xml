@@ -56,7 +56,8 @@
 	</target>
 
 	
-	<target id="agg"  category="^*"  extendcategory="super_target" ></target> 
+<!-- 	<target id="agg"  category="^*"  extendcategory="super_target" ></target> --> 
+	<target id="agg"  category="^niotest.ReadWorker"  extendcategory="super_target" ></target> 
 
 
 <!-- 
