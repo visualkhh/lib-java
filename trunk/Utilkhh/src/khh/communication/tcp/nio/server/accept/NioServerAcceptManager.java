@@ -59,7 +59,10 @@ public class NioServerAcceptManager extends Thread
 					SocketChannel clientSocket = serverSocket.accept();
 					log.debug(String.format("NioAcceptManager Connected From %s  user port %d ", clientSocket.socket().getRemoteSocketAddress().toString(),clientSocket.socket().getPort()));
 					synchronized (selectorPool) {//이거해줘야함 roundrobin 동기화안되는객체임
-						selectorPool.getNext().addSocketChannel(clientSocket);
+					    NioServerSelector s = selectorPool.getNext();
+					    s.addSocketChannel(clientSocket);
+//                        clientSocket.configureBlocking(false);
+//					    clientSocket.register(Selector.open(), SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 					}
 					it.remove();
 				}

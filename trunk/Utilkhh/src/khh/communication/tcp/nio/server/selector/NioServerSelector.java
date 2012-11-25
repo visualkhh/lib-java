@@ -17,15 +17,15 @@ import khh.debug.util.DebugUtil;
 public class NioServerSelector extends Thread
 {
 	//private ArrayList<SocketChannel>	clientSocket	= null;
-	private Selector				clientSelector	= null;
+	private Selector				selector	= null;
 	private BlockingQueue<SelectionKey>	eventQueue	= null;
 	private LogK log = LogK.getInstance();
 	public NioServerSelector(BlockingQueue<SelectionKey> eventQueue) throws IOException{
 		this.eventQueue = eventQueue;									//공유할 eventqueue
 		//this.clientSocket = new ArrayList<SocketChannel>();				//새로들어온 Accep되어진 ! client SocketChannel  Socket!!
-		if(getClientSelector()==null){
-			setClientSelector(Selector.open());								//감지할 셀렉터
-		}
+//		if(getClientSelector()==null){
+//			setClientSelector(Selector.open());								//감지할 셀렉터
+//		}
 		log.debug(String.format("NioSelector(id:%d) Create...Thread", getId() ));
 	}
 
@@ -33,8 +33,8 @@ public class NioServerSelector extends Thread
 		log.debug(String.format("NioSelector(id:%d) Running...Thread Run", getId() ));
 		while(true){
 			try{
-				if(getClientSelector().select(3) > 0){
-					Iterator<SelectionKey> it = getClientSelector().selectedKeys().iterator();
+				if(getSelector().select(3) > 0){
+					Iterator<SelectionKey> it = getSelector().selectedKeys().iterator();
 					while (it.hasNext()){
 						SelectionKey key = it.next();
 						if(key.isReadable() || key.isWritable()){	//ReadState SelectionKey  공유queue 에 input
@@ -53,8 +53,13 @@ public class NioServerSelector extends Thread
 
 	public void addSocketChannel(SocketChannel socketChannel) throws InterruptedException, IOException{
 		SocketChannel chnnel = socketChannel; 
+		Selector selector = getSelector();
+		if(selector==null){
+		    selector = Selector.open();
+		    setSelector(selector);
+		}
 		chnnel.configureBlocking(false);
-		chnnel.register(getClientSelector(), SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+		chnnel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		//clientSocket.add(socketChannel);
 	}
 
@@ -62,12 +67,12 @@ public class NioServerSelector extends Thread
 		return eventQueue;
 	}
 
-	private void setClientSelector(Selector clientSelector) {
-		this.clientSelector = clientSelector;
+	private void setSelector(Selector selector) {
+		this.selector = selector;
 	}
 
-	public Selector getClientSelector() {
-		return clientSelector;
+	public Selector getSelector() {
+		return selector;
 	}
 	
 }
