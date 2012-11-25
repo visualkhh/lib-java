@@ -10,10 +10,9 @@ public class EchoNioServer {
 //            aa . add( new EchoNioServerWorker());
 //        }
 //        NioServer a = new NioServer(8080,aa);
-        
         NioServer a = new NioServer(9595,EchoNioServerWorker.class);
         a.setSelectorPoolSize(10);  //clinet selecting을 관장하는 쓰레드개수
-        a.setWorkerPoolSize(100);   //일하는워커 쓰레드개수.
+        a.setWorkerPoolSize(10);   //일하는워커 쓰레드개수.
         a.start();
     }
 }
