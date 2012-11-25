@@ -1,0 +1,1627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>China Daily Website - Connecting China Connecting the World</title>
+<meta content="China News Business Information Weather Entertainment Beijing Shanghai Life Sports Photo" name="keywords"/>
+<meta content="Chinadaily.com.cn is the largest English portal in China, providing news, business information, BBS, learning materials. The Website has channels as China, BizChina, World, Opinion, Sports/Olympics, Entertainment, Lifestyle, Culture, Citylife, Photo, Forum and Weather." name="description"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+<meta name="robots" content="all"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="-1"/><!--天润实时统计代码 Start-->
+<meta name="filetype" content="1"/>
+<meta name="publishedtype" content="1"/>
+<meta name="pagetype" content="2"/><!--begin 1459419-0-2--><meta name="catalogs" content="159283"/><!--end 1459419-0-2-->
+<!--天润实时统计代码 End-->
+<!--google 统计代码 Start -->
+<script type="text/javascript">
+<!--
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28295596-1']);
+  _gaq.push(['_setDomainName', 'chinadaily.com.cn']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+-->
+</script>
+
+<!--google 统计代码 End-->
+<link rel="stylesheet" type="text/css" href="15361.files/master.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="15361.files/layout.css" media="all"/>
+<script type="text/javascript" src="15361.files/all.js">
+</script>
+
+<script src="15361.files/date.js" type="text/javascript">
+</script>
+
+<script src="15361.files/jquery-1.4a2.min.js" type="text/javascript">
+</script>
+
+<script type="text/javascript" src="15361.files/2011menu.js">
+</script>
+
+<link rel="stylesheet" type="text/css" href="15361.files/corwhite.css" media="all"/>
+</head>
+<body>
+<!--头部代码开始-->
+<div class="toptip-ins"><span class="floatlft"><img src="http://www.chinadaily.com.cn/2011images/logo-c.gif" alt=""/> <b class="floatlft">
+<script type="text/javascript">
+<!--
+        document.write("" + d[today.getDay()+1] + ", "+ m[today.getMonth()+1]+ " "+ today.getDate()+", " + theYear + " ");
+        
+-->
+</script>
+</b></span> 
+
+<div class="ver-lne"><span class="ver-lft">left corner</span> 
+
+<div class="ver-ins"><a class="font12" href="hqzx/" title="中文" target="_blank">中文</a> <a href="http://usa.chinadaily.com.cn/" title="US" target="_blank">US</a> <a href="http://europe.chinadaily.com.cn/" title="EUROPE" target="_blank">EUROPE</a> <a href="http://www.chinadailyapac.com/" title="ASIA PACIFIC" target="_blank">ASIA PACIFIC</a></div>
+
+<span class="ver-rgt">left corner</span></div>
+
+<div class="searchbox">
+<form name="searchform" method="get" action="http://search.chinadaily.com.cn/all_en.jsp" onsubmit="return do_search(this)" target="_blank"><input class="inputbox" name="searchText" type="text" onfocus="cleanword(this)"/> <a href="javascript:searchform.submit()">Go</a> <a href="http://search.chinadaily.com.cn/" target="_blank">Adv Search</a></form>
+</div>
+</div>
+
+<div class="top-bottom">
+<div class="topb-pics"><a class="floatlft" href="" target="_blank"><img src="2011images/logo-e.jpg" alt="China Daily Website"/></a> 
+
+<span class="floatrgt"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_H435_50&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</span></div>
+</div>
+
+<!--头部代码结束-->
+<!--Main navigation start 2012/3/28 bayon-->
+<div id="mainNav">
+<ul class="menu">
+<li><a href="" class="b-home">Home</a></li>
+
+<li><a href="china/" class="b-china">China</a> 
+
+<ul class="subMenu">
+<li><a href="china/governmentandpolicy.html" class="white">Politics</a></li>
+
+<li><a href="china/society.html" class="white">Society</a></li>
+
+<li><a href="china/scitech.html" class="white">Science/Tech</a></li>
+
+<li><a href="china/newsmaker.html" class="white">People</a></li>
+
+<li><a href="china/webexclusive.html" class="white">China Scene</a></li>
+
+<li><a href="china/hotonthweb.html" class="white">Hot Issues</a></li>
+
+<li><a href="metro/" class="white">Beijing</a></li>
+
+<li><a href="regional/" class="white">Regional</a></li>
+
+<li><a href="special.html" class="white">Special Coverages</a></li>
+</ul>
+</li>
+
+<li><a href="world/" class="b-world">World</a> 
+
+<ul class="subMenu">
+<li><a href="world/asia_pacific.html" class="white">Asia &#38; Pacific</a></li>
+
+<li><a href="world/america.html" class="white">Americas</a></li>
+
+<li><a href="world/europe.html" class="white">Europe</a></li>
+
+<li><a href="world/africa.html" class="white">Africa</a></li>
+
+<li><a href="world/middle_east.html" class="white">Middle East</a></li>
+
+<li><a href="world/aroundtheworld.html" class="white">Around the World</a></li>
+
+<li><a href="world/newsmaker.html" class="white">Newsmaker</a></li>
+
+<li><a href="world/countryprofile.html" class="white">Country Profile</a></li>
+</ul>
+</li>
+
+<li><a href="business/" class="b-business">Business</a> 
+
+<ul class="subMenu">
+<li><a href="business/economy.html" class="white">Economy</a></li>
+
+<li><a href="business/companies.html" class="white">Companies</a></li>
+
+<li><a href="business/money.html" class="white">Markets</a></li>
+
+<li><a href="business/biz_industries.html" class="white">Industries</a></li>
+
+<li><a href="business/bizopinion.html" class="white">Opinion</a></li>
+
+<li><a href="business/policyandregulation.html" class="white">Policy &#38; Regulation</a></li>
+
+<li><a href="business/AutoChinaWeekly.html" class="white">AutoChina Weekly</a></li>
+
+<li><a href="business/greenchina/" class="white">Green China</a></li>
+
+<li><a href="http://eshop.chinadaily.com.cn/product_list.shtml?cateid=32&#38;lan=2" class="white">Business Daily Updates</a></li>
+
+<li><a href="http://eshop.chinadaily.com.cn/" class="white">E-shop</a></li>
+</ul>
+</li>
+
+<li><a href="sports/" class="b-sport">Sports</a> 
+
+<ul class="subMenu">
+<li><a href="sports/china.html" class="white">China</a></li>
+
+<li><a href="sports/stars.html" class="white">Stars</a></li>
+
+<li><a href="sports/golf.html" class="white">Golf</a></li>
+
+<li><a href="sports/tennis.html" class="white">Tennis</a></li>
+
+<li><a href="sports/other_sports.html" class="white">Other Sports</a></li>
+</ul>
+</li>
+
+<li><a href="life/" class="b-culture">Life</a> 
+
+<ul class="subMenu">
+<li><a href="life/2010cul_travel.html" class="white">Travel</a></li>
+
+<li><a href="life/2010cul_food.html" class="white">Food</a></li>
+
+<li><a href="life/2010cul_art.html" class="white">Arts</a></li>
+
+<li><a href="life/2010cul_books.html" class="white">Books</a></li>
+
+<li><a href="life/2010cul_heritage.html" class="white">Heritage</a></li>
+
+<li><a href="life/that_hot.html" class="white">Hot Pot</a></li>
+
+<li><a href="life/xray.html" class="white">X-ray</a></li>
+</ul>
+</li>
+
+<li><a href="entertainment/" class="b-showbiz">Entertainment</a> 
+
+<ul class="subMenu">
+<li><a href="entertainment/celebrities.html" class="white">Celebrities</a></li>
+
+<li><a href="entertainment/movie.html" class="white">Movies</a></li>
+
+<li><a href="entertainment/music.html" class="white">Music</a></li>
+
+<li><a href="entertainment/television.html" class="white">Television</a></li>
+
+<li><a href="entertainment/style.html" class="white">Style</a></li>
+
+<li><a href="entertainment/special_coverage.html" class="white">Specials</a></li>
+</ul>
+</li>
+
+<li><a href="photo/" class="b-photo">Photo</a> 
+
+<ul class="subMenu">
+<li><a href="photo/china.html" class="white">China</a></li>
+
+<li><a href="photo/world.html" class="white">World</a></li>
+
+<li><a href="photo/sports.html" class="white">Sports</a></li>
+
+<li><a href="slides/" class="white">Slides</a></li>
+
+<li><a href="photo/odd.html" class="white">Odd</a></li>
+
+<li><a href="photo/photographers.html" class="white">Photographers</a></li>
+</ul>
+</li>
+
+<li><a href="video/" class="b-video">Video</a> 
+
+<ul class="subMenu">
+<li><a href="video/news.html" class="white">News</a></li>
+
+<li><a href="video/bigtalk.html" class="white">Big Talk</a></li>
+
+<li><a href="video/lite.html" class="white">China Lite</a></li>
+
+<li><a href="video/traditionmission.html" class="white">Tradition Mission</a></li>
+
+<li><a href="video/focus.html" class="white">Focus</a></li>
+
+<li><a href="digestchina/" class="white">Digest China</a></li>
+</ul>
+</li>
+
+<li><a href="opinion/" class="b-opinion">Opinion</a> 
+
+<ul class="subMenu">
+<li><a href="opinion/editionals.html" class="white">Editorials</a></li>
+
+<li><a href="opinion/op-ed.html" class="white">Op-Ed Contributors</a></li>
+
+<li><a href="opinion/columnists.html" class="white">Columnists</a></li>
+
+<li><a href="opinion/webcomments2010.html" class="white">Web Comments</a></li>
+
+<li><a href="opinion/opinion_special.html" class="white">Specials</a></li>
+
+<li><a href="opinion/fromthechinesepress.html" class="white">From Chinese Press</a></li>
+
+<li><a href="opinion/fromoverseaspress.html" class="white">From Overseas Press</a></li>
+
+<li><a href="opinion/readers.html" class="white">From the readers</a></li>
+
+<li><a href="opinion/project/project.html" class="white">Thought Leaders</a></li>
+</ul>
+</li>
+
+<li><a href="http://bbs.chinadaily.com.cn/index.php" class="b-froum">Forum</a> 
+
+<ul class="subMenu">
+<li><a href="http://bbs.chinadaily.com.cn/forum.php?gid=2" class="white">News Talk</a></li>
+
+<li><a href="http://bbs.chinadaily.com.cn/forum.php?gid=84" class="white">Life in China</a></li>
+
+<li><a href="http://bbs.chinadaily.com.cn/forum.php?gid=3" class="white">Leisure Time</a></li>
+
+<li><a href="http://bbs.chinadaily.com.cn/forum.php?gid=91" class="white">Language learning</a></li>
+
+<li><a href="http://bbs.chinadaily.com.cn/forum.php?gid=55" class="white">Studying Overseas</a></li>
+
+<li><a href="http://bbs.chinadaily.com.cn/forum.php?gid=97" class="white">Classified</a></li>
+</ul>
+</li>
+
+<li><a href="http://cartoon.chinadaily.com.cn/" class="b-cartoon">Cartoon</a></li>
+
+<li><a href="language_tips/" class="b-tip">Language Tips</a> 
+
+<ul class="subMenu">
+<li><a href="language_tips/news/news_bilingual.html" class="white">Bilingual News</a></li>
+
+<li><a href="language_tips/news/news_words_politics.html" class="white">Hot Words</a></li>
+
+<li><a href="language_tips/trans/trans_collect.html" class="white">Buzzwords</a></li>
+
+<li><a href="http://translate.chinadaily.com.cn/" class="white">Translation</a></li>
+
+<li><a href="language_tips/cdaudio/audio_cd.html" class="white">Audio</a></li>
+
+<li><a href="language_tips/suvival/practice_tongue.html" class="white">Survival English</a></li>
+
+<li><a href="language_tips/auvideo/audio_film.html" class="white">Movie English</a></li>
+
+<li><a href="http://overseas.chinadaily.com.cn/" class="white">Study Abroad</a></li>
+</ul>
+</li>
+
+<li><a href="mobile/"><img src="http://www.chinadaily.com.cn/2011images/mobile-01.gif" width="50" height="18" border="0"/></a></li>
+</ul>
+</div>
+
+<!--Main navigation end 2012/3/28 bayon--><!--Main content start 2012/4/9 bayon-->
+<div class="mainbox">
+<div class="main-left"><!--Slide focus pictures start 2012/4/9 bayon-->
+<div class="focusbox" id="KinSlideshow"><!--begin 1459420-1054741-1-->
+<a href="photo/2012-05/28/content_15405937.htm" target="_blank"><img src="attachement/jpg/site1/20120528/0023ae606e66112d817916.jpg" border="0" alt="Royal wedding for the masses" width="470" height="300"/></a> <a href="photo/2012-05/28/content_15403192.htm" target="_blank"><img src="attachement/jpg/site1/20120528/0013729e4809112d360111.jpg" border="0" alt="Weekly Photos: May 21 - 27" width="470" height="300"/></a> <a href="photo/2012-05/28/content_15401896.htm" target="_blank"><img src="attachement/jpg/site1/20120528/001aa018f83f112d25ca22.jpg" border="0" alt="Military display to mark HK anniversary" width="470" height="300"/></a> <a href="china/2012-05/28/content_15398566.htm" target="_blank"><img src="attachement/jpg/site1/20120528/001aa018f83f112d04eb14.jpg" border="0" alt="Supervision over online crime heightened" width="470" height="300"/></a> <a href="china/2012-05/28/content_15398736.htm" target="_blank"><img src="attachement/jpg/site1/20120528/00221917dead112d089f12.jpg" border="0" alt="Free meals aid Guizhou rural school students" width="470" height="300"/></a>
+<!--end 1459420-1054741-1-->
+</div>
+
+<!--Slide focus pictures end 2012/4/9 bayon-->
+<!--body left side left code start-->
+<div class="mainlft-lft">
+<div class="weatherbox bor-item">
+<script type="text/javascript" language="javascript" src="html/topnews/cma_weather.json">
+</script>
+
+ 
+
+<script type="text/javascript">
+<!--
+document.write("<table width=100% border=0 cellpadding=0 cellspacing=0 bgcolor=#FFFFFF><tr><td width=80%><table width=97% border=0 cellspacing=0 cellpadding=0><tr><td width=4% class=text_style01>&nbsp;<\/td><td  width=25% class=text_style01><b>" + weatherObj[0].name + " : <\/b><\/td><td width=13% align=center><img src=http://www.cma.gov.cn/tqyb/img/weather/" + weatherObj[0].image1 + ".gif><\/td><td width=14%><img src=http://www.cma.gov.cn/tqyb/img/weather/" + weatherObj[0].image2 + ".gif><\/td><td width=22%  class=text_style01>"+ weatherObj[0].temperature + "<span class=style2>℃ <\/span><\/td><td width=22%><a href=http://www.cma.gov.cn/en/forecasts/ target=_blank><img src=http://www.chinadaily.com.cn/2009image_e/morecities.jpg border=0 width=40 height=20><\/a><\/td><\/tr><\/table><\/td><td width=20%><a href=\"http://www.chinadaily.com.cn/rss/\" target=\"_blank\"><img src=\"http://www.chinadaily.com.cn/2011images/icon-rss.gif\" width=62 height=20><\/a><\/td><\/tr><\/table>");
+            
+-->
+</script>
+</div>
+
+<script src="15361.files/tabs.js" type="text/javascript">
+</script>
+
+ 
+
+<div class="itemwid bor-item padbot mart10">
+<ul class="menu0" id="menu0">
+<li class="hover" onmouseover="setTabs(0,0)"><a href="chinesemedia.html"><span>From Chinese Media</span></a></li>
+
+<li onmouseover="setTabs(0,1)"><a title="mostviewd"><span>Most Viewed</span></a></li>
+</ul>
+
+<div class="main0" id="main0"><!--begin 1459421-1039161-1-->
+<ul class="news-lst block">
+<li><a href="china/2012-05/28/content_15406711.htm" target="_blank">Brave rescue led to young man's death</a></li>
+
+<li><a href="china/2012-05/28/content_15406657.htm" target="_blank">China to collect samples of combustible ice</a></li>
+
+<li><a href="china/2012-05/28/content_15405548.htm" target="_blank">TCL launches first dual-core smartphone</a></li>
+
+<li><a href="business/2012-05/28/content_15405164.htm" target="_blank">Domestic milk powder quality at its best</a></li>
+
+<li><a href="china/2012-05/28/content_15403520.htm" target="_blank">Satellite wreckage damages homes</a></li>
+</ul>
+<!--end 1459421-1039161-1-->
+<div class="news-lst">
+<script type="text/javascript" src="html/topnews/english.js">
+</script>
+
+ 
+
+<script type="text/javascript">
+<!--
+var num = cd_json.length;
+document.write('<ul class=\"news-lst\">');
+for(var i=0;i<num;i++){
+document.write('<li><a href="'+cd_json[i].url+'" target="_blank">'+cd_json[i].title+'<\/a><\/li>');
+}
+document.write('<\/ul>');
+-->
+</script>
+</div>
+</div>
+</div>
+
+<div class="itemwid bor-item padbot mart10">
+<ul class="menu0" id="menu1">
+<li class="hover" onmouseover="setTabs(1,0)"><a href="video/"><span>Video</span></a></li>
+
+<li onmouseover="setTabs(1,1)"><a href="slides/"><span>Slide</span></a></li>
+
+<li onmouseover="setTabs(1,2)"><a href="listentochinadaily.html"><span>Podcast</span></a></li>
+
+<li onmouseover="setTabs(1,3)"><a href="photo/"><span>Pictures</span></a></li>
+</ul>
+
+<div class="main0" id="main1"><!--begin 1459422-1023321-1-->
+<ul class="pics-lst block">
+<li><a href="video/2012-05/28/content_15405395.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120528/0024e8494bec112d7e8101.jpg" border="0"/></a> 
+
+<span class="floatlft"><a href="video/2012-05/28/content_15405395.htm" target="_blank">Huntsman tackles US-China relations</a></span></li>
+
+<li><a href="video/2012-05/28/content_15399149.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120528/14e6e423d2f4112d11c716.jpg" border="0"/></a> 
+
+<span class="floatlft"><a href="video/2012-05/28/content_15399149.htm" target="_blank">The Quatuor Diotima from France</a></span></li>
+</ul>
+<!--end 1459422-1023321-1-->
+<!--begin 1459423-159368-1-->
+<ul class="pics-lst">
+<li><a href="slides/2012-05/25/content_15391319.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120525/0013729e43191129bf910b.jpg" border="0"/></a> 
+
+<span class="floatlft"><a href="slides/2012-05/25/content_15391319.htm" target="_blank">China, Thailand hold joint naval drill</a></span></li>
+
+<li><a href="slides/2012-05/25/content_15385781.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120525/0013729e4ad911292de701.jpg" border="0"/></a> 
+
+<span class="floatlft"><a href="slides/2012-05/25/content_15385781.htm" target="_blank">Slide: PLA air force in jet drill</a></span></li>
+</ul>
+<!--end 1459423-159368-1-->
+<!--begin 1459424-1016264-1-->
+<ul class="news-list">
+<li><a href="language_tips/cdaudio/2011-09/29/content_13816952.htm" target="_blank">China's tennis ace eyes next year's Olympics</a></li>
+
+<li><a href="language_tips/cdaudio/2011-09/29/content_13816947.htm" target="_blank">Foreign pilots call for better safety systems</a></li>
+
+<li><a href="language_tips/cdaudio/2011-09/29/content_13816942.htm" target="_blank">Anti-Gadhafi forces take heavy losses</a></li>
+
+<li><a href="language_tips/cdaudio/2011-09/29/content_13816937.htm" target="_blank">Rising waves of sea disputes</a></li>
+
+<li><a href="language_tips/cdaudio/2011-09/28/content_13808856.htm" target="_blank">Highway cracks after 1 month</a></li>
+</ul>
+<!--end 1459424-1016264-1-->
+<!--begin 1459425-1056561-1-->
+<ul class="pics-lst">
+<li><a href="photo/2012-05/28/content_15404318_2.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120528/002564bc6745112d704911.jpg" border="0"/></a> 
+
+<span class="floatlft"><a href="photo/2012-05/28/content_15404318_2.htm" target="_blank">Golden Gate Bridge marks 75 years</a></span></li>
+
+<li><a href="photo/2012-05/23/content_15366093.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120524/002564bc6745112820df01.jpg" border="0"/></a> 
+
+<span class="floatlft"><a href="photo/2012-05/23/content_15366093.htm" target="_blank">Glimpse of Earth's declining animal population</a></span></li>
+</ul>
+<!--end 1459425-1056561-1-->
+</div>
+</div>
+
+<div class="adsbox mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_L310_90_1&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="utf-8">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="itemwid bor-blue padbot mart10"><dl class="item-tit Cor-china">
+<dd>
+<h2><a href="china/" target="_blank">China</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li class="istop"><!--begin 1459426-159490-1-->
+<a href="photo/2012-05/28/content_15406121.htm" target="_blank"><img src="attachement/jpg/site1/20120528/0013729e4ad9112d826801.jpg" border="0" width="300"/></a> 
+
+<h3 class="small-arial">Diamond wedding for a dozen couples</h3>
+<!--end 1459426-159490-1-->
+</li>
+
+<li><!--begin 1459427-159490-1-->
+<h3><a href="china/2012-05/28/content_15401026.htm" target="_blank">Demolition of school 'totally wrong'</a></h3>
+
+<p>The demolition of Mianyang Bauhinia Ethnic Secondary School, built with donations from Hong Kong, was "totally wrong", said a government spokesman.</p>
+<!--end 1459427-159490-1-->
+</li>
+
+<li><!--begin 1459428-159490-1-->
+<h3><a href="china/2012-05/28/content_15401634.htm" target="_blank">M4.8 earthquake hits north China</a></h3>
+
+<p>An earthquake measuring 4.8 on the Richter scale jolted north China's Hebei Province at 10:22 am.</p>
+<!--end 1459428-159490-1-->
+</li>
+
+<li><!--begin 1459429-159490-1-->
+<h3><a href="china/2012-05/28/content_15398214.htm" target="_blank">Yunnan villager arrested in serial killings</a></h3>
+
+<p>A man suspected of killing 11 people in the past four years has been arrested by police in Southwest China's Yunnan province after weeks of investigation.</p>
+<!--end 1459429-159490-1-->
+</li>
+</ul>
+
+<a class="more" href="china/" target="_blank">more</a></div>
+
+<div class="itemwid bor-blue padbot mart10"><dl class="item-tit Cor-china">
+<dd>
+<h2><a href="world/">World</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li class="istop"><!--begin 1459430-159504-1-->
+<a href="photo/2012-05/27/content_15395604.htm" target="_blank"><img src="attachement/jpg/site1/20120527/0022190dec45112bb3440d.jpg" border="0" width="300"/></a> 
+
+<h3 class="small-arial">Tao of agility</h3>
+<!--end 1459430-159504-1-->
+</li>
+
+<li><!--begin 1459431-159504-1-->
+<h3><a href="world/2012-05/28/content_15398104.htm" target="_blank">65th Cannes film festival admires 'Amour'</a></h3>
+
+<p>The 65th Cannes film festival has handed out its top prize Palme d'Or to "Amour"(Love), as it wrapped up with a star-studded closing ceremony.</p>
+<!--end 1459431-159504-1-->
+</li>
+
+<li><!--begin 1459432-159504-1-->
+<h3><a href="world/2012-05/28/content_15398089.htm" target="_blank">Iran may rethink 20% enrichment</a></h3>
+
+<p>Iranian official said Iran will consider halt of 20 percent uranium enrichment if the West recognizes its "civilian" nuclear program.</p>
+<!--end 1459432-159504-1-->
+</li>
+
+<li><!--begin 1459433-159504-1-->
+<h3><a href="world/2012-05/28/content_15398049.htm" target="_blank">UNSC strongly condemns Syria massacre</a></h3>
+
+<p>The UN Security Council on Sunday condemned "in the strongest possible terms" the killings of more than 100 people in Syria.</p>
+<!--end 1459433-159504-1-->
+</li>
+</ul>
+
+<a class="more" href="world/" target="_blank">more</a></div>
+
+<div class="itemwid bor-gray padbot mart10"><dl class="item-tit Cor-opinion">
+<dd>
+<h2><a href="opinion/" target="_blank">Opinion</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li class="istop"><!--begin 1459434-158870-1-->
+<a href="opinion/2012-05/28/content_15400431.htm" target="_blank"><img src="attachement/jpg/site1/20120528/0023ae989656112d1c7402.jpg" border="0" width="300"/></a> 
+
+<h3 class="small-arial">Human rights reports</h3>
+<!--end 1459434-158870-1-->
+</li>
+
+<li><!--begin 1459435-158870-1-->
+<h3><a href="opinion/2012-05/28/content_15398958.htm" target="_blank">Inter-bank lending better option for funding</a></h3>
+
+<p>While supporting the government's efforts, some economists and financial experts have put forward the opinion that meaningful financial reform can only be achieved by the liberalization of interest rates.</p>
+<!--end 1459435-158870-1-->
+</li>
+
+<li><!--begin 1459436-158870-1-->
+<h3><a href="opinion/2012-05/28/content_15398952.htm" target="_blank">Philippines must stop running amok</a></h3>
+
+<p>Despite China's low-key restraint, offer of mutually beneficial economic cooperation, diplomatic protests and consultation within ASEAN, the Philippines insists on provoking China.</p>
+<!--end 1459436-158870-1-->
+</li>
+
+<li><!--begin 1459437-158870-1-->
+<h3><a href="opinion/2012-05/28/content_15398946.htm" target="_blank">Present policy is producing no results</a></h3>
+
+<p>In addition to offering a non-aggression pledge and a peace treaty formally ending the Korean War, the Obama administration should propose ending the diplomatic chill on the peninsula.</p>
+<!--end 1459437-158870-1-->
+</li>
+</ul>
+
+<a class="more" href="opinion/" target="_blank">more</a></div>
+
+<div class="adsbox mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_L310_90_2&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="utf-8">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="itemwid bor-red padbot mart10"><dl class="item-tit Cor-entertain">
+<dd>
+<h2><a href="entertainment/" target="_blank">Entertainment</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li class="istop"><!--begin 1459438-1005000-1-->
+<a href="entertainment/2012-05/28/content_15403295.htm" target="_blank"><img src="attachement/jpg/site1/20120528/00221917e9c4112d50c54f.jpg" border="0" width="300"/></a> 
+
+<h3 class="small-arial">Awards ceremony held in Cannes</h3>
+<!--end 1459438-1005000-1-->
+</li>
+
+<li><!--begin 1459439-1005000-1-->
+<h3><a href="entertainment/2012-05/28/content_15399647.htm" target="_blank">'Men in Black' bumps 'Avengers'</a></h3>
+
+<p>The third "Men in Black" action comedy, starring Will Smith, bumped the mighty "Avengers" from the top of movie box office charts.</p>
+<!--end 1459439-1005000-1-->
+</li>
+
+<li><!--begin 1459440-1005000-1-->
+<h3><a href="entertainment/2012-05/28/content_15399492.htm" target="_blank">'Love' wins to cheers at Cannes festival</a></h3>
+
+<p>Austrian director Michael Haneke was the popular winner of the Cannes film festival's top honor with "Love" (Amour), an elegiac tale of an elderly couple facing the inescapable.</p>
+<!--end 1459440-1005000-1-->
+</li>
+
+<li><!--begin 1459441-1005000-1-->
+<h3><a href="entertainment/2012-05/28/content_15400228.htm" target="_blank">Cannes gets happy ending with 'Mud'</a></h3>
+
+<p>"Mud", a touching coming-of-age tale set on the Mississippi River and starring Matthew McConaughey and Reese Witherspoon, brought the Cannes film festival competition to a close.</p>
+<!--end 1459441-1005000-1-->
+</li>
+</ul>
+
+<a class="more" href="entertainment/" target="_blank">more</a></div>
+
+<div class="itemwid bor-gray padbot mart10"><dl class="item-tit Cor-opinion Cor-old bggray">
+<dd>
+<h2><a href="xinhua/" target="_blank">From Agencies</a></h2>
+
+</dd>
+</dl>
+<iframe name="plzf" id="plzf" src="xinhua/plzf_iframe.html" width="100%" height="200" frameborder="0" scrolling="no"></iframe> <a class="more" target="_blank" href="xinhua/">more</a></div>
+</div>
+
+<!--body left side left code end-->
+<!--body left side right code start-->
+<div class="mainlft-rgt"><!--begin 1459442-1004740-1-->
+<div class="mainl-ritem">
+<h3><a href="china/2012-05/28/content_15397983.htm" target="_blank">Solar power faces eclipse from tariffs</a></h3>
+
+<p>Chinese solar panel manufacturers are facing the possibility of stiff new tariffs from the US Commerce Department.</p>
+
+<a href="china/2012-05/28/content_15397983.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120528/001aa018f83f112cfa7f0a.jpg" border="0"/></a></div>
+
+<div class="mainl-ritem">
+<h3><a href="china/weekendextra/" target="_blank">Weekend Extra</a></h3>
+
+<p>In a country where love of gadgetry goes beyond the ordinary, the smartphone can do a lot more than just connecting one voice with another in China.</p>
+
+<a href="china/weekendextra/" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120527/0022190dec45112bda412b.jpg" border="0"/></a></div>
+
+<div class="mainl-ritem">
+<h3><a href="china/mychinastory/2012-05/28/content_15402233.htm" target="_blank">My China Story</a></h3>
+
+<p><font color="black"><strong>New: <a class="" title="" href="china/mychinastory/2012-05/28/content_15402233.htm" target="_blank">Teaching in China</a></strong> <a class="" title="" href="china/mychinastory/2012-05/21/content_15344201.htm" target="_blank"></a></font>The China Daily website is inviting foreign readers to share their China stories with our worldwide audience.</p>
+
+<a href="china/mychinastory/2012-05/28/content_15402233.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120517/f04da2db1484111f068f36.jpg" border="0"/></a></div>
+<!--end 1459442-1004740-1-->
+<!--begin 1459443-1004101-1-->
+<div class="mainl-ritem">
+<h3><a href="business/2012-05/28/content_15401449.htm" target="_blank">Making that little bit extra</a></h3>
+
+<p>Small-part actors discuss their life in Hengdian, known as China's "Hollywood".</p>
+
+<a href="business/2012-05/28/content_15401449.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120528/00219b824717112d28e112.jpg" border="0"/></a></div>
+
+<div class="mainl-ritem">
+<h3><a href="business/2012-05/25/content_15391009.htm" target="_blank">Experts discuss slowdown fears</a></h3>
+
+<p>Can the second largest economy of the world maintain its balance? If so, how?</p>
+
+<a href="business/2012-05/25/content_15391009.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120525/0013729e45181129a16e08.jpg" border="0"/></a></div>
+<!--end 1459443-1004101-1-->
+<!--begin 1459444-158964-1-->
+<div class="mainl-ritem">
+<h3><a href="china/2012-05/10/content_15253129.htm" target="_blank">Everything that's fit to eat</a></h3>
+
+<p>According to the story, US president Theodore Roosevelt threw his breakfast sausages out of the window after reading about conditions in Chicago's meatpacking industry.</p>
+
+<a href="china/2012-05/10/content_15253129.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120510/f04da2db1484111540010c.jpg" border="0"/></a></div>
+<!--end 1459444-158964-1-->
+<!--begin 1459445-159689-1-->
+<div class="mainl-ritem">
+<h3><a href="photo/2012-05/25/content_15093801.htm" target="_blank">Countdown to London Olympics</a></h3>
+
+<p>Countdown to London Olympics: Li Na to run torch relay; Lee needs 'miracle' to make London shuttle；IOC names 3 finalists to host 2020 Games.</p>
+
+<a href="photo/2012-05/25/content_15093801.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120419/0022190dec4510fa211130.jpg" border="0"/></a></div>
+<!--end 1459445-159689-1-->
+<!--begin 1459446-1005000-1-->
+<div class="mainl-ritem">
+<h3><a href="entertainment/2012-05/25/content_15384454.htm" target="_blank">Cecilia Cheung promotes film</a></h3>
+
+<p>Cecilia Cheung promotes her film 'Dangerous Liaisons' in Cannes during 65 Cannes Film Festival.</p>
+
+<a href="entertainment/2012-05/25/content_15384454.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120525/001ec97909631129220005.jpg" border="0"/></a></div>
+
+<div class="mainl-ritem">
+<h3><a href="entertainment/2012-05/21/content_15344823.htm" target="_blank">2012 Billboard Music Awards</a></h3>
+
+<p>Entertainers attend the 2012 Billboard Music Awards in Las Vegas, Nevada, May 20, 2012.</p>
+
+<a href="entertainment/2012-05/21/content_15344823.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120521/00221917e9c41123e6b401.jpg" border="0"/></a></div>
+<!--end 1459446-1005000-1-->
+<!--begin 1459447-1028941-1-->
+<div class="mainl-ritem">
+<h3><a href="life/2012-05/28/content_15404534.htm" target="_blank"></a></h3>
+
+<p>Hong Kong cinema is merging into the larger Chinese cinema, gaining strength and at the same time losing its own identity.</p>
+
+<a href="life/2012-05/28/content_15404534.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120528/60eb69bba1f3112d150a03.jpg" border="0"/></a></div>
+<!--end 1459447-1028941-1-->
+<!--begin 1459448-159972-1-->
+<div class="mainl-ritem">
+<h3><a href="life/2012-05/17/content_15321601.htm" target="_blank">Hot Pot Column</a></h3>
+
+<p>If you want to learn a new skill, you should go to the top exponents in the field.</p>
+
+<a href="life/2012-05/17/content_15321601.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120517/001ec9790963111ee2621c.jpg" border="0"/></a></div>
+<!--end 1459448-159972-1-->
+<div class="mainl-ritem">
+<h3><a href="digestchina/" target="_blank">Digest China</a></h3>
+
+<p><!--begin 1459449-1075164-1--><a href="digestchina/" target="_blank">Lawmakers are entering their last stage of assessing China’s need for a specialized law on domestic violence. Digest China explores the concept of domestic violence and the difficulty in proving it.</a><!--end 1459449-1075164-1-->
+</p>
+
+<a href="digestchina/" target="_blank"><img src="2011images/digest.jpg" border="0"/></a></div>
+
+<div class="columnist columborblue"><dl class="item-tit bgblue bornone">
+<dd class="fontstyle">
+<h4><a href="opinion/columnists.html" target="_blank">Columnists</a></h4>
+
+</dd>
+</dl>
+<!--begin 1459450-158983-1-->
+<ul class="colum-ins">
+<li><a href="opinion/2012-05/24/content_15373288.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120524/00221910abe91127cf1207.jpg" border="0"/></a> <a href="opinion/2012-05/24/content_15373288.htm" class="floatrgt" target="_blank">Huang Xiangyang</a> 
+
+<p class="desc-colum"><a href="opinion/2012-05/24/content_15373288.htm" target="_blank">Inquiry into the health of citizens</a></p>
+</li>
+
+<li><a href="opinion/2012-05/18/content_15326475.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120518/0023ae989656111fea2e05.jpg" border="0"/></a> <a href="opinion/2012-05/18/content_15326475.htm" class="floatrgt" target="_blank">Chen Weihua</a> 
+
+<p class="desc-colum"><a href="opinion/2012-05/18/content_15326475.htm" target="_blank">Too long a wait for financial disclosure</a></p>
+</li>
+
+<li><a href="opinion/2012-05/02/content_15183584.htm" class="floatlft" target="_blank"><img src="attachement/jpg/site1/20120502/00221910abe9110ad2e408.jpg" border="0"/></a> <a href="opinion/2012-05/02/content_15183584.htm" class="floatrgt" target="_blank">Zhu Yuan</a> 
+
+<p class="desc-colum"><a href="opinion/2012-05/02/content_15183584.htm" target="_blank">More talking would stop the bickering</a></p>
+</li>
+
+<li style="list-style: none"><a class="more" href="opinion/columnists.html" target="_blank">more</a></li>
+</ul>
+<!--end 1459450-158983-1-->
+</div>
+</div>
+
+<!--body left side right code end-->
+</div>
+
+<div class="main-middle">
+<div class="headlftbor mart10">
+<ul class="headline-box">
+<li><!--begin 1459451-159283-1-->
+<h2 class="font28"><a href="china/2012-05/28/content_15406620.htm" target="_blank">Former railways minister expelled from Party</a></h2>
+
+<div>China's former railways minister, Liu Zhijun, has been expelled from the Communist Party of China (CPC) after being found guilty of corruption.</div>
+<!--end 1459451-159283-1-->
+</li>
+
+<li><!--begin 1459452-159283-1-->
+<h2><a href="china/2012-05/28/content_15406719.htm" target="_blank">China calls for cyber space rules</a></h2>
+
+<div>A Chinese general&#160;on Monday urged the international community to make joint efforts to formulate rules for cyber space as the world is faced with "grim" challenges concerning online risk.</div>
+<!--end 1459452-159283-1-->
+</li>
+
+<li><!--begin 1459453-159283-1-->
+<h2><a href="china/2012-05/28/content_15405803.htm" target="_blank">China welcomes Manila envoy</a></h2>
+
+<div>China on Monday welcomed newly-appointed Philippine Ambassador to China Sonia C. Brady to take office as soon as possible.</div>
+<!--end 1459453-159283-1-->
+</li>
+
+<li><!--begin 1459454-159283-1-->
+<h2><a href="china/2012-05/28/content_15405560.htm" target="_blank">China to be top consumer market</a></h2>
+
+<div>China's Commerce Minister Chen Deming said Monday that China is expected to become the world's largest consumer market in 2015.</div>
+<!--end 1459454-159283-1-->
+</li>
+</ul>
+
+<div class="itemwid bor-item padbot mart10 wid299">
+<ul class="menu0 wid290" id="menu2">
+<li class="hover" onmouseover="setTabs(2,0)"><span>More Top Stories</span></li>
+
+<li onmouseover="setTabs(2,1)"><a href="latestnews2010.html" title="mostviewd"><span>Just In</span></a></li>
+</ul>
+
+<div class="main0 wid290" id="main2"><!--begin 1459455-159283-1-->
+<ul class="news-lst block">
+<li><a href="china/2012-05/28/content_15406808.htm" target="_blank">Traffic accidents kill 8 in&#160;C China</a></li>
+
+<li><a href="china/2012-05/28/content_15406480.htm" target="_blank">10 years to solve wealth distribution issues: expert</a></li>
+
+<li><a href="world/2012-05/28/content_15405758.htm" target="_blank">China, Philippines bust int'l telecom fraud</a></li>
+
+<li><a href="china/2012-05/28/content_15406250.htm" target="_blank">2 kids dead in kindergarten fire</a></li>
+
+<li><a href="china/2012-05/28/content_15404967.htm" target="_blank">721 foreigners get 'green cards' in Beijing</a></li>
+
+<li><a href="china/2012-05/28/content_15404889.htm" target="_blank">Half of China's urban underground water polluted</a></li>
+
+<li><a href="world/2012-05/28/content_15404397.htm" target="_blank">China issues 20,000 work visas to DPRK</a></li>
+
+<li><a href="china/2012-05/28/content_15403689.htm" target="_blank">Wen urges further opening up in service sector</a></li>
+</ul>
+<!--end 1459455-159283-1-->
+<ul>
+<li id="dem">
+<div id="dem1"><!--begin 1459456-1039162-1-->
+<ul class="news-lst block">
+<li><a href="china/2012-05/28/content_15406808.htm" target="_blank">Traffic accidents kill 8 in&#160;C China&#160;&#160;(20:16)</a></li>
+
+<li><a href="china/2012-05/28/content_15406784.htm" target="_blank">Official calms nerves after Tangshan aftershock&#160;&#160;(20:00)</a></li>
+
+<li><a href="china/2012-05/28/content_15406737.htm" target="_blank">Death toll rises to 2 from C China boat accident&#160;&#160;(19:38)</a></li>
+
+<li><a href="china/2012-05/28/content_15406731.htm" target="_blank">Xinjiang to become new engine for China's auto biz&#160;&#160;(19:37)</a></li>
+
+<li><a href="china/2012-05/28/content_15406719.htm" target="_blank">Chinese general calls for int'l cyber space rules&#160;&#160;(19:37)</a></li>
+
+<li><a href="china/2012-05/28/content_15406711.htm" target="_blank">Brave rescue led to young man's death&#160;&#160;(19:36)</a></li>
+
+<li><a href="china/2012-05/28/content_15406704.htm" target="_blank">Weekend market benefits farmers and residents&#160;&#160;(19:35)</a></li>
+</ul>
+<!--end 1459456-1039162-1-->
+</div>
+
+<div id="dem2">&#160;</div>
+
+<script src="15361.files/scroll.js" type="text/javascript">
+</script>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="itemwid bor-green padbot mart10"><dl class="item-tit Cor-business">
+<dd>
+<h2><a href="business/" target="_blank">Business</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li class="istop"><!--begin 1459457-159491-1-->
+<a href="business/2012-05/28/content_15405480.htm" target="_blank"><img src="attachement/jpg/site1/20120528/0013729e4518112d823c01.jpg" border="0" width="300"/></a> 
+
+<h3 class="small-arial">Old mine&#160;boosts fishing industry</h3>
+<!--end 1459457-159491-1-->
+</li>
+
+<li><!--begin 1459458-159491-1-->
+<h3><a href="business/2012-05/28/content_15405265.htm" target="_blank">China to be top consumer market in '15</a></h3>
+
+<p>China's Commerce Minister Chen Deming said Monday that China is expected to become the world's largest consumer market in 2015.</p>
+<!--end 1459458-159491-1-->
+</li>
+
+<li><!--begin 1459459-159491-1-->
+<h3><a href="business/2012-05/28/content_15403346.htm" target="_blank">Non-tax revenue drives up fiscal growth</a></h3>
+
+<p>China's government revenue is maintaining a relatively high growth speed despite, with non-tax collections becoming the main driver.</p>
+<!--end 1459459-159491-1-->
+</li>
+
+<li><!--begin 1459460-159491-1-->
+<h3><a href="business/2012-05/28/content_15403318.htm" target="_blank">Approvals for major projects sped up</a></h3>
+
+<p>China recently sped up the approval process for major projects looks toward investment to boost the economy, local media reported Monday.</p>
+<!--end 1459460-159491-1-->
+</li>
+
+<li style="list-style: none">
+<div class="little-ico"><span><a href="business/money.html">Markets</a></span> 
+
+<span><a href="business/companies.html">Companies</a></span> 
+
+<span><a href="business/policyandregulation.html">Policy &#38; Regulations</a></span> 
+
+<span><a href="business/greenchina/">Green China</a></span> 
+
+<span><a href="http://eshop.chinadaily.com.cn/product_list.shtml?cateid=32">Daily Updates</a></span> 
+
+<span><a href="http://eshop.chinadaily.com.cn/product_list.shtml?cateid=66">Weekly Reports</a></span> 
+
+<span><a href="business/CareerCounselor.html">Career Counselor</a></span> 
+
+<span><a href="business/MicroblogInsights.html">Microblog Insights</a></span></div>
+</li>
+</ul>
+
+<a class="more" href="bizchina/" target="_blank">more</a></div>
+
+<div class="mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_M310_250&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="itemwid bor-darkred padbot mart10"><dl class="item-tit Cor-life">
+<dd>
+<h2><a href="life/" target="_blank">Life</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li class="istop"><!--begin 1459461-1047782-1-->
+<a href="life/2012-05/25/content_15384632.htm" target="_blank"><img src="attachement/jpg/site1/20120525/001ec97909631129251306.jpg" border="0" width="300"/></a> 
+
+<h3 class="small-arial">Dream team</h3>
+<!--end 1459461-1047782-1-->
+</li>
+
+<li><!--begin 1459462-1047782-1-->
+<h3><a href="life/2012-05/25/content_15384837.htm" target="_blank">The mind's eye</a></h3>
+
+<p>Jiao Xiaojian's works focus on the relationship between sight and perception in his portrayals of ordinary scenes of southern China.</p>
+<!--end 1459462-1047782-1-->
+</li>
+
+<li><!--begin 1459463-1047782-1-->
+<h3><a href="life/2012-05/24/content_15374932.htm" target="_blank">A traveler's treasure trove</a></h3>
+
+<p>While poor in material wealth, Guizhou is rich in culture, scenery and much else a visitor would desire.</p>
+<!--end 1459463-1047782-1-->
+</li>
+
+<li><!--begin 1459464-1047782-1-->
+<h3><a href="life/2012-05/23/content_15367825.htm" target="_blank">Taking the good with the bad, it's not actually ugly - or we'd leave</a></h3>
+
+<p>Like all papers, we report "bad news" about China - things like rampant piracy, toxic food and 18 people passing by an injured child. Unfortunately, this gives a distorted impression of the country.</p>
+<!--end 1459464-1047782-1-->
+</li>
+</ul>
+
+<a class="more" href="life/" target="_blank">more</a></div>
+
+<iframe width="300" height="148" name="travelmessage" style="margin-top:10px; " frameborder="0" scrolling="no" src="life/travelmessage/index_03.html"></iframe> 
+
+<div class="itemwid bor-lightgreen padbot mart10"><dl class="item-tit Cor-sport">
+<dd>
+<h2><a href="sports/" target="_blank">Sports</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li class="istop"><!--begin 1459465-159506-1-->
+<a href="photo/2012-05/28/content_15406501.htm" target="_blank"><img src="attachement/jpg/site1/20120528/0023ae696209112d7d9a0f.jpg" border="0" width="300"/></a> 
+
+<h3 class="small-arial">France's Patrol draws the curtain of French Open</h3>
+<!--end 1459465-159506-1-->
+</li>
+
+<li><!--begin 1459466-159506-1-->
+<h3><a href="china/2012-05/28/content_15403279.htm" target="_blank">Beijing Games an anti-corruption model</a></h3>
+
+<p>China's top anti-corruption officials have vowed to share their experience of running "corruption-free" Beijing Olympics as a model to others in the country's battle against official greed.</p>
+<!--end 1459466-159506-1-->
+</li>
+
+<li><!--begin 1459467-159506-1-->
+<h3><a href="sports/2012-05/28/content_15401233.htm" target="_blank">Venus silences young fan in Paris</a></h3>
+
+<p>Venus Williams tamed a plucky teenaged fan who once emailed her for playing tips while fellow American Andy Roddick found himself off target as he bowed out in the first round of the French Open on Sunday.</p>
+<!--end 1459467-159506-1-->
+</li>
+
+<li><!--begin 1459468-159506-1-->
+<h3><a href="sports/2012-05/27/content_15397829.htm" target="_blank">Super Dan wonders about future</a></h3>
+
+<p>"Super Dan" is wondering about his future as his closest rivals have announced they won't play next Thomas Cup.</p>
+<!--end 1459468-159506-1-->
+</li>
+</ul>
+
+<a class="more" href="sports/" target="_blank">more</a></div>
+
+<div class="itemwid bor-gray padbot mart10"><dl class="item-tit Cor-opinion Cor-old bggray">
+<dd>
+<h2><a href="odd.html" target="_blank">Odd News</a></h2>
+
+</dd>
+</dl>
+<ul class="item-ins wid300">
+<li><!--begin 1459469-1054402-1-->
+<h3><a href="2012-04/27/content_15159703.htm" target="_blank">Man fights deadly saliva charge</a></h3>
+
+<p>A gay-rights group is urging New York state's high court to overturn the conviction of an HIV-positive man whose saliva was found to be a "dangerous instrument" in a biting case.</p>
+<!--end 1459469-1054402-1-->
+</li>
+
+<li><!--begin 1459470-1054402-1-->
+<h3><a href="2012-04/27/content_15159661.htm" target="_blank">Woman fired after donating kidney to boss</a></h3>
+
+<p>A New York woman who donated a kidney so her ailing boss would move up the transplant waiting list.</p>
+<!--end 1459470-1054402-1-->
+</li>
+
+<li><!--begin 1459471-1054402-1-->
+<h3><a href="2012-04/21/content_15106273.htm" target="_blank">South Korean bullfighting is for bulls only</a></h3>
+
+<p>Once a regular village entertainment in South Korea, bullfighting nearly died out as the nation rapidly industrialised, but the annual Cheongdo Bullfighting Festival help keep the cherished tradition alive.</p>
+<!--end 1459471-1054402-1-->
+</li>
+
+<li><!--begin 1459472-1054402-1-->
+<h3><a href="china/2012-04/17/content_15070562.htm" target="_blank">Little people live in SW China's 'Lilliput'</a></h3>
+
+<p>Nearly 100 dwarfs live in their "Lilliput" inside a forest park in Kunming. They work as actors, dancing, singing, and showing their talents for tourists.</p>
+<!--end 1459472-1054402-1-->
+</li>
+</ul>
+
+<a class="more" href="odd.html" target="_blank">more</a></div>
+
+<div class="itemwid bor-gray padbot mart10 hei360 sliderpos"><dl class="item-tit Cor-opinion Cor-old bggray">
+<dd>
+<h3><a href="opinion/project/project.html" target="_blank">Thought Leader</a></h3>
+
+</dd>
+</dl>
+<div id="rotation"><!--begin 550885-0-1-->
+<!--begin 1459473-1041881-1-->
+<table id="pictable" style="display: none;" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td><img src="attachement/jpg/site1/20120514/00221910abe9111aae4401.jpg" border="0"/></td>
+<td>Romney versus Obama</td>
+<td>http://www.chinadaily.com.cn/opinion/project/2012-05/14/content_15282929.htm</td>
+<td>While the presidential primary elections in the United States are not over, Mitt Romney is now almost certain to be the party’s nominee to face Democratic President Barack Obama in November.</td>
+</tr>
+
+<tr>
+<td><img src="attachement/jpg/site1/20120509/00221910abe91114627301.jpg" border="0"/></td>
+<td>The economy and the presidency</td>
+<td>http://www.chinadaily.com.cn/opinion/project/2012-05/09/content_15250123.htm</td>
+<td>The polls are very close, and voters have not yet locked in their decisions. The economy could rise more sharply than expected in the months ahead.</td>
+</tr>
+
+<tr>
+<td><img src="attachement/jpg/site1/20120426/00221910abe91103433209.jpg" border="0"/></td>
+<td>Markets of magical thinking</td>
+<td>http://www.chinadaily.com.cn/opinion/project/2012-04/26/content_15150619.htm</td>
+<td>The JOBS Act is an extreme example of Americans' belief in people's essential goodness, and everyone's right to self-fulfillment.</td>
+</tr>
+
+<tr>
+<td><img src="attachement/jpg/site1/20120426/00221910abe91103428008.jpg" border="0"/></td>
+<td>Reinventing the Sino-American relationship</td>
+<td>http://www.chinadaily.com.cn/opinion/project/2012-04/26/content_15150641.htm</td>
+<td>The core of the relationship is simple: China needs US innovation to grow, and the US needs Chinese markets to grow.</td>
+</tr>
+
+<tr>
+<td><img src="attachement/jpg/site1/20120416/00221910abe910f62c4008.jpg" border="0"/></td>
+<td>The problem of priorities</td>
+<td>http://www.chinadaily.com.cn/opinion/project/2012-04/16/content_15059669.htm</td>
+<td>Despite global population growth and economic crisis, absolute poverty – the proportion of people living on less than $1.25 a day – is falling in every region of the world.</td>
+</tr>
+</tbody>
+</table>
+<!--end 1459473-1041881-1-->
+<!--end 550885-0-1-->
+</div>
+
+<div id="main-feature-col-1" onmouseover="_xMainFeature.tmpPauseFeature()" onmouseout="_xMainFeature.revertFeature()">
+<div id="main-preloader">LOADING</div>
+
+<div id="main-feature">
+<div class="main-feature-holder">
+<div class="feature-wrapper">
+<div style="left:0;" class="display-holder" id="display-holder-div"></div>
+
+<!-- navigation -->
+<div class="mainfeature_pagination" id="mainfeature_popup-div"><img class="nop" src="http://www.chinadaily.com.cn/15361.files/left-cornerbox.gif"/></div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript" src="15361.files/sliderpics.js">
+</script>
+
+ 
+
+<div id="trueboxOverlay"></div>
+
+<div id="trueboxContent">
+<div id="trueboxInsideContent"></div>
+</div>
+</div>
+</div>
+
+<div class="main-right"><a class="floatlft" href="hqzx/" target="_blank"><img src="http://www.chinadaily.com.cn/2011images/hqzx_img.gif" alt=""/></a> 
+
+<div class="mainrgt-item mart10"><dl class="bgblue hei5">
+</dl>
+<div class="mainrgt-itemins"><!--begin 1459474-159853-1-->
+<a href="2012olympics/" target="_blank"><img src="attachement/jpg/site1/20120524/0022190dec4511283bff08.jpg" border="0" width="135" height="86"/></a>
+<!--end 1459474-159853-1-->
+<ul class="news-lst">
+<li class="bigtit"><!--begin 1459475-159853-1-->
+<a href="2012olympics/" target="_blank">London 2012 Olympic Games</a>
+<!--end 1459475-159853-1-->
+</li>
+
+<li class="bold"><!--begin 1459476-159853-1-->
+<a href="business/2012-05/25/content_15391009.htm" target="_blank">Experts discuss slowdown fears</a>
+<!--end 1459476-159853-1-->
+</li>
+</ul>
+
+<!--begin 1459477-0-5--><a href="special.html" target="_blank" class="more">more</a><!--end 1459477-0-5-->
+</div>
+</div>
+
+<a class="floatlft mart10" href="http://www.chinaculture.org/" target="_blank"><img src="http://www.chinadaily.com.cn/2011images/wt.gif" alt=""/></a> <a class="floatlft mart10" href="bizchina/AutoChinaWeekly.html"><img src="2011images/autochina.jpg" alt=""/></a> 
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_1&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="mainrgt-item mart10"><dl class="bgblue">
+<dd class="titlebox2">
+<span>City Special</span></dd>
+ </dl>
+ 
+
+<div class="mainrgt-itemins">
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNewR_135_45_1&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNewR_135_45_2&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="char-lst mart5"><!--begin 1459478-1062021-1-->
+<a href="http://liaoning.chinadaily.com.cn/dandong/" target="_blank">Dandong</a><a href="http://hubei.chinadaily.com.cn/gov/" target="_blank">Hubei</a><a href="http://anhui.chinadaily.com.cn/travel/" target="_blank">Anhui</a><a href="http://fuzhou.chinadaily.com.cn/e/" target="_blank">Fuzhou</a><a href="http://zhouzhuang.chinadaily.com.cn/" target="_blank">Zhouzhuang</a><a href="http://english.hebei.gov.cn/" target="_blank">Hebei</a><a href="m/expo2011/" target="_blank">Xi'an</a><a href="http://dalian.chinadaily.com.cn/" target="_blank">Dalian</a>
+<!--end 1459478-1062021-1-->
+</div>
+
+<a class="more" href="regional/" target="_blank">more</a></div>
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_60_1&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_60_2&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+ 
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_60_3&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_60_4&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="mainrgt-item mart10"><dl class="bgblue">
+<dd class="titlebox2">
+<span>Newspaper</span></dd>
+ </dl>
+ 
+
+<div class="mainrgt-itemins">
+<ul class="newspaper-lst mart5">
+<li><a href="cndy/index1.html">China Daily</a></li>
+
+<li><!--begin 1459479-1063681-1-->
+<a href="sunday/2012-05/27/">Sunday Edition</a>
+<!--end 1459479-1063681-1-->
+</li>
+
+<li><a href="http://usa.chinadaily.com.cn/">US Edition</a></li>
+
+<li><!--begin 1459480-1085941-1-->
+<a href="http://europe.chinadaily.com.cn/epaper/2012-05/27/">European Weekly</a>
+<!--end 1459480-1085941-1-->
+</li>
+
+<li><a href="hkedition/hk.html">HK Edition</a></li>
+
+<li><a href="http://www.i21st.cn/">21st Century</a></li>
+
+<li><a href="http://pub1.chinadaily.com.cn/cdpdf/zhejiang/">Zhejiang Weekly PDF</a></li>
+
+<li><a class="cor666" href="http://circu.chinadaily.com.cn/subscription.php">Subscribe <img src="http://www.chinadaily.com.cn/2011images/tabicons_077.gif"/></a></li>
+</ul>
+</div>
+</div>
+
+<ul class="icos-lst mart10">
+<li><a href="http://eshop.chinadaily.com.cn/"><img src="http://www.chinadaily.com.cn/2011images/pick-eshop.gif" alt=""/></a> <a href="http://eshop.chinadaily.com.cn/">E-SHOP</a></li>
+
+<li><a href="http://www.asianewsphoto.com/"><img src="http://www.chinadaily.com.cn/2011images/photo-share.gif" alt=""/></a> <a href="http://www.asianewsphoto.com/">NEWSPHOTO</a></li>
+
+<li><a href="m/eduonline/"><img src="http://www.chinadaily.com.cn/2011images/bubble_016.gif" alt=""/></a> <a href="m/eduonline/">EDUCATION</a></li>
+
+<li><a href="http://chinatravel.chinadaily.com.cn/"><img src="http://www.chinadaily.com.cn/2011images/hotle.gif" alt=""/></a> <a href="http://chinatravel.chinadaily.com.cn/">HOTELS</a></li>
+</ul>
+
+<a class="floatlft mart10" href="iphone/newmedia.html" target="_blank"><img src="2011images/ipad_ad2.jpg" alt=""/></a> <a class="floatlft mart10" href="http://www.cpcchina.org" target="_blank"><img src="http://www.chinadaily.com.cn/2011images/cpc.gif" alt=""/></a> 
+
+<div class="mainrgt-item mart10"><dl class="bgblue hei5">
+</dl>
+<div class="mainrgt-itemins"><a class="floatlft" href="http://bbs.chinadaily.com.cn/" target="_blank"><img src="2011images/logo_forum.jpg"/></a> <!--cycle list start-->
+ <!--begin 1459481-1076341-1-->
+<a href="http://bbs.chinadaily.com.cn/thread-750139-1-1.html" class="floatlft mart10" target="_blank"><img src="attachement/jpg/site1/20120528/0023ae989656112d26b406.jpg" border="0"/></a> 
+
+<div class="mainrgt-item-bor">
+<h4><a href="http://bbs.chinadaily.com.cn/thread-750139-1-1.html" target="_blank">Sweet kisses</a></h4>
+
+<p>The photos capture beautiful moments.</p>
+</div>
+
+<a href="http://bbs.chinadaily.com.cn/thread-750326-1-1.html" class="floatlft mart10" target="_blank"><img src="attachement/jpg/site1/20120528/0023ae989656112d283d07.jpg" border="0"/></a> 
+
+<div class="mainrgt-item-bor">
+<h4><a href="http://bbs.chinadaily.com.cn/thread-750326-1-1.html" target="_blank">Beautiful places</a></h4>
+
+<p>Fantastical places exist in the real world.</p>
+</div>
+<!--end 1459481-1076341-1-->
+ <!--cycle list start end-->
+ <a class="more" href="http://bbs.chinadaily.com.cn/index.php" target="_blank">more</a></div>
+</div>
+
+<iframe name="home_survery" id="home_survery" scrolling="no" frameborder="0" height="210" width="150" src="html/survey/vote_gate.html?images/vote_1_2011_06_15_8473.html" marginwidth="0" style="margin-bottom:10px;margin-top:10px; "></iframe> <iframe name="home_debate" id="home_debate" scrolling="no" frameborder="0" height="240" width="150" src="js/2012debate.htm" marginwidth="0" style="margin-bottom:10px;margin-top:10px; "></iframe>  
+
+<div class="floatlft bgyellow mart10"><img src="http://www.chinadaily.com.cn/2011images/tips.gif" alt=""/> <!--begin 1459482-1032881-1-->
+<ul class="news-lst bd-dashed">
+<li><a href="language_tips/trans/2012-05/28/content_15404005.htm" target="_blank"><span>自产绿色食品 100-foot diet</span></a></li>
+
+<li><a href="language_tips/news/2012-05/28/content_15403986.htm" target="_blank"><span>Smart Defense 巧防御</span></a></li>
+
+<li><a href="language_tips/news/2012-05/25/content_15387812.htm" target="_blank"><span>Chronological age 实际年龄</span></a></li>
+</ul>
+<!--end 1459482-1032881-1-->
+ <a class="more" href="language_tips/" target="_blank">more</a></div>
+</div>
+
+<a href="http://www.asianewsnet.net/home/index.php" target="_blank"><img src="http://www.chinadaily.com.cn/2011images/banner-ann150.gif" width="150" border="0"/></a> 
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_2&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End--></div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_3&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End--></div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_4&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End--></div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_5&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_6&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_7&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_8&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_9&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<div class="floatlft mart10"><!--AdForward Begin:-->
+<script type="text/javascript" src="http://chinadaily.allyes.com/main/adfshow?user=ChinaDailyNetwork|2011EHPNew|EHPNew_R150_150_10&#38;db=chinadaily&#38;border=0&#38;local=yes&#38;js=ie" charset="gb2312">
+</script>
+
+ <!--AdForward End-->
+</div>
+
+<!--begin 1459483-1030401-1-->
+<table width="130" height="130" border="0" align="center" cellpadding="0" cellspacing="0" style=" border: 1px solid #cc0000;">
+<tr valign="top">
+<td valign="top" bgcolor="#E7E7E7"><img src="http://www.chinadaily.com.cn/attachement/gif/site1/20091223/00221917d8930c9c048901.gif" border="0" width="130"/></td>
+</tr>
+
+<tr valign="top">
+<td valign="top" bgcolor="#E7E7E7" align="center"><span style="font-family: Geneva, Arial, Helvetica, sans-serif; color: #333333; font-size: 11px;">A Leading <a class="" title="" href="http://www.made-in-china.com/" target="_blank">B2B platform</a> with 10 years history. Compare &#38; Inquire with Trusted <a class="" title="" href="http://www.made-in-china.com/prod/catlist/" target="_blank">China Suppliers</a> (SGS certified). Log on &#38; Order now!</span> </td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td height="10"></td>
+</tr>
+</table>
+<!--end 1459483-1030401-1-->
+</div>
+</div>
+
+<!--Main content end 2012/4/9 bayon-->
+<!--Footer code start 2012/4/19 bayon-->
+<div class="footer-zx"><dl>
+<dt>
+<a href="china/" target="_blank">China</a></dt>
+ <dd>
+<a href="china/governmentandpolicy.html" target="_blank">Politics</a></dd>
+ <dd>
+<a href="china/society.html" target="_blank">Society</a></dd>
+ <dd>
+<a href="china/scitech.html" target="_blank">Sci-Tech</a></dd>
+ <dd>
+<a href="china/newsmaker.html" target="_blank">People</a></dd>
+ <dd>
+<a href="china/webexclusive.html" target="_blank">China Scene</a></dd>
+ <dd>
+<a href="china/hotonthweb.html" target="_blank">Hot Issues</a></dd>
+ <dd>
+<a href="metro/" target="_blank">Beijing</a></dd>
+ <dd>
+<a href="regional/" target="_blank">City Special</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="business/" target="_blank">Business</a></dt>
+ <dd>
+<a href="business/economy.html" target="_blank">Economy</a></dd>
+ <dd>
+<a href="business/companies.html" target="_blank">Companies</a></dd>
+ <dd>
+<a href="business/policyandregulation.html" target="_blank">Policy</a></dd>
+ <dd>
+<a href="business/bizopinion.html" target="_blank">Opinion</a></dd>
+ <dd>
+<a href="business/money.html" target="_blank">Markets</a></dd>
+ <dd>
+<a href="business/greenchina/" target="_blank">Green China</a></dd>
+ <dd>
+<a href="business/biz_industries.html" target="_blank">Industries</a></dd>
+ <dd>
+<a href="business/full_coverage.html" target="_blank">Special Coverages</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="world/" target="_blank">World</a></dt>
+ <dd>
+<a href="world/asia_pacific.html" target="_blank">Asia &#38; Pacific</a></dd>
+ <dd>
+<a href="world/america.html" target="_blank">Americas</a></dd>
+ <dd>
+<a href="world/europe.html" target="_blank">Europe</a></dd>
+ <dd>
+<a href="world/africa.html" target="_blank">Africa</a></dd>
+ <dd>
+<a href="world/middle_east.html" target="_blank">Middle East</a></dd>
+ <dd>
+<a href="world/aroundtheworld.html" target="_blank">Around the World</a></dd>
+ <dd>
+<a href="world/newsmaker.html" target="_blank">Newsmakers</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="life/" target="_blank">Life</a></dt>
+ <dd>
+<a href="life/2010cul_travel.html" target="_blank">Travel</a></dd>
+ <dd>
+<a href="life/2010cul_delicacies.html" target="_blank">food</a></dd>
+ <dd>
+<a href="life/2010cul_art.html" target="_blank">Theater</a></dd>
+ <dd>
+<a href="life/2010cul_books.html" target="_blank">Books</a></dd>
+ <dd>
+<a href="life/2010cul_heritage.html" target="_blank">Heritage</a></dd>
+ <dd>
+<a href="life/that_hot.html" target="_blank">Hot Pot</a></dd>
+ <dd>
+<a href="life/xray.html" target="_blank">X-ray</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="entertainment/" target="_blank">Entertainment</a></dt>
+ <dd>
+<a href="entertainment/celebrities.html" target="_blank">Celebrities</a></dd>
+ <dd>
+<a href="entertainment/movie.html" target="_blank">Movies</a></dd>
+ <dd>
+<a href="entertainment/music.html" target="_blank">Music</a></dd>
+ <dd>
+<a href="entertainment/television.html" target="_blank">Television</a></dd>
+ <dd>
+<a href="entertainment/special_coverage.html" target="_blank">Specials</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="sports/" target="_blank">Sports</a></dt>
+ <dd>
+<a href="sports/china.html" target="_blank">China</a></dd>
+ <dd>
+<a href="sports/stars.html" target="_blank">Stars</a></dd>
+ <dd>
+<a href="sports/golf.html" target="_blank">Golf</a></dd>
+ <dd>
+<a href="sports/tennis.html" target="_blank">Tennis</a></dd>
+ <dd>
+<a href="sports/other_sports.html" target="_blank">Other Sports</a></dd>
+ <dd>
+<a href="#" target="_blank">Columnists</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="opinion/" target="_blank">Opinion</a></dt>
+ <dd>
+<a href="opinion/editionals.html" target="_blank">Editorals</a></dd>
+ <dd>
+<a href="opinion/op-ed.html" target="_blank">Op-Ed Contributors</a></dd>
+ <dd>
+<a href="opinion/columnists.html" target="_blank">Columnists</a></dd>
+ <dd>
+<a href="opinion/webcomments2010.html" target="_blank">Web Comments</a></dd>
+ <dd>
+<a href="opinion/opinion_special.html" target="_blank">Specials</a></dd>
+ <dd>
+<a href="opinion/fromthechinesepress.html" target="_blank">From Chinese Press</a></dd>
+ <dd>
+<a href="opinion/fromoverseaspress.html" target="_blank">From Overseas Press</a></dd>
+ <dd>
+<a href="opinion/readers.html" target="_blank">From the readers</a></dd>
+ <dd>
+<a href="opinion/project/project.html" target="_blank">Thought Leaders</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="http://bbs.chinadaily.com.cn/" target="_blank">Forum</a></dt>
+ <dd>
+<a href="http://bbs.chinadaily.com.cn/forumsub.php?gid=2" target="_blank">News Talk</a></dd>
+ <dd>
+<a href="http://bbs.chinadaily.com.cn/forumsub.php?gid=3" target="_blank">Leisure Time</a></dd>
+ <dd>
+<a href="http://bbs.chinadaily.com.cn/forumsub.php?gid=4" target="_blank">English Study</a></dd>
+ <dd>
+<a href="http://bbs.chinadaily.com.cn/forumsub.php?gid=55" target="_blank">Overseas Students' Family</a></dd>
+ <dd>
+<a href="http://bbs.chinadaily.com.cn/forumsub.php?gid=72" target="_blank">Europe Discussion</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="photo/" target="_blank">Photo</a></dt>
+ <dd>
+<a href="photo/china.html" target="_blank">China</a></dd>
+ <dd>
+<a href="photo/world.html" target="_blank">World</a></dd>
+ <dd>
+<a href="photo/sports.html" target="_blank">Sports</a></dd>
+ <dd>
+<a href="photo/odd.html" target="_blank">Odd</a></dd>
+ <dd>
+<a href="photo/photographers.html" target="_blank">Photographers</a></dd>
+ <dd>
+<a href="photo/share.html" target="_blank">Share your photos</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="video/" target="_blank">Video</a></dt>
+ <dd>
+<a href="video/news.html" target="_blank">News</a></dd>
+ <dd>
+<a href="video/bigtalk.html" target="_blank">Big Talk</a></dd>
+ <dd>
+<a href="video/lite.html" target="_blank">China Lite</a></dd>
+ <dd>
+<a href="video/traditionmission.html" target="_blank">Tradition Mission</a></dd>
+ <dd>
+<a href="video/focus.html" target="_blank">Focus</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="language_tips/" target="_blank">Language Tips</a></dt>
+ <dd>
+<a href="language_tips/news/news_bilingual.html" target="_blank">Bilingual News</a></dd>
+ <dd>
+<a href="language_tips/news/news_words_politics.html" target="_blank">Hot Words</a></dd>
+ <dd>
+<a href="language_tips/trans/trans_collect.html" target="_blank">Buzzwords</a></dd>
+ <dd>
+<a href="http://translate.chinadaily.com.cn/" target="_blank">Translation</a></dd>
+ <dd>
+<a href="language_tips/cdaudio/audio_cd.html" target="_blank">Audio</a></dd>
+ <dd>
+<a href="language_tips/auvideo/audio_film.html" target="_blank">Movie English</a></dd>
+ <dd>
+<a href="language_tips/suvival/practice_tongue.html" target="_blank">Survival English</a></dd>
+ <dd>
+<a href="http://overseas.chinadaily.com.cn/" target="_blank">Study Abroad</a></dd>
+ </dl>
+ <dl>
+ <dt>
+<a href="iphone/newmedia.html" target="_blank">Mobile</a></dt>
+ <dd>
+<a href="http://itunes.apple.com/us/app/the-chinadaily-ipaper/id388337167?mt=8" target="_blank">iPad</a></dd>
+ <dd>
+<a href="http://itunes.apple.com/us/app/china-daily/id330543698?mt=8" target="_blank">iPhone</a></dd>
+ <dd>
+<a href="http://www.amazon.com/China-Daily-US-Edition/dp/B004477Y6S" target="_blank">Kindle</a></dd>
+ <dd>
+<a href="http://ebookstore.sony.com/periodical/_/R-400000000000000329614" target="_blank">Android</a></dd>
+ <dd>
+<a href="http://appworld.blackberry.com/webstore/content/21127?lang=en" target="_blank">Blackberry</a></dd>
+ </dl>
+</div>
+
+<div class="blank10">...</div>
+
+<div class="footer-zx partnersbox bdt-dashed">Partners : | <a href="http://english.qstheory.cn/" target="_blank">qstheory.cn</a>|<a href="http://english.peopledaily.com.cn/" target="_blank">PeopleDaily</a>|<a href="http://www.chinaview.cn/" target="_blank">Xinhua.net</a>|<a href="http://www.china.org.cn/" target="_blank">China.org.cn</a>|<a href="http://english.cctv.com/" target="_blank">cntv.com</a>|<a href="http://english.cri.cn/" target="_blank">CRI.cn</a>|<a href="http://en.ce.cn/" target="_blank">CE.cn</a>|<a href="http://en.youth.cn/" target="_blank">Youth.cn</a>|<a href="http://www.chinataiwan.org/english/" target="_blank">ChinaTaiwan.org</a>|<br/>
+ Media : | <a href="http://www.chinatraveldepot.com/" target="_blank">ChinaTravelDepot.com</a>|<a href="http://www.peopleforum.cn/" target="_blank">Peopleforum</a>|<a href="http://www.workercn.cn" target="_blank">workercn.cn</a>|<br/>
+ Portals : | <a href="http://www.panguso.com/" target="_blank">www.panguso.com</a>|<a href="http://www.goso.cn/" target="_blank">www.goso.cn</a>|<a href="http://english.sina.com/" target="_blank">Sina</a>|<a href="http://corp.sohu.com/" target="_blank">Sohu</a>|<a href="http://www.tom.com/" target="_blank">Tom</a>|<a href="http://www.tencent.com/en-us/index.shtml" target="_blank">Tencent</a>|<a href="http://www.163.com/" target="_blank">NetEase</a>|<a href="http://www.hexun.com/" target="_blank">Hexun</a>|<br/>
+ Organizations : | <a href="http://www.ccifc.org/" target="_blank">FrenCham</a>|<a href="http://www.cpaffc.org.cn/" target="_blank">CPAFFC</a>|<a href="http://www.cpifa.org/EN/" target="_blank">CPIFA</a>|<a href="http://english.gov.cn/" target="_blank">Gov.cn</a>|<a href="http://www.ebeijing.gov.cn/" target="_blank">eBeijing</a>|<a href="http://www.amchamchina.org/" target="_blank">AmCham</a>|<a href="http://www.swisscham.org/bei/" target="_blank">SwissCham BJ</a>|<a href="http://www.gz2010.cn/en" target="_blank">The 16th Asian Games</a>|</div>
+
+<div class="blank10">...</div>
+
+<div class="footer-zx partnersbox">
+<div class="center infobox">| <a href="static_e/2011about.html" target="_top">About China Daily</a> | <a href="static_e/Advertise_Site.html" target="_top">Advertise on Site</a> | <a href="static_e/Contact_Us.html" target="_top">Contact Us</a> | <a href="http://career.chinadaily.com.cn/" target="_top">Job Offer</a> |</div>
+
+<p class="center foot-info">Copyright 1995 - 2010 . All rights reserved. The content (including but not limited to text, photo, multimedia information, etc) published in this site belongs to China Daily Information Co (CDIC). Without written authorization from CDIC, such content shall not be republished or used in any form. Note: Browsers with 1024*768 or higher resolution are suggested for this site.</p>
+
+<p class="center foot-info">License for publishing multimedia online <a href="2009image_e/permit2010.jpg" target="_blank">0108263</a> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Registration Number: <a href="ad/licence/licence.html" target="_blank">20100000002731</a>&#160;&#160;&#160;&#160;&#160;&#160;<img src="http://www.chinadaily.com.cn/15361.files/biaoshi.gif" width="35" height="37"/> 
+
+<script type="text/javascript" src="http://s20.cnzz.com/stat.php?id=3089622&#38;web_id=3089622&#38;show=pic1" language="JavaScript">
+</script>
+</p>
+</div>
+
+<script src="15361.files/jquery.KinSlideshow-1.2.1.min.js" type="text/javascript">
+</script>
+
+<script src="15361.files/slishow.js" type="text/javascript">
+</script>
+
+<!--Footer code end 2012/4/19 bayon-->
+<script type="text/javascript" src="http://dict.bing.com.cn/cloudwidget/Scripts/Generated/BingTranslate_Hover_Phrase_Selection_ShowIcon.js">
+</script>
+
+<script type="text/javascript">
+
+<!--
+
+BingCW.Init({
+
+   AppID:"http://www.chinadaily.com.cn/",
+
+   MachineTranslation:true,
+
+   WebDefinition:false,
+
+   Disabled:true
+
+})
+-->
+</script>
+
+<!--天润实时统计代码 Start-->
+<div style="display:none">
+<script type="text/javascript">
+<!--
+document.write(unescape("%3Cscript src='http://cl2.webterren.com/webdig.js?z=16' type='text/javascript'%3E%3C/script%3E"));
+-->
+</script>
+
+ 
+
+<script type="text/javascript">
+<!--
+wd_paramtracker("_wdxid=000000000000000000000000000000000000000000")
+-->
+</script>
+</div>
+
+<!--天润实时统计代码 End-->
+</body>
+</html>
+</html>
