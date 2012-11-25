@@ -17,12 +17,12 @@ import khh.util.Util;
 
 public class NioClient extends Thread implements Communication_I{
 	private SocketChannel socketChannel	= null;
-	private String serverAddr			= "120.0.0.1";
+	private String serverAddr			= "127.0.0.1";
 	private int	serverPort				= 9090;
 	private int serverConnectionTimeout	= 0;
 	private Selector clientSelector		= null;
 	private LogK log 					= LogK.getInstance();
-	private NioWorker nioworkerbusiness = null;
+	private NioWorker nioWorker         = null;
 	public NioClient() throws IOException{
 		init();
 	}
@@ -56,13 +56,14 @@ public class NioClient extends Thread implements Communication_I{
 		socketChennel.register(clientSelector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		return socketChennel;
 	}
-	public NioWorker getNioworkerbusiness() {
-		return nioworkerbusiness;
-	}
-	public void setNioworkerbusiness(NioWorker nioworkerbusiness) {
-		this.nioworkerbusiness = nioworkerbusiness;
-	}
-	public boolean isConnected(){
+
+	public NioWorker getNioWorker() {
+        return nioWorker;
+    }
+    public void setNioWorker(NioWorker nioWorker) {
+        this.nioWorker = nioWorker;
+    }
+    public boolean isConnected(){
 		if ( socketChannel == null )
 			return false;
 		return socketChannel.isConnected() && socketChannel.socket().isConnected()  ;//&& socket.isOpen()&&socket.finishConnect();
@@ -87,11 +88,11 @@ public class NioClient extends Thread implements Communication_I{
 							try{
 								Thread.sleep(1);
 								key = it.next();
-								if((getNioworkerbusiness().getFirestMode()==NioWorker.MODE_FIREST_R) && (key.isReadable()==false)){
+								if((getNioWorker().getFirestMode()==NioWorker.MODE_FIREST_R) && (key.isReadable()==false)){
 									continue;//읽기부터인데 읽기가 활성화안되면 넘겨
-								}else if((getNioworkerbusiness().getFirestMode()==NioWorker.MODE_FIREST_W) && (key.isWritable()==false)){
+								}else if((getNioWorker().getFirestMode()==NioWorker.MODE_FIREST_W) && (key.isWritable()==false)){
 									continue;//쓰기인데 쓰기가 활성화안되어있으면 넘겨
-								}else if((getNioworkerbusiness().getFirestMode()==NioWorker.MODE_FIREST_RW) &&(key.isReadable()==false || key.isWritable()==false)){
+								}else if((getNioWorker().getFirestMode()==NioWorker.MODE_FIREST_RW) &&(key.isReadable()==false || key.isWritable()==false)){
 									continue;//일기쓰기 인데 둘다 안되어있으면 넘겨
 								}
 								
@@ -102,8 +103,8 @@ public class NioClient extends Thread implements Communication_I{
 										finish(key);
 										continue;
 									}
-									getNioworkerbusiness().setSocketChannel(channel);
-									getNioworkerbusiness().execute(key);
+									getNioWorker().setSocketChannel(channel);
+									getNioWorker().execute(key);
 									finish(key);
 								}
 							}catch (Exception e){
