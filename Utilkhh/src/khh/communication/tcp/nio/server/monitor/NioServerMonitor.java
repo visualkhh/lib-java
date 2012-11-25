@@ -14,7 +14,7 @@ import khh.debug.LogK;
 
 public class NioServerMonitor {
 //public class NioServerMonitor extends Thread {
-	private Selector clientSelector	= null;
+	//private Selector clientSelector	= null;
 	RoundRobin<NioServerSelector> selectorPool = null;
 	private LogK log = LogK.getInstance();
 	public NioServerMonitor(RoundRobin<NioServerSelector> selectorPool) throws IOException {
@@ -22,7 +22,7 @@ public class NioServerMonitor {
 		this.selectorPool = selectorPool;
 	}
 	public void init() throws IOException{
-		clientSelector = Selector.open();
+		//clientSelector = Selector.open();
 	}
 //	@Override
 //	public void run() {
@@ -38,12 +38,12 @@ public class NioServerMonitor {
 	public ArrayList<SelectionKey> getSelectionKeys(){
 		ArrayList<SelectionKey> ret = new ArrayList<SelectionKey>();
 		for (int i = 0; i < getSelectorPool().size(); i++) {
-			NioServerSelector selector = getSelectorPool().get(i);
-			Selector clientSelector = selector.getClientSelector();
-			if(clientSelector==null){
+			NioServerSelector nioServerSelector = getSelectorPool().get(i);
+			Selector selector = nioServerSelector.getSelector();
+			if(selector==null){
 				continue;
 			}
-			Set<SelectionKey> s = clientSelector.keys();
+			Set<SelectionKey> s = selector.keys();
 			Iterator<SelectionKey> it = s.iterator();
 			while (it.hasNext()){
 				SelectionKey key = it.next();
