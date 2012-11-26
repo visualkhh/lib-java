@@ -19,7 +19,7 @@ public class NioServerMultiMonitor{
 		monitors = new Adapter_Std<String, NioServerMonitor>();
 	}
 
-	synchronized public void addMinitor(String servername, NioServerMonitor monitor)
+	synchronized public void addMonitor(String servername, NioServerMonitor monitor)
 			throws Exception{
 		synchronized(monitors){
 			monitors.add(servername, monitor);
