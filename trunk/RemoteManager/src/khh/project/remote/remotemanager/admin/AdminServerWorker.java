@@ -4,6 +4,7 @@ import java.nio.channels.SelectionKey;
 
 import khh.communication.tcp.nio.worker.NioWorker;
 import khh.project.remote.remotemanager.client.ClientServer;
+import khh.project.remote.remotemanager.monitor.RemoteServerMonitor;
 import khh.project.remote.remotemanager.msg.RemoteMsg;
 import khh.project.remote.remotemanager.msg.format.RemoteTitleFormater;
 import khh.project.remote.remotemanager.worker.RemoteWorkerBase;
@@ -11,6 +12,9 @@ import khh.project.remote.remotemanager.worker.RemoteWorkerBase.ACTION;
 import khh.std.adapter.Adapter_Std;
 
 public class AdminServerWorker extends RemoteWorkerBase {
+	RemoteServerMonitor monitor = RemoteServerMonitor.getInstance();
+	
+	
 	public AdminServerWorker() {
 		setFirestMode(MODE_FIREST_R);
 	}
@@ -35,9 +39,9 @@ public class AdminServerWorker extends RemoteWorkerBase {
 			return null;
 		}
 			if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-				AdminServer.userList.set(msg.getDataToStr(), msg.getSelectionKey());
+				monitor.setAdminSelectionKey(msg.getDataToStr(), msg.getSelectionKey());
 			}else if(ACTION.LOGIN_LOGOUT.getValue() == msg.getAction()){
-				AdminServer.userList.remove(msg.getDataToStr());
+				monitor.removeAdminSelectionKey(msg.getDataToStr());
 			}
 			
 //			else if(ACTION.ADMIN_CLIENT_JOIN.getValue() == msg.getAction()){
@@ -63,7 +67,7 @@ public class AdminServerWorker extends RemoteWorkerBase {
 			RemoteTitleFormater titleformat = new RemoteTitleFormater();
 			titleformat.format(msg.getData());
 			
-			SelectionKey clientSelectionKey = ClientServer.userList.get(titleformat.getTitle());
+			SelectionKey clientSelectionKey = monitor.getClientSelectionKey(titleformat.getTitle());
 			sendMsg.setAction(ACTION.ADMIN_CLIENT_JOIN.getValue());
 			sendMsg.setData(titleformat.getData());
 			sendMsg(sendMsg, clientSelectionKey);

@@ -10,7 +10,6 @@ import khh.std.adapter.Adapter_Std;
 
 public class AdminServer{
 	
-	public static Adapter_Std<String, SelectionKey> userList = new Adapter_Std<String, SelectionKey>();
 	private int port = 9090;
 	private NioServer server = null;
 	public AdminServer(){
