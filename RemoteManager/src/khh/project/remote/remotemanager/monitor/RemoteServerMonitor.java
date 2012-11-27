@@ -34,5 +34,24 @@ public class RemoteServerMonitor extends NioServerMultiMonitor{
 		return getSelectionKey(ADMINSERVER_NAME, sessionKey);
 	}
 
+	public void addClientSelectionKey(String sessionKey,SelectionKey selectionKey) throws Exception{
+		addSelectionKey(CLIENTSERVER_NAME, sessionKey, selectionKey);
+	}
+	public void addAdminSelectionKey(String sessionKey,SelectionKey selectionKey) throws Exception{
+		addSelectionKey(ADMINSERVER_NAME, sessionKey, selectionKey);
+	}
+	
+	public void setClientSelectionKey(String sessionKey,SelectionKey selectionKey) throws Exception{
+		setSelectionKey(CLIENTSERVER_NAME, sessionKey, selectionKey);
+	}
+	public void setAdminSelectionKey(String sessionKey,SelectionKey selectionKey) throws Exception{
+		setSelectionKey(ADMINSERVER_NAME, sessionKey, selectionKey);
+	}
+	public void removeClientSelectionKey(String sessionKey) throws Exception{
+		removeSelectionKey(CLIENTSERVER_NAME, sessionKey);
+	}
+	public void removeAdminSelectionKey(String sessionKey) throws Exception{
+		removeSelectionKey(ADMINSERVER_NAME, sessionKey);
+	}
 }
 

@@ -9,7 +9,6 @@ import khh.project.remote.remotemanager.msg.RemoteMsg;
 import khh.std.adapter.Adapter_Std;
 
 public class ClientServer{
-	public static Adapter_Std<String, SelectionKey> userList = new Adapter_Std<String, SelectionKey>();
 	private int port = 80;
 	private NioServer server = null;
 	public ClientServer(){

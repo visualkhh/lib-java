@@ -3,11 +3,14 @@ package khh.project.remote.remotemanager.client;
 import java.nio.channels.SelectionKey;
 
 import khh.debug.LogK;
+import khh.project.remote.remotemanager.monitor.RemoteServerMonitor;
 import khh.project.remote.remotemanager.msg.RemoteMsg;
 import khh.project.remote.remotemanager.worker.RemoteWorkerBase;
 
 public class ClientServerWorker extends RemoteWorkerBase{
 	private LogK log = LogK.getInstance();
+	RemoteServerMonitor monitor = RemoteServerMonitor.getInstance();
+	
 	public ClientServerWorker() {
 		setFirestMode(MODE_FIREST_R);
 	}
@@ -33,9 +36,9 @@ public class ClientServerWorker extends RemoteWorkerBase{
 			return null;
 		}
 			if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-				ClientServer.userList.set(msg.getDataToStr(), msg.getSelectionKey());
+				monitor.setClientSelectionKey(msg.getDataToStr(), msg.getSelectionKey());
 			}else if(ACTION.LOGIN_LOGOUT.getValue() == msg.getAction()){
-				ClientServer.userList.remove(msg.getDataToStr());
+				monitor.removeClientSelectionKey(msg.getDataToStr());
 			}
 		return msg;
 	}
