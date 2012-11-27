@@ -1,36 +1,23 @@
 package com.kdn.p.view;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.TextArea;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.lang.Thread.State;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.kdn.gui.frame.FrameFrame;
-import com.kdn.gui.util.UtilGUI;
+import khh.gui.component.frame.FrameFrame;
+import khh.property.util.PropertyUtil;
+import khh.schedule.Scheduler;
+import khh.util.Util;
+
 import com.kdn.p.techexport.engin.Execute;
 import com.kdn.p.techexport.engin.STD;
 import com.kdn.p.techexport.engin.Systeminfo;
-import com.kdn.util.collection.DuplicationArrayList;
-import com.kdn.util.property.PropertyUtil;
-import com.kdt.util.Utilities;
-import com.kdt.util.schedule.Scheduler;
-import com.kdt.util.xml.XMLparser;
 
 public class TechExport_ThreadMonitor extends FrameFrame
 {
@@ -49,7 +36,7 @@ public class TechExport_ThreadMonitor extends FrameFrame
     
     
     public static enum ACTION{
-        REFRESH(Utilities.getNextNumber());
+        REFRESH(Util.getNextNumber());
         int id;
         ACTION(int id){
             this.id=id;

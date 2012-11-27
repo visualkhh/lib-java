@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.kdn.util.ValidationUtil;
-import com.kdn.util.db.ConnectionUtil;
-import com.kdn.util.db.statement.LogPreparedStatement;
-import com.kdn.util.property.PropertyUtil;
-import com.kdt.util.date.DateUtil;
-import com.khh.util.debug.DebugUtil;
-import com.khh.util.file.FileUtil;
+import khh.date.util.DateUtil;
+import khh.db.statement.LogPreparedStatement;
+import khh.db.util.ConnectionUtil;
+import khh.debug.util.DebugUtil;
+import khh.file.util.FileUtil;
+import khh.property.util.PropertyUtil;
+import khh.string.util.StringUtil;
 
 public class Execute extends Thread {
 
@@ -139,7 +139,7 @@ public class Execute extends Thread {
        
         try {
             
-            sql = ValidationUtil.replaceAll(sql, ";","");
+            sql = StringUtil.replaceAll(sql, ";","");
 
 //sql="select a.*,'13. 더블브레이드를 이용한 케이블포설공법' NEWTECH_CD from kit0130 a where a.oper_ntc_ymd BETWEEN ? AND ?";
                 ppsmt =  new LogPreparedStatement(con,sql);

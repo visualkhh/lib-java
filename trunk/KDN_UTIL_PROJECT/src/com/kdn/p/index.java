@@ -5,7 +5,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.kdn.gui.frame.FrameFrame;
+import khh.gui.component.frame.FrameFrame;
+
 import com.kdn.p.view.DateJump;
 import com.kdn.p.view.ExcelParser;
 import com.kdn.p.view.FileRenameReplaceName;
@@ -13,7 +14,6 @@ import com.kdn.p.view.FolderOpen;
 import com.kdn.p.view.ISL_GENPROC1A;
 import com.kdn.p.view.PasswordConversion;
 import com.kdn.p.view.TechExport;
-import com.kdn.p.view.PasswordConversion.VIEWID;
 
 public class index extends FrameFrame {
 

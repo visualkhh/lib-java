@@ -4,15 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.kdn.gui.frame.FrameFrame;
-import com.kdn.util.file.FileUtilKDN;
+import khh.file.util.FileUtil;
+import khh.gui.component.frame.FrameFrame;
 
 public class FileRenameReplaceName extends FrameFrame
 {
@@ -106,7 +105,7 @@ public class FileRenameReplaceName extends FrameFrame
 		
 		
 		
-		FileUtilKDN.replaceFileName(path.getText(), textfield_a.getText(), textfield_b.getText());
+		FileUtil.replaceFileName(path.getText(), textfield_a.getText(), textfield_b.getText());
 //		textarea.setText("");
 //
 //		File file = new File(path.getText());

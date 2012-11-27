@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.Utilities;
 
 import jxl.Cell;
 import jxl.Image;
@@ -22,15 +23,13 @@ import jxl.write.Label;
 import jxl.write.WritableCellFormat;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
-
-import com.kdn.gui.frame.FrameFrame;
-import com.kdn.util.ValidationUtil;
-import com.kdn.util.excel.ExcelReaderParser;
-import com.kdn.util.excel.ExcelWriterParser;
-import com.kdt.std.Standard;
-import com.kdt.util.Utilities;
-import com.khh.util.debug.DebugUtil;
-import com.khh.util.file.FileUtil;
+import khh.debug.util.DebugUtil;
+import khh.excel.ExcelReaderParser;
+import khh.excel.ExcelWriterParser;
+import khh.file.util.FileUtil;
+import khh.gui.component.frame.FrameFrame;
+import khh.std.Standard;
+import khh.string.util.StringUtil;
 
 public class ExcelParser extends FrameFrame
 {
@@ -385,11 +384,11 @@ public class ExcelParser extends FrameFrame
                         if(contents==null)
                             continue;
                         
-//                        if(Utilities.deleteAllSpace(v).equals("공통점의조서")){
-                        if(Utilities.deleteAllSpace(contents).equals("검사점의조서") || Utilities.deleteAllSpace(contents).equals("공통점의조서")){
+//                        if(StringUtil.deleteAllSpace(v).equals("공통점의조서")){
+                        if(StringUtil.deleteAllSpace(contents).equals("검사점의조서") || StringUtil.deleteAllSpace(contents).equals("공통점의조서")){
                             st.setValue(rowindex);
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("검사점번호")){
+                        if(StringUtil.deleteAllSpace(contents).equals("검사점번호")){
                             st.setKey(cells[colindex+1].getContents());
                         }
 
@@ -449,54 +448,54 @@ public class ExcelParser extends FrameFrame
                         if(contents==null)
                             continue;
                         
-                        if(Utilities.deleteAllSpace(contents).equals("검사점번호")){
+                        if(StringUtil.deleteAllSpace(contents).equals("검사점번호")){
                             gumsanum = cells[colindex+1].getContents();
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("도엽번호")){
+                        if(StringUtil.deleteAllSpace(contents).equals("도엽번호")){
                             doynum = cells[colindex+1].getContents();
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("소재지")){
+                        if(StringUtil.deleteAllSpace(contents).equals("소재지")){
                             soje = cells[colindex+1].getContents();
-                            soje = ValidationUtil.replaceUL(soje, ",", ".");
+                            soje = StringUtil.replaceUL(soje, ",", ".");
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("좌표원점")){
+                        if(StringUtil.deleteAllSpace(contents).equals("좌표원점")){
                             point = cells[colindex+1].getContents();
-                            point = ValidationUtil.replaceUL(point, ",", ".");
+                            point = StringUtil.replaceUL(point, ",", ".");
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("관측일자")){
+                        if(StringUtil.deleteAllSpace(contents).equals("관측일자")){
                             mymd = cells[colindex+1].getContents();
-                            mymd = ValidationUtil.replaceUL(mymd, ",", ".");
+                            mymd = StringUtil.replaceUL(mymd, ",", ".");
                         }
-//                        if(Utilities.deleteAllSpace(contents).equals("관측일자")){
+//                        if(StringUtil.deleteAllSpace(contents).equals("관측일자")){
 //                            result+=(cells[colindex+1].getContents()+",");
 //                        }
-                        if(Utilities.deleteAllSpace(contents).equals("GRS80") ){
+                        if(StringUtil.deleteAllSpace(contents).equals("GRS80") ){
                             Cell[] cells2 = reader.getRow(sheetindex, rowindex+1);
                             x = cells2[colindex+1].getContents();
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("GRS80") ){
+                        if(StringUtil.deleteAllSpace(contents).equals("GRS80") ){
                             Cell[] cells2 = reader.getRow(sheetindex, rowindex+2);
                             y = cells2[colindex+1].getContents();
                         }
                         
-//                        if(Utilities.deleteAllSpace(contents).equals("성과")){
+//                        if(StringUtil.deleteAllSpace(contents).equals("성과")){
 //                            songga = cells[colindex+1].getContents();
 //                        }
-                        if(Utilities.deleteAllSpace(contents).equals("GRS80")){
+                        if(StringUtil.deleteAllSpace(contents).equals("GRS80")){
                             songga = cells[colindex].getContents();
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("관측자")){
+                        if(StringUtil.deleteAllSpace(contents).equals("관측자")){
                             mpeple = cells[colindex+1].getContents();
                         }
-//                        if(Utilities.deleteAllSpace(contents).equals("관측자")){
+//                        if(StringUtil.deleteAllSpace(contents).equals("관측자")){
 //                            result+=(cells[colindex+1].getContents()+",,");
 //                        }
                         
-                        if(Utilities.deleteAllSpace(contents).equals("경로")){
+                        if(StringUtil.deleteAllSpace(contents).equals("경로")){
                             root = cells[colindex+1].getContents();
-                            root = ValidationUtil.replaceUL(root, ",", ".");
+                            root = StringUtil.replaceUL(root, ",", ".");
                         }
-                        if(Utilities.deleteAllSpace(contents).equals("검사점번호")){
+                        if(StringUtil.deleteAllSpace(contents).equals("검사점번호")){
                             filename = cells[colindex+1].getContents()+".xls";
                         }
                         System.out.print(".");
@@ -561,57 +560,57 @@ public class ExcelParser extends FrameFrame
                      if(contents==null)
                          continue;
                      
-                     System.out.println(Utilities.deleteAllSpace(contents));
+                     System.out.println(StringUtil.deleteAllSpace(contents));
                      
-                     if(Utilities.deleteAllSpace(contents).equals("번호")){
+                     if(StringUtil.deleteAllSpace(contents).equals("번호")){
                          gumsanum = cells[colindex+1].getContents();
                      }
-                     if(Utilities.deleteAllSpace(contents).equals("도엽번호")){
+                     if(StringUtil.deleteAllSpace(contents).equals("도엽번호")){
                          doynum = cells[colindex+1].getContents();
                      }
-                     if(Utilities.deleteAllSpace(contents).equals("소재지")){
+                     if(StringUtil.deleteAllSpace(contents).equals("소재지")){
                          soje = cells[colindex+1].getContents();
-                         soje = ValidationUtil.replaceUL(soje, ",", ".");
+                         soje = StringUtil.replaceUL(soje, ",", ".");
                      }
-                     if(Utilities.deleteAllSpace(contents).equals("좌표원점")){
+                     if(StringUtil.deleteAllSpace(contents).equals("좌표원점")){
                          point = cells[colindex+1].getContents();
-                         point = ValidationUtil.replaceUL(point, ",", ".");
+                         point = StringUtil.replaceUL(point, ",", ".");
                      }
-                     if(Utilities.deleteAllSpace(contents).equals("관측일자")){
+                     if(StringUtil.deleteAllSpace(contents).equals("관측일자")){
                          mymd = cells[colindex+1].getContents();
-                         mymd = ValidationUtil.replaceUL(mymd, ",", ".");
+                         mymd = StringUtil.replaceUL(mymd, ",", ".");
                      }
-//                     if(Utilities.deleteAllSpace(contents).equals("관측일자")){
+//                     if(StringUtil.deleteAllSpace(contents).equals("관측일자")){
 //                         result+=(cells[colindex+1].getContents()+",");
 //                     }
-                     if(Utilities.deleteAllSpace(contents).equals("GRS80") ){
+                     if(StringUtil.deleteAllSpace(contents).equals("GRS80") ){
                          Cell[] cells2 = reader.getRow(sheetindex, rowindex+1);
                          x = cells2[colindex+1].getContents();
                      }
-                     if(Utilities.deleteAllSpace(contents).equals("GRS80") ){
+                     if(StringUtil.deleteAllSpace(contents).equals("GRS80") ){
                          Cell[] cells2 = reader.getRow(sheetindex, rowindex+2);
                          y = cells2[colindex+1].getContents();
                      }
                      
-//                     if(Utilities.deleteAllSpace(contents).equals("성과")){
+//                     if(StringUtil.deleteAllSpace(contents).equals("성과")){
 //                         songga = cells[colindex+1].getContents();
 //                     }
-                     if(Utilities.deleteAllSpace(contents).equals("GRS80")){
+                     if(StringUtil.deleteAllSpace(contents).equals("GRS80")){
                          songga = cells[colindex].getContents();
                      }
-                     if(Utilities.deleteAllSpace(contents).equals("관측자")){
+                     if(StringUtil.deleteAllSpace(contents).equals("관측자")){
                          mpeple = cells[colindex+1].getContents();
                      }
-//                     if(Utilities.deleteAllSpace(contents).equals("관측자")){
+//                     if(StringUtil.deleteAllSpace(contents).equals("관측자")){
 //                         result+=(cells[colindex+1].getContents()+",,");
 //                     }
                      
-                     if(Utilities.deleteAllSpace(contents).equals("경로")){
+                     if(StringUtil.deleteAllSpace(contents).equals("경로")){
                          Cell[] cells2 = reader.getRow(sheetindex, rowindex+1);
                          root = cells2[colindex+1].getContents();
-                         root = ValidationUtil.replaceUL(root, ",", ".");
+                         root = StringUtil.replaceUL(root, ",", ".");
                      }
-                     if(Utilities.deleteAllSpace(contents).equals("번호")){
+                     if(StringUtil.deleteAllSpace(contents).equals("번호")){
                          filename = cells[colindex+1].getContents()+".hwp";
                      }
                      System.out.print(".");
