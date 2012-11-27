@@ -1,5 +1,7 @@
 package khh.project.remote.remotemanager.monitor;
 
+import java.nio.channels.SelectionKey;
+
 import khh.communication.tcp.nio.server.monitor.NioServerMonitor;
 import khh.communication.tcp.nio.server.monitor.NioServerMultiMonitor;
 import khh.debug.LogK;
@@ -24,6 +26,12 @@ public class RemoteServerMonitor extends NioServerMultiMonitor{
 	}
 	public void addServerMinitor(NioServerMonitor monitor) throws Exception{
 		addMonitor(ADMINSERVER_NAME, monitor);
+	}
+	public SelectionKey getClientSelectionKey(String sessionKey) throws Exception{
+		return getSelectionKey(CLIENTSERVER_NAME, sessionKey);
+	}
+	public SelectionKey getAdminSelectionKey(String sessionKey) throws Exception{
+		return getSelectionKey(ADMINSERVER_NAME, sessionKey);
 	}
 
 }
