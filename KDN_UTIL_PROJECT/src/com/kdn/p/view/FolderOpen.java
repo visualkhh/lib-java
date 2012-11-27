@@ -1,6 +1,5 @@
 package com.kdn.p.view;
 
-import java.awt.Component;
 import java.awt.FileDialog;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -18,15 +17,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.text.Utilities;
 
-import com.kdn.gui.component.editor.table.ButtonCellEditor;
-import com.kdn.gui.component.randerer.table.ButtonCellRenderer;
-import com.kdn.gui.component.randerer.table.LableCellRenderer;
-import com.kdn.gui.component.table.TableModelCustom;
-import com.kdn.gui.frame.FrameFrame;
-import com.kdn.util.property.PropertyUtil;
-import com.kdt.util.Utilities;
-import com.kdt.util.xml.XMLparser;
+import khh.gui.component.editor.table.ButtonCellEditor;
+import khh.gui.component.frame.FrameFrame;
+import khh.gui.component.randerer.table.LableCellRenderer;
+import khh.gui.component.table.TableModelCustom;
+import khh.property.util.PropertyUtil;
+import khh.util.Util;
+import khh.xml.XMLparser;
 
 public class FolderOpen extends FrameFrame
 {
@@ -47,7 +46,7 @@ public class FolderOpen extends FrameFrame
 	}
 	
 	public static enum ACTION{
-		FILEOPEN(Utilities.getNextNumber())
+		FILEOPEN(Util.getNextNumber())
 		;
 		int id;
 		ACTION(int id){
@@ -207,7 +206,7 @@ public class FolderOpen extends FrameFrame
 						if(osname.indexOf("Window")>=0){
 							try
 							{
-								Utilities.executeSystem("explorer "+url);
+								Util.executeSystem("explorer "+url);
 							}
 							catch (IOException e1)
 							{

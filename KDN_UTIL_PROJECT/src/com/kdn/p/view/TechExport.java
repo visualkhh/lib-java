@@ -17,12 +17,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.kdn.gui.frame.FrameFrame;
-import com.kdn.gui.util.UtilGUI;
+import khh.gui.component.frame.FrameFrame;
+import khh.gui.util.GUIUtil;
+import khh.util.Util;
+import khh.xml.XMLparser;
+
 import com.kdn.p.techexport.engin.STD;
 import com.kdn.p.techexport.engin.Systeminfo;
-import com.kdt.util.Utilities;
-import com.kdt.util.xml.XMLparser;
 
 public class TechExport extends FrameFrame
 {
@@ -52,7 +53,7 @@ public class TechExport extends FrameFrame
     
     
     public static enum ACTION{
-        SERVER_INFO_LOAD(Utilities.getNextNumber());
+        SERVER_INFO_LOAD(Util.getNextNumber());
         int id;
         ACTION(int id){
             this.id=id;
@@ -88,26 +89,26 @@ public class TechExport extends FrameFrame
         
         
         
-        JTextField server_info = new JTextField("C:\\추출\\지사계정.xml"); server_info.setName(VIEWID.SERVER_INFO.getValue());    UtilGUI.setSize(server_info,220,20);
-        JTextField sigong_info = new JTextField("C:\\추출\\지사별 신기술추출\\시공_2000"); sigong_info.setName(VIEWID.SIGONG_INFO.getValue());  UtilGUI.setSize(sigong_info,220,20);
-        JTextField jungong_info = new JTextField("C:\\추출\\지사별 신기술추출\\준공_1000"); jungong_info.setName(VIEWID.JUNGONG_INFO.getValue());  UtilGUI.setSize(jungong_info,220,20);
-//        JTextField server_info = new JTextField(); server_info.setName(VIEWID.SERVER_INFO.getValue());    UtilGUI.setSize(server_info,220,20);
-//        JTextField sigong_info = new JTextField(); sigong_info.setName(VIEWID.SIGONG_INFO.getValue());  UtilGUI.setSize(sigong_info,220,20);
-//        JTextField jungong_info = new JTextField(); jungong_info.setName(VIEWID.JUNGONG_INFO.getValue());  UtilGUI.setSize(jungong_info,220,20);
+        JTextField server_info = new JTextField("C:\\추출\\지사계정.xml"); server_info.setName(VIEWID.SERVER_INFO.getValue());    GUIUtil.setSize(server_info,220,20);
+        JTextField sigong_info = new JTextField("C:\\추출\\지사별 신기술추출\\시공_2000"); sigong_info.setName(VIEWID.SIGONG_INFO.getValue());  GUIUtil.setSize(sigong_info,220,20);
+        JTextField jungong_info = new JTextField("C:\\추출\\지사별 신기술추출\\준공_1000"); jungong_info.setName(VIEWID.JUNGONG_INFO.getValue());  GUIUtil.setSize(jungong_info,220,20);
+//        JTextField server_info = new JTextField(); server_info.setName(VIEWID.SERVER_INFO.getValue());    GUIUtil.setSize(server_info,220,20);
+//        JTextField sigong_info = new JTextField(); sigong_info.setName(VIEWID.SIGONG_INFO.getValue());  GUIUtil.setSize(sigong_info,220,20);
+//        JTextField jungong_info = new JTextField(); jungong_info.setName(VIEWID.JUNGONG_INFO.getValue());  GUIUtil.setSize(jungong_info,220,20);
         
     
-        Button loadbtn = new Button("Load"); loadbtn.setName(VIEWID.LOAD_BTN.getValue()); UtilGUI.setSize(loadbtn,40,20);
-        Label serverl  = new Label("server_info");    UtilGUI.setSize(serverl, 40,20); 
-        Label sigongl  = new Label("sigong_info"); UtilGUI.setSize(sigongl, 40,20);
-        Label jungongl  = new Label("jungong_info");UtilGUI.setSize(jungongl, 40,20);
+        Button loadbtn = new Button("Load"); loadbtn.setName(VIEWID.LOAD_BTN.getValue()); GUIUtil.setSize(loadbtn,40,20);
+        Label serverl  = new Label("server_info");    GUIUtil.setSize(serverl, 40,20); 
+        Label sigongl  = new Label("sigong_info"); GUIUtil.setSize(sigongl, 40,20);
+        Label jungongl  = new Label("jungong_info");GUIUtil.setSize(jungongl, 40,20);
         
-        toolbar.add(serverl,UtilGUI.getGridBagConstraints(0, 0, 1, 1,GridBagConstraints.BOTH));
-        toolbar.add(sigongl,UtilGUI.getGridBagConstraints(0, 1, 1, 1,GridBagConstraints.BOTH));
-        toolbar.add(jungongl,UtilGUI.getGridBagConstraints(0, 2, 1, 1,GridBagConstraints.BOTH));
-        toolbar.add(server_info,UtilGUI.getGridBagConstraints(1, 0, 1, 1,GridBagConstraints.BOTH));
-        toolbar.add(sigong_info,UtilGUI.getGridBagConstraints(1, 1, 1, 1,GridBagConstraints.BOTH));
-        toolbar.add(jungong_info,UtilGUI.getGridBagConstraints(1, 2, 1, 1,GridBagConstraints.BOTH));
-        toolbar.add(loadbtn,UtilGUI.getGridBagConstraints(3, 0, 1, 3,GridBagConstraints.BOTH));
+        toolbar.add(serverl,GUIUtil.getGridBagConstraints(0, 0, 1, 1,GridBagConstraints.BOTH));
+        toolbar.add(sigongl,GUIUtil.getGridBagConstraints(0, 1, 1, 1,GridBagConstraints.BOTH));
+        toolbar.add(jungongl,GUIUtil.getGridBagConstraints(0, 2, 1, 1,GridBagConstraints.BOTH));
+        toolbar.add(server_info,GUIUtil.getGridBagConstraints(1, 0, 1, 1,GridBagConstraints.BOTH));
+        toolbar.add(sigong_info,GUIUtil.getGridBagConstraints(1, 1, 1, 1,GridBagConstraints.BOTH));
+        toolbar.add(jungong_info,GUIUtil.getGridBagConstraints(1, 2, 1, 1,GridBagConstraints.BOTH));
+        toolbar.add(loadbtn,GUIUtil.getGridBagConstraints(3, 0, 1, 3,GridBagConstraints.BOTH));
         add(toolbar,BorderLayout.NORTH);
         
         ///////////////

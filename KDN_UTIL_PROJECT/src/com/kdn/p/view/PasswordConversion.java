@@ -9,8 +9,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.kdn.gui.frame.FrameFrame;
-import com.kdt.util.Utilities;
+import khh.gui.component.frame.FrameFrame;
 
 public class PasswordConversion extends FrameFrame
 {

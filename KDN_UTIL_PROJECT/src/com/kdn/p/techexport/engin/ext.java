@@ -1,17 +1,13 @@
 package com.kdn.p.techexport.engin;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.xml.sax.SAXException;
+import khh.xml.XMLparser;
 
-import com.kdn.util.db.ConnectionUtil;
-import com.kdt.util.xml.XMLparser;
+import org.xml.sax.SAXException;
 
 public class ext {
     public static void main(String[] args) throws SAXException, IOException, XPathExpressionException, NoClassDefFoundError, ClassNotFoundException, SQLException {

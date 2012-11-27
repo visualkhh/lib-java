@@ -7,25 +7,18 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.plaf.SliderUI;
 
-import com.kdn.gui.frame.FrameFrame;
-import com.kdn.util.db.ConnectionUtil;
-import com.kdn.util.db.connection.ConnectionCreator_I;
-import com.kdn.util.db.connection.ConnectionPoolCreator_I;
-import com.kdn.util.db.connection.ConnectionPool_Connection;
-import com.kdn.util.db.connection.pool.ConnectionMultiPool;
-import com.kdn.util.db.statement.LogPreparedStatement;
-import com.kdn.util.property.PropertyUtil;
-import com.kdt.util.schedule.Scheduler;
+import khh.db.connection.ConnectionCreator_I;
+import khh.db.connection.pool.ConnectionMultiPool;
+import khh.db.connection.pool.ConnectionPool_Connection;
+import khh.db.util.ConnectionUtil;
+import khh.gui.component.frame.FrameFrame;
+import khh.schedule.Scheduler;
 
 public class ISL_GENPROC1A extends FrameFrame
 {
@@ -151,7 +144,7 @@ public class ISL_GENPROC1A extends FrameFrame
 	
 	
 	
-	ConnectionPoolCreator_I islcreator = new ConnectionPoolCreator_I() {
+	ConnectionCreator_I islcreator = new ConnectionCreator_I() {
         @Override
         public ConnectionPool_Connection getMakeConnection() throws ClassNotFoundException, SQLException {
             String ip = "168.78.203.138";
@@ -164,7 +157,7 @@ public class ISL_GENPROC1A extends FrameFrame
         }
     };
 	
-    ConnectionPoolCreator_I knetcreator = new ConnectionPoolCreator_I() {
+    ConnectionCreator_I knetcreator = new ConnectionCreator_I() {
         @Override
         public ConnectionPool_Connection getMakeConnection() throws ClassNotFoundException, SQLException {
             String ip = "100.1.26.72";
