@@ -29,11 +29,11 @@ public class MathUtil {
         dist = Math.acos(dist);
         dist = radTodeg(dist);
         dist = dist * 60 * 1.1515;
-        if ( unit == "K" ) {
+        if ( unit == "K" || unit.equals("K")) {
             dist = dist * 1.609344;
-        } else if ( unit == "N" ) {
+        } else if ( unit == "N" || unit.equals("N") ) {
             dist = dist * 0.8684;
-        } else if ( unit == "m" ) {
+        } else if ( unit == "m" || unit.equals("m") ) {
             dist = dist * 1.609344;
             dist = dist * 1000;
         }
