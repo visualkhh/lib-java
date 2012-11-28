@@ -137,8 +137,38 @@ public class StringUtil {
         return m.find();
     }
     
+    static public String[] isMatches(String inputStr,String[] matchingStrArr){
+        ArrayList mats= new ArrayList();
+        for (int i = 0; i < matchingStrArr.length; i++)
+        {
+            mats.add(matchingStrArr[i]);
+        }
+        ArrayList  r = isMatches(inputStr, mats);
+        String[] ra = new String[r.size()];
+        for (int i = 0; i < r.size(); i++)
+        {
+            ra[i]=(String)r.get(i);
+        }
+        return ra;
+    }
+    
+    
+    
+    static public ArrayList isMatches(String inputStr,ArrayList<String> matchingStrArr){
+        ArrayList mats= new ArrayList();
+        for (int i = 0; i < matchingStrArr.size(); i++)
+        {
+            String in =StringUtil.regexMetaCharToEscapeChar( (String)matchingStrArr.get(i));
+            if(isMatches(inputStr,".*"+in+".*"))
+                mats.add(matchingStrArr.get(i));
+            
+        }
+        return mats;
+    }
+    
     static public boolean  isMatches(String str,String regex){
     //  System.out.println(Utilities.isMatches(str, ".*R001.*"));
+        
             boolean sw = false;
              try {
 //               Pattern p = Pattern.compile(regex);
@@ -149,6 +179,11 @@ public class StringUtil {
 //              }else{
 //                  return false;
 //              }
+//                 HashMap<String,String> m = new HashMap();
+//                 m.put("\r","");
+//                 m.put("\n","");
+//                 m.put("\t","");
+//                 str  = StringUtil.replaceAll(str,m);
                   if (str.matches(regex)){
                       sw = true;
                   }else{
