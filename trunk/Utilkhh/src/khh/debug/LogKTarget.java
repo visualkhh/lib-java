@@ -20,28 +20,28 @@ import java.io.OutputStream;
 //        %n : line_separator
 // -->
 public class LogKTarget{
-	public static final String ALL = "A";
-	public static final String OFF = "O";
-	public static final String FATAL = "F";
-	public static final String ERROR = "E";
-	public static final String WARN = "W";
-	public static final String INFO = "I";
-	public static final String DEBUG = "D";
+	public static final String ALL 		= "A";
+	public static final String OFF 		= "O";
+	public static final String FATAL 	= "F";
+	public static final String ERROR 	= "E";
+	public static final String WARN 	= "W";
+	public static final String INFO 	= "I";
+	public static final String DEBUG 	= "D";
 
-	String loger_dateformat = null;
-	String loger_logformat = null;
-	String[] loger_level = null;
-	String saver_dateformat = null;
-	Boolean saver_save = null;
-	String saver_savepath = null;
-	Boolean saver_append = null;
-	String saver_filename = null;
-	Boolean exception_stacktrace = null;
+	String loger_dateformat 	= null;
+	String loger_logformat 		= null;
+	String[] loger_level 		= null;
+	String saver_dateformat 	= null;
+	Boolean saver_save 			= null;
+	String saver_savepath 		= null;
+	Boolean saver_append 		= null;
+	String saver_filename 		= null;
+	Boolean exception_stacktrace= null;
 
-	String id;
-	String category;
-	String extendcategory;
-	OutputStream outputstream = System.out;
+	String id					= null;
+	String category				= null;
+	String extendcategory		= null;
+	OutputStream outputstream 	= System.out;
 
 	public String getLoger_dateformat(){
 		return loger_dateformat;
