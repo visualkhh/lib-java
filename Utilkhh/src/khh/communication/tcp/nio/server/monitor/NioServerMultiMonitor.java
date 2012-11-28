@@ -19,8 +19,7 @@ public class NioServerMultiMonitor{
 		monitors = new Adapter_Std<String, NioServerMonitor>();
 	}
 
-	synchronized public void addMonitor(String servername, NioServerMonitor monitor)
-			throws Exception{
+	synchronized public void addMonitor(String servername, NioServerMonitor monitor) throws Exception{
 		synchronized(monitors){
 			monitors.add(servername, monitor);
 		}
@@ -37,9 +36,34 @@ public class NioServerMultiMonitor{
 			serverlist.remove(servername);
 		}
 	}
+	synchronized public void addSelectionKey(String servername,String sessionKey,SelectionKey selectionKey) throws Exception{
+		synchronized(serverlist){
+			Adapter_Std<String, SelectionKey> list = serverlist.get(servername);
+			synchronized(list){
+				list.add(sessionKey, selectionKey);
+			}
+		}
+	}
+	synchronized public void setSelectionKey(String servername,String sessionKey,SelectionKey selectionKey) throws Exception{
+		synchronized(serverlist){
+			Adapter_Std<String, SelectionKey> list = serverlist.get(servername);
+			synchronized(list){
+				list.set(sessionKey, selectionKey);
+			}
+		}
+	}
+	synchronized public void removeSelectionKey(String servername,String sessionKey) throws Exception{
+		synchronized(serverlist){
+			Adapter_Std<String, SelectionKey> list = serverlist.get(servername);
+			synchronized(list){
+				list.remove(sessionKey);
+			}
+		}
+	}
+	
+	
 
-	synchronized public SelectionKey getSelectionKey(String serverid, String sessionKey)
-			throws Exception{
+	synchronized public SelectionKey getSelectionKey(String serverid, String sessionKey) throws Exception{
 		ArrayList<SelectionKey> monitorKeys = null;
 		Adapter_Std<String, SelectionKey> serverKeys = null;
 		SelectionKey skey = null;
