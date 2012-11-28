@@ -30,9 +30,7 @@ import javax.imageio.stream.ImageInputStream;
 import javax.swing.ImageIcon;
 
 import jxl.format.RGB;
-
 import khh.conversion.util.ConversionUtil;
-import khh.file.util.FileUtil;
 
 import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
