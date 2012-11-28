@@ -19,112 +19,132 @@ import java.io.OutputStream;
 //        %m : message
 //        %n : line_separator
 // -->
-public class LogKTarget {
-    public static final String  ALL="A";
-    public static final String  OFF="O";
-    public static final String  FATAL="F";
-    public static final String  ERROR="E";
-    public static final String  WARN="W";
-    public static final String  INFO="I";
-    public static final String  DEBUG="D";
-    
-String loger_dateformat=null;
-String loger_logformat=null;
-String[] loger_level=null;
-String saver_dateformat=null;
-Boolean saver_save=null;
-String saver_savepath=null;
-Boolean saver_append=null;
-String saver_filename=null;
-Boolean exception_stacktrace=null;
+public class LogKTarget{
+	public static final String ALL = "A";
+	public static final String OFF = "O";
+	public static final String FATAL = "F";
+	public static final String ERROR = "E";
+	public static final String WARN = "W";
+	public static final String INFO = "I";
+	public static final String DEBUG = "D";
 
-String id;
-String category;
-String extendcategory;
-OutputStream outputstream = System.out;
+	String loger_dateformat = null;
+	String loger_logformat = null;
+	String[] loger_level = null;
+	String saver_dateformat = null;
+	Boolean saver_save = null;
+	String saver_savepath = null;
+	Boolean saver_append = null;
+	String saver_filename = null;
+	Boolean exception_stacktrace = null;
 
-public String getLoger_dateformat() {
-    return loger_dateformat;
-}
-public void setLoger_dateformat(String loger_dateformat) {
-    this.loger_dateformat = loger_dateformat;
-}
-public String getLoger_logformat() {
-    return loger_logformat;
-}
-public void setLoger_logformat(String loger_logformat) {
-    this.loger_logformat = loger_logformat;
-}
-public String getSaver_dateformat() {
-    return saver_dateformat;
-}
-public void setSaver_dateformat(String saver_dateformat) {
-    this.saver_dateformat = saver_dateformat;
-}
+	String id;
+	String category;
+	String extendcategory;
+	OutputStream outputstream = System.out;
 
-public String getSaver_savepath() {
-    return saver_savepath;
-}
-public void setSaver_savepath(String saver_savepath) {
-    this.saver_savepath = saver_savepath;
-}
+	public String getLoger_dateformat(){
+		return loger_dateformat;
+	}
 
-public String getSaver_filename() {
-    return saver_filename;
-}
-public void setSaver_filename(String saver_filename) {
-    this.saver_filename = saver_filename;
-}
-public String getId() {
-    return id;
-}
-public void setId(String id) {
-    this.id = id;
-}
-public String getCategory() {
-    return category;
-}
-public void setCategory(String category) {
-    this.category = category;
-}
-public String getExtendcategory() {
-    return extendcategory;
-}
-public void setExtendcategory(String extendcategory) {
-    this.extendcategory = extendcategory;
-}
-public Boolean isSaver_save() {
-    return saver_save;
-}
-public void setSaver_save(Boolean saver_save) {
-    this.saver_save = saver_save;
-}
-public Boolean isSaver_append() {
-    return saver_append;
-}
-public void setSaver_append(Boolean saver_append) {
-    this.saver_append = saver_append;
-}
-public String[] getLoger_level() {
-    return loger_level;
-}
-public void setLoger_level(String[] loger_level) {
-    this.loger_level = loger_level;
-}
-public Boolean getException_stacktrace() {
-    return exception_stacktrace;
-}
-public void setException_stacktrace(Boolean exception_stacktrace) {
-    this.exception_stacktrace = exception_stacktrace;
-}
-public OutputStream getOutputstream() {
-	return outputstream;
-}
-public void setOutputstream(OutputStream outputstream) {
-	this.outputstream = outputstream;
-}
+	public void setLoger_dateformat(String loger_dateformat){
+		this.loger_dateformat = loger_dateformat;
+	}
 
+	public String getLoger_logformat(){
+		return loger_logformat;
+	}
 
+	public void setLoger_logformat(String loger_logformat){
+		this.loger_logformat = loger_logformat;
+	}
 
+	public String getSaver_dateformat(){
+		return saver_dateformat;
+	}
+
+	public void setSaver_dateformat(String saver_dateformat){
+		this.saver_dateformat = saver_dateformat;
+	}
+
+	public String getSaver_savepath(){
+		return saver_savepath;
+	}
+
+	public void setSaver_savepath(String saver_savepath){
+		this.saver_savepath = saver_savepath;
+	}
+
+	public String getSaver_filename(){
+		return saver_filename;
+	}
+
+	public void setSaver_filename(String saver_filename){
+		this.saver_filename = saver_filename;
+	}
+
+	public String getId(){
+		return id;
+	}
+
+	public void setId(String id){
+		this.id = id;
+	}
+
+	public String getCategory(){
+		return category;
+	}
+
+	public void setCategory(String category){
+		this.category = category;
+	}
+
+	public String getExtendcategory(){
+		return extendcategory;
+	}
+
+	public void setExtendcategory(String extendcategory){
+		this.extendcategory = extendcategory;
+	}
+
+	public Boolean isSaver_save(){
+		return saver_save;
+	}
+
+	public void setSaver_save(Boolean saver_save){
+		this.saver_save = saver_save;
+	}
+
+	public Boolean isSaver_append(){
+		return saver_append;
+	}
+
+	public void setSaver_append(Boolean saver_append){
+		this.saver_append = saver_append;
+	}
+
+	public String[] getLoger_level(){
+		return loger_level;
+	}
+
+	public void setLoger_level(String[] loger_level){
+		this.loger_level = loger_level;
+	}
+
+	public Boolean getException_stacktrace(){
+		return exception_stacktrace;
+	}
+
+	public void setException_stacktrace(Boolean exception_stacktrace){
+		this.exception_stacktrace = exception_stacktrace;
+	}
+
+	public OutputStream getOutputstream(){
+		return outputstream;
+	}
+
+	public void setOutputstream(OutputStream outputstream){
+		this.outputstream = outputstream;
+	}
 
 }
