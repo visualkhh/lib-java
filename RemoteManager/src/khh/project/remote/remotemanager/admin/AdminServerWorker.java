@@ -38,14 +38,15 @@ public class AdminServerWorker extends RemoteWorkerBase {
 		if(msg!=null && msg.isSuccess()==false){
 			return null;
 		}
-			if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-				monitor.setAdminSelectionKey(msg.getDataToStr(), msg.getSelectionKey());
-			}else if(ACTION.LOGIN_LOGOUT.getValue() == msg.getAction()){
-				monitor.removeAdminSelectionKey(msg.getDataToStr());
-			}
-			
-//			else if(ACTION.ADMIN_CLIENT_JOIN.getValue() == msg.getAction()){
-//			}
+		if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
+			RemoteTitleFormater titleformat = new RemoteTitleFormater();
+			titleformat.format(msg.getData());
+			monitor.setAdminSelectionKey(titleformat.getTitle(), msg.getSelectionKey());
+		}else if(ACTION.LOGIN_LOGOUT.getValue() == msg.getAction()){
+			RemoteTitleFormater titleformat = new RemoteTitleFormater();
+			titleformat.format(msg.getData());
+			monitor.removeAdminSelectionKey(titleformat.getTitle());
+		}
 		return msg;
 	}
 
@@ -66,13 +67,18 @@ public class AdminServerWorker extends RemoteWorkerBase {
 		else if(ACTION.ADMIN_CLIENT_JOIN.getValue() == msg.getAction()){
 			RemoteTitleFormater titleformat = new RemoteTitleFormater();
 			titleformat.format(msg.getData());
-			
 			SelectionKey clientSelectionKey = monitor.getClientSelectionKey(titleformat.getTitle());
 			sendMsg.setAction(ACTION.ADMIN_CLIENT_JOIN.getValue());
 			sendMsg.setData(titleformat.getData());
 			sendMsg(sendMsg, clientSelectionKey);
-		}
+		}else{
+//			sendMsg.setAction(msg.getAction());
+//			sendMsg.setData(msg.getData());
+//			sendMsg(sendMsg,selectionKey);
 			
+		}
+
+		
 			
 		return msg;
 	}
