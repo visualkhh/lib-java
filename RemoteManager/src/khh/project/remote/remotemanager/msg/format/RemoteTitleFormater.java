@@ -3,8 +3,10 @@ package khh.project.remote.remotemanager.msg.format;
 import java.nio.ByteBuffer;
 
 import khh.debug.LogK;
+import khh.format.Formater;
+import khh.std.Standard;
 
-public class RemoteTitleFormater extends RemoteFormater {
+public class RemoteTitleFormater extends Formater<ByteBuffer> {
     public static final byte TITLE_STX=(byte) 0x04;
     public static final byte TITLE_ETX=(byte) 0x25;
     
@@ -48,6 +50,67 @@ public class RemoteTitleFormater extends RemoteFormater {
 	public void setData(ByteBuffer data) {
 		this.data = data;
 		log.debug("format Data Set",this.data);
+	}
+
+	
+	@Override
+	public Boolean getBoolean() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Byte getByte() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] getByteArray() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ByteBuffer getByteBuffer() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Double getDouble() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Float getFloat() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer getInt() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getObject() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Standard getStandard() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getString() throws ClassCastException{
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
     
