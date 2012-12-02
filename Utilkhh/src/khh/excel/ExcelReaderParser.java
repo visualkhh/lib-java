@@ -4,10 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.xml.sax.SAXException;
-
-import jxl.Cell;
-import jxl.Image;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
