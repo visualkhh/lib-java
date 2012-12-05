@@ -371,8 +371,18 @@ public class LogK  implements Serializable {
                    String saver_date = DateUtil.getDate(saver_dateformat);
                    
                    String saver_filename = attarget.getSaver_filename();
-                   saver_filename= saver_filename.replaceAll("%c", classpath);
-                   saver_filename= saver_filename.replaceAll("%d", saver_date);
+                   saver_filename = saver_filename.replaceAll("%d", date);
+                   saver_filename = saver_filename.replaceAll("%l", level);
+                   saver_filename = saver_filename.replaceAll("%c", StringUtil.regexMetaCharToEscapeChar(classpath));
+                   saver_filename = saver_filename.replaceAll("%k", filename);
+                   saver_filename = saver_filename.replaceAll("%f", methodname);
+                   saver_filename = saver_filename.replaceAll("%n", classlinenumber+"");
+                   //saver_filename = saver_filename.replaceAll("%r", PropertyUtil.getSeparator());
+                   message = (message==null?"null":message);
+                   saver_filename = saver_filename.replaceAll("%m", StringUtil.regexMetaCharToEscapeChar(message.toString()));
+                   
+//                   saver_filename= saver_filename.replaceAll("%c", classpath);
+//                   saver_filename= saver_filename.replaceAll("%d", saver_date);
                    
                    String savepath = attarget.getSaver_savepath()+PropertyUtil.getFileSeparator()+saver_filename;
                    try {
