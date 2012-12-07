@@ -35,7 +35,7 @@ public class NioServerSelector extends Thread
 			try{
 			   
 			    if(getSelector()==null){
-			        Thread.sleep(5000);
+			        Thread.sleep(2000);
 			        continue;
 			    }
 			    
