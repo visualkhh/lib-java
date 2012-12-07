@@ -364,10 +364,7 @@ public class ConversionUtil {
    }
    
    
-   public static SocketChannel getSocketChannel(SelectionKey selectionKey){
-	   SocketChannel channel = (SocketChannel)selectionKey.channel();
-	   return channel;
-   }
+
    
    public static String byteSizeToHumenSize(int size) {
        String displaySize;
