@@ -420,6 +420,12 @@ public class ByteUtil {
 	
 	
 	
+	public static ByteBuffer toByteBuffer(byte[] bytearray){
+		return  ByteBuffer.wrap(bytearray);
+	}
+	public static ByteBuffer toByteBuffer(String str){
+		return  ByteBuffer.wrap(str.getBytes());
+	}
 	public static byte[] toByteArray(ByteBuffer buffer){
 		   int limit 	= buffer.limit();
 		   int position = buffer.position();
