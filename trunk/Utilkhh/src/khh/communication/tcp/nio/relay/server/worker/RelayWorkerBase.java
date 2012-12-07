@@ -100,13 +100,13 @@ public abstract class RelayWorkerBase extends NioWorker {
 			RelayMsg msg = receiveMsg(selectionKey);
 			
 			if(msg == null || (msg!=null && msg.isSuccess() == false)){
-				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg.toString());
+				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg);
 				return ;
 			}
 			msg = onReceiveAction(msg, selectionKey);
 			
 			if(msg == null || (msg!=null && msg.isSuccess() == false)){
-				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg.toString());
+				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg);
 				return ;
 			}
 			onSendAction(msg, selectionKey);
