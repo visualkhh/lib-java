@@ -3,6 +3,8 @@ package khh.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -266,6 +268,21 @@ public class Util {
     public synchronized static int getNextNumber(){
         return ++value;
     }
+    
+    synchronized public static String getTimeUnikey() {
+
+		/*
+		 * Unikey 생성 로직
+		 * DATETIME(yyyyMMddHHmmssSSS;17) + IncNum(000~999;3)
+		 */
+
+		Object[] objs = { new Integer((getNextNumber()) % 1000)};
+		return new SimpleDateFormat("yyyyMMddHHmmssSSS").format(
+			new java.util.Date())
+			+ new MessageFormat("{0,number,000}").format(objs);
+
+	}
+    
     
     public static boolean isTimeOver(long start_mm,long daly_mm){
         long time = System.currentTimeMillis()  -  start_mm;
