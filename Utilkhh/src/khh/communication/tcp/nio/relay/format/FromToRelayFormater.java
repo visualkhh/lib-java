@@ -1,21 +1,18 @@
 package khh.communication.tcp.nio.relay.format;
 
 import java.nio.ByteBuffer;
+import java.util.Date;
 
 import khh.debug.LogK;
 import khh.format.Formater;
 import khh.std.Standard;
 import khh.util.*;
 
-public class FromToFormater extends Formater<ByteBuffer> {
+public class FromToRelayFormater extends Formater<ByteBuffer> {
     public static final byte STX=(byte) 0x04;
     public static final byte ETX=(byte) 0x25;
-    
     private String from = null;
     private String to = null;
-    private LogK log = LogK.getInstance();
-    
-    
 	public void format(ByteBuffer data) {
 		if(data==null)
 			return;
@@ -103,9 +100,9 @@ public class FromToFormater extends Formater<ByteBuffer> {
         if(data!=null){
             undata.put(data);
         }
-        data.reset();
+        undata.clear();
         
-        return data;
+        return undata;
     }
     
     
@@ -124,7 +121,10 @@ public class FromToFormater extends Formater<ByteBuffer> {
         this.to = to;
     }
 
-	
+	@Override
+	public String toString() {
+	    return "from:"+getFrom()+", to:"+getTo()+", get:"+get();
+	}
 	
 	
     @Override
@@ -141,14 +141,6 @@ public class FromToFormater extends Formater<ByteBuffer> {
 		return new String(getByteArray());
 	}
 	
-	
-	
-	
-	
-
-    
-
-    
 
     @Override
 	public Double getDouble() throws ClassCastException{
@@ -179,10 +171,15 @@ public class FromToFormater extends Formater<ByteBuffer> {
 		throw new ClassCastException("Boolean Disabled Cast");
 	}
 
-	@Override
-	public Byte getByte() throws ClassCastException{
-		throw new ClassCastException("Byte Disabled Cast");
-	}
+    @Override
+    public Byte getByte() throws ClassCastException{
+        throw new ClassCastException("Byte Disabled Cast");
+    }
+    
+    @Override
+    public Date getDate() throws ClassCastException{
+        throw new ClassCastException("Date Disabled Cast");
+    }
 
 
 
