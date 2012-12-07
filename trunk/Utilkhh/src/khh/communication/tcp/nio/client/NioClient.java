@@ -8,6 +8,8 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
+import com.sun.mail.iap.ConnectionException;
+
 import khh.communication.Communication_I;
 import khh.communication.Connection_Interface;
 import khh.communication.tcp.nio.worker.NioWorker;
@@ -19,7 +21,7 @@ public class NioClient extends Thread implements Communication_I{
 	private SocketChannel socketChannel	= null;
 	private String serverAddr			= "127.0.0.1";
 	private int	serverPort				= 9090;
-	private int serverConnectionTimeout	= 0;
+	private int connectionTimeout	= 0;
 	private Selector clientSelector		= null;
 	private LogK log 					= LogK.getInstance();
 	private NioWorker nioWorker         = null;
@@ -29,14 +31,14 @@ public class NioClient extends Thread implements Communication_I{
 	public NioClient(String serverAddr, int serverPort,int serverConnectionTimeout,NioWorker nioWorker) throws IOException{
 		setServerAddr(serverAddr);
 		setServerPort(serverPort);
-		setServerConnectionTimeout(serverConnectionTimeout);
+		setConnectionTimeout(serverConnectionTimeout);
 		setNioWorker(nioWorker);
 		init();
 	}
 	public NioClient(String ServerAddr, int ServerPort,NioWorker nioWorker) throws IOException{
 		setServerAddr(ServerAddr);
 		setServerPort(ServerPort);
-		setServerConnectionTimeout(0);
+		setConnectionTimeout(0);
 		setNioWorker(nioWorker);
 		init();
 	}
@@ -46,14 +48,14 @@ public class NioClient extends Thread implements Communication_I{
 	public SocketChannel connection() throws IOException{
 		InetSocketAddress	addr = new InetSocketAddress(getServerAddr(), getServerPort());
 		SocketChannel socketChennel=null;
-		if(getServerConnectionTimeout()>0){
+		if(getConnectionTimeout()>0){
 			socketChennel = SocketChannel.open();
-			socketChennel.socket().connect(addr,getServerConnectionTimeout());
+			socketChennel.socket().connect(addr,getConnectionTimeout());
 		}else{
 			socketChennel = SocketChannel.open(addr);
 		}
 		socketChennel.configureBlocking(false);
-		log.debug(String.format("New Join Connection  %s   %d   %d",getServerAddr(), getServerPort(),getServerConnectionTimeout()));
+		log.debug(String.format("New Join Connection  %s   Port:%d   ConnectiomTimeOut:%d",getServerAddr(), getServerPort(),getConnectionTimeout()));
 		setSocketChennel(socketChennel);
 		socketChennel.register(clientSelector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		return socketChennel;
@@ -74,11 +76,12 @@ public class NioClient extends Thread implements Communication_I{
 	public void run(){
 		try{
 			if(isConnected()==false){
-				connection();
+				throw new ConnectionException("notConnection");
 			}
-		}catch(IOException e1){
-			e1.printStackTrace();
-		}
+		}catch (ConnectionException e) {
+            e.printStackTrace();
+            return;
+        }
 		log.debug(String.format("NioClient(id:%d) Running...Thread Run", getId() ));
 		while(true){
 				try {
@@ -90,6 +93,7 @@ public class NioClient extends Thread implements Communication_I{
 							try{
 								Thread.sleep(1);
 								key = it.next();
+//								log.debug("NioClientWorker Type : "+getNioWorker().getFirestMode()+" Readble:"+key.isReadable()+" Writable:"+key.isWritable());
 								if((getNioWorker().getFirestMode()==NioWorker.MODE_FIREST_R) && (key.isReadable()==false)){
 									continue;//읽기부터인데 읽기가 활성화안되면 넘겨
 								}else if((getNioWorker().getFirestMode()==NioWorker.MODE_FIREST_W) && (key.isWritable()==false)){
@@ -118,9 +122,11 @@ public class NioClient extends Thread implements Communication_I{
 							}
 							it.remove();		//selectorkeys에 남은거지우기위해
 						}
+					}else{
+					    Thread.sleep(2000);
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					//e.printStackTrace();
 				}
 		}
 	}
@@ -152,11 +158,11 @@ public class NioClient extends Thread implements Communication_I{
 	public void setSocketChennel(SocketChannel socketChennel){
 		this.socketChannel= socketChennel;
 	}
-	public int getServerConnectionTimeout() {
-		return serverConnectionTimeout;
+	public int getConnectionTimeout() {
+		return connectionTimeout;
 	}
-	public void setServerConnectionTimeout(int serverConnectionTimeout){
-		this.serverConnectionTimeout = serverConnectionTimeout;
+	public void setConnectionTimeout(int connectionTimeout){
+		this.connectionTimeout = connectionTimeout;
 	}
 	public String getServerAddr() {
 		return serverAddr;
