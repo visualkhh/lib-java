@@ -15,12 +15,10 @@ public class FromToFormater extends Formater<ByteBuffer> {
     private String to = null;
     private LogK log = LogK.getInstance();
     
-	@Override
+    
 	public void format(ByteBuffer data) {
 		if(data==null)
 			return;
-		
-		
 		//from! stx str etx
 		if(data!=null && data.get()!=STX){
 			data.clear();
@@ -70,19 +68,66 @@ public class FromToFormater extends Formater<ByteBuffer> {
 		//System.arraycopy(data, int srcPos, Object dest, int destPos, int length)
 	}
 
+	
+	
+    @Override
+    public ByteBuffer unformat() {
+        int length =0;
+        
+        
+        String from = getFrom();
+        String to = getTo();
+        ByteBuffer data = get();
+        if(from!=null){
+            length += from.length()+1+1;
+        }
+        if(to!=null){
+            length += to.length()+1+1;
+        }
+        if(data!=null){
+            length += data.capacity();
+        }
+        
+        ByteBuffer undata = ByteBuffer.allocate(length);
+        
+        if(from!=null){
+            undata.put(STX);
+            undata.put(from.getBytes());
+            undata.put(ETX);
+        }
+        if(to!=null){
+            undata.put(STX);
+            undata.put(to.getBytes());
+            undata.put(ETX);
+        }
+        if(data!=null){
+            undata.put(data);
+        }
+        data.reset();
+        
+        return data;
+    }
+    
+    
+	
 	public String getFrom() {
 		return from;
 	}
 	public String getTo() {
 		return to;
 	}
+	public void setFrom(String from) {
+        this.from = from;
+    }
+
+	public void setTo(String to) {
+        this.to = to;
+    }
 
 	
-
-
-
-
-	@Override
+	
+	
+    @Override
 	public byte[] getByteArray() throws ClassCastException{
 		return ByteUtil.toByteArray(get());
 	}
@@ -97,7 +142,15 @@ public class FromToFormater extends Formater<ByteBuffer> {
 	}
 	
 	
-	@Override
+	
+	
+	
+
+    
+
+    
+
+    @Override
 	public Double getDouble() throws ClassCastException{
 		throw new ClassCastException("Double Disabled Cast");
 	}
@@ -130,5 +183,9 @@ public class FromToFormater extends Formater<ByteBuffer> {
 	public Byte getByte() throws ClassCastException{
 		throw new ClassCastException("Byte Disabled Cast");
 	}
+
+
+
+
     
 }
