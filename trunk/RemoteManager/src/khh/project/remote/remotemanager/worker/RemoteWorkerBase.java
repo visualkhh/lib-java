@@ -100,13 +100,13 @@ public abstract class RemoteWorkerBase extends NioWorker {
 		if(selectionKey.isReadable()){
 			RemoteMsg msg = receiveMsg(selectionKey);
 			
-			if(msg == null || msg.isSuccess() == false){
+			if(msg == null || (msg!=null && msg.isSuccess() == false)){
 				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg.toString());
 				return ;
 			}
 			msg = onReceiveAction(msg, selectionKey);
 			
-			if(msg == null || msg.isSuccess() == false){
+			if(msg == null || (msg!=null && msg.isSuccess() == false)){
 				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg.toString());
 				return ;
 			}

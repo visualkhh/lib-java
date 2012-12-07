@@ -2,12 +2,15 @@ package khh.project.remote.remotemanager.admin;
 
 import java.nio.channels.SelectionKey;
 
+import khh.debug.LogK;
 import khh.project.remote.remotemanager.monitor.RemoteServerMonitor;
 import khh.project.remote.remotemanager.msg.RemoteMsg;
 import khh.project.remote.remotemanager.msg.format.FromToFormater;
 import khh.project.remote.remotemanager.worker.RemoteWorkerBase;
+import khh.util.ByteUtil;
 
 public class AdminServerWorker extends RemoteWorkerBase{
+	private LogK log = LogK.getInstance();
 	RemoteServerMonitor monitor = RemoteServerMonitor.getInstance();
 
 	public AdminServerWorker(){
@@ -17,11 +20,12 @@ public class AdminServerWorker extends RemoteWorkerBase{
 	@Override
 	public RemoteMsg onReceiveAction(RemoteMsg msg, SelectionKey selectionKey) throws Exception{
 		FromToFormater fromto = new FromToFormater();
+		fromto.format(msg.getData());
 		if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-			fromto.format(msg.getData());
+			monitor.setAdminSelectionKey(fromto.getFrom(), msg.getSelectionKey());
+		}else if(fromto.getFrom() != null){
 			monitor.setAdminSelectionKey(fromto.getFrom(), msg.getSelectionKey());
 		}
-
 		return msg;
 	}
 
@@ -34,9 +38,15 @@ public class AdminServerWorker extends RemoteWorkerBase{
 			FromToFormater fromto = new FromToFormater();
 			fromto.format(msg.getData());
 			SelectionKey clientSelectionKey = monitor.getClientSelectionKey(fromto.getTo());
-			sendMsg(msg, clientSelectionKey);
+			try{
+				sendMsg(msg, clientSelectionKey);
+			}catch (Exception e) {
+				log.debug("Error Msg AdminSend"+e.getMessage());
+				msg.setData(ByteUtil.toByteBuffer(e.toString()+"["+e.getMessage()+"]"));
+				sendMsg(msg,selectionKey);
+			}
+			
 		}
-
 		return msg;
 	}
 
