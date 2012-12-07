@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import khh.file.util.FileUtil;
 import khh.std.adapter.Adapter_Std;
 
 public class ConversionUtil {
@@ -368,7 +369,24 @@ public class ConversionUtil {
 	   return channel;
    }
    
-   
+   public static String byteSizeToHumenSize(int size) {
+       String displaySize;
+
+       if (size / FileUtil.GB > 0) {
+           displaySize = String.valueOf(size / FileUtil.GB) + " GB";
+       }
+       else if (size / FileUtil.MB > 0) {
+           displaySize = String.valueOf(size / FileUtil.MB) + " MB";
+       }
+       else if (size / FileUtil.KB > 0) {
+           displaySize = String.valueOf(size / FileUtil.KB) + " KB";
+       }
+       else {
+           displaySize = String.valueOf(size) + " bytes";
+       }
+
+       return displaySize;
+   }
    
     
 //    

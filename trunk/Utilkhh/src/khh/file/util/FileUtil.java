@@ -479,6 +479,7 @@ public class FileUtil
         }
         public static long getFileSize(File file) {
         	//return (new Long(file.length())).intValue();
+        	//int size = (new Long(file.length())).intValue();
             return file.length();
         }
         //존재유무
@@ -491,7 +492,7 @@ public class FileUtil
 	    
         public static InputStream uploadFile(URL url,File file,String parametername,String filename) throws Exception{
             String boundary ="--dkjsei40f9844------haha-djs8dviw--4-s-df-";
-            String endter = PropertyUtil.getSeparator();
+            String enter = PropertyUtil.getSeparator();
 //          String parametername="file";
 //          String filename="a.jpg";
 //          String file="/sdcard/3df/a.jpg";
@@ -516,8 +517,8 @@ public class FileUtil
 
             //Output스트림을 열어
             DataOutputStream dos = new DataOutputStream(conn.getOutputStream()); 
-            dos.writeBytes("--" + boundary + endter); 
-            dos.writeBytes("Content-Disposition: form-data; name=\""+parametername+"\";filename=\""+ filename +"\"" + endter); 
+            dos.writeBytes("--" + boundary + enter); 
+            dos.writeBytes("Content-Disposition: form-data; name=\""+parametername+"\";filename=\""+ filename +"\"" + enter); 
             dos.writeBytes(enter); 
             
              byte[] data = readFileToByte(file);
@@ -537,8 +538,8 @@ public class FileUtil
 //              bufferSize = Math.min(bytesAvailable, maxBufferSize); 
 //              bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
 //          } 
-            dos.writeBytes(endter); 
-            dos.writeBytes("--" + boundary + "--" + endter); 
+            dos.writeBytes(enter); 
+            dos.writeBytes("--" + boundary + "--" + enter); 
 //          fileInputStream.close();
 
             //써진 버퍼를 stream에 출력.  
