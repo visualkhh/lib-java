@@ -9,7 +9,7 @@ import khh.project.remote.remotemanager.client.ClientServer;
 
 public class RemoteServerManager {
     private LogK log = LogK.getInstance();
-	public void start() throws Exception {
+	public void start( ) throws Exception {
 		ClientServer clientS = new ClientServer();
 		AdminServer adminS = new AdminServer();
 		clientS.start();
