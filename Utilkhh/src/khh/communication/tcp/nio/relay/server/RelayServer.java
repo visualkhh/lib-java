@@ -47,8 +47,8 @@ public class RelayServer {
 		serverPort.add(801);
 		
 		RelayServer f = new RelayServer();
-		f.setSelectorPoolSize(1);
-		f.setWorkerPoolSize(1);
+		f.setSelectorPoolSize(10);
+		f.setWorkerPoolSize(10);
 		f.start(serverPort);
 	}
 }
