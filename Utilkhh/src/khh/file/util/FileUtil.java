@@ -518,7 +518,7 @@ public class FileUtil
             DataOutputStream dos = new DataOutputStream(conn.getOutputStream()); 
             dos.writeBytes("--" + boundary + endter); 
             dos.writeBytes("Content-Disposition: form-data; name=\""+parametername+"\";filename=\""+ filename +"\"" + endter); 
-            dos.writeBytes(endter); 
+            dos.writeBytes(enter); 
             
              byte[] data = readFileToByte(file);
              dos.write(data,0,data.length);
