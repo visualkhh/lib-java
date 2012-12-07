@@ -82,7 +82,18 @@ public class NioServerMultiMonitor{
 				}
 			}
 		}
-		
 		return null;
 	}
+	synchronized public SelectionKey getSelectionKey(String sessionKey) throws Exception{
+		synchronized(monitors){
+			for(int i = 0; i < monitors.size(); i++){
+				SelectionKey key  =  getSelectionKey(monitors.getKey(i),sessionKey);
+				if(key!=null){
+					return key;
+				}
+			}
+		}
+		return null;
+	}
+	
 }
