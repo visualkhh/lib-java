@@ -2,8 +2,8 @@ package khh.communication.tcp.nio.relay.server.client;
 
 import java.nio.channels.SelectionKey;
 
-import khh.communication.tcp.nio.relay.format.FromToFormater;
-import khh.communication.tcp.nio.relay.msg.RelayMsg;
+import khh.communication.tcp.nio.protocol.NioMsg;
+import khh.communication.tcp.nio.relay.format.FromToRelayFormater;
 import khh.communication.tcp.nio.relay.server.worker.RelayWorkerBase;
 import khh.debug.LogK;
 import khh.util.ByteUtil;
@@ -15,33 +15,33 @@ public class ClientRelayServerWorker extends RelayWorkerBase{
 	}
 
 	@Override
-	public RelayMsg onReceiveAction(RelayMsg msg, SelectionKey selectionKey) throws Exception{
-		FromToFormater fromto = new FromToFormater();
-		fromto.format(msg.getData());
+	public NioMsg onReceiveAction(NioMsg msg, SelectionKey selectionKey) throws Exception{
+		FromToRelayFormater fromto = new FromToRelayFormater();
+		fromto.format(msg.get());
 		if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-			getServer().getMultimonitor().setSelectionKey(getServer().getName(),fromto.getFrom(), msg.getSelectionKey());
+			getServer().getMultimonitor().setSelectionKey(getServer().getName(),fromto.getFrom(), selectionKey);
 		}else if(fromto.getFrom() != null){
-			getServer().getMultimonitor().setSelectionKey(getServer().getName(),fromto.getFrom(), msg.getSelectionKey());
+			getServer().getMultimonitor().setSelectionKey(getServer().getName(),fromto.getFrom(), selectionKey);
 		}
 		return msg;
 	}
 
 	@Override
-	public RelayMsg onSendAction(RelayMsg msg, SelectionKey selectionKey) throws Exception{
+	public NioMsg onSendAction(NioMsg msg, SelectionKey selectionKey) throws Exception{
 		if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
 			msg.setAction(ACTION.LOGIN_OK.getValue());
-			sendMsg(msg, selectionKey);
+			sendNioMsg(msg, selectionKey);
 		}else{
-			FromToFormater fromto = new FromToFormater();
-			fromto.format(msg.getData());
-			SelectionKey adminSelectionKey = getServer().getMultimonitor().getSelectionKey(fromto.getTo());
+			FromToRelayFormater fromto = new FromToRelayFormater();
+			fromto.format(msg.get());
+			SelectionKey toSelectionKey = getServer().getMultimonitor().getSelectionKey(fromto.getTo());
 			
 			try{
-				sendMsg(msg, adminSelectionKey);
+			    sendNioMsg(msg, toSelectionKey);
 			}catch (Exception e) {
-				log.debug("Error Msg ClientSend"+e.getMessage());
-				msg.setData(ByteUtil.toByteBuffer(e.toString()+"["+e.getMessage()+"]"));
-				sendMsg(msg,selectionKey);
+				log.debug("Error:"+e.getMessage());
+				msg.set(ByteUtil.toByteBuffer(e.toString()+"["+e.getMessage()+"]"+fromto));
+				sendNioMsg(msg,selectionKey);
 			}
 		}
 		return msg;
