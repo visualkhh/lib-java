@@ -19,12 +19,13 @@ public class RemoteServerMonitor extends NioServerMultiMonitor{
 	}
 
 	private RemoteServerMonitor(){
+		super();
 	}
 
 	public void addClinetMinitor(NioServerMonitor monitor) throws Exception{
 		addMonitor(CLIENTSERVER_NAME, monitor);
 	}
-	public void addServerMinitor(NioServerMonitor monitor) throws Exception{
+	public void addAdminMinitor(NioServerMonitor monitor) throws Exception{
 		addMonitor(ADMINSERVER_NAME, monitor);
 	}
 	public SelectionKey getClientSelectionKey(String sessionKey) throws Exception{

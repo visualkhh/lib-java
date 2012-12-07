@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import khh.communication.tcp.nio.server.NioServer;
 import khh.communication.tcp.nio.worker.NioWorker;
+import khh.project.remote.remotemanager.monitor.RemoteServerMonitor;
 import khh.project.remote.remotemanager.msg.RemoteMsg;
 import khh.std.adapter.Adapter_Std;
 
@@ -23,6 +24,7 @@ public class ClientServer{
 		server.setSelectorPoolSize(10);
 		server.setWorkerPoolSize(10);
 		server.start();
+		RemoteServerMonitor.getInstance().addClinetMinitor(server.getMonitor());
 	}
 
 	private int getPort(){
