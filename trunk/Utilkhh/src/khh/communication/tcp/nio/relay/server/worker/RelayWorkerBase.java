@@ -1,4 +1,4 @@
-package khh.communication.tcp.nio.relayserver.worker;
+package khh.communication.tcp.nio.relay.server.worker;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -6,7 +6,7 @@ import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
-import khh.communication.tcp.nio.relayserver.msg.RelayMsg;
+import khh.communication.tcp.nio.relay.msg.RelayMsg;
 import khh.communication.tcp.nio.worker.NioWorker;
 import khh.debug.LogK;
 

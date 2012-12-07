@@ -1,4 +1,4 @@
-package khh.communication.tcp.nio.relayserver.client;
+package khh.communication.tcp.nio.relay.server.client;
 
 import khh.communication.tcp.nio.server.NioServer;
 

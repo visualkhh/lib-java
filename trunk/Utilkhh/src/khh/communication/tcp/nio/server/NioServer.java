@@ -100,7 +100,7 @@ public class NioServer implements Communication_I
 		workerPoolSetting();
 		acceptSelectThread = new NioServerAcceptManager(getSelectorPool(),getPort());
 		acceptSelectThread.start();
-		monitor .setSelectorPool(getSelectorPool());
+		monitor.setSelectorPool(getSelectorPool());
 		//monitor.start();
 	}
 	public void stop(){

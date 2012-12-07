@@ -1,9 +1,9 @@
-package khh.communication.tcp.nio.relayserver;
+package khh.communication.tcp.nio.relay.server;
 
 import java.util.ArrayList;
 
-import khh.communication.tcp.nio.relayserver.client.ClientRelayServer;
-import khh.communication.tcp.nio.relayserver.client.ClientRelayServerWorker;
+import khh.communication.tcp.nio.relay.server.client.ClientRelayServer;
+import khh.communication.tcp.nio.relay.server.client.ClientRelayServerWorker;
 import khh.communication.tcp.nio.server.monitor.NioServerMultiMonitor;
 import khh.debug.LogK;
 
@@ -44,9 +44,11 @@ public class RelayServer {
 	public static void main(String[] args) throws Exception  {
 		ArrayList<Integer> serverPort = new ArrayList<Integer> ();
 		serverPort.add(9090);
-		serverPort.add(80);
+		serverPort.add(801);
 		
 		RelayServer f = new RelayServer();
+		f.setSelectorPoolSize(1);
+		f.setWorkerPoolSize(1);
 		f.start(serverPort);
 	}
 }
