@@ -17,11 +17,20 @@ public class NioServerMonitor {
 	//private Selector clientSelector	= null;
 	RoundRobin<NioServerSelector> selectorPool = null;
 	private LogK log = LogK.getInstance();
-	public NioServerMonitor(RoundRobin<NioServerSelector> selectorPool) throws IOException {
+	public NioServerMonitor(RoundRobin<NioServerSelector> selectorPool) {
 		init();
 		this.selectorPool = selectorPool;
 	}
-	public void init() throws IOException{
+	public NioServerMonitor() {
+		init();
+	}
+	
+	public void setSelectorPool(RoundRobin<NioServerSelector> selectorPool){
+		this.selectorPool = selectorPool;
+	}
+
+
+	public void init() {
 		//clientSelector = Selector.open();
 	}
 //	@Override
@@ -56,7 +65,7 @@ public class NioServerMonitor {
 		} 
 		return ret;
 	}
-	private RoundRobin<NioServerSelector> getSelectorPool(){
+	public RoundRobin<NioServerSelector> getSelectorPool(){
 		return selectorPool;
 	}
 	

@@ -8,6 +8,7 @@ import java.nio.channels.SocketChannel;
 
 import khh.communication.Communication_Interface;
 import khh.communication.Connection_Interface;
+import khh.communication.tcp.nio.server.NioServer;
 import khh.debug.LogK;
 import khh.debug.util.DebugUtil;
 import khh.std.adapter.Adapter_Base;
@@ -22,7 +23,7 @@ abstract public class NioWorker{
 	private int firestMode 						= MODE_FIREST_R;
 	private SocketChannel socketChannel			= null;
 	private LogK log 							= LogK.getInstance();
-	
+	private NioServer server =  null;
 	final synchronized public void write(String data) throws IOException{
 		write(data.getBytes());
 	}
@@ -122,6 +123,12 @@ abstract public class NioWorker{
 			socket.close();
 		}catch (IOException e1){
 		}
+	}
+	public NioServer getServer(){
+		return server;
+	}
+	public void setServer(NioServer server){
+		this.server = server;
 	}
 	
 	

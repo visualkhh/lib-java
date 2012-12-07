@@ -12,6 +12,7 @@ import khh.collection.RoundRobin;
 import khh.communication.Communication_I;
 import khh.communication.tcp.nio.server.accept.NioServerAcceptManager;
 import khh.communication.tcp.nio.server.monitor.NioServerMonitor;
+import khh.communication.tcp.nio.server.monitor.NioServerMultiMonitor;
 import khh.communication.tcp.nio.server.selector.NioServerSelector;
 import khh.communication.tcp.nio.server.worker.NioServerWorker;
 import khh.communication.tcp.nio.worker.NioWorker;
@@ -26,6 +27,7 @@ public class NioServer implements Communication_I
 	private int workerPoolSize 		= 10;
 	private NioServerAcceptManager acceptSelectThread			= null;
 	private NioServerMonitor monitor							= null;
+	private NioServerMultiMonitor multimonitor					= null;
 	private BlockingQueue<SelectionKey> eventQueue 				= null;
 	private ArrayList<NioServerWorker> workerPool    			= null;
 	private RoundRobin<NioServerSelector> selectorPool 			= null;
@@ -55,6 +57,7 @@ public class NioServer implements Communication_I
 		this.eventQueue 	= new LinkedBlockingQueue<SelectionKey>();
 		this.workerPool 	= new ArrayList<NioServerWorker>();
 		this.selectorPool 	= new RoundRobin<NioServerSelector>();
+		this. monitor = new NioServerMonitor();
 	}
 
 	
@@ -97,7 +100,7 @@ public class NioServer implements Communication_I
 		workerPoolSetting();
 		acceptSelectThread = new NioServerAcceptManager(getSelectorPool(),getPort());
 		acceptSelectThread.start();
-		monitor = new NioServerMonitor(getSelectorPool());
+		monitor .setSelectorPool(getSelectorPool());
 		//monitor.start();
 	}
 	public void stop(){
@@ -113,16 +116,22 @@ public class NioServer implements Communication_I
 	private void workerPoolSetting() throws IOException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 		if(getNioWorkerList()!=null && getNioWorkerList().size()>0){
 			for(int i = 0 ; i < getNioWorkerList().size() ; i++){
-				NioServerWorker worker = new NioServerWorker(eventQueue,getNioWorkerList().get(i));
-				worker.start();
-				workerPool.add(worker);
+				NioWorker worker = getNioWorkerList().get(i);
+				worker.setServer(this);
+				NioServerWorker serverWorker = new NioServerWorker(eventQueue,worker);
+				serverWorker.setServer(this);
+				serverWorker.start();
+				workerPool.add(serverWorker);
 			}	
 			setWorkerPoolSize(getNioWorkerList().size());
 		}else{
 			for(int i = 0 ; i < getWorkerPoolSize() ; i++){
-				NioServerWorker worker = new NioServerWorker(eventQueue,(NioWorker) ReflectionUtil.newClass(getNioWorkerClass()));
-				worker.start();
-				workerPool.add(worker);
+				NioWorker worker = (NioWorker) ReflectionUtil.newClass(getNioWorkerClass());
+				worker.setServer(this);
+				NioServerWorker serverWorker = new NioServerWorker(eventQueue,worker);
+				serverWorker.setServer(this);
+				serverWorker.start();
+				workerPool.add(serverWorker);
 			}	
 		}
 	}
@@ -142,6 +151,13 @@ public class NioServer implements Communication_I
 	}
 	public void setName(String name){
 		this.name = name;
+	}
+	
+	public NioServerMultiMonitor getMultimonitor(){
+		return multimonitor;
+	}
+	public void setMultimonitor(NioServerMultiMonitor multimonitor){
+		this.multimonitor = multimonitor;
 	}
 	public static void main(String[] args) throws IOException{
 //		System.out.println("=============a");
