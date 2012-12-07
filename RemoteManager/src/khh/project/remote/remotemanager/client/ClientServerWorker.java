@@ -7,7 +7,7 @@ import khh.project.remote.remotemanager.monitor.RemoteServerMonitor;
 import khh.project.remote.remotemanager.msg.RemoteMsg;
 import khh.project.remote.remotemanager.msg.format.FromToFormater;
 import khh.project.remote.remotemanager.worker.RemoteWorkerBase;
-
+import khh.util.*;
 public class ClientServerWorker extends RemoteWorkerBase{
 	private LogK log = LogK.getInstance();
 	RemoteServerMonitor monitor = RemoteServerMonitor.getInstance();
@@ -19,8 +19,10 @@ public class ClientServerWorker extends RemoteWorkerBase{
 	@Override
 	public RemoteMsg onReceiveAction(RemoteMsg msg, SelectionKey selectionKey) throws Exception{
 		FromToFormater fromto = new FromToFormater();
+		fromto.format(msg.getData());
 		if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-			fromto.format(msg.getData());
+			monitor.setClientSelectionKey(fromto.getFrom(), msg.getSelectionKey());
+		}else if(fromto.getFrom() != null){
 			monitor.setClientSelectionKey(fromto.getFrom(), msg.getSelectionKey());
 		}
 		return msg;
@@ -35,7 +37,14 @@ public class ClientServerWorker extends RemoteWorkerBase{
 			FromToFormater fromto = new FromToFormater();
 			fromto.format(msg.getData());
 			SelectionKey adminSelectionKey = monitor.getAdminSelectionKey(fromto.getTo());
-			sendMsg(msg, adminSelectionKey);
+			
+			try{
+				sendMsg(msg, adminSelectionKey);
+			}catch (Exception e) {
+				log.debug("Error Msg ClientSend"+e.getMessage());
+				msg.setData(ByteUtil.toByteBuffer(e.toString()+"["+e.getMessage()+"]"));
+				sendMsg(msg,selectionKey);
+			}
 		}
 		return msg;
 	}

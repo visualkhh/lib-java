@@ -17,10 +17,13 @@ public class FromToFormater extends Formater<ByteBuffer> {
     
 	@Override
 	public void format(ByteBuffer data) {
+		if(data==null)
+			return;
+		
 		
 		//from! stx str etx
 		if(data!=null && data.get()!=STX){
-			data.reset();
+			data.clear();
 			set(data);
 			return;
 		}
@@ -59,10 +62,11 @@ public class FromToFormater extends Formater<ByteBuffer> {
 		}
 		byte[] tobyte = new byte[tolength];
 		data.position(tostartposition); //stx 빼기
-		data.get(tolength);
-		this.from = new String(tobyte);
+		data.get(tobyte);
+		this.to = new String(tobyte);
 		data.get(); //ext빼기
 		set(data.slice());
+		data.clear();
 		//System.arraycopy(data, int srcPos, Object dest, int destPos, int length)
 	}
 
