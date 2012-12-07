@@ -1,4 +1,4 @@
-package khh.communication.tcp.nio.relayserver.msg;
+package khh.communication.tcp.nio.relay.msg;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

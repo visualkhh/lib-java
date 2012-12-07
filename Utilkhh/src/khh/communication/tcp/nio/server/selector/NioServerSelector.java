@@ -33,6 +33,12 @@ public class NioServerSelector extends Thread
 		log.debug(String.format("NioSelector(id:%d) Running...Thread Run", getId() ));
 		while(true){
 			try{
+			   
+			    if(getSelector()==null){
+			        Thread.sleep(5000);
+			        continue;
+			    }
+			    
 				if(getSelector().select(3) > 0){
 					Iterator<SelectionKey> it = getSelector().selectedKeys().iterator();
 					while (it.hasNext()){

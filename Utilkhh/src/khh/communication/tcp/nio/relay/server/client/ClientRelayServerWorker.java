@@ -1,10 +1,10 @@
-package khh.communication.tcp.nio.relayserver.client;
+package khh.communication.tcp.nio.relay.server.client;
 
 import java.nio.channels.SelectionKey;
 
-import khh.communication.tcp.nio.relayserver.msg.RelayMsg;
-import khh.communication.tcp.nio.relayserver.msg.format.FromToFormater;
-import khh.communication.tcp.nio.relayserver.worker.RelayWorkerBase;
+import khh.communication.tcp.nio.relay.format.FromToFormater;
+import khh.communication.tcp.nio.relay.msg.RelayMsg;
+import khh.communication.tcp.nio.relay.server.worker.RelayWorkerBase;
 import khh.debug.LogK;
 import khh.util.ByteUtil;
 public class ClientRelayServerWorker extends RelayWorkerBase{
