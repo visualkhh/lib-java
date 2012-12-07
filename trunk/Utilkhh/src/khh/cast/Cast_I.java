@@ -1,6 +1,7 @@
 package khh.cast;
 
 import java.nio.ByteBuffer;
+import java.util.Date;
 
 import khh.std.Standard;
 
@@ -29,5 +30,6 @@ public interface Cast_I<T>{
 	public Standard getStandard() throws ClassCastException;
 
 	public Object getObject() throws ClassCastException;
+	public Date getDate() throws ClassCastException;
 
 }
