@@ -340,6 +340,7 @@ public class LogK  implements Serializable {
            logerformat = logerformat.replaceAll("%r", PropertyUtil.getSeparator());
            message = (message==null?"null":message);
            logerformat = logerformat.replaceAll("%m", StringUtil.regexMetaCharToEscapeChar(message.toString()));
+//           logerformat = logerformat.replaceAll("%m", StringUtil.regexMetaCharToEscapeChar(message.toString()));
            
            
            if(e==null){
@@ -430,7 +431,7 @@ public class LogK  implements Serializable {
 				for (int a = 0; a < z; a++)
 					fill_space += "    ";
 
-				str.append(fill_space + "\t| " + new String(charbuffer));
+				str.append(fill_space + "\t| " + new String(charbuffer)+PropertyUtil.getSeparator());
 			}
 		}
 		return str.toString();
@@ -438,19 +439,21 @@ public class LogK  implements Serializable {
 	
 	public String toHexlog(byte[] tby) {
 		StringBuffer str = new StringBuffer();
-		String charbuffer = "";
+		StringBuffer charbuffer = new StringBuffer();
 		for (int i =0; i < tby.length; i++) {
+//		    str.append(PropertyUtil.getSeparator());
 			if (i % 16 == 0 && i != 0)
-				str.append("\t| " + (charbuffer));
+				str.append("\t| " + (charbuffer.toString()+PropertyUtil.getSeparator()));
 			if (i % 8 == 0 && i != 0) {
 				if (i % 16 != 0)
 					str.append("|");
 			}
 
-			if (i % 16 == 0 && i != 0)
-				charbuffer = "";
-
-			charbuffer += (char) tby[i];
+			if (i % 16 == 0 && i != 0){
+			    charbuffer.setLength(0);
+			}
+			charbuffer.append((char)tby[i]);
+			
 			str.append(String.format(" %02X ", tby[i]));
 
 			// 16개 꽉안찼을때..채운다.
@@ -528,7 +531,7 @@ public class LogK  implements Serializable {
 	   log(LogKTarget.DEBUG,message,null);
    }
    synchronized public void debug(Object message,ByteBuffer buffer){
-	   info(message,ByteUtil.toByteArray(buffer));
+       debug(message,ByteUtil.toByteArray(buffer));
    }
    synchronized public void debug(Object message,byte[] data){
 	   logByte(LogKTarget.INFO,message,data);
