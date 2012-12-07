@@ -84,5 +84,8 @@ public class RemoteMsg {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	
+	@Override
+	public String toString(){
+		return "action:"+action+", data:"+data+", success:"+success+", "+selectionKey;
+	}
 }

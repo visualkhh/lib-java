@@ -5,63 +5,39 @@ import java.nio.channels.SelectionKey;
 import khh.debug.LogK;
 import khh.project.remote.remotemanager.monitor.RemoteServerMonitor;
 import khh.project.remote.remotemanager.msg.RemoteMsg;
-import khh.project.remote.remotemanager.msg.format.RemoteTitleFormater;
+import khh.project.remote.remotemanager.msg.format.FromToFormater;
 import khh.project.remote.remotemanager.worker.RemoteWorkerBase;
 
 public class ClientServerWorker extends RemoteWorkerBase{
 	private LogK log = LogK.getInstance();
 	RemoteServerMonitor monitor = RemoteServerMonitor.getInstance();
-	
-	public ClientServerWorker() {
+
+	public ClientServerWorker(){
 		setFirestMode(MODE_FIREST_R);
 	}
 
-
 	@Override
-	public void execute(SelectionKey selectionKey) throws Exception {
-		RemoteMsg msg = null;
-		if(selectionKey.isReadable()){
-			msg = receiveMsg(selectionKey);
-			msg = onReceiveAction(msg,selectionKey);
-			onSendAction(msg, selectionKey);
-		}else if(selectionKey.isWritable()){
-		}
-		
-	}
-	
-	
-	
-	@Override
-	public	RemoteMsg onReceiveAction(RemoteMsg msg, SelectionKey selectionKey) throws Exception {
-		if(msg!=null && msg.isSuccess()==false){
-			return null;
-		}
-			if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-				RemoteTitleFormater titleformat = new RemoteTitleFormater();
-				titleformat.format(msg.getData());
-				monitor.setClientSelectionKey(titleformat.getTitle(), msg.getSelectionKey());
-			}else if(ACTION.LOGIN_LOGOUT.getValue() == msg.getAction()){
-				monitor.removeClientSelectionKey(msg.getDataToStr());
-			}
-		return msg;
-	}
-
-
-	@Override
-	public RemoteMsg onSendAction(RemoteMsg msg, SelectionKey selectionKey) throws Exception {
-		if(msg!=null && msg.isSuccess()==false && !selectionKey.isWritable()){
-			return null;
-		}
-		RemoteMsg sendMsg = new RemoteMsg();
-		sendMsg.setSuccess(true);
-		
+	public RemoteMsg onReceiveAction(RemoteMsg msg, SelectionKey selectionKey) throws Exception{
+		FromToFormater fromto = new FromToFormater();
 		if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
-			sendMsg.setAction(ACTION.LOGIN_OK.getValue());
-			sendMsg(sendMsg,selectionKey);
-		}else if(ACTION.LOGIN_LOGOUT.getValue() == msg.getAction()){
+			fromto.format(msg.getData());
+			monitor.setClientSelectionKey(fromto.getFrom(), msg.getSelectionKey());
 		}
 		return msg;
 	}
 
+	@Override
+	public RemoteMsg onSendAction(RemoteMsg msg, SelectionKey selectionKey) throws Exception{
+		if(ACTION.LOGIN_LOGIN.getValue() == msg.getAction()){
+			msg.setAction(ACTION.LOGIN_OK.getValue());
+			sendMsg(msg, selectionKey);
+		}else{
+			FromToFormater fromto = new FromToFormater();
+			fromto.format(msg.getData());
+			SelectionKey adminSelectionKey = monitor.getAdminSelectionKey(fromto.getTo());
+			sendMsg(msg, adminSelectionKey);
+		}
+		return msg;
+	}
 
 }
