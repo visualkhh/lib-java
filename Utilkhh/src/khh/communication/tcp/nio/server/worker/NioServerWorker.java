@@ -16,7 +16,8 @@ import khh.debug.util.DebugUtil;
 public class NioServerWorker extends Thread
 {
 	private BlockingQueue<SelectionKey>	eventQueue	= null;
-	private NioWorker			business	= null;
+	private NioWorker business = null;
+	private NioServer server = null;
 	private LogK log = LogK.getInstance();
 	public NioServerWorker(BlockingQueue<SelectionKey>eventQueue,NioWorker business){
 		this.eventQueue = eventQueue;
@@ -94,6 +95,14 @@ public class NioServerWorker extends Thread
 	public BlockingQueue<SelectionKey> getEventQueue() {
 		return eventQueue;
 	}
-	
+
+	public NioServer getServer(){
+		return server;
+	}
+
+	public void setServer(NioServer server){
+		this.server = server;
+	}
+
 
 }
