@@ -15,11 +15,10 @@ public abstract class RemoteWorkerBase extends NioWorker {
 
     public static enum ACTION {
         LOGIN_LOGIN(50001),
-        LOGIN_LOGOUT(50002),
         LOGIN_OK(50003),
         LOGIN_FAIL(50004),
-        
-        ADMIN_CLIENT_JOIN(50004)
+        //LOGIN_LOGOUT(50002),
+        //ADMIN_CLIENT_JOIN(50004)
         ;
         int code;
         ACTION(int id) {
@@ -95,6 +94,29 @@ public abstract class RemoteWorkerBase extends NioWorker {
 			write(msg.makeByteMsg(),channel);
 		}
 	}
+	
+	@Override
+	public void execute(SelectionKey selectionKey) throws Exception{
+		if(selectionKey.isReadable()){
+			RemoteMsg msg = receiveMsg(selectionKey);
+			
+			if(msg == null || msg.isSuccess() == false){
+				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg.toString());
+				return ;
+			}
+			msg = onReceiveAction(msg, selectionKey);
+			
+			if(msg == null || msg.isSuccess() == false){
+				log.info("RemoteMsg  [msg == null || msg.isSuccess() == false] "+msg.toString());
+				return ;
+			}
+			onSendAction(msg, selectionKey);
+			
+		}else if(selectionKey.isWritable()){
+		}
+	}
+	
+	
 	
 	
 	public abstract RemoteMsg onReceiveAction(RemoteMsg msg, SelectionKey selectionKey) throws Exception;
