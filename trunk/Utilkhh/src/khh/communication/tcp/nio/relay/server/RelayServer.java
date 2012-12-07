@@ -37,31 +37,26 @@ public class RelayServer implements Communication_I {
         
     }
 	
-	private int getSelectorPoolSize(){
+    public int getSelectorPoolSize(){
 		return selectorPoolSize;
 	}
-	private void setSelectorPoolSize(int selectorPoolSize){
+    public void setSelectorPoolSize(int selectorPoolSize){
 		this.selectorPoolSize = selectorPoolSize;
 	}
-	private int getWorkerPoolSize(){
+    public int getWorkerPoolSize(){
 		return workerPoolSize;
 	}
-	private void setWorkerPoolSize(int workerPoolSize){
+    public void setWorkerPoolSize(int workerPoolSize){
 		this.workerPoolSize = workerPoolSize;
 	}
 
-
-
-
     
     
-    
-    
-    private ArrayList<Integer> getServerPort() {
+    public ArrayList<Integer> getServerPort() {
         return serverPort;
     }
 
-    private void setServerPort(ArrayList<Integer> serverPort) {
+    public void setServerPort(ArrayList<Integer> serverPort) {
         this.serverPort = serverPort;
     }
 
