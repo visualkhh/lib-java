@@ -29,11 +29,11 @@ import khh.string.util.StringUtil;
 public class FileUtil
 {
     /** 1 KB */
-    public static final int KB = 1024;
+    public static final int KB_SIZE = 1024;
     /** 1 MB. */
-    public static final int MB = KB * KB;
+    public static final int MB_SIZE = KB_SIZE * KB_SIZE;
     /** 1 GB */
-    public static final int GB = KB * MB;
+    public static final int GB_SIZE = KB_SIZE * MB_SIZE;
     
 	
 
