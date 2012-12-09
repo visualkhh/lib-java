@@ -4,7 +4,7 @@ import java.nio.channels.SelectionKey;
 import khh.communication.tcp.nio.worker.NioWorker;
 public class EchoNioClientWorker extends NioWorker {
     public EchoNioClientWorker() {
-        setFirestMode(MODE_FIREST_W);
+        setFirestMode(MODE_FIREST_RW);
     }
     private int i=0;
     @Override
