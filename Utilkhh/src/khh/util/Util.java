@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -155,7 +156,40 @@ public class Util {
         return returnvalue;
     }
     
+    
+    
+    
+    
+    
+    
     //random
+    public static  int[] getRandom(int start,int max,int wantsize){
+        LinkedList<Integer> list = new LinkedList<Integer>();
+
+        for(; start <= max; start++){
+            list.addLast(start);   // 1~100까지의 값을 집어 넣음
+        }
+        
+        int[] rv = new int[wantsize];
+        int rvi=0;
+        Random random = new Random();
+        for(int i = list.size(); i > 0 && rvi<wantsize; i--){
+            int index = random.nextInt(i);      //현재 list 길이 만큼의 숫자에서 랜덤 숫자 뽑아냄
+            int random_number = (Integer)list.get(index);  //랜덤 값이 나온 값을 리스트에서 뽑아냄 (결국 랜덤으로 나온 값을 뽑아내는것과 같음
+            rv[rvi++]=random_number;
+            list.remove(index);       //뽑아낸 리스트 제거           
+        }
+        return rv;
+    };
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static double[] getRandom(double standardValue, int toleranceValue,int wantsize){
         Random random = new Random();
         double [] randomvalue=new double[wantsize];
