@@ -9,9 +9,9 @@ import khh.std.Standard;
 import khh.util.ByteUtil;
 
 public class NioMsg extends Formater<ByteBuffer>{
-    public static final byte STX=(byte) 0x19;
-    public static final byte ETX=(byte) 0x86;
-	private int action=0;
+	public static final byte STX = (byte)0x19;
+	public static final byte ETX = (byte)0x86;
+	private int action = 0;
 	private boolean success = false;
 	
     public NioMsg() {
