@@ -2,20 +2,15 @@ package khh.communication.tcp.nio.client;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
+import java.net.SocketException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-import com.sun.mail.iap.ConnectionException;
-
 import khh.communication.Communication_I;
-import khh.communication.Connection_Interface;
 import khh.communication.tcp.nio.worker.NioWorker;
 import khh.debug.LogK;
-import khh.std.adapter.Adapter_Base;
-import khh.util.Util;
 
 public class NioClient extends Thread implements Communication_I{
 	private SocketChannel socketChannel	= null;
@@ -76,9 +71,9 @@ public class NioClient extends Thread implements Communication_I{
 	public void run(){
 		try{
 			if(isConnected()==false){
-				throw new ConnectionException("notConnection");
+				throw new SocketException("notConnection");
 			}
-		}catch (ConnectionException e) {
+		}catch (SocketException e) {
             e.printStackTrace();
             return;
         }
