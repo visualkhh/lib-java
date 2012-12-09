@@ -7,14 +7,9 @@ import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
-import khh.communication.Communication_Interface;
-import khh.communication.Connection_Interface;
 import khh.communication.tcp.nio.protocol.NioMsg;
 import khh.communication.tcp.nio.server.NioServer;
 import khh.debug.LogK;
-import khh.debug.util.DebugUtil;
-import khh.std.adapter.Adapter_Base;
-import khh.util.ByteUtil;
 import khh.util.Util;
 
 abstract public class NioWorker{
@@ -52,6 +47,10 @@ abstract public class NioWorker{
 	final synchronized public int write(ByteBuffer data) throws IOException{
 		return write(data,getSocketChannel());
 	}
+	
+	final synchronized public int write(ByteBuffer data,SelectionKey selectionKey) throws IOException{
+		return write(data,(SocketChannel)selectionKey.channel());
+	}
 	final synchronized public int write(ByteBuffer data,SocketChannel socketChannel) throws IOException{
 		int write_length=0;
 		try{
@@ -82,6 +81,9 @@ abstract public class NioWorker{
 	}
 	final synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms) throws IOException{
 		return read(buffer,timeout_daly_ms,getSocketChannel());
+	}
+	final synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms,SelectionKey selectionKey) throws IOException{
+		return read(buffer,timeout_daly_ms,(SocketChannel)selectionKey.channel());
 	}
 	final synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms,SocketChannel socketChannel) throws IOException{
 		int len = 0;

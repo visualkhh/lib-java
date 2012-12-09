@@ -6,13 +6,11 @@ import khh.communication.Communication_I;
 import khh.communication.tcp.nio.relay.server.client.ClientRelayServer;
 import khh.communication.tcp.nio.relay.server.client.ClientRelayServerWorker;
 import khh.communication.tcp.nio.server.monitor.NioServerMultiMonitor;
-import khh.debug.LogK;
 
 
 
 
 public class RelayServer implements Communication_I {
-    private LogK log = LogK.getInstance();
 	private int selectorPoolSize=10;
 	private int workerPoolSize=10;
 	private ArrayList<Integer> serverPort=null;

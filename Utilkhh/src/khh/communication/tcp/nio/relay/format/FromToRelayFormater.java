@@ -3,10 +3,9 @@ package khh.communication.tcp.nio.relay.format;
 import java.nio.ByteBuffer;
 import java.util.Date;
 
-import khh.debug.LogK;
 import khh.format.Formater;
 import khh.std.Standard;
-import khh.util.*;
+import khh.util.ByteUtil;
 
 public class FromToRelayFormater extends Formater<ByteBuffer> {
     public static final byte STX=(byte) 0x04;
