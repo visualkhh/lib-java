@@ -12,7 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
-abstract public class FrameFrame  extends Frame  
+abstract public class FrameFrame  extends Frame 
 {
 	
 	private HashMap<String,Object> viewContainer = new HashMap<String,Object>();

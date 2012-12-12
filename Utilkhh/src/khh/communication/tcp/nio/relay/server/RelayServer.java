@@ -18,7 +18,7 @@ public class RelayServer implements Communication_I {
 	
 	public void start() throws Exception {
 		NioServerMultiMonitor multimonitor = new NioServerMultiMonitor();
-		ArrayList<Integer> serverPort=getServerPort();
+		ArrayList<Integer> serverPort=getPort();
 		for(int i = 0; serverPort!=null && i < serverPort.size(); i++){
 			ClientRelayServer clientRelayServer = new ClientRelayServer(serverPort.get(i),ClientRelayServerWorker.class);
 			clientRelayServer.setMultimonitor(multimonitor);
@@ -31,8 +31,6 @@ public class RelayServer implements Communication_I {
 
     @Override
     public void stop() throws Exception {
-        // TODO Auto-generated method stub
-        
     }
 	
     public int getSelectorPoolSize(){
@@ -50,11 +48,11 @@ public class RelayServer implements Communication_I {
 
     
     
-    public ArrayList<Integer> getServerPort() {
+    public ArrayList<Integer> getPort() {
         return serverPort;
     }
 
-    public void setServerPort(ArrayList<Integer> serverPort) {
+    public void setPort(ArrayList<Integer> serverPort) {
         this.serverPort = serverPort;
     }
 
