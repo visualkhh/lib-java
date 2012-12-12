@@ -5,11 +5,10 @@ import java.util.Date;
 
 import khh.std.Standard;
 
-public interface Cast_I<T>{
+public interface Cast_I{
 	
-	public void set(T data);
-
-	public T get();
+//	public void set(T data);
+//	public T get();
 
 	public Integer getInt() throws ClassCastException;
 

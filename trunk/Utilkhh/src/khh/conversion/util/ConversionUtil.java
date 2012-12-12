@@ -78,25 +78,19 @@ public class ConversionUtil {
    }
    
    /////Casting
-   
-   public static String stringCasting(String data){
+   public static String toString(String data){
       return data;
   }
-   public static String stringCasting(int data){
+   public static String toString(int data){
       return Integer.toString(data);
   }
-
-  
-  
-   public static  String stringCasting(double data){
+   public static  String toString(double data){
       return Double.toString(data);
   }
-   public static String stringCasting(float data){
+   public static String toString(float data){
       return Float.toString(data);
   }
-  
-  
-   public static String stringCasting(boolean data){
+   public static String toString(boolean data){
       return Boolean.toString(data);
   }
    
@@ -369,14 +363,14 @@ public class ConversionUtil {
    public static String byteSizeToHumenSize(int size) {
        String displaySize;
 
-       if (size / FileUtil.GB > 0) {
-           displaySize = String.valueOf(size / FileUtil.GB) + " GB";
+       if (size / FileUtil.GB_SIZE > 0) {
+           displaySize = String.valueOf(size / FileUtil.GB_SIZE) + " GB";
        }
-       else if (size / FileUtil.MB > 0) {
-           displaySize = String.valueOf(size / FileUtil.MB) + " MB";
+       else if (size / FileUtil.MB_SIZE > 0) {
+           displaySize = String.valueOf(size / FileUtil.MB_SIZE) + " MB";
        }
-       else if (size / FileUtil.KB > 0) {
-           displaySize = String.valueOf(size / FileUtil.KB) + " KB";
+       else if (size / FileUtil.KB_SIZE > 0) {
+           displaySize = String.valueOf(size / FileUtil.KB_SIZE) + " KB";
        }
        else {
            displaySize = String.valueOf(size) + " bytes";

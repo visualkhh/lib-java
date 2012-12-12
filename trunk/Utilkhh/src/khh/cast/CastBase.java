@@ -6,14 +6,14 @@ import java.util.Date;
 import khh.std.Standard;
 
 
-public class CastBase<T> implements Cast_I<T>{
+public class CastBase<T> implements Cast_I{
 	private T data = null;
 
-	public void set(T data){
+	final public void set(T data){
 		this.data = data;
 	}
 
-	public T get(){
+	final public T get(){
 		return this.data;
 	}
 
