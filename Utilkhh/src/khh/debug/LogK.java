@@ -308,7 +308,7 @@ public class LogK  implements Serializable {
        log(level,message,null);
    }
    synchronized private void logByte(String level,Object message,byte[] data){
-       log(level,message.toString()+"("+data.length+")"+PropertyUtil.getSeparator()+toHexlog(data),null);
+       log(level,message.toString()+"(len:"+data.length+")"+PropertyUtil.getSeparator()+toHexlog(data),null);
    }
    
    synchronized  private void log(String level,Object message,Throwable e){
@@ -412,7 +412,8 @@ public class LogK  implements Serializable {
 		String charbuffer = "";
 		for (int i = tby.position(); i < tby.limit(); i++) {
 			if (i % 16 == 0 && i != 0)
-				str.append("\t| " + (charbuffer));
+				str.append("\t| " + (charbuffer.toString().replaceAll(PropertyUtil.getSeparator(), " ").replaceAll("\t", " ").replaceAll("\r\n", " ").replaceAll("\r", " ").replaceAll("\n", " ")+PropertyUtil.getSeparator()));
+//				str.append("\t| " + (charbuffer.toString().replaceAll(PropertyUtil.getSeparator(), " ").replaceAll("\t", " ")));
 			if (i % 8 == 0 && i != 0) {
 				if (i % 16 != 0)
 					str.append("|");
@@ -431,7 +432,8 @@ public class LogK  implements Serializable {
 				for (int a = 0; a < z; a++)
 					fill_space += "    ";
 
-				str.append(fill_space + "\t| " + new String(charbuffer)+PropertyUtil.getSeparator());
+				str.append(fill_space + "\t| " + charbuffer.toString().replaceAll(PropertyUtil.getSeparator(), " ").replaceAll("\t", " ").replaceAll("\r\n", " ").replaceAll("\r", " ").replaceAll("\n", " "));
+//				str.append(fill_space + "\t| " + charbuffer.toString().replaceAll(PropertyUtil.getSeparator(), " ").replaceAll("\t", " ")+PropertyUtil.getSeparator());
 			}
 		}
 		return str.toString();
@@ -440,18 +442,22 @@ public class LogK  implements Serializable {
 	public String toHexlog(byte[] tby) {
 		StringBuffer str = new StringBuffer();
 		StringBuffer charbuffer = new StringBuffer();
+		
 		for (int i =0; i < tby.length; i++) {
-//		    str.append(PropertyUtil.getSeparator());
 			if (i % 16 == 0 && i != 0)
-				str.append("\t| " + (charbuffer.toString()+PropertyUtil.getSeparator()));
-			if (i % 8 == 0 && i != 0) {
-				if (i % 16 != 0)
+				str.append("\t| " + (charbuffer.toString().replaceAll(PropertyUtil.getSeparator(), " ").replaceAll("\t", " ").replaceAll("\r\n", " ").replaceAll("\r", " ").replaceAll("\n", " ")+PropertyUtil.getSeparator()));
+			
+			if(i % 8 == 0 && i != 0){
+				if(i % 16 != 0)
 					str.append("|");
 			}
+			
+			
 
 			if (i % 16 == 0 && i != 0){
 			    charbuffer.setLength(0);
 			}
+			
 			charbuffer.append((char)tby[i]);
 			
 			str.append(String.format(" %02X ", tby[i]));
@@ -463,7 +469,7 @@ public class LogK  implements Serializable {
 				for (int a = 0; a < z; a++)
 					fill_space += "    ";
 
-				str.append(fill_space + "\t| " + new String(charbuffer));
+				str.append(fill_space + "\t| " + charbuffer.toString().replaceAll(PropertyUtil.getSeparator(), " ").replaceAll("\t", " ").replaceAll("\r\n", " ").replaceAll("\r", " ").replaceAll("\n", " "));
 			}
 		}
 		return str.toString();

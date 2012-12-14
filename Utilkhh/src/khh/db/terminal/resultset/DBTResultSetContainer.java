@@ -2,9 +2,9 @@ package khh.db.terminal.resultset;
 
 import java.util.ArrayList;
 
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 
-public class DBTResultSetContainer extends Adapter_Base<Long, DBTResultRecord> {
+public class DBTResultSetContainer extends AdapterMapBase<Long, DBTResultRecord> {
     ArrayList<String> columnNames ;
     Long atRow =null;
     

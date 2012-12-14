@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import khh.file.util.FileUtil;
-import khh.std.adapter.Adapter_Std;
+import khh.std.adapter.AdapterMap;
 
 public class ConversionUtil {
 	
@@ -328,11 +328,11 @@ public class ConversionUtil {
    
    
    
-   public static Adapter_Std mapToAdapter(Map map) throws Exception{
+   public static AdapterMap mapToAdapter(Map map) throws Exception{
 //	   if(map==null){
 //		   return null;
 //	   }
-	   Adapter_Std adapter = new Adapter_Std();
+	   AdapterMap adapter = new AdapterMap();
 	   
 	   Set keyset = map.keySet();
 	   Iterator i = keyset.iterator();
@@ -346,7 +346,7 @@ public class ConversionUtil {
 	   
    }
    //child에 없는걸 super에서 가져와라  즉   super에있는것중에 child에 없으면 거기에넣어라	KEY값으로.
-	public static Adapter_Std merge(Adapter_Std superitem, Adapter_Std childitem) throws Exception{
+	public static AdapterMap merge(AdapterMap superitem, AdapterMap childitem) throws Exception{
 	for (int i = 0; i < superitem.size(); i++) {
 		Object key = superitem.getKey(i);
 		Object value = superitem.get(i);

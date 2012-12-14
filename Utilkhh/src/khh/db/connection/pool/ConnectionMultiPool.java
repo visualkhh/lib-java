@@ -5,23 +5,23 @@ import java.sql.SQLException;
 
 import khh.db.connection.ConnectionCreator_I;
 import khh.debug.LogK;
-import khh.std.adapter.Adapter_Std;
+import khh.std.adapter.AdapterMap;
 
 
 public class ConnectionMultiPool
 {
 	private static ConnectionMultiPool	instance		= null;
 
-	private Adapter_Std<String,Adapter_Std<Integer,ConnectionPool_Connection>>		connectionPool	;
-	private Adapter_Std<String,ConnectionCreator_I> connectionCreators ;
-	private Adapter_Std<String,Integer> maximumConnectionSizes ;
+	private AdapterMap<String,AdapterMap<Integer,ConnectionPool_Connection>>		connectionPool	;
+	private AdapterMap<String,ConnectionCreator_I> connectionCreators ;
+	private AdapterMap<String,Integer> maximumConnectionSizes ;
 	private long connectionWaitMillisl = 1000;
 	private LogK logk  = LogK.getInstance();
 	private ConnectionMultiPool()
 	{ 
-	    connectionPool = new Adapter_Std<String, Adapter_Std<Integer,ConnectionPool_Connection>>();
-	    connectionCreators = new Adapter_Std<String, ConnectionCreator_I>();
-	    maximumConnectionSizes = new Adapter_Std<String, Integer>();
+	    connectionPool = new AdapterMap<String, AdapterMap<Integer,ConnectionPool_Connection>>();
+	    connectionCreators = new AdapterMap<String, ConnectionCreator_I>();
+	    maximumConnectionSizes = new AdapterMap<String, Integer>();
 	}
 	
    public synchronized void addConnectionCreator(String creatorName,final ConnectionCreator_I creator,Integer maximumConnectionSize) throws Exception{
@@ -49,7 +49,7 @@ public class ConnectionMultiPool
 	    synchronized (connectionPool) {
     		for (int i = 0; i < connectionPool.size(); i++)
     		{
-    		    Adapter_Std<Integer,ConnectionPool_Connection> std = connectionPool.get(i);
+    		    AdapterMap<Integer,ConnectionPool_Connection> std = connectionPool.get(i);
     		    for (int j = 0; j < std.size(); j++) {
     		        std.get(i).close();
                 }
@@ -91,12 +91,12 @@ public class ConnectionMultiPool
 				logk.debug(creatorName+ " 의 이름을 찾을수없습니다.");
 				return null;
 			}
-			Adapter_Std<Integer, ConnectionPool_Connection>  atConnections = connectionPool.get(creatorName);
+			AdapterMap<Integer, ConnectionPool_Connection>  atConnections = connectionPool.get(creatorName);
 			if ( con == null )
 			{
 			    
 			    if(atConnections==null){
-			        atConnections=new Adapter_Std<Integer, ConnectionPool_Connection>();
+			        atConnections=new AdapterMap<Integer, ConnectionPool_Connection>();
 			        connectionPool.add(creatorName, atConnections);
 			    }
 				if ( atConnections.size() < poolmaxsize ) // 추가
@@ -144,7 +144,7 @@ public class ConnectionMultiPool
 
 	public ConnectionPool_Connection getStandbyConnction(String creatorName) throws Exception
 	{
-	    Adapter_Std<Integer, ConnectionPool_Connection> atConnections  = connectionPool.get(creatorName);
+	    AdapterMap<Integer, ConnectionPool_Connection> atConnections  = connectionPool.get(creatorName);
 		for (int i = 0;atConnections!=null && i < atConnections.size(); i++)
 		{
 			if ( atConnections.get(i).isClosed() )
@@ -174,7 +174,7 @@ public class ConnectionMultiPool
 	
 	public int getUseConnction(String creatorName) throws Exception
 	{
-	    Adapter_Std<Integer, ConnectionPool_Connection>  atConnections = connectionPool.get(creatorName);
+	    AdapterMap<Integer, ConnectionPool_Connection>  atConnections = connectionPool.get(creatorName);
 		int poolusesize=0;
 		for (int i = 0;atConnections!=null && i < atConnections.size(); i++)
 		{

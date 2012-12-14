@@ -5,7 +5,7 @@ import java.nio.channels.SocketChannel;
 
 import khh.communication.Communication_Interface;
 import khh.communication.Connection_Interface;
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 
 //꼭 생성자에서 비지니스를 setConnection 해줘야함
 abstract public class TcpServerCommunication implements Communication_Interface
@@ -74,28 +74,28 @@ abstract public class TcpServerCommunication implements Communication_Interface
 	
 	
 
-	abstract public Adapter_Base execute() throws Exception;
+	abstract public AdapterMapBase execute() throws Exception;
 	
 
-	public Adapter_Base execute(String data) throws Exception
+	public AdapterMapBase execute(String data) throws Exception
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Adapter_Base execute(byte[] data) throws Exception
+	public AdapterMapBase execute(byte[] data) throws Exception
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Adapter_Base execute(ByteBuffer data) throws Exception
+	public AdapterMapBase execute(ByteBuffer data) throws Exception
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Adapter_Base execute(ByteBuffer data, int timeout) throws Exception
+	public AdapterMapBase execute(ByteBuffer data, int timeout) throws Exception
 	{
 		// TODO Auto-generated method stub
 		return null;

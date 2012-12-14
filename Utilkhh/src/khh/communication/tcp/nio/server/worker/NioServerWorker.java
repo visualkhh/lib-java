@@ -49,23 +49,23 @@ public class NioServerWorker extends Thread
 					continue;
 				}
 				
-				log.info(String.format("Worker! Start [%03d]", getId()));
+				//log.info(String.format("Worker! Start [%03d]", getId()));
 				socket = channel.socket();
 				business.setSocketChannel(channel);
 				business.execute(key);
-				log.info(String.format("Worker! END [%03d] isConnected:%b isConnectionPending:%b isOpen:%b  isClosed:%b isBound:%b isWriteble:%b"+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()));
+				//log.info(String.format("Worker! END [%03d] isConnected:%b isConnectionPending:%b isOpen:%b  isClosed:%b isBound:%b isWriteble:%b"+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()));
 			}catch (SocketTimeoutException e) {
 				log.error(String.format("SocketTimeoutException execute WorkerBusiness End [%03d] isConnected:%b isConnectionPending:%b isOpen:%b isClosed:%b isBound:%b isWriteble:%b "+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()),e);
 				business.close(channel);
-				close(channel);
+//				close(channel);
 			}catch (IOException e) {
 				log.error(String.format("IOException  execute WorkerBusiness End [%03d] "+channel.socket().getInetAddress(), getId(), getId()),e);
 				business.close(channel);
-				close(channel);
+//				close(channel);
 			}catch (Exception e){
 				log.error(String.format("Exception  Close Socket!!  execute WorkerBusiness End [%03d] "+channel.socket().getInetAddress(), getId(), getId()),e);
 				business.close(channel);
-				close(channel);
+//				close(channel);
 			}finally{
 //				if( channel.isConnected() && channel.socket().isConnected()  && channel.isOpen() && !channel.socket().isClosed() && !channel.socket().isClosed()){
 					//커넥트된상태
@@ -84,13 +84,13 @@ public class NioServerWorker extends Thread
 		}
 	}
 
-	private void close(SocketChannel socket){
-		try{
-			if(socket!=null)
-			socket.close();
-		}catch (IOException e1){
-		}
-	}
+//	private void close(SocketChannel socket){
+//		try{
+//			if(socket!=null)
+//			socket.close();
+//		}catch (IOException e1){
+//		}
+//	}
 
 	public BlockingQueue<SelectionKey> getEventQueue() {
 		return eventQueue;

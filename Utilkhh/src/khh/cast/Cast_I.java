@@ -16,6 +16,7 @@ public interface Cast_I{
 
 	public Float getFloat() throws ClassCastException;
 
+	public Short getShort() throws ClassCastException;
 	public String getString() throws ClassCastException;
 
 	public Boolean getBoolean() throws ClassCastException;

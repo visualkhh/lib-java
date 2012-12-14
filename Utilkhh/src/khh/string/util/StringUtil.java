@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import khh.conversion.util.ConversionUtil;
-import khh.std.adapter.Adapter_Std;
+import khh.std.adapter.AdapterMap;
 
 public class StringUtil {
 
@@ -372,13 +372,13 @@ public class StringUtil {
 		return buffer.toString();
     }
 
-    public static String concatenateToAttribute(Adapter_Std<String,String> map) throws Exception{
+    public static String concatenateToAttribute(AdapterMap<String,String> map) throws Exception{
     	return concatenate(map,"="," ","'");
     }
-    public static String concatenateToParameter(Adapter_Std<String,String> map) throws Exception{
+    public static String concatenateToParameter(AdapterMap<String,String> map) throws Exception{
     	return concatenate(map,"=","&","");
     }
-    public static String concatenate(Adapter_Std<String,String> map,String unionString,String divisionString,String pairString) throws Exception{
+    public static String concatenate(AdapterMap<String,String> map,String unionString,String divisionString,String pairString) throws Exception{
 //    	if(unionString==null){
 //    		unionString="";
 //    	}

@@ -3,7 +3,7 @@ package khh.std.adapter;
 import java.io.Serializable;
 
 
-public class Adapter_Std<K,T> extends Adapter_Base<K,T> implements Serializable {
+public class AdapterMap<K,T> extends AdapterMapBase<K,T> implements Serializable {
 //	@Override
 //	public T getAlgorithm()
 //	{

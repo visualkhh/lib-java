@@ -3,13 +3,13 @@ import java.util.Date;
 
 import javax.swing.text.Utilities;
 
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 import khh.std.realworld.Direction;
 import khh.std.realworld.Realworld;
 import khh.std.realworld.Weather;
 import khh.util.Util;
 
-public class WeatherAdapter extends Adapter_Base<String,Realworld> {
+public class WeatherAdapter extends AdapterMapBase<String,Realworld> {
 	String info;
 	
 	

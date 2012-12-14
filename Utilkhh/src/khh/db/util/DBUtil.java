@@ -26,12 +26,12 @@ import khh.sort.SortUtil;
 import khh.sort.comparator.CompareBase;
 import khh.sort.comparator.CompareIntegerStandard;
 import khh.std.Standard;
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 import khh.string.util.StringUtil;
 
 public class DBUtil {
 
-    public static ArrayList setPreparedStatementValueName(String sql_naming,Adapter_Base<String,Object> param) throws Exception{
+    public static ArrayList setPreparedStatementValueName(String sql_naming,AdapterMapBase<String,Object> param) throws Exception{
         StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
         for (int i = 0; i < param.size(); i++) {
             String findstr="#"+param.getKey(i)+"#";

@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import khh.communication.Communication_Interface;
 import khh.communication.Connection_Interface;
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 
 abstract public class TcpClientCommunication implements Communication_Interface
 {
@@ -48,24 +48,24 @@ abstract public class TcpClientCommunication implements Communication_Interface
 //	}
 
 
-	synchronized public Adapter_Base execute() throws Exception{
+	synchronized public AdapterMapBase execute() throws Exception{
 		return null;
 	}
-	synchronized public Adapter_Base execute(String data) throws Exception {
+	synchronized public AdapterMapBase execute(String data) throws Exception {
 		return execute(data.getBytes());
 	}
-	synchronized public Adapter_Base execute(byte[] data) throws Exception {
+	synchronized public AdapterMapBase execute(byte[] data) throws Exception {
 		ByteBuffer bytebuff  = ByteBuffer.allocate(data.length);
 		bytebuff.put(data);
 		bytebuff.rewind();
 		return execute(bytebuff);
 	}
-	synchronized public Adapter_Base execute(ByteBuffer data) throws Exception {
+	synchronized public AdapterMapBase execute(ByteBuffer data) throws Exception {
 		return execute(data,getReadBlock_TimeOut());
 	}
-	abstract public  Adapter_Base execute(ByteBuffer data,int timeout) throws Exception;
+	abstract public  AdapterMapBase execute(ByteBuffer data,int timeout) throws Exception;
 
-	abstract public Adapter_Base resultParsing(ByteBuffer buffer) throws Exception;
+	abstract public AdapterMapBase resultParsing(ByteBuffer buffer) throws Exception;
 	
 	
 }

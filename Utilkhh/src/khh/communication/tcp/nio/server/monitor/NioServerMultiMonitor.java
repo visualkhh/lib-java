@@ -1,60 +1,70 @@
 package khh.communication.tcp.nio.server.monitor;
 
+import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
-
-import khh.std.adapter.Adapter_Std;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class NioServerMultiMonitor{
 	// serverid, <user_sessionKey_Strig,selectionKey>
-	public Adapter_Std<String, Adapter_Std<String, SelectionKey>> serverlist = null;
-	public Adapter_Std<String, NioServerMonitor> monitors = null;
+	public HashMap<String, HashMap<String, SelectionKey>> clientSelectionKey = null;
+	public HashMap<String, NioServerMonitor> monitors = null;
+//	public Adapter_Std<String, Adapter_Std<String, SelectionKey>> serverlist = null;
+//	public Adapter_Std<String, NioServerMonitor> monitors = null;
 
 	public NioServerMultiMonitor(){
 		init();
 	}
 
 	synchronized private void init(){
-		serverlist = new Adapter_Std<String, Adapter_Std<String, SelectionKey>>();
-		monitors = new Adapter_Std<String, NioServerMonitor>();
+		clientSelectionKey = new HashMap<String, HashMap<String, SelectionKey>>();
+		monitors = new HashMap<String, NioServerMonitor>();
+//		serverlist = new Adapter_Std<String, Adapter_Std<String, SelectionKey>>();
+//		monitors = new Adapter_Std<String, NioServerMonitor>();
 	}
 
-	synchronized public void addMonitor(String servername, NioServerMonitor monitor) throws Exception{
+	synchronized public void putMonitor(String servername, NioServerMonitor monitor) throws Exception{
 		synchronized(monitors){
-			monitors.add(servername, monitor);
+			monitors.put(servername, monitor);
 		}
-		synchronized(monitor){
-			serverlist.add(servername, new Adapter_Std<String, SelectionKey>());
+		synchronized(clientSelectionKey){
+			clientSelectionKey.put(servername, new HashMap<String, SelectionKey>());
 		}
 	}
+	
+	
 
 	synchronized public void removeMonitor(String servername) throws Exception{
+		synchronized(clientSelectionKey){
+			clientSelectionKey.remove(servername);
+		}
 		synchronized(monitors){
 			monitors.remove(servername);
 		}
-		synchronized(serverlist){
-			serverlist.remove(servername);
-		}
 	}
-	synchronized public void addSelectionKey(String servername,String sessionKey,SelectionKey selectionKey) throws Exception{
-		synchronized(serverlist){
-			Adapter_Std<String, SelectionKey> list = serverlist.get(servername);
+	synchronized public void putSelectionKey(String servername,String sessionKey,SelectionKey selectionKey) throws Exception{
+		synchronized(clientSelectionKey){
+			HashMap<String, SelectionKey> list = clientSelectionKey.get(servername);
 			synchronized(list){
-				list.add(sessionKey, selectionKey);
+				list.put(sessionKey, selectionKey);
 			}
 		}
 	}
-	synchronized public void setSelectionKey(String servername,String sessionKey,SelectionKey selectionKey) throws Exception{
-		synchronized(serverlist){
-			Adapter_Std<String, SelectionKey> list = serverlist.get(servername);
-			synchronized(list){
-				list.set(sessionKey, selectionKey);
-			}
-		}
-	}
+//	synchronized public void setSelectionKey(String servername,String sessionKey,SelectionKey selectionKey) throws Exception{
+//		synchronized(serverlist){
+//			Adapter_Std<String, SelectionKey> list = serverlist.get(servername);
+//			synchronized(list){
+//				list.set(sessionKey, selectionKey);
+//			}
+//		}
+//	}
+	
+	
 	synchronized public void removeSelectionKey(String servername,String sessionKey) throws Exception{
-		synchronized(serverlist){
-			Adapter_Std<String, SelectionKey> list = serverlist.get(servername);
+		synchronized(clientSelectionKey){
+			HashMap<String, SelectionKey> list = clientSelectionKey.get(servername);
 			synchronized(list){
 				list.remove(sessionKey);
 			}
@@ -65,12 +75,12 @@ public class NioServerMultiMonitor{
 
 	synchronized public SelectionKey getSelectionKey(String serverid, String sessionKey) throws Exception{
 		ArrayList<SelectionKey> monitorKeys = null;
-		Adapter_Std<String, SelectionKey> serverKeys = null;
+		HashMap<String, SelectionKey> serverKeys = null;
 		SelectionKey skey = null;
 		synchronized(monitors){
-			synchronized(serverlist){
+			synchronized(clientSelectionKey){
 				monitorKeys = monitors.get(serverid).getSelectionKeys();
-				serverKeys = serverlist.get(serverid);
+				serverKeys = clientSelectionKey.get(serverid);
 				skey = serverKeys.get(sessionKey);
 			}
 		}
@@ -81,19 +91,75 @@ public class NioServerMultiMonitor{
 					return monitorSelectionKey;
 				}
 			}
+			
+			removeSelectionKey(serverid,sessionKey);
+			return null;
 		}
-		return null;
 	}
+
+
+	
+	
+	
 	synchronized public SelectionKey getSelectionKey(String sessionKey) throws Exception{
 		synchronized(monitors){
-			for(int i = 0; i < monitors.size(); i++){
-				SelectionKey key  =  getSelectionKey(monitors.getKey(i),sessionKey);
+			Iterator<String> iter = monitors.keySet().iterator();
+			while(iter.hasNext()){
+				SelectionKey key  =  getSelectionKey(iter.next(),sessionKey);
 				if(key!=null){
 					return key;
 				}
 			}
+			return null;
 		}
-		return null;
 	}
+	synchronized public ArrayList<SelectionKey> getSelectionKeys(String sessionKey) throws Exception{
+		synchronized(monitors){
+			ArrayList<SelectionKey> selectionKeys = new ArrayList<SelectionKey>();
+			Iterator<String> iter = monitors.keySet().iterator();
+			while(iter.hasNext()){
+				SelectionKey key  =  getSelectionKey(iter.next(),sessionKey);
+				if(key!=null){
+					selectionKeys.add( key );
+				}
+			}
+			return selectionKeys;
+		}
+	}
+	
+	synchronized public HashMap<String,SelectionKey> getClientSelectionKeys(String serverid) throws Exception{
+		HashMap<String,SelectionKey> keys = new HashMap<String,SelectionKey>();
+		HashMap<String,SelectionKey> acct = clientSelectionKey.get(serverid);
+		Iterator<String> iter = acct.keySet().iterator();
+		while(iter.hasNext()){
+			String key = iter.next();
+			SelectionKey selectionKey = getSelectionKey(serverid, key);
+			if(key!=null){
+				keys.put(key,selectionKey);
+			}
+		}
+		return keys;
+	}
+	synchronized public HashMap<String,SelectableChannel > getClientSocketChannels(String serverid) throws Exception{
+		HashMap<String,SelectableChannel > keys = new HashMap<String,SelectableChannel >();
+		HashMap<String,SelectionKey> acct = clientSelectionKey.get(serverid);
+		Iterator<String> iter = acct.keySet().iterator();
+		while(iter.hasNext()){
+			String key = iter.next();
+			SelectionKey selectionKey = getSelectionKey(serverid, key);
+			if(key!=null){
+				keys.put(key,selectionKey.channel());
+			}
+		}
+		return keys;
+	}
+
+	public HashMap<String, NioServerMonitor> getMonitors(){
+		return monitors;
+	}
+	
+	
+	
+	
 	
 }

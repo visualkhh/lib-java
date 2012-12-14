@@ -7,8 +7,8 @@ import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
-import khh.communication.tcp.nio.protocol.NioMsg;
 import khh.communication.tcp.nio.server.NioServer;
+import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.debug.LogK;
 import khh.util.Util;
 
@@ -23,6 +23,7 @@ abstract public class NioWorker{
 	private LogK log 							= LogK.getInstance();
 	private NioServer server =  null;
 	
+
 	
 	public NioWorker(int firestMode) {
 	    setFirestMode(firestMode);
@@ -34,7 +35,7 @@ abstract public class NioWorker{
 		write(data.getBytes());
 	}
 	final synchronized public void write(byte[] data) throws IOException{
-		ByteBuffer bytebuff = ByteBuffer.allocate(data.length);
+		ByteBuffer bytebuff = ByteBuffer.allocateDirect(data.length);
 		bytebuff.put(data);
 		bytebuff.clear();
 		write(bytebuff);
@@ -57,9 +58,9 @@ abstract public class NioWorker{
 //		    System.out.println( log.toHexlog(data));
 //		    DebugUtil.trace(ByteUtil.toByteArray(data), "---------");
 //		    System.out.println( log.toHexlog(data));
-			//log.debug("Write Before  "+isConnected(),data);
+			log.debug("Write Before  "+isConnected(),data);
 			write_length = socketChannel.write(data);
-			//log.debug("Write after OK!  "+isConnected());
+			log.debug("Write after OK!  "+isConnected()+"  size:"+write_length);
 //			log.debug("2) WriteLength "+write_length);
 		}catch(IOException e){
 			log.debug("Exception : Write Fail Socket=null  isConnected? -> "+isConnected());
@@ -70,10 +71,10 @@ abstract public class NioWorker{
 	
 	
 	
-	final synchronized public  int read(byte[] buffer, int timeout_daly_mm) throws IOException{
-		ByteBuffer bytebuff  = ByteBuffer.allocate(buffer.length);
+	final synchronized public  int read(byte[] buffer, int timeout_daly_ms) throws IOException{
+		ByteBuffer bytebuff  = ByteBuffer.allocateDirect(buffer.length);
 		bytebuff.clear();
-		int r = read(buffer, timeout_daly_mm);
+		int r = read(buffer, timeout_daly_ms);
 		bytebuff.clear();
 		bytebuff.get(buffer);
 		bytebuff.clear();
@@ -112,81 +113,7 @@ abstract public class NioWorker{
 	
 	
 	
-	//////////protocol!!
-	   /*
-     * STX(1byte), ACTIONCODE(int4byte), LENGTH(datalength int4byte), DATA(bytes..~..), ETX(1byte) 
-     */
-	public NioMsg receiveNioMsg() throws IOException {
-	    return receiveNioMsg(getSocketChannel());
-	}
-	public NioMsg receiveNioMsg(SelectionKey selectionKey) throws IOException {
-	    return receiveNioMsg((SocketChannel)selectionKey.channel());
-	}
-    public NioMsg receiveNioMsg(SocketChannel socket) throws IOException {
-        NioMsg msg = null;
-//        if(selectionKey.isReadable()){
-            ByteBuffer buffer = ByteBuffer.allocate(1);
-            int i = read(buffer, 1000,socket); //stx Read
-            buffer.clear();
-            //log.debug("SEX",buffer);
-            
-            if(i==1 && NioMsg.STX == buffer.get(0)){
-                msg = new NioMsg();
-                //msg.setStx(buffer.get(0));
-                
-                buffer = ByteBuffer.allocate(4);
-                buffer.order(ByteOrder.BIG_ENDIAN);
-                i = read(buffer, 1000,socket);         //action Code Read
-                buffer.clear();
-                int actionCode = buffer.getInt();
-                buffer.clear();
-                //log.debug("ACTION("+actionCode+")",buffer);
-                msg.setAction(actionCode);
-                
-                
-                buffer = ByteBuffer.allocate(4);    //length Code Read
-                buffer.order(ByteOrder.BIG_ENDIAN);
-                i = read(buffer, 1000,socket);
-                buffer.clear();
-                int length = buffer.getInt();
-                buffer.clear();
-               // log.debug("LENGTH("+length+")",buffer);
-//              msg.setAction(length);
-                
-                buffer = ByteBuffer.allocate(length);//data Read
-                i = read(buffer, 2000,socket);
-                buffer.clear();
-                msg.set(buffer);
-                //log.debug("DATA",buffer);
-                
-                buffer = ByteBuffer.allocate(1);        //etx Read
-                i = read(buffer, 1000,socket);
-                buffer.clear();
-                //msg.setEtx(buffer.get(0));
-               // log.debug("ETX",buffer);
-                
-                if(i==1 && NioMsg.ETX ==buffer.get(0)){
-                //    log.debug("Good Message ActionCode :"+ msg.getAction());
-                    msg.setSuccess(true);
-                    //msg.setSelectionKey(selectionKey);
-                }
-            }
-//        }
-        return msg;
-    }
-    
-    
-    public void sendNioMsg(NioMsg msg) throws Exception {
-        sendNioMsg(msg,getSocketChannel());
-    }
-    public void sendNioMsg(NioMsg msg, SelectionKey selectionKey) throws Exception {
-        sendNioMsg(msg,(SocketChannel)selectionKey.channel());
-    }
-    public void sendNioMsg(NioMsg msg, SocketChannel socket) throws Exception {
-        if(msg.isSuccess()){
-            write(msg.unformat(),socket);
-        }
-    }
+	
 	
 	
 	
@@ -226,13 +153,16 @@ abstract public class NioWorker{
 		super.finalize();
 	}
 	
+	
 	final synchronized public void close(){
 		close(getSocketChannel());
 	}
 	final synchronized public void close(SocketChannel socket){
 		try{
-			if(socket!=null)
-			socket.close();
+			if(socket!=null){
+				socket.close();
+				log.debug("socket close: "+socket);
+			}
 		}catch (IOException e1){
 		}
 	}

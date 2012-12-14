@@ -2,17 +2,17 @@ package khh.schedule;
 
 import java.util.Timer;
 
-import khh.std.adapter.Adapter_Std;
+import khh.std.adapter.AdapterMap;
 
 
 
 public class Scheduler
 {
-	Adapter_Std<String, ScheduleTask>	taskContainer	= null;
+	AdapterMap<String, ScheduleTask>	taskContainer	= null;
 	Timer timer = null;
 	public Scheduler()
 	{
-		taskContainer = new Adapter_Std<String, ScheduleTask>();
+		taskContainer = new AdapterMap<String, ScheduleTask>();
 	}
 	
 //delay는 말그대로 딜레이 delay있다가 수행   주기적인  period는 ms 콜
@@ -119,7 +119,7 @@ public class Scheduler
    public ScheduleTask getScheduleTask(String name) throws Exception{
         return taskContainer.get(name);
     }
-	public   Adapter_Std<String, ScheduleTask> getScheduleContainer(){
+	public   AdapterMap<String, ScheduleTask> getScheduleContainer(){
 	    return taskContainer;
 	}
 	public int getTaskSize(){

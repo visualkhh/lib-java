@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import khh.std.Standard;
 
 
-public abstract class Adapter_Base<K,T>  implements Serializable {
+public abstract class AdapterMapBase<K,T>  implements Serializable {
 	private ArrayList<Standard<K,T>> container = null;
 	
-	public Adapter_Base() {
+	public AdapterMapBase() {
 		container = new ArrayList<Standard<K,T>>();
 	}
 	
