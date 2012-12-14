@@ -9,9 +9,9 @@ public class hashmaptest {
 public static void main(String[] args) {
     Map<String, String> sessions = new ConcurrentHashMap<String, String>();
     
-    sessions.put("a", "a");
+    sessions.put(new String("a"), "a");
     sessions.put("ab", "a");
-    sessions.put("a", "b");
+    sessions.put(new String("a"), "b");
     System.out.println(sessions.size());
     
     
@@ -21,5 +21,19 @@ public static void main(String[] args) {
         String key = it.next();
         System.out.println("key : "+key+"         val: "+sessions.get(key));
     }
+    
+    it = a.iterator();
+    for (int i = 0; i < sessions.size(); i++) {
+        String key = it.next();
+        System.out.println("key : "+key+"         val: "+sessions.get(key));
+    }
+    
+    
+//    while(it.hasNext()){
+//    	String key = it.next();
+//    	sessions.remove(key);
+//    	System.out.println("key : "+key+"         val: "+sessions.get(key));
+//    	
+//    }
 }
 }

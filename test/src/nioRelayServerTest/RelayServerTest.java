@@ -11,7 +11,7 @@ public class RelayServerTest {
         serverPort.add(801);
         
         RelayServer f = new RelayServer();
-        f.setServerPort(serverPort);
+        f.setPort(serverPort);
         f.start();
     }
 }

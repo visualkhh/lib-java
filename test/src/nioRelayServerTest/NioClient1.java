@@ -5,42 +5,48 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 
 import khh.communication.tcp.nio.client.NioClient;
-import khh.communication.tcp.nio.protocol.NioMsg;
-import khh.communication.tcp.nio.relay.format.FromToRelayFormater;
+import khh.communication.tcp.nio.worker.NioActionWorker;
 import khh.communication.tcp.nio.worker.NioWorker;
+import khh.communication.tcp.nio.worker.msg.FromToFormater;
+import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.debug.LogK;
 import khh.util.ByteUtil;
 
 public class NioClient1 {
     public static void main(String[] args) throws IOException {
 
-        NioWorker client1Worker = new NioWorker(NioWorker.MODE_FIREST_W) {
+    	NioActionWorker client1Worker = new NioActionWorker(NioWorker.MODE_FIREST_W) {
             LogK log = LogK.getInstance();
-            public void execute(SelectionKey selectionKey) throws Exception {
-                if ( selectionKey.isWritable() ) {
-                    FromToRelayFormater fromto = new FromToRelayFormater();
-                    fromto.setFrom("client1");
-                    fromto.setTo("client2");
-                    fromto.set(ByteUtil.toByteBuffer("From:Client1(9090) ~ To: Clinet2(801)   Msg: hi~client2"));
-                    ByteBuffer data = fromto.unformat();
+			@Override
+			public NioActionMsg onReceiveAction(NioActionMsg msg, SelectionKey selectionKey) throws Exception{
+              FromToFormater fromto = new FromToFormater();
+              fromto.format(msg.get());
+              log.debug("Recv Msg :("+msg.getAction()+") " + fromto.getString());
+              return msg;
+			}
+			
+			@Override
+			public NioActionMsg onSendAction(NioActionMsg msg, SelectionKey selectionKey) throws Exception{
+              FromToFormater fromto = new FromToFormater();
+              fromto.setFrom("client1");
+              fromto.setTo("client2");
+              //fromto.set(ByteUtil.toByteBuffer("From:Client1(9090) ~ To: Clinet2(801)   Msg: hi~client2"));
+              fromto.set("ClientRelayServer8011");
 
-                    NioMsg msg = new NioMsg();
-                    msg.set(data);
-                    msg.setSuccess(true);
-                    write(msg.unformat());
-                    Thread.sleep(3000);
-                }
-                
-                if(selectionKey.isReadable()){
-                    NioMsg msg = receiveNioMsg();
-                    FromToRelayFormater fromto = new FromToRelayFormater();
-                    fromto.format(msg.get());
-                    log.debug("Recv Msg : "+fromto.getString());
-                }
-            }
+              msg = new NioActionMsg();
+              msg.setAction(ACTION.FROMTO.getValue());
+              msg.setAction(ACTION.GET_SERVERS.getValue());
+              msg.setAction(ACTION.GET_CLIENTS.getValue());
+              msg.set(fromto);
+              msg.setSuccess(true);
+              sendNioActionMsg(msg);
+              Thread.sleep(3000);
+				
+              return msg;
+			}
 
         };
-        NioClient client1 = new NioClient("192.168.0.2", 9090, client1Worker);
+        NioClient client1 = new NioClient("127.0.0.1", 9090, client1Worker);
         client1.connection();
         client1.start();
     }
