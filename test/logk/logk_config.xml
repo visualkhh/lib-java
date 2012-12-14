@@ -48,7 +48,7 @@
 		</loger>
 		<saver>
 			<dateformat>yyyy-MM-dd</dateformat>
-			<save>true</save>
+			<save>false</save>
 			<savepath>c:\logk</savepath>
 			<append>true</append>
 			<filename>hhk_%c_%d.log</filename>
@@ -57,8 +57,10 @@
 
 	
 <!-- 	<target id="agg"  category="^*"  extendcategory="super_target" ></target> --> 
-	<target id="agg"  category="^niotest.ReadWorker"  extendcategory="super_target" ></target> 
-
+	<target id="agg"  category="^nioRelayServerTest.*"  extendcategory="super_target" ></target> 
+	<target id="agg"  category="^khh.communication.tcp.nio.*"  extendcategory="super_target" ></target> 
+<!-- 
+ -->
 
 <!-- 
 	<target id="gg"  category="^com.khh.util.file.pack"  extendcategory="super_target" ></target>
