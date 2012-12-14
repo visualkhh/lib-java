@@ -5,42 +5,45 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 
 import khh.communication.tcp.nio.client.NioClient;
-import khh.communication.tcp.nio.protocol.NioMsg;
-import khh.communication.tcp.nio.relay.format.FromToRelayFormater;
+import khh.communication.tcp.nio.worker.NioActionWorker;
 import khh.communication.tcp.nio.worker.NioWorker;
+import khh.communication.tcp.nio.worker.msg.FromToFormater;
+import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.debug.LogK;
 import khh.util.ByteUtil;
 
 public class NioClient2 {
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        NioWorker client1Worker = new NioWorker(NioWorker.MODE_FIREST_W) {
+    	NioActionWorker client1Worker = new NioActionWorker(NioWorker.MODE_FIREST_W) {
             LogK log = LogK.getInstance();
-            public void execute(SelectionKey selectionKey) throws Exception {
-                if ( selectionKey.isWritable() ) {
-                    FromToRelayFormater fromto = new FromToRelayFormater();
-                    fromto.setFrom("client2");
-                    fromto.setTo("client1");
-                    fromto.set(ByteUtil.toByteBuffer("From:Client2(801) ~ To: Clinet1(9090)   Msg: hi~client1"));
-                    ByteBuffer data = fromto.unformat();
 
-                    NioMsg msg = new NioMsg();
-                    msg.set(data);
-                    msg.setSuccess(true);
-                    write(msg.unformat());
-                    Thread.sleep(3000);
-                }
+			@Override
+			public NioActionMsg onReceiveAction(NioActionMsg msg, SelectionKey selectionKey)throws Exception{
+                FromToFormater fromto = new FromToFormater();
+                fromto.format(msg.get());
+                log.debug("Recv Msg :("+msg.getAction()+") " + fromto.getString());
+                return msg;
+			}
 
-                if ( selectionKey.isReadable() ) {
-                    NioMsg msg = receiveNioMsg();
-                    FromToRelayFormater fromto = new FromToRelayFormater();
-                    fromto.format(msg.get());
-                    log.debug("Recv Msg : " + fromto.getString());
-                }
+			@Override
+			public NioActionMsg onSendAction(NioActionMsg msg, SelectionKey selectionKey)throws Exception{
+              FromToFormater fromto = new FromToFormater();
+              fromto.setFrom("client2");
+              fromto.setTo("client1");
+              fromto.set(ByteUtil.toByteBuffer("From:Client2(801) ~ To: Clinet1(9090)   Msg: hi~client1"));
+              ByteBuffer data = fromto.unformat();
 
-            }
+              msg = new NioActionMsg();
+              msg.set(data);
+              msg.setAction(ACTION.FROMTO.getValue());
+              msg.setSuccess(true);
+              sendNioActionMsg(msg);
+              Thread.sleep(3000);
+              return msg;
+			}
         };
-        NioClient client2 = new NioClient("192.168.0.2", 801, client1Worker);
+        NioClient client2 = new NioClient("127.0.0.1", 801, client1Worker);
         client2.connection();
         client2.start();
 

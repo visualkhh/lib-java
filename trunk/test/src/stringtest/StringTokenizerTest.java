@@ -1,17 +1,46 @@
 package stringtest;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.StringTokenizer;
 
 public class StringTokenizerTest {
     public static void main(String[] args) {
-        String data="GET / HTTP/1.1";
-        StringTokenizer tok = new StringTokenizer(data);
-        System.out.println(tok.nextToken(" "));
-        System.out.println(tok.nextToken(" "));
-        System.out.println(tok.nextToken(" "));
-        System.out.println(tok.nextToken(" "));
-        System.out.println(tok.nextToken(" "));
+        String data="GET /* HTTP /* 1.1";
+        StringTokenizer tok = new StringTokenizer(data,"/*");
+//        tok.
+        while(tok.hasMoreTokens()){
+        	System.out.println(tok.nextToken()+"  "+tok.countTokens());
+        }
+//        System.out.println(tok.nextToken(" "));
+//        System.out.println(tok.nextToken(" "));
+//        System.out.println(tok.nextToken(" "));
+//        System.out.println(tok.nextToken(" "));
 //        System.out.println(tok.nextToken());
+        
+//        Object a= new String("a");
+        
+        khh.string.token.StringTokenizer hhkTok = new khh.string.token.StringTokenizer("vv,aa",",");
+        ArrayList ggg = new ArrayList();
+        ggg.add("aa");
+        ggg.add("aba");
+        ggg.add("aca");
+        ggg.add("ada");
+        System.out.println(hhkTok.makeString(ggg));
+        
+        
+        
+        khh.string.token.StringTokenizer hhkTok2 = new khh.string.token.StringTokenizer("vv,aa",",");
+        LinkedHashMap  h = new LinkedHashMap ();
+        h.put("a","aa");
+        h.put("b","bb");
+        h.put("c","cc");
+        h.put("d",1);
+        System.out.println(hhkTok.makeString(h));
+        hhkTok2.nextToken();
+        hhkTok2.nextToken();
+        hhkTok2.nextToken();
+        hhkTok2.nextToken();
     }
     
     private String getValue(String origin, String key){

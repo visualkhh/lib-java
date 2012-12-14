@@ -9,7 +9,7 @@ import khh.sort.comparator.CompareBase;
 import khh.sort.comparator.CompareInteger;
 import khh.sort.comparator.CompareIntegerStandard;
 import khh.std.Standard;
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 import khh.string.util.StringUtil;
 
 
@@ -19,7 +19,7 @@ public class StringTest {
     public static void main(String[] args) throws Exception {
         
         
-        Adapter_Base<String, String> param = new Adapter_Base<String, String>() {
+        AdapterMapBase<String, String> param = new AdapterMapBase<String, String>() {
         };
         param.add("a", "1");
         param.add("b", "2");

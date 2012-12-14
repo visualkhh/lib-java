@@ -11,7 +11,7 @@ import khh.db.terminal.resultset.DBTResultSetContainer;
 import khh.db.util.ConnectionUtil;
 import khh.debug.LogK;
 import khh.file.util.FileUtil;
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 
 public class DBTerminalTest {
     LogK log = LogK.getInstance();
@@ -33,7 +33,7 @@ public class DBTerminalTest {
         DBTerminal.addConfigfile("dbt/sqlmapa.xml");
     }
     public void select() throws Exception{
-        Adapter_Base<String, Object> param = new Adapter_Base<String, Object>() {};
+        AdapterMapBase<String, Object> param = new AdapterMapBase<String, Object>() {};
         param.add("hit",436);
         param.add("name","관리자");
         DBTResultSetContainer result = dbterminal.executeMapQuery("cool_select",param);
@@ -43,19 +43,19 @@ public class DBTerminalTest {
         } 
     }
     private void insert() throws Exception {
-        Adapter_Base<String, Object> param = new Adapter_Base<String, Object>() {};
+        AdapterMapBase<String, Object> param = new AdapterMapBase<String, Object>() {};
         param.add("seq","김2");
         int result = dbterminal.executeMapUpdate("cool_insert",param);
         log.debug("insert result : "+result);
     }
     private void update() throws Exception {
-        Adapter_Base<String, Object> param = new Adapter_Base<String, Object>() {};
+        AdapterMapBase<String, Object> param = new AdapterMapBase<String, Object>() {};
         param.add("seq","김빵");
         int result = dbterminal.executeMapUpdate("cool_update",param);
         log.debug("update result : "+result);
     }
     private void delete() throws Exception {
-        Adapter_Base<String, Object> param = new Adapter_Base<String, Object>() {};
+        AdapterMapBase<String, Object> param = new AdapterMapBase<String, Object>() {};
         param.add("seq","김");
         int result = dbterminal.executeMapUpdate("cool_delete",param);
         log.debug("update result : "+result);
