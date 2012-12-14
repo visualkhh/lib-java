@@ -7,15 +7,19 @@ import khh.communication.tcp.nio.worker.NioWorker;
 
 public class ClientRelayServer extends NioServer{
 
-	public ClientRelayServer(int port,Class nioWorkerClass){
-		super(port,nioWorkerClass);
+	public ClientRelayServer(int port,Class clientRelayWorkerClass){
+		super(port,clientRelayWorkerClass);
 	}
-	public ClientRelayServer(int port,ArrayList<NioWorker> nioWorkerList){
-		super(port,nioWorkerList);
+	public ClientRelayServer(int port,ArrayList<NioWorker> clientRelayWorkerList){
+		super(port,clientRelayWorkerList);
 	}
+	
 	
 	public void start() throws Exception{
 		super.start();
-		getMultimonitor().addMonitor(getName(),getMonitor());
+		getMultimonitor().putMonitor(getName(),getMonitor());
 	}
+	
+  
+
 }

@@ -227,4 +227,15 @@ abstract public class FrameFrame extends Frame implements GuiFrame{
 	public void setfinish(boolean wantfinish){
 		isfinish = wantfinish;
 	}
+
+	//화면보이기!
+	public void setVisible(boolean sw){
+		super.setVisible(sw); 
+	}
+	
+	public FrameFrame getContext(){
+		return context;
+	}
+	
+	
 }

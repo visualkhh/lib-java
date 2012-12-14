@@ -420,6 +420,32 @@ public class ByteUtil {
 	
 	
 	
+	public static ByteBuffer toByteBuffer(int i){
+		ByteBuffer buf = ByteBuffer.allocate(Integer.SIZE);
+		buf.putInt(i);
+		buf.clear();
+		return buf;
+	}
+	public static ByteBuffer toByteBuffer(double i){
+		ByteBuffer buf = ByteBuffer.allocate(Double.SIZE);
+		buf.putDouble(i);
+		buf.clear();
+		return buf;
+	}
+	public static ByteBuffer toByteBuffer(float i){
+		ByteBuffer buf = ByteBuffer.allocate(Float.SIZE);
+		buf.putFloat(i);
+		buf.clear();
+		return buf;
+	}
+	public static ByteBuffer toByteBuffer(long i){
+		ByteBuffer buf = ByteBuffer.allocate(Long.SIZE);
+		buf.putLong(i);
+		buf.clear();
+		return buf;
+	}
+	
+	
 	public static ByteBuffer toByteBuffer(byte[] bytearray){
 		return  ByteBuffer.wrap(bytearray);
 	}

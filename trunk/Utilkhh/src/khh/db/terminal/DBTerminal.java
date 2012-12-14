@@ -23,7 +23,7 @@ import khh.sort.SortUtil;
 import khh.sort.comparator.CompareBase;
 import khh.sort.comparator.CompareIntegerStandard;
 import khh.std.Standard;
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 import khh.string.util.StringUtil;
 import khh.xml.XMLparser;
 
@@ -208,7 +208,7 @@ public class DBTerminal {
         }
         return executeQuery(sql.get(sqlid));
     }
-    public DBTResultSetContainer executeMapQuery(String sqlid,Adapter_Base<String,Object> param) throws Exception{
+    public DBTResultSetContainer executeMapQuery(String sqlid,AdapterMapBase<String,Object> param) throws Exception{
         if(sql.get(sqlid)==null){
             log.error("not Found find SqlMap id "+sqlid);
             throw new Exception("not Found find SqlMap id "+sqlid);
@@ -283,7 +283,7 @@ public class DBTerminal {
         }
         return executeMapUpdate(sql.get(sqlid));
     }
-    public int executeMapUpdate(String sqlid,Adapter_Base<String,Object> param) throws Exception{
+    public int executeMapUpdate(String sqlid,AdapterMapBase<String,Object> param) throws Exception{
         if(sql.get(sqlid)==null){
             log.error("not Found find SqlMap id "+sqlid);
             throw new Exception("not Found find SqlMap id "+sqlid);

@@ -1,4 +1,4 @@
-package khh.communication.tcp.nio.protocol;
+package khh.communication.tcp.nio.worker.msg;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -8,20 +8,20 @@ import khh.format.Formater;
 import khh.std.Standard;
 import khh.util.ByteUtil;
 
-public class NioMsg extends Formater<ByteBuffer>{
+public class NioActionMsg extends Formater<ByteBuffer>{
 	public static final byte STX = (byte)0x19;
 	public static final byte ETX = (byte)0x86;
 	private int action = 0;
 	private boolean success = false;
 	
-    public NioMsg() {
+    public NioActionMsg() {
     }
 
-    public NioMsg(int action) {
+    public NioActionMsg(int action) {
         setAction(action);
     }
 
-    public NioMsg(int action, ByteBuffer data) {
+    public NioActionMsg(int action, ByteBuffer data) {
         setAction(action);
         set(data);
     }
@@ -35,6 +35,7 @@ public class NioMsg extends Formater<ByteBuffer>{
             return get().limit()-get().position();
         }
     }
+    
 
     public int getAction() {
         return action;
@@ -50,13 +51,29 @@ public class NioMsg extends Formater<ByteBuffer>{
     public void setSuccess(boolean success) {
         this.success = success;
     }
-    @Override
-    public String toString(){
-        return "action:"+getAction()+", data:"+get()+", success:"+isSuccess();
-    }
+    
 
     @Override
     public void format(ByteBuffer data) {
+    	//read해서 그냥바로넣기때문에 여긴안쓴다.  아래검증안됨 쓰지마!
+		if(data==null)
+			return;
+		//from! stx str etx
+		if(data!=null && data.get()!=STX){
+			data.clear();
+			set(data);
+			return;
+		}
+		setAction(data.getInt());
+		int length = data.getInt();
+		ByteBuffer datas =  ByteBuffer.allocateDirect(length);
+		datas.put(datas);
+		set(datas);
+		if(data.get()!=ETX){
+			setSuccess(false);
+		}else{
+			setSuccess(true);
+		}
     }
 
     @Override
@@ -77,9 +94,43 @@ public class NioMsg extends Formater<ByteBuffer>{
         return buff;
     }
 	
+    
+    
+    
+    public void clear(){
+    	super.set(null);
+    }
+    public void set(String str){
+    	set(ByteUtil.toByteBuffer(str));
+    }
+    public void set(byte[] bytearray){
+    	set(ByteUtil.toByteBuffer(bytearray));
+    }
+    public void set(int i){
+    	set(ByteUtil.toByteBuffer(i));
+    }
+    public void set(long i){
+    	set(ByteUtil.toByteBuffer(i));
+    }
+    public void set(float i){
+    	set(ByteUtil.toByteBuffer(i));
+    }
+    public void set(double i){
+    	set(ByteUtil.toByteBuffer(i));
+    }
+    public void set(NioActionMsg format){
+    	set(format.unformat());
+    }
+    
+    
+    
     @Override
     public byte[] getByteArray() throws ClassCastException {
-        return ByteUtil.toByteArray(get());
+    	if(get()!=null){
+    		return ByteUtil.toByteArray(get());
+    	}else{
+    		return null;
+    	}
     }
 
     @Override
@@ -89,27 +140,31 @@ public class NioMsg extends Formater<ByteBuffer>{
 
     @Override
     public String getString() throws ClassCastException {
-        return new String(getByteArray());
+    	if(getByteArray()!=null){
+    		return new String(getByteArray());
+    	}else{
+    		return null;
+    	}
     }
 
     @Override
     public Double getDouble() throws ClassCastException {
-        throw new ClassCastException("Double Disabled Cast");
+    	return get().getDouble();
     }
 
     @Override
     public Float getFloat() throws ClassCastException {
-        throw new ClassCastException("Double Float Cast");
+    	return get().getFloat();
     }
 
     @Override
     public Integer getInt() throws ClassCastException {
-        throw new ClassCastException("Integer Float Cast");
+    	return get().getInt();
     }
 
     @Override
     public Object getObject() throws ClassCastException {
-        throw new ClassCastException("Object Float Cast");
+    	return get();
     }
 
     @Override
@@ -133,7 +188,10 @@ public class NioMsg extends Formater<ByteBuffer>{
     }
 
 	    
-	    
+    @Override
+    public String toString(){
+        return "action:"+getAction()+", data:"+get()+", success:"+isSuccess()+"  length:"+getLength();
+    }
 	
 	
 }

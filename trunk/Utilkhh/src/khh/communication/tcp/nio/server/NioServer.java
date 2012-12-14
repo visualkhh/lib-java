@@ -86,10 +86,10 @@ public class NioServer implements Communication_I
 	}
 
 
-    public Class getNioWorkerClass() {
+	protected Class getNioWorkerClass() {
         return nioWorkerClass;
     }
-    public void setNioWorkerClass(Class nioWorkerClass) {
+    protected void setNioWorkerClass(Class nioWorkerClass) {
         this.nioWorkerClass = nioWorkerClass;
     }
     //start
@@ -141,7 +141,7 @@ public class NioServer implements Communication_I
 	private ArrayList<NioWorker> getNioWorkerList() {
 		return nioWorkerList;
 	}
-	private void setNioWorkerList(ArrayList<NioWorker> nioWorker) {
+	public void setNioWorkerList(ArrayList<NioWorker> nioWorker) {
 		this.nioWorkerList = nioWorker;
 	}
 	

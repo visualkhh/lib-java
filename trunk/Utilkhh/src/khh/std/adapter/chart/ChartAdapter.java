@@ -2,12 +2,12 @@ package khh.std.adapter.chart;
 
 import javax.swing.text.Utilities;
 
-import khh.std.adapter.Adapter_Base;
+import khh.std.adapter.AdapterMapBase;
 import khh.std.chart.Chart_DTO;
 import khh.util.Util;
 
 
-public class ChartAdapter extends Adapter_Base<Integer,Chart_DTO> {
+public class ChartAdapter extends AdapterMapBase<Integer,Chart_DTO> {
 	public enum TYPE {
 		NOMAL(0),
 		SCOPE(1)

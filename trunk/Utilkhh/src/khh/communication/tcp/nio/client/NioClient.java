@@ -78,7 +78,7 @@ public class NioClient extends Thread implements Communication_I{
             return;
         }
 		log.debug(String.format("NioClient(id:%d) Running...Thread Run", getId() ));
-		while(true){
+		while(socketChannel.isConnected()){
 				try {
 					if(clientSelector.select(3) > 0){
 						Iterator<SelectionKey> it = clientSelector.selectedKeys().iterator();

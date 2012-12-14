@@ -67,6 +67,12 @@ public class CastBase<T> implements Cast_I{
         return (String)get();
     }
     
+
+    @Override
+    public Short getShort() throws ClassCastException {
+        return (Short)get();
+    }
+    
     @Override
     public Date getDate() throws ClassCastException {
         return (Date)get();

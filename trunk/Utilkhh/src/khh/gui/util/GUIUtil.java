@@ -7,11 +7,6 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
-import java.awt.MenuItem;
-import java.io.File;
-import java.io.IOException;
-
-import khh.image.ImageUtil;
 
 public class GUIUtil
 {
