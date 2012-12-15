@@ -26,18 +26,20 @@ public class NioClient1 {
                     msg=new NioActionMsg();
                 }
                 msg.clear();
-                 msg.setAction(NioActionMsg.ACTION.GET_SERVERTIME.getValue());
-               // msg.setAction(NioActionMsg.ACTION.FROMTO.getValue());
+                 msg.setAction(NioActionMsg.ACTION.ECHO.getValue());
+//                 msg.setAction(NioActionMsg.ACTION.GET_SERVERTIME.getValue());
+                msg.setAction(NioActionMsg.ACTION.FROMTO.getValue());
               //  msg.setAction(NioActionMsg.ACTION.GET_SERVERS.getValue());
              //   msg.setAction(NioActionMsg.ACTION.GET_CLIENTS.getValue());
-                //msg.putParam(NioActionMsg.PARAM.FROM.getValue(), "client1");
-//                msg.putParam(NioActionMsg.PARAM.TO.getValue(), "client2");
+                msg.putParam(NioActionMsg.PARAM.FROM.getValue(), "client1");
+                msg.putParam(NioActionMsg.PARAM.TO.getValue(), "client2");
                 // fromto.set(ByteUtil.toByteBuffer("From:Client1(9090) ~ To: Clinet2(801)   Msg: hi~client2"));
 //                msg.set("ClientRelayServer9090");
+                msg.set("hey Client2");
                 msg.setSuccess(true);
 
                 sendNioActionMsg(msg);
-//                Thread.sleep(3000);
+                Thread.sleep(5000);
 
                 return msg;
             }
