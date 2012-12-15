@@ -154,7 +154,11 @@ public abstract class NioActionWorker extends NioWorker {
 				if(msg==null){
 					msg = new NioActionMsg(NioActionMsg.ACTION.EXCEPTION.getValue());
 				}
+				log.info("NioActionWorker Exception: ",e);
+				
+				msg.clear();
 				msg.set("exception:"+e+",message:"+e.getMessage()+",trace:"+StackTraceUtil.getStackTrace(e)+",date:"+DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
+				msg.setSuccess(true);
 				sendNioActionMsg(msg);
 			}else{
 			    throw e;
