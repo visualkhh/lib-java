@@ -7,7 +7,7 @@ import java.nio.channels.SelectionKey;
 import khh.communication.tcp.nio.client.NioClient;
 import khh.communication.tcp.nio.worker.NioActionWorker;
 import khh.communication.tcp.nio.worker.NioWorker;
-import khh.communication.tcp.nio.worker.msg.FromToFormater;
+import khh.communication.tcp.nio.worker.msg.NioParamMsg;
 import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.debug.LogK;
 import khh.util.ByteUtil;
@@ -20,7 +20,7 @@ public class NioClient2 {
 
 			@Override
 			public NioActionMsg onReceiveAction(NioActionMsg msg, SelectionKey selectionKey)throws Exception{
-                FromToFormater fromto = new FromToFormater();
+                NioParamMsg fromto = new NioParamMsg();
                 fromto.format(msg.get());
                 log.debug("Recv Msg :("+msg.getAction()+") " + fromto.getString());
                 return msg;
@@ -28,7 +28,7 @@ public class NioClient2 {
 
 			@Override
 			public NioActionMsg onSendAction(NioActionMsg msg, SelectionKey selectionKey)throws Exception{
-              FromToFormater fromto = new FromToFormater();
+              NioParamMsg fromto = new NioParamMsg();
               fromto.setFrom("client2");
               fromto.setTo("client1");
               fromto.set(ByteUtil.toByteBuffer("From:Client2(801) ~ To: Clinet1(9090)   Msg: hi~client1"));
