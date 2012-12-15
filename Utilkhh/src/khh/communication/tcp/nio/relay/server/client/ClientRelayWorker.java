@@ -71,14 +71,15 @@ public class ClientRelayWorker extends NioActionWorker{
 				try{
 				    sendNioActionMsg(msg, toSelectionKey);
 				}catch (Exception e) {
-					log.debug("Error:"+e.getMessage());
+					//log.debug("Error:"+e.getMessage());
 					msg.setAction(NioActionMsg.ACTION.EXCEPTION.getValue());
 					msg.set(e+","+e.getMessage()+","+msg);
 					sendNioActionMsg(msg,selectionKey);
 				}
 			}else{
+			    msg.clear();
 				msg.setAction(NioActionMsg.ACTION.NOSUCH_TOTARGET_EXCEPTION.getValue());
-				msg.clear();
+				msg.setSuccess(true);
 				sendNioActionMsg(msg,selectionKey);
 			}
 		}
