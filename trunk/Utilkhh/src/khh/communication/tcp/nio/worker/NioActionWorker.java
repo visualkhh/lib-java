@@ -7,16 +7,14 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 import khh.callstack.util.StackTraceUtil;
-import khh.communication.tcp.nio.worker.msg.FromToFormater;
 import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.date.util.DateUtil;
 import khh.debug.LogK;
-import khh.util.ByteUtil;
 
 public abstract class NioActionWorker extends NioWorker {
 	private LogK log = LogK.getInstance();
 	private int readTimeout_ms =5000; 
-	private boolean autoFeedbackException=true;
+	private boolean autoFeedbackException=false;
 	public NioActionWorker(int firestMode) {
 	   super(firestMode);
     }
@@ -29,51 +27,21 @@ public abstract class NioActionWorker extends NioWorker {
 //		setFirestMode(MODE_FIREST_R);
 //	}
 	
-	private boolean isAutoFeedbackException(){
+	public boolean isAutoFeedbackException(){
 		return autoFeedbackException;
 	}
-	private void setAutoFeedbackException(boolean autoFeedbackException){
+	public void setAutoFeedbackException(boolean autoFeedbackException){
 		this.autoFeedbackException = autoFeedbackException;
 	}
-	private int getReadTimeout(){
+	public int getReadTimeout(){
 		return readTimeout_ms;
 	}
-	private void setReadTimeout(int readTimeout_ms){
+	public void setReadTimeout(int readTimeout_ms){
 		this.readTimeout_ms = readTimeout_ms;
 	}
 
 
-	//int        부호 있는 정수    32 bits      -2147483648 ~ 2147483647
-	//기본액션은 			1000001 이상
-	//서버액션은 			2000001 이상
-	//EXCEPTION액션은 	3000001 이상
-	//사용자정의액션은 		50000001 이상
-	//FromTo액션은 		100000001 이상
-	public static enum ACTION {
-        POLL(1000001),
-        ECHO(1000002),
-        
-        GET_SERVERTIME(2000001),//서버시간 yyyy/MM/dd HH:mm:ss/SSS
-        GET_SERVERS(2000003),//서버정보요청 열려있는 서버이름s!   
-        GET_CLIENTS(2000004),//서버에 붙어있는 클라이언트이름s!   
-        
-        NOSUCH_EXCEPTION(3000001),
-        NOSUCH_FROMTARGET_EXCEPTION(3000002),
-        NOSUCH_TOTARGET_EXCEPTION(3000003),
-        EXCEPTION(3000005),
-        
-        FROMTO(100000001), //여기위에서부터는 다 FROMTO임..
-        //LOGIN_LOGOUT(50002),
-        //ADMIN_CLIENT_JOIN(50004)
-        ;
-        int value;
-        ACTION(int id) {
-            this.value = id;
-        }
-        public int getValue() {
-            return this.value;
-        }
-    };
+
 	
 //////////protocol!!
 	   /*
@@ -99,7 +67,6 @@ public abstract class NioActionWorker extends NioWorker {
          log.debug("SEX",buffer);
          if(i==1 && NioActionMsg.STX == buffer.get(0)){
              msg = new NioActionMsg();
-            // msg.setStx(buffer.get(0));
              
              buffer = ByteBuffer.allocateDirect(4);
              buffer.order(ByteOrder.BIG_ENDIAN);
@@ -123,7 +90,6 @@ public abstract class NioActionWorker extends NioWorker {
              int length = buffer.getInt();
              buffer.clear();
             log.debug("LENGTH("+length+")",buffer);
-//           msg.setAction(length);
              
              
              timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
@@ -132,7 +98,8 @@ public abstract class NioActionWorker extends NioWorker {
 	             buffer = ByteBuffer.allocateDirect(length);//data Read
 	             i = read(buffer, timeoutms,socket);
 	             buffer.clear();
-	             msg.set(buffer);
+	             msg.format(buffer);
+//	             msg.set(buffer);
 	             log.debug("DATA",buffer);
              }
              
@@ -142,13 +109,10 @@ public abstract class NioActionWorker extends NioWorker {
              buffer = ByteBuffer.allocateDirect(1);        //etx Read
              i = read(buffer, timeoutms,socket);
              buffer.clear();
-//             msg.setEtx(buffer.get(0));
              log.debug("ETX",buffer);
              
              if(i==1 && NioActionMsg.ETX ==buffer.get(0)){
-             //    log.debug("Good Message ActionCode :"+ msg.getAction());
                  msg.setSuccess(true);
-                 //msg.setSelectionKey(selectionKey);
              }
          }
 //     }
@@ -188,10 +152,12 @@ public abstract class NioActionWorker extends NioWorker {
 		}catch (Exception e) {
 			if(isAutoFeedbackException() && selectionKey!=null && selectionKey.isWritable()){
 				if(msg==null){
-					msg = new NioActionMsg(ACTION.EXCEPTION.getValue());
+					msg = new NioActionMsg(NioActionMsg.ACTION.EXCEPTION.getValue());
 				}
-				msg.set("Exception e:"+e+","+e.getMessage()+","+StackTraceUtil.getStackTrace(e)+","+DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
+				msg.set("exception:"+e+",message:"+e.getMessage()+",trace:"+StackTraceUtil.getStackTrace(e)+",date:"+DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
 				sendNioActionMsg(msg);
+			}else{
+			    throw e;
 			}
 		}
 	}
