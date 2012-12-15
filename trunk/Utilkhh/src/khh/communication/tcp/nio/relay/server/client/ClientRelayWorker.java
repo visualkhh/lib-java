@@ -6,51 +6,58 @@ import java.util.HashMap;
 
 import khh.communication.tcp.nio.server.monitor.NioServerMonitor;
 import khh.communication.tcp.nio.worker.NioActionWorker;
-import khh.communication.tcp.nio.worker.msg.FromToFormater;
 import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.date.util.DateUtil;
 import khh.debug.LogK;
-import khh.std.adapter.AdapterMap;
 import khh.string.token.StringTokenizer;
 public class ClientRelayWorker extends NioActionWorker{
 	private LogK log = LogK.getInstance();
     public ClientRelayWorker(int firestMode){
 		super(firestMode);
+		init();
 	}
     public ClientRelayWorker(){
-    	
+    	init();
+    }
+    public void init(){
+        setAutoFeedbackException(true);
     }
 	public NioActionMsg onReceiveAction(NioActionMsg msg, SelectionKey selectionKey) throws Exception{
-		FromToFormater fromto = new FromToFormater();
-		fromto.format(msg.get());
-		if(ACTION.POLL.getValue() == msg.getAction()){
-			getServer().getMultimonitor().putSelectionKey(getServer().getName(),fromto.getFrom(), selectionKey);
-		}else if(fromto.getFrom() != null){
-			getServer().getMultimonitor().putSelectionKey(getServer().getName(),fromto.getFrom(), selectionKey);
+		String from  =  msg.getParamString(NioActionMsg.PARAM.FROM.getValue());
+		if(from!=null){
+			getServer().getMultimonitor().putSelectionKey(getServer().getName(),from, selectionKey);
 		}
+//		if(ACTION.POLL.getValue() == msg.getAction()){
+//			getServer().getMultimonitor().putSelectionKey(getServer().getName(),fromto.getFrom(), selectionKey);
+//		}else if(fromto.getFrom() != null){
+//			getServer().getMultimonitor().putSelectionKey(getServer().getName(),fromto.getFrom(), selectionKey);
+//		}
 		return msg;
 	}
 
 	public NioActionMsg onSendAction(NioActionMsg msg, SelectionKey selectionKey) throws Exception{
-		if(ACTION.POLL.getValue() == msg.getAction()){
+		if(NioActionMsg.ACTION.POLL.getValue() == msg.getAction()){
 			msg.clear();
 			sendNioActionMsg(msg, selectionKey);
-		}else if(ACTION.ECHO.getValue() == msg.getAction()){
+		}else if(NioActionMsg.ACTION.ECHO.getValue() == msg.getAction()){
 			sendNioActionMsg(msg, selectionKey);
-		}else if(ACTION.GET_SERVERTIME.getValue() == msg.getAction()){
-			msg.set(DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
+		}else if(NioActionMsg.ACTION.GET_SERVERTIME.getValue() == msg.getAction()){
+		    String format = msg.getString(); 
+		    if(format!=null){
+		        msg.set(DateUtil.getDate(format));
+		    }else{
+		        msg.set(DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
+		    }
 			sendNioActionMsg(msg, selectionKey);
 		}
 		
-		else if(ACTION.GET_SERVERS.getValue() == msg.getAction()){
+		else if(NioActionMsg.ACTION.GET_SERVERS.getValue() == msg.getAction()){
 			HashMap<String, NioServerMonitor> monitors = getServer().getMultimonitor().getMonitors();
 			StringTokenizer token = new StringTokenizer(",");
 			msg.set(token.makeKeyString(monitors));
 			sendNioActionMsg(msg, selectionKey);
-		}else if(ACTION.GET_CLIENTS.getValue() == msg.getAction()){
-			FromToFormater fromto = new FromToFormater();
-			fromto.format(msg.get());
-			HashMap<String, SelectableChannel> clients = getServer().getMultimonitor().getClientSocketChannels(fromto.getString());
+		}else if(NioActionMsg.ACTION.GET_CLIENTS.getValue() == msg.getAction()){
+			HashMap<String, SelectableChannel> clients = getServer().getMultimonitor().getClientSocketChannels(msg.getString());
 			StringTokenizer token = new StringTokenizer(",");
 			msg.set(token.makeString(clients));
 			sendNioActionMsg(msg, selectionKey);
@@ -58,21 +65,19 @@ public class ClientRelayWorker extends NioActionWorker{
 		
 		
 		
-		else if(ACTION.FROMTO.getValue() <= msg.getAction()){
-			FromToFormater fromto = new FromToFormater();
-			fromto.format(msg.get());
-			SelectionKey toSelectionKey = getServer().getMultimonitor().getSelectionKey(fromto.getTo());
+		else if(NioActionMsg.ACTION.FROMTO.getValue() <= msg.getAction()){
+			SelectionKey toSelectionKey = getServer().getMultimonitor().getSelectionKey(msg.getParamString(NioActionMsg.PARAM.TO.getValue()));
 			if(toSelectionKey!=null){
 				try{
 				    sendNioActionMsg(msg, toSelectionKey);
 				}catch (Exception e) {
 					log.debug("Error:"+e.getMessage());
-					msg.setAction(ACTION.EXCEPTION.getValue());
-					msg.set(e+","+e.getMessage()+","+fromto);
+					msg.setAction(NioActionMsg.ACTION.EXCEPTION.getValue());
+					msg.set(e+","+e.getMessage()+","+msg);
 					sendNioActionMsg(msg,selectionKey);
 				}
 			}else{
-				msg.setAction(ACTION.NOSUCH_TOTARGET_EXCEPTION.getValue());
+				msg.setAction(NioActionMsg.ACTION.NOSUCH_TOTARGET_EXCEPTION.getValue());
 				msg.clear();
 				sendNioActionMsg(msg,selectionKey);
 			}
