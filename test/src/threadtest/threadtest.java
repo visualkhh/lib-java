@@ -1,64 +1,41 @@
-package threadtest;
+package ThreadTest;
 
-import java.lang.Thread.State;
 
-import javax.swing.plaf.SliderUI;
+class TT extends Thread{
+	int i=0;
+	@Override
+	public void run() {
 
-import com.kdt.util.schedule.Scheduler;
+		while (true) {
+			try {
+				System.out.println("while s");
+				sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		i++;
 
-public class threadtest {
-    tt t=null;
-    public void start() throws Exception{
-        System.out.println("a");
-        t = new tt();
-        t.start();
-        System.out.println("b");
+		System.out.println("while end");
+		if(i>5){
+			break;
+		}
+		}
+	}
+	public int getI() {
+		return i;
+	}
+	public void setI(int i) {
+		this.i = i;
+	}
+	
+}
 
-        if(t.getState()==Thread.State.NEW){
-            System.out.println("new");
-        }else if(t.getState()==Thread.State.BLOCKED){
-            System.out.println("BLOCKED");
-        }else if(t.getState()==Thread.State.RUNNABLE){
-            System.out.println("RUNNABLE");
-        }else if(t.getState()==Thread.State.TERMINATED){
-            System.out.println("TERMINATED");
-        }else if(t.getState()==Thread.State.TIMED_WAITING){
-            System.out.println("TIMED_WAITING");
-        }else if(t.getState()==Thread.State.WAITING){
-            System.out.println("WAITING");
-        }
-        Thread.sleep(2000);
-        t.interrupt();
-            if(t.getState()==Thread.State.NEW){
-                System.out.println("new");
-            }else if(t.getState()==Thread.State.BLOCKED){
-                System.out.println("BLOCKED");
-            }else if(t.getState()==Thread.State.RUNNABLE){
-                System.out.println("RUNNABLE");
-            }else if(t.getState()==Thread.State.TERMINATED){
-                System.out.println("TERMINATED");
-            }else if(t.getState()==Thread.State.TIMED_WAITING){
-                System.out.println("TIMED_WAITING");
-            }else if(t.getState()==Thread.State.WAITING){
-                System.out.println("WAITING");
-            }
-        
-//        Scheduler s = new Scheduler();
-//        s.schedule("a", r, 0, 100);
-    }
-    
-    public static void main(String[] args) throws Exception {
-        threadtest a = new threadtest();
-        a.start();
-    }
-    
-    
-    Runnable r = new Runnable() {
-        public void run() {
-            System.out.println(t.getState());
-            if(t.getState()==State.TERMINATED){
-                t.start();
-            }
-        }
-    };
+public class ThreadTest {
+	public static void main(String[] args) throws InterruptedException {
+		TT t = new TT();
+		t.run();
+		Thread.sleep(500);
+		System.out.println( t.getI());
+	}
+
 }
