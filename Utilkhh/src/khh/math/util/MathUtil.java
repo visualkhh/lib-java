@@ -1,5 +1,8 @@
 package khh.math.util;
 
+import java.util.ArrayList;
+
+import khh.conversion.util.ConversionUtil;
 import khh.std.realworld.TPoint;
 
 public class MathUtil {
@@ -193,6 +196,75 @@ public class MathUtil {
 
     
     
+    
+    
+    
+  //avg
+    public static double getAvg(ArrayList<Double> data){
+        return getAvg(ConversionUtil.toDoubleArray(data));
+    }
+    //sum
+    public static double getSum(ArrayList<Double> data){
+     return getSum(ConversionUtil.toDoubleArray(data));
+    }
+    
+    
+    //비교 및 큰값 작은값  min max sum
+    public static double getMax(ArrayList<Double> data){
+        return getMax(ConversionUtil.toDoubleArray(data));
+    }
+    public static double getMin(ArrayList<Double> data){
+        return getMin(ConversionUtil.toDoubleArray(data));
+    }
+    
+    
+    //avg
+    public static double getAvg(double [] data){
+        return getSum(data)/data.length;
+    }
+    //sum
+    public static double getSum(double [] data){
+        double maxValue = 0;
+        for(int i = 0 ; i <data.length ;  i++){
+            maxValue +=data[i];
+        }
+        return maxValue;
+    }
+    
+    
+    //비교 및 큰값 작은값  min max sum
+    public static double getMax(double [] data){
+        return data[getMaxIndex(data)];
+    }
+    public static double getMin(double [] data){
+        return data[getMinIndex(data)];
+    }
+    
+    
+    //큰값 인덱스 작은값인덱스
+    public static int getMaxIndex(double [] data){
+        int index=data.length-1;
+        double maxValue = Integer.MIN_VALUE;
+        for(int i = 0 ; i <data.length ;  i++){
+            if(maxValue != Math.max(data[i], maxValue)){
+                maxValue = Math.max(data[i], maxValue);
+                index = i;
+            }
+        }
+        return index;
+    }
+    public static int getMinIndex(double [] data){
+        int index= 0;
+        double minValue = Integer.MAX_VALUE;
+        
+        for(int i = 0 ; i <data.length ;  i++){
+            if(minValue != Math.min(data[i], minValue)){
+                minValue = Math.min(data[i], minValue);
+                index=i;
+            }
+        }
+        return index;
+    }
     
     
     
