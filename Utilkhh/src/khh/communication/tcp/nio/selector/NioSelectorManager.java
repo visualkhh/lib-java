@@ -1,4 +1,4 @@
-package khh.communication.tcp.nio.server.selector;
+package khh.communication.tcp.nio.selector;
 
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
@@ -14,13 +14,13 @@ import khh.communication.tcp.nio.server.NioServer;
 import khh.debug.LogK;
 import khh.debug.util.DebugUtil;
 
-public class NioServerSelector extends Thread
+public class NioSelectorManager extends Thread
 {
 	//private ArrayList<SocketChannel>	clientSocket	= null;
 	private Selector				selector	= null;
 	private BlockingQueue<SelectionKey>	eventQueue	= null;
 	private LogK log = LogK.getInstance();
-	public NioServerSelector(BlockingQueue<SelectionKey> eventQueue) throws IOException{
+	public NioSelectorManager(BlockingQueue<SelectionKey> eventQueue) throws IOException{
 		this.eventQueue = eventQueue;									//공유할 eventqueue
 		//this.clientSocket = new ArrayList<SocketChannel>();				//새로들어온 Accep되어진 ! client SocketChannel  Socket!!
 //		if(getClientSelector()==null){

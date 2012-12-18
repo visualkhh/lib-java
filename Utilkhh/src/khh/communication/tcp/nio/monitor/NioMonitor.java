@@ -8,27 +8,30 @@ import java.util.Iterator;
 import java.util.Set;
 
 import khh.collection.RoundRobin;
-import khh.communication.tcp.nio.server.selector.NioServerSelector;
+import khh.communication.tcp.nio.selector.NioSelectorManager;
 import khh.debug.LogK;
 
 public class NioMonitor {
 //public class NioServerMonitor extends Thread {
 	//private Selector clientSelector	= null;
-	ArrayList<Selector> selectorList = new ArrayList<Selector>();
+	ArrayList<NioSelectorManager> selectorManagerList = new ArrayList<NioSelectorManager>();
 	private LogK log = LogK.getInstance();
-	public NioMonitor(ArrayList<Selector> selectorList) {
+	public NioMonitor(ArrayList<NioSelectorManager> selectorManagerList) {
 		init();
-		this.selectorList = selectorList;
+		this.selectorManagerList = selectorManagerList;
 	}
 	public NioMonitor() {
 		init();
 	}
 	
-	public void setSelectorPool(ArrayList<Selector> selectorList){
-		this.selectorList = selectorList;
+	public ArrayList<NioSelectorManager> getSelectorManagerList(){
+		return selectorManagerList;
 	}
-
-
+	public void setSelectorManagerList(ArrayList<NioSelectorManager> selectorManagerList){
+		this.selectorManagerList = selectorManagerList;
+	}
+	
+	
 	public void init() {
 		//clientSelector = Selector.open();
 	}
@@ -46,8 +49,8 @@ public class NioMonitor {
 	public ArrayList<SelectionKey> getSelectionKeys(){
 		
 		ArrayList<SelectionKey> ret = new ArrayList<SelectionKey>();
-		for (int i = 0; i < getSelectorList().size(); i++) {
-			Selector selector = getSelectorList().get(i);
+		for (int i = 0; i < getSelectorManagerList().size(); i++) {
+			Selector selector = getSelectorManagerList().get(i).getSelector();
 			if(selector==null){
 				continue;
 			}
@@ -64,10 +67,6 @@ public class NioMonitor {
 		} 
 		return ret;
 	}
-	public ArrayList<Selector> getSelectorList(){
-		return selectorList;
-	}
-	public void addSelector(Selector selector){
-		getSelectorList().add(selector);
-	}
+	
+	
 }

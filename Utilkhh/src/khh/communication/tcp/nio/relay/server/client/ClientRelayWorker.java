@@ -4,7 +4,7 @@ import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.util.HashMap;
 
-import khh.communication.tcp.nio.server.monitor.NioServerMonitor;
+import khh.communication.tcp.nio.monitor.NioMonitor;
 import khh.communication.tcp.nio.worker.NioActionWorker;
 import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.date.util.DateUtil;
@@ -25,7 +25,7 @@ public class ClientRelayWorker extends NioActionWorker{
 	public NioActionMsg onReceiveAction(NioActionMsg msg, SelectionKey selectionKey) throws Exception{
 		String from  =  msg.getParamString(NioActionMsg.PARAM.FROM.getValue());
 		if(from!=null){
-			getServer().getMultimonitor().putSelectionKey(getServer().getName(),from, selectionKey);
+			getNioCommunication().getMultimonitor().putSelectionKey(getNioCommunication().getName(),from, selectionKey);
 		}
 //		if(ACTION.POLL.getValue() == msg.getAction()){
 //			getServer().getMultimonitor().putSelectionKey(getServer().getName(),fromto.getFrom(), selectionKey);
@@ -52,12 +52,12 @@ public class ClientRelayWorker extends NioActionWorker{
 		}
 		
 		else if(NioActionMsg.ACTION.GET_SERVERS.getValue() == msg.getAction()){
-			HashMap<String, NioServerMonitor> monitors = getServer().getMultimonitor().getMonitors();
+			HashMap<String, NioMonitor> monitors = getNioCommunication().getMultimonitor().getMonitors();
 			StringTokenizer token = new StringTokenizer(",");
 			msg.set(token.makeKeyString(monitors));
 			sendNioActionMsg(msg, selectionKey);
 		}else if(NioActionMsg.ACTION.GET_CLIENTS.getValue() == msg.getAction()){
-			HashMap<String, SelectableChannel> clients = getServer().getMultimonitor().getClientSocketChannels(msg.getString());
+			HashMap<String, SelectableChannel> clients = getNioCommunication().getMultimonitor().getClientSocketChannels(msg.getString());
 			StringTokenizer token = new StringTokenizer(",");
 			msg.set(token.makeString(clients));
 			sendNioActionMsg(msg, selectionKey);
@@ -66,7 +66,7 @@ public class ClientRelayWorker extends NioActionWorker{
 		
 		
 		else if(NioActionMsg.ACTION.FROMTO.getValue() <= msg.getAction()){
-			SelectionKey toSelectionKey = getServer().getMultimonitor().getSelectionKey(msg.getParamString(NioActionMsg.PARAM.TO.getValue()));
+			SelectionKey toSelectionKey = getNioCommunication().getMultimonitor().getSelectionKey(msg.getParamString(NioActionMsg.PARAM.TO.getValue()));
 			if(toSelectionKey!=null){
 				try{
 				    sendNioActionMsg(msg, toSelectionKey);
