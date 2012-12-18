@@ -46,4 +46,8 @@ public class NioServer extends NioCommunication
 	public void stop(){
 	}
 
+	@Override
+	public void setIp(String ip) throws Exception{
+		throw new Exception("NioServer  sorry No Input plz");
+	}
 }
