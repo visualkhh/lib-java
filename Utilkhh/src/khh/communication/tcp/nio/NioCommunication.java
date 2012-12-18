@@ -64,7 +64,7 @@ public abstract class NioCommunication implements Communication_I{
 	public String getIp(){
 		return ip;
 	}
-	public void setIp(String ip){
+	public void setIp(String ip) throws Exception{
 		this.ip = ip;
 	}
 	

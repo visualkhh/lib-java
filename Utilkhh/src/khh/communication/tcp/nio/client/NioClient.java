@@ -16,14 +16,20 @@ public class NioClient extends NioCommunication{
 		init();
 	}
 	public NioClient(String serverAddr, int serverPort,int serverConnectionTimeout,Class nioWorkerClass) throws IOException{
-		setIp(serverAddr);
+		try{
+			setIp(serverAddr);
+		}catch(Exception e){
+		}
 		setPort(serverPort);
 		setConnectionTimeout(serverConnectionTimeout);
 		setNioWorkerClass(nioWorkerClass);
 		init();
 	}
 	public NioClient(String ServerAddr, int ServerPort,Class nioWorkerClass) throws IOException{
-		setIp(ServerAddr);
+		try{
+			setIp(ServerAddr);
+		}catch(Exception e){
+		}
 		setPort(ServerPort);
 		setConnectionTimeout(0);
 		setNioWorkerClass(nioWorkerClass);
@@ -67,7 +73,7 @@ public class NioClient extends NioCommunication{
 		if(nioWorker.size()==1){
 			super.setNioWorkerList(nioWorker);
 		}else{
-			throw new Exception("NioClient tNioWorkerList Only 1 Size sorry you Size"+nioWorker.size());
+			throw new Exception("NioClient NioWorkerList Only 1 Size sorry you Size"+nioWorker.size());
 		}
 	}
 }
