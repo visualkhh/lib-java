@@ -16,9 +16,10 @@ abstract public class NioWorker{
 	
 	public static final int MODE_DISABLE 		= -1;
 	public static final int MODE_FIREST_NONE 	= 0;
-	public static final int MODE_FIREST_RW		= SelectionKey.OP_READ | SelectionKey.OP_WRITE;
-	public static final int MODE_FIREST_W		= SelectionKey.OP_WRITE;
-	public static final int MODE_FIREST_R		= SelectionKey.OP_READ;
+	public static final int MODE_FIREST_RW		= 1;//SelectionKey.OP_READ | SelectionKey.OP_WRITE;
+	public static final int MODE_FIREST_W		= 2;//SelectionKey.OP_WRITE;
+	public static final int MODE_FIREST_R		= 3;//SelectionKey.OP_READ;
+	public static final int MODE_ONLY_TELEGRAM	= 4;//SelectionKey.OP_READ;
 	private int firestMode 						= MODE_FIREST_R;
 	private SocketChannel socketChannel			= null;
 	private LogK log 							= LogK.getInstance();

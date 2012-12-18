@@ -40,7 +40,9 @@ public class NioWorkerManager extends Thread
 					continue;//쓰기인데 쓰기가 활성화안되어있으면 넘겨
 				}else if((business.getFirestMode()==NioWorker.MODE_FIREST_RW) && (key.isReadable()==false || key.isWritable()==false)){
 					continue;//일기쓰기 인데 둘다 안되어있으면 넘겨
-				}else if((business.getFirestMode()==NioWorker.MODE_DISABLE) && niocommunication.getTelegramQueue().size()<=0 ){ //완전안함
+				}else if(business.getFirestMode()==NioWorker.MODE_ONLY_TELEGRAM && niocommunication.getTelegramQueue().size()<=0){
+					continue;
+				}else if((business.getFirestMode()==NioWorker.MODE_DISABLE)){ //완전안함
 					continue;
 				}
 				//if(key.isReadable()&&key.isWritable())
