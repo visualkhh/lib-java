@@ -3,17 +3,18 @@ package khh.communication.tcp.nio.worker;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
+import khh.collection.Queue;
+import khh.communication.tcp.nio.NioCommunication;
 import khh.communication.tcp.nio.server.NioServer;
-import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.debug.LogK;
 import khh.util.Util;
 
 abstract public class NioWorker{
 	
+	public static final int MODE_DISABLE 		= -1;
 	public static final int MODE_FIREST_NONE 	= 0;
 	public static final int MODE_FIREST_RW		= SelectionKey.OP_READ | SelectionKey.OP_WRITE;
 	public static final int MODE_FIREST_W		= SelectionKey.OP_WRITE;
@@ -21,8 +22,7 @@ abstract public class NioWorker{
 	private int firestMode 						= MODE_FIREST_R;
 	private SocketChannel socketChannel			= null;
 	private LogK log 							= LogK.getInstance();
-	private NioServer server =  null;
-	
+	private NioCommunication niocommunication 					= null;
 
 	
 	public NioWorker(int firestMode) {
@@ -166,11 +166,12 @@ abstract public class NioWorker{
 		}catch (IOException e1){
 		}
 	}
-	public NioServer getServer(){
-		return server;
+	public NioCommunication getNioCommunication(){
+		return niocommunication;
 	}
-	public void setServer(NioServer server){
-		this.server = server;
+
+	public void setNioCommunication(NioCommunication niocommunication){
+		this.niocommunication = niocommunication;
 	}
 	
 	

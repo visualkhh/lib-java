@@ -1,4 +1,4 @@
-package khh.communication.tcp.nio.server.accept;
+package khh.communication.tcp.nio.aceept;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -10,21 +10,21 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 import khh.collection.RoundRobin;
-import khh.communication.tcp.nio.server.selector.NioServerSelector;
+import khh.communication.tcp.nio.selector.NioSelectorManager;
 import khh.debug.LogK;
 
 
-public class NioServerAcceptManager extends Thread
+public class NioAcceptManager extends Thread
 {
 
 	private Selector					acceptSelector		= null;
 	private ServerSocket				socket				= null;
 	private ServerSocketChannel			socketChannel		= null;
-	private RoundRobin<NioServerSelector> 	selectorPool		= null;
+	private RoundRobin<NioSelectorManager> 	selectorManagerList		= null;
 	private int port 	= 9090;
 	private LogK log 	= LogK.getInstance();
-	public NioServerAcceptManager(RoundRobin<NioServerSelector> selectorPool,int port) throws IOException{
-		this.selectorPool = selectorPool;
+	public NioAcceptManager(RoundRobin<NioSelectorManager> selectorManagerList,int port) throws IOException{
+		this.selectorManagerList = selectorManagerList;
 		this.port = port;
 		init();
 	}
@@ -58,8 +58,8 @@ public class NioServerAcceptManager extends Thread
 					ServerSocketChannel serverSocket = (ServerSocketChannel) key.channel();
 					SocketChannel clientSocket = serverSocket.accept();
 					log.debug(String.format("NioAcceptManager Connected From %s  user port %d ", clientSocket.socket().getRemoteSocketAddress().toString(),clientSocket.socket().getPort()));
-					synchronized (selectorPool) {//이거해줘야함 roundrobin 동기화안되는객체임
-					    NioServerSelector s = selectorPool.getNext();
+					synchronized (selectorManagerList) {//이거해줘야함 roundrobin 동기화안되는객체임
+					    NioSelectorManager s = selectorManagerList.getNext();
 					    s.addSocketChannel(clientSocket);
 //                        clientSocket.configureBlocking(false);
 //					    clientSocket.register(Selector.open(), SelectionKey.OP_READ | SelectionKey.OP_WRITE);

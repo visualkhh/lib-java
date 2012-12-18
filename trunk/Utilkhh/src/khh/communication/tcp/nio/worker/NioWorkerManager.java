@@ -1,4 +1,4 @@
-package khh.communication.tcp.nio.server.worker;
+package khh.communication.tcp.nio.worker;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -8,18 +8,18 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.BlockingQueue;
 
 import khh.communication.Communication_Interface;
+import khh.communication.tcp.nio.NioCommunication;
 import khh.communication.tcp.nio.server.NioServer;
-import khh.communication.tcp.nio.worker.NioWorker;
 import khh.debug.LogK;
 import khh.debug.util.DebugUtil;
 
-public class NioServerWorker extends Thread
+public class NioWorkerManager extends Thread
 {
 	private BlockingQueue<SelectionKey>	eventQueue	= null;
 	private NioWorker business = null;
-	private NioServer server = null;
+	private NioCommunication niocommunication = null;
 	private LogK log = LogK.getInstance();
-	public NioServerWorker(BlockingQueue<SelectionKey>eventQueue,NioWorker business){
+	public NioWorkerManager(BlockingQueue<SelectionKey>eventQueue,NioWorker business){
 		this.eventQueue = eventQueue;
 		this.business = business;
 		log.debug(String.format("NioWorker(id:%d) Create...Thread(%s)", getId(),business.getClass().getName()));
@@ -40,6 +40,8 @@ public class NioServerWorker extends Thread
 					continue;//쓰기인데 쓰기가 활성화안되어있으면 넘겨
 				}else if((business.getFirestMode()==NioWorker.MODE_FIREST_RW) && (key.isReadable()==false || key.isWritable()==false)){
 					continue;//일기쓰기 인데 둘다 안되어있으면 넘겨
+				}else if((business.getFirestMode()==NioWorker.MODE_DISABLE) && niocommunication.getTelegramQueue().size()<=0 ){ //완전안함
+					continue;
 				}
 				//if(key.isReadable()&&key.isWritable())
 				
@@ -96,12 +98,12 @@ public class NioServerWorker extends Thread
 		return eventQueue;
 	}
 
-	public NioServer getServer(){
-		return server;
+	public NioCommunication getNioCommunication(){
+		return niocommunication;
 	}
 
-	public void setServer(NioServer server){
-		this.server = server;
+	public void setNioCommunication(NioCommunication niocommunication){
+		this.niocommunication = niocommunication;
 	}
 
 
