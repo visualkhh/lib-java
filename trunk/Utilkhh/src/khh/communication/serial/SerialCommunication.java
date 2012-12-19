@@ -18,7 +18,14 @@ import javax.comm.SerialPort;
 import javax.comm.SerialPortEventListener;
 import javax.comm.UnsupportedCommOperationException;
 
+/*
+ -Djava.library.path=W:\workspace\source\eclipse\java\test\jnilib
+ package serial;
 
+ 
+ 
+ 
+ */
 public class SerialCommunication {
     private SerialParameters serialParameters=null;
     

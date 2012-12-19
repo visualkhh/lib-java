@@ -38,20 +38,24 @@ A class that stores parameters for serial ports.
 */
 public class SerialParameters {
 
-    private String portName;
-    private int baudRate;
-    private int flowControlIn;
-    private int flowControlOut;
-    private int databits;
-    private int stopbits;
-    private int parity;
+    private String portName="COM1";
+    private int baudRate=9600;
+    private int flowControlIn=SerialPort.FLOWCONTROL_NONE;
+    private int flowControlOut=SerialPort.FLOWCONTROL_NONE;
+    private int databits= SerialPort.DATABITS_8;
+    private int stopbits=SerialPort.STOPBITS_1;
+    private int parity=SerialPort.PARITY_NONE;
 
     /**
     Default constructer. Sets parameters to no port, 9600 baud, no flow 
     control, 8 data bits, 1 stop bit, no parity.
+    포트:COM1
+    Baud속도 : 기본9600
+    데이트비트 :기본 8 
+    스탑비트 :기본 1
     */
     public SerialParameters () {
-	this("", 
+	this("COM1", 
 	     9600, 
 	     SerialPort.FLOWCONTROL_NONE,
 	     SerialPort.FLOWCONTROL_NONE,
