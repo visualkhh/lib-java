@@ -52,9 +52,8 @@ import javax.comm.SerialPortEvent;
 import javax.comm.SerialPortEventListener;
 import javax.comm.UnsupportedCommOperationException;
 
-import com.kdn.util.property.PropertyUtil;
-import com.kdt.util.date.DateUtil;
-import com.khm.util.io.keyboard.KeyBoardUtil;
+import khh.date.util.DateUtil;
+import khh.io.keyboard.util.KeyBoardUtil;
 
 /**
 A class that handles the details of a serial connection. Reads from one 
