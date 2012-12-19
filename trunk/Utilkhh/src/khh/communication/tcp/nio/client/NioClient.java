@@ -11,7 +11,6 @@ import khh.debug.LogK;
 
 public class NioClient extends NioCommunication{
 	private int connectionTimeout	= 0;
-	private LogK log 					= LogK.getInstance();
 	public NioClient() throws IOException{
 		init();
 	}
