@@ -2,6 +2,7 @@ package khh.std.adapter.chart;
 
 import javax.swing.text.Utilities;
 
+import khh.math.util.MathUtil;
 import khh.std.adapter.AdapterMapBase;
 import khh.std.chart.Chart_DTO;
 import khh.util.Util;
@@ -70,17 +71,17 @@ public class ChartAdapter extends AdapterMapBase<Integer,Chart_DTO> {
 	
 	
 	public Chart_DTO getMaxLocation() throws Exception{
-		return get(Util.getMaxIndex(getLocationArray()));
+		return get(MathUtil.getMaxIndex(getLocationArray()));
 	}
 	public Chart_DTO getMinLocation() throws Exception{
-		return get(Util.getMinIndex(getLocationArray()));
+		return get(MathUtil.getMinIndex(getLocationArray()));
 	}
 	
 	public Chart_DTO getMaxValue() throws Exception{
-		return get(Util.getMaxIndex(getValueArray()));
+		return get(MathUtil.getMaxIndex(getValueArray()));
 	}
 	public Chart_DTO getMinValue() throws Exception{
-		return get(Util.getMinIndex(getValueArray()));
+		return get(MathUtil.getMinIndex(getValueArray()));
 	}
 	
 //	public Chart_DTO getMaxDate() throws Exception{

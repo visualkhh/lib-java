@@ -1,8 +1,7 @@
 package khh.std.adapter.realworld;
 import java.util.Date;
 
-import javax.swing.text.Utilities;
-
+import khh.math.util.MathUtil;
 import khh.std.adapter.AdapterMapBase;
 import khh.std.realworld.Direction;
 import khh.std.realworld.Realworld;
@@ -174,14 +173,14 @@ public class WeatherAdapter extends AdapterMapBase<String,Realworld> {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		weather.setTemperature		(    Util.getMin(Temperature	)    );
-		weather.setRainfall			(    Util.getMin(Rainfall		)    );
-		weather.setInsolation		(    Util.getMin(Insolation	)    );
-		weather.setHumidity			(    Util.getMin(Humidity		)    );
-		weather.setDust				(    Util.getMin(Dust			)    );
-		weather.setCloud			(    Util.getMin(Cloud			)    );
-		weather.setSnow				(    Util.getMin(Snow			)    );
-		weather.setWind				(    Util.getMin(Wind			)    );
+		weather.setTemperature		(    MathUtil.getMin(Temperature	)    );
+		weather.setRainfall			(    MathUtil.getMin(Rainfall		)    );
+		weather.setInsolation		(    MathUtil.getMin(Insolation	)    );
+		weather.setHumidity			(    MathUtil.getMin(Humidity		)    );
+		weather.setDust				(    MathUtil.getMin(Dust			)    );
+		weather.setCloud			(    MathUtil.getMin(Cloud			)    );
+		weather.setSnow				(    MathUtil.getMin(Snow			)    );
+		weather.setWind				(    MathUtil.getMin(Wind			)    );
 		
 		realworld.setWeather(weather);
 		realworld.setDirection(new Direction());

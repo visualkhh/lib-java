@@ -1,8 +1,7 @@
 package khh.std.report;
 
-import javax.swing.text.Utilities;
-
 import khh.decimal.util.DecimalUtil;
+import khh.math.util.MathUtil;
 import khh.util.Util;
 
 public class List_DTO {
@@ -32,11 +31,11 @@ public class List_DTO {
 		}
 		
 		public int getMaxIndex() {
-			return (Util.getMaxIndex(this.list));
+			return (MathUtil.getMaxIndex(this.list));
 		}
  
 		public int getMinIndex() {
-			return (Util.getMinIndex(this.list));
+			return (MathUtil.getMinIndex(this.list));
 		}
 		//
 		public double getMaxValue(){
