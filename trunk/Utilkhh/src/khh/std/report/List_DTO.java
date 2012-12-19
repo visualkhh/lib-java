@@ -45,10 +45,10 @@ public class List_DTO {
 			return this.list[getMinIndex()];
 		}
 		public double getAvgValue(){
-			return  Util.getAvg(this.list);
+			return  MathUtil.getAvg(this.list);
 		}
 		public double getSumValue(){
-			return Util.getSum(this.list);
+			return MathUtil.getSum(this.list);
 		}
 		
 		
