@@ -1,29 +1,28 @@
 package serial;
 
-import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.TooManyListenersException;
 
 import javax.comm.SerialPortEvent;
 import javax.comm.SerialPortEventListener;
 
-import serial.serialdemo.SerialConnectionException;
+import khh.communication.serial.SerialCommunication;
+import khh.communication.serial.SerialConnectionException;
+import khh.communication.serial.SerialParameters;
 
-import com.khm.util.communication.serial.SerialCommunication;
-import com.khm.util.communication.serial.SerialParameters;
-import com.khm.util.io.keyboard.KeyBoardUtil;
 public class SerialCommunicationTest implements SerialPortEventListener {
     
     
-    public static void main(String[] args) throws com.khm.util.communication.serial.SerialConnectionException, TooManyListenersException {
+    public static void main(String[] args) throws SerialConnectionException, TooManyListenersException {
         new SerialCommunicationTest().start();
     }
 
     
     SerialCommunication sc;
-    public void start() throws TooManyListenersException, com.khm.util.communication.serial.SerialConnectionException{
+    public void start() throws TooManyListenersException, SerialConnectionException{
         sc = new SerialCommunication();
         SerialParameters params = new SerialParameters();
-        params.setPortName("COM2");
+        params.setPortName("COM5");
         sc.setSerialParameters(params);
         sc.addEventListener(this);
         sc.openConnection();
@@ -47,17 +46,24 @@ public class SerialCommunicationTest implements SerialPortEventListener {
           // Read data until -1 is returned. If \r is received substitute
           // \n for correct newline handling.
           case SerialPortEvent.DATA_AVAILABLE:
-              while (true) {
-                  try {
-                  String echoMsg = sc.getBufferedreader().readLine();
-                  System.out.print("Echo: " + echoMsg);
-                  KeyBoardUtil.pess(echoMsg);
-                    KeyBoardUtil.pess(KeyEvent.VK_ENTER);
-                    break;
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-              }
+              try {
+                int echoMsg = sc.getBufferedreader().read();
+                System.out.println(echoMsg);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+              
+//              while (true) {
+//                  try {
+//                  String echoMsg = sc.getBufferedreader().readLine();
+//                  System.out.print("Echo: " + echoMsg);
+//                  //KeyBoardUtil.pess(echoMsg);
+//                  //KeyBoardUtil.pess(KeyEvent.VK_ENTER);
+//                    break;
+//                } catch (Exception e1) {
+//                    e1.printStackTrace();
+//                }
+//              }
               
           break;
           
