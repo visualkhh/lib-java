@@ -132,14 +132,14 @@ public class WeatherAdapter extends AdapterMapBase<String,Realworld> {
 			e.printStackTrace();
 		}
 		
-		weather.setTemperature		(    Util.getMax(Temperature	)    );
-		weather.setRainfall			(    Util.getMax(Rainfall		)    );
-		weather.setInsolation		(    Util.getMax(Insolation	)    );
-		weather.setHumidity			(    Util.getMax(Humidity		)    );
-		weather.setDust				(    Util.getMax(Dust			)    );
-		weather.setCloud			(    Util.getMax(Cloud			)    );
-		weather.setSnow				(    Util.getMax(Snow			)    );
-		weather.setWind				(    Util.getMax(Wind			)    );
+		weather.setTemperature		(    MathUtil.getMax(Temperature	)    );
+		weather.setRainfall			(    MathUtil.getMax(Rainfall		)    );
+		weather.setInsolation		(    MathUtil.getMax(Insolation	)    );
+		weather.setHumidity			(    MathUtil.getMax(Humidity		)    );
+		weather.setDust				(    MathUtil.getMax(Dust			)    );
+		weather.setCloud			(    MathUtil.getMax(Cloud			)    );
+		weather.setSnow				(    MathUtil.getMax(Snow			)    );
+		weather.setWind				(    MathUtil.getMax(Wind			)    );
 		
 		realworld.setWeather(weather);
 		realworld.setDirection(new Direction());
