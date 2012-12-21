@@ -66,7 +66,7 @@ public class CryptConversion extends FrameFrame{
 		// textarea.setName(VIEWID.INFO.getValue());
 		// add(textarea,BorderLayout.CENTER);
 
-		path = new JTextField(20);
+		path = new JTextField(60);
 		path.setName(VIEWID.RESULTTEXT.getValue());
 		add(path, BorderLayout.SOUTH);
 

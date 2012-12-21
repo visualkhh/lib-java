@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import khh.gui.component.frame.FrameFrame;
 
+import com.kdn.p.view.CryptConversion;
 import com.kdn.p.view.DateJump;
 import com.kdn.p.view.ExcelParser;
 import com.kdn.p.view.FileRenameReplaceName;
@@ -18,7 +19,15 @@ import com.kdn.p.view.TechExport;
 public class index extends FrameFrame {
 
     public static enum VIEWID {
-        FILERENAME("FILERENAME"), PASSWORDCONVERSION("PASSWORDCONVERSION"), EXCELSPLIT("EXCELSPLIT"), FOLDEROPEN("FOLDEROPEN"), TECHEXPORT("TECHEXPORT"),ISL_GENPROC1A("ISL_GENPROC1A"),DATEJUMP("DATEJUMP");
+        FILERENAME("FILERENAME"), 
+        PASSWORDCONVERSION("PASSWORDCONVERSION"), 
+        EXCELSPLIT("EXCELSPLIT"), 
+        FOLDEROPEN("FOLDEROPEN"), 
+        TECHEXPORT("TECHEXPORT"),
+        ISL_GENPROC1A("ISL_GENPROC1A"),
+        DATEJUMP("DATEJUMP"),
+        CRYPT("CRYPT"), 
+        ;
         String id;
 
         VIEWID(String id) {
@@ -56,6 +65,8 @@ public class index extends FrameFrame {
         b6.setName(VIEWID.ISL_GENPROC1A.getValue());
         Button b7 = new Button(VIEWID.DATEJUMP.getValue());
         b7.setName(VIEWID.DATEJUMP.getValue());
+        Button b8 = new Button(VIEWID.CRYPT .getValue());
+        b8.setName(VIEWID.CRYPT.getValue());
 
         add(b1);
         add(b2);
@@ -64,6 +75,7 @@ public class index extends FrameFrame {
         add(b5);
         add(b6);
         add(b7);
+        add(b8);
     }
 
     @Override
@@ -79,6 +91,7 @@ public class index extends FrameFrame {
         Button b5 = (Button) getComponent(VIEWID.TECHEXPORT.getValue());
         Button b6 = (Button) getComponent(VIEWID.ISL_GENPROC1A.getValue());
         Button b7 = (Button) getComponent(VIEWID.DATEJUMP.getValue());
+        Button b8 = (Button) getComponent(VIEWID.CRYPT.getValue());
 
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -126,9 +139,16 @@ public class index extends FrameFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 new DateJump("데이트 점프");
-                
             }
         });
+        
+        b8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                new CryptConversion("암호화");
+            }
+        });
+        
     }
 
     @Override
