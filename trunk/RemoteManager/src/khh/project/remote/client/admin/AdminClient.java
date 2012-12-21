@@ -72,16 +72,21 @@ public class AdminClient extends FrameFrame{
         
         
         
+        
         //center
 		Panel centerPanel = new Panel(new GridLayout(10,10));
 		centerPanel.setName(VIEWID.CENTER_PANEL.getValue());
 		centerPanel.removeAll();
-		centerPanel.add(new Button("aaaaaa"));
 		this.add(centerPanel,BorderLayout.CENTER);
         
         
         topPanel.setBackground(new Color(255,0,0));
         this.add(topPanel,BorderLayout.NORTH);
+        
+        Button b = new Button("목록불러오기");
+        b.
+        this.add(new Button("목록불러오기"),BorderLayout.SOUTH);
+        
 		setVisible(true);
 	}
 	@Override
