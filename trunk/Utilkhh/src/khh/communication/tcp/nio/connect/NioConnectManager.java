@@ -52,6 +52,12 @@ public class NioConnectManager extends Thread{
 		//return socketChannel;
 	}
 	
+	public void connnection() throws IOException{
+		if(getSocketChannel().isConnected()){
+		}else{
+			init();
+		}
+	}
 	@Override
 	public void run(){
 		while(getSocketChannel().isConnected()){

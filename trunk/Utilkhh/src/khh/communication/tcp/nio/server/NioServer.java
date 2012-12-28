@@ -2,6 +2,7 @@ package khh.communication.tcp.nio.server;
 
 import java.util.ArrayList;
 
+import khh.communication.network.util.NetworkUtil;
 import khh.communication.tcp.nio.NioCommunication;
 import khh.communication.tcp.nio.aceept.NioAcceptManager;
 import khh.communication.tcp.nio.worker.NioWorker;
@@ -48,6 +49,6 @@ public class NioServer extends NioCommunication
 
 	@Override
 	public void setIp(String ip) throws Exception{
-		throw new Exception("NioServer  sorry No Input plz");
+		throw new Exception("NioServer  sorry No Input plz  Only Localhost:"+NetworkUtil.getHostAddress());
 	}
 }

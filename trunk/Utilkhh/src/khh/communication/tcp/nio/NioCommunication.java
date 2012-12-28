@@ -151,5 +151,9 @@ public abstract class NioCommunication implements Communication_I{
 		getMonitor().setSelectorManagerList(getSelectorManagerList());
 //		addSelectorM(getSelectorManagerList().get(i).getSelector());
 	}
+	@Override
+	public String toString(){
+		return getIp()+":"+getPort()+" name:"+getName()+" SelectorMngSize"+getSelectorManagerSize()+" WorkerMngSize"+getWorkerManagerSize();
+	}
 	
 }
