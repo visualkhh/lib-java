@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 
+import khh.collection.RoundRobin;
 import khh.communication.tcp.nio.NioCommunication;
 import khh.communication.tcp.nio.connect.NioConnectManager;
+import khh.communication.tcp.nio.selector.NioSelectorManager;
 import khh.communication.tcp.nio.worker.NioWorker;
-import khh.debug.LogK;
+import khh.communication.tcp.nio.worker.NioWorkerManager;
 
 public class NioClient extends NioCommunication{
 	private int connectionTimeout	= 0;
@@ -42,14 +44,43 @@ public class NioClient extends NioCommunication{
 		}
 	}
 	
+	NioConnectManager nioconnectmanager=null;
 	@Override
 	public void start() throws Exception{
 		super.start();
-		NioConnectManager nioconnectmanager = new NioConnectManager(getSelectorManagerList(),getIp(),getPort(),getConnectionTimeout());
+		nioconnectmanager = new NioConnectManager(getSelectorManagerList(),getIp(),getPort(),getConnectionTimeout());
 		nioconnectmanager.start();
+		
 	}
+	
+	
 	@Override
 	public void stop() throws Exception{
+		if(getNioconnectmanager()!=null)
+		getNioconnectmanager().interrupt();
+		
+			RoundRobin<NioSelectorManager> sm = getSelectorManagerList();
+		if(sm != null){
+			for(int i = 0; i < sm.size(); i++){
+				if(sm.get(i)!=null)
+				sm.get(i).interrupt();
+			}
+		}
+		ArrayList<NioWorkerManager> wm = getWorkerManagerList();
+		if(wm!=null){
+			for(int i = 0; i < wm.size(); i++){
+				if(wm.get(i)!=null)
+				wm.get(i).interrupt();
+			}
+		}
+	}
+	
+	public void connnection() throws IOException{
+		nioconnectmanager.connnection();
+	}
+	public boolean isConnected(){
+		SocketChannel s = nioconnectmanager==null?null:nioconnectmanager.getSocketChannel();
+		return  s==null?false:s.isConnected();
 	}
 	
 	public int getConnectionTimeout() {
@@ -59,6 +90,9 @@ public class NioClient extends NioCommunication{
 		this.connectionTimeout = connectionTimeout;
 	}
 
+	protected NioConnectManager getNioconnectmanager(){
+		return nioconnectmanager;
+	}
 	@Override
 	public void setSelectorManagerSize(int selectorManagerSize) throws Exception{
 		throw new Exception("NioClient  SelectorManagerSize Only 1  sorry  No Input plz");
@@ -74,5 +108,9 @@ public class NioClient extends NioCommunication{
 		}else{
 			throw new Exception("NioClient NioWorkerList Only 1 Size sorry you Size"+nioWorker.size());
 		}
+	}
+	@Override
+	public String toString(){
+		return	super.toString()+" isConnected:"+isConnected();
 	}
 }
