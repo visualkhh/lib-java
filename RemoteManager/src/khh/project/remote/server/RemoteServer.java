@@ -9,7 +9,7 @@ public class RemoteServer{
 
 	public void start() throws Exception{
 		ArrayList<Integer> port = new ArrayList<Integer>();
-		port.add(9090);
+		port.add(9595);
 		port.add(80);
 		
 		RelayServer relayServer = new RelayServer();
