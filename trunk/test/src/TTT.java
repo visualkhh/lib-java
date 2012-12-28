@@ -1,21 +1,21 @@
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import khh.file.util.FileUtil;
-import khh.url.util.URLUtil;
+import khh.db.util.ConnectionUtil;
 
 public class TTT {
-	public static void main(String[] args) throws MalformedURLException, IOException {
-		//for (int i = 3725; i <99999 ; i++) {
-			//FileUtil.writeFile(new File("G:\\viusalhhk\\list.txt"),"------",true);
-			//System.out.println(i);
-		//}
-		String toDay ="20121220";
-			String startDate = "20121218";
-			String  endDate   = "20121219";
-		if((Integer.parseInt(startDate) <= Integer.parseInt(toDay)) && (Integer.parseInt(toDay) <= Integer.parseInt(endDate))){
-			System.out.println("탔어");
-		}
+	public static void main(String[] args) throws MalformedURLException, IOException, ClassNotFoundException, SQLException {
+		Connection c = ConnectionUtil.getConnection(ConnectionUtil.MYSQL, "127.0.0.1", ConnectionUtil.MYSQL_DAFAULT_PORT, "nexon", "root", "javadev");
+	PreparedStatement p =  	c.prepareStatement("select ? from bp_user");
+	p.setString(1, "count(*)");
+	ResultSet r = p.executeQuery();
+	while(r.next()){
+		System.out.println(r.getInt(1));
+	}
+		
 	}
 }
