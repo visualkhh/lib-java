@@ -50,7 +50,7 @@ public class NioAcceptManager extends Thread
 	public void run(){
 		log.debug(String.format("NioAcceptManager(id:%d) Running...Thread Run", getId()));
 		try{
-			while(true){
+			while(!Thread.currentThread().isInterrupted()){
 				acceptSelector.select(0);
 				Iterator<SelectionKey> it = acceptSelector.selectedKeys().iterator();
 				while(it.hasNext()){
@@ -67,6 +67,9 @@ public class NioAcceptManager extends Thread
 					it.remove();
 				}
 			}
+		}catch (InterruptedException e) {
+			log.error("InterruptedException  NioAccepManager End ",e);
+			return;
 		}catch (Exception e){
 			log.error("Accept Error",e);
 		}

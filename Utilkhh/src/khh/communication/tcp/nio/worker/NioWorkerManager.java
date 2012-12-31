@@ -30,7 +30,7 @@ public class NioWorkerManager extends Thread
 		SelectionKey key = null;
 		SocketChannel channel = null;
 		Socket socket = null;
-		while(true){
+		while(!Thread.currentThread().isInterrupted()){
 			try{
 				Thread.sleep(1);
 				key = getEventQueue().take();	//BlockingQueue
@@ -58,16 +58,22 @@ public class NioWorkerManager extends Thread
 				business.setSocketChannel(channel);
 				business.execute(key);
 				//log.info(String.format("Worker! END [%03d] isConnected:%b isConnectionPending:%b isOpen:%b  isClosed:%b isBound:%b isWriteble:%b"+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()));
+			}catch (InterruptedException e) {
+				log.error("InterruptedException  WorkerBusiness End ",e);
+				return;
 			}catch (SocketTimeoutException e) {
-				log.error(String.format("SocketTimeoutException execute WorkerBusiness End [%03d] isConnected:%b isConnectionPending:%b isOpen:%b isClosed:%b isBound:%b isWriteble:%b "+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()),e);
+				log.error("SocketTimeoutException execute WorkerBusiness End ",e);
+				//log.error(String.format("SocketTimeoutException execute WorkerBusiness End [%03d] isConnected:%b isConnectionPending:%b isOpen:%b isClosed:%b isBound:%b isWriteble:%b "+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()),e);
 				business.close(channel);
 //				close(channel);
 			}catch (IOException e) {
-				log.error(String.format("IOException  execute WorkerBusiness End [%03d] "+channel.socket().getInetAddress(), getId(), getId()),e);
+				log.error("IOException execute WorkerBusiness End ",e);
+				//log.error(String.format("IOException  execute WorkerBusiness End [%03d] "+channel.socket().getInetAddress(), getId(), getId()),e);
 				business.close(channel);
 //				close(channel);
 			}catch (Exception e){
-				log.error(String.format("Exception  Close Socket!!  execute WorkerBusiness End [%03d] "+channel.socket().getInetAddress(), getId(), getId()),e);
+				log.error("Exception execute WorkerBusiness End ",e);
+				//log.error(String.format("Exception  Close Socket!!  execute WorkerBusiness End [%03d] "+channel.socket().getInetAddress(), getId(), getId()),e);
 				business.close(channel);
 //				close(channel);
 			}finally{
@@ -77,6 +83,10 @@ public class NioWorkerManager extends Thread
 //				}
 				if(key != null)
 					finish(key);
+				
+				if(Thread.currentThread().isInterrupted()){
+					return;
+				}
 			}
 		}
 	}

@@ -31,7 +31,7 @@ public class NioSelectorManager extends Thread
 
 	public void run(){
 		log.debug(String.format("NioSelector(id:%d) Running...Thread Run", getId() ));
-		while(true){
+		while(!Thread.currentThread().isInterrupted()){
 			try{
 			   
 			    if(getSelector()==null){
@@ -50,6 +50,9 @@ public class NioSelectorManager extends Thread
 						it.remove();		//selectorkeys에 남은거지우기위해
 					}
 				}
+			}catch (InterruptedException e) {
+				log.error("InterruptedException  SelectorManager End ",e);
+				return;
 			}catch (Exception e){
 			}
 		}
