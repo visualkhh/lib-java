@@ -60,7 +60,7 @@ public class NioConnectManager extends Thread{
 	}
 	@Override
 	public void run(){
-		while(getSocketChannel().isConnected()){
+		while(!Thread.currentThread().isInterrupted()&&getSocketChannel().isConnected()){
 			try{
 				if(connectSelector.select(3) > 0){
 					Iterator<SelectionKey> it = connectSelector.selectedKeys().iterator();
@@ -76,6 +76,9 @@ public class NioConnectManager extends Thread{
 				}else{
 					Thread.sleep(2000);
 				}
+			}catch (InterruptedException e) {
+				log.error("InterruptedException  ConnectManage End ",e);
+				return;
 			}catch(Exception e){
 				log.error("Connect Error", e);
 			}
