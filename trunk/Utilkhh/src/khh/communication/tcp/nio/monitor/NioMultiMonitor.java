@@ -2,16 +2,15 @@ package khh.communication.tcp.nio.monitor;
 
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 
 
 public class NioMultiMonitor{
 	// serverid, <user_sessionKey_Strig,selectionKey>
-	public HashMap<String, HashMap<String, SelectionKey>> clientSelectionKey = null;
-	public HashMap<String, NioMonitor> monitors = null;
+	public Hashtable<String, Hashtable<String, SelectionKey>> clientSelectionKey = null;
+	public Hashtable<String, NioMonitor> monitors = null;
 //	public Adapter_Std<String, Adapter_Std<String, SelectionKey>> serverlist = null;
 //	public Adapter_Std<String, NioServerMonitor> monitors = null;
 
@@ -20,8 +19,8 @@ public class NioMultiMonitor{
 	}
 
 	synchronized private void init(){
-		clientSelectionKey = new HashMap<String, HashMap<String, SelectionKey>>();
-		monitors = new HashMap<String, NioMonitor>();
+		clientSelectionKey = new Hashtable<String, Hashtable<String, SelectionKey>>();
+		monitors = new Hashtable<String, NioMonitor>();
 //		serverlist = new Adapter_Std<String, Adapter_Std<String, SelectionKey>>();
 //		monitors = new Adapter_Std<String, NioServerMonitor>();
 	}
@@ -31,7 +30,7 @@ public class NioMultiMonitor{
 			monitors.put(servername, monitor);
 		}
 		synchronized(clientSelectionKey){
-			clientSelectionKey.put(servername, new HashMap<String, SelectionKey>());
+			clientSelectionKey.put(servername, new Hashtable<String, SelectionKey>());
 		}
 	}
 	
@@ -47,7 +46,7 @@ public class NioMultiMonitor{
 	}
 	synchronized public void putSelectionKey(String servername,String sessionKey,SelectionKey selectionKey) throws Exception{
 		synchronized(clientSelectionKey){
-			HashMap<String, SelectionKey> list = clientSelectionKey.get(servername);
+			Hashtable<String, SelectionKey> list = clientSelectionKey.get(servername);
 			synchronized(list){
 				list.put(sessionKey, selectionKey);
 			}
@@ -65,7 +64,7 @@ public class NioMultiMonitor{
 	
 	synchronized public void removeSelectionKey(String servername,String sessionKey) throws Exception{
 		synchronized(clientSelectionKey){
-			HashMap<String, SelectionKey> list = clientSelectionKey.get(servername);
+			Hashtable<String, SelectionKey> list = clientSelectionKey.get(servername);
 			synchronized(list){
 				list.remove(sessionKey);
 			}
@@ -76,7 +75,7 @@ public class NioMultiMonitor{
 
 	synchronized public SelectionKey getSelectionKey(String serverid, String sessionKey) throws Exception{
 		ArrayList<SelectionKey> monitorKeys = null;
-		HashMap<String, SelectionKey> serverKeys = null;
+		Hashtable<String, SelectionKey> serverKeys = null;
 		SelectionKey skey = null;
 		synchronized(monitors){
 			synchronized(clientSelectionKey){
@@ -128,9 +127,9 @@ public class NioMultiMonitor{
 		}
 	}
 	
-	synchronized public HashMap<String,SelectionKey> getClientSelectionKeys(String serverid) throws Exception{
-		HashMap<String,SelectionKey> keys = new HashMap<String,SelectionKey>();
-		HashMap<String,SelectionKey> acct = clientSelectionKey.get(serverid);
+	synchronized public Hashtable<String,SelectionKey> getClientSelectionKeys(String serverid) throws Exception{
+		Hashtable<String,SelectionKey> keys = new Hashtable<String,SelectionKey>();
+		Hashtable<String,SelectionKey> acct = clientSelectionKey.get(serverid);
 		Iterator<String> iter = acct.keySet().iterator();
 		while(iter.hasNext()){
 			String key = iter.next();
@@ -141,9 +140,9 @@ public class NioMultiMonitor{
 		}
 		return keys;
 	}
-	synchronized public HashMap<String,SelectableChannel > getClientSocketChannels(String serverid) throws Exception{
-		HashMap<String,SelectableChannel > keys = new HashMap<String,SelectableChannel >();
-		HashMap<String,SelectionKey> acct = clientSelectionKey.get(serverid);
+	synchronized public Hashtable<String,SelectableChannel > getClientSocketChannels(String serverid) throws Exception{
+		Hashtable<String,SelectableChannel > keys = new Hashtable<String,SelectableChannel >();
+		Hashtable<String,SelectionKey> acct = clientSelectionKey.get(serverid);
 		Iterator<String> iter = acct.keySet().iterator();
 		while(iter.hasNext()){
 			String key = iter.next();
@@ -155,7 +154,7 @@ public class NioMultiMonitor{
 		return keys;
 	}
 
-	public HashMap<String, NioMonitor> getMonitors(){
+	public Hashtable<String, NioMonitor> getMonitors(){
 		return monitors;
 	}
 	

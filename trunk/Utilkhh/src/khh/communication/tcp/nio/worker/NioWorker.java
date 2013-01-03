@@ -5,11 +5,13 @@ import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.util.HashMap;
 
-import khh.collection.Queue;
 import khh.communication.tcp.nio.NioCommunication;
-import khh.communication.tcp.nio.server.NioServer;
 import khh.debug.LogK;
+import khh.filter.Filter;
+import khh.listener.action.ActionListener;
+import khh.std.Action;
 import khh.util.Util;
 
 abstract public class NioWorker{
@@ -19,12 +21,12 @@ abstract public class NioWorker{
 	public static final int MODE_FIREST_RW		= 1;//SelectionKey.OP_READ | SelectionKey.OP_WRITE;
 	public static final int MODE_FIREST_W		= 2;//SelectionKey.OP_WRITE;
 	public static final int MODE_FIREST_R		= 3;//SelectionKey.OP_READ;
-	public static final int MODE_ONLY_TELEGRAM	= 4;//SelectionKey.OP_READ;
+	//public static final int MODE_ONLY_TELEGRAM	= 4;//SelectionKey.OP_READ;
 	private int firestMode 						= MODE_FIREST_R;
 	private SocketChannel socketChannel			= null;
 	private LogK log 							= LogK.getInstance();
 	private NioCommunication niocommunication 					= null;
-
+	
 	
 	public NioWorker(int firestMode) {
 	    setFirestMode(firestMode);
@@ -44,7 +46,7 @@ abstract public class NioWorker{
 	
 	//여기서 알아서 처리혀라.
 	abstract public void execute(SelectionKey selectionKey) throws Exception;
-	
+	abstract public void receiveTelegram(HashMap<String,Object> telegram,SelectionKey selectionKey) throws Exception;
 	
 	final synchronized public int write(ByteBuffer data) throws IOException{
 		return write(data,getSocketChannel());
@@ -175,5 +177,11 @@ abstract public class NioWorker{
 		this.niocommunication = niocommunication;
 	}
 	
+	public void sendActionEventToListener(Action event){
+		getNioCommunication().sendActionEventToListener(event);
+	}
+	public void sendActionEventToListener(Filter<ActionListener> filter,Action event){
+		getNioCommunication().sendActionEventToListener(filter,event);
+	}
 	
 }

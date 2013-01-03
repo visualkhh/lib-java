@@ -23,6 +23,8 @@ import java.util.HashMap;
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 
+import org.mozilla.universalchardet.UniversalDetector;
+
 import khh.property.util.PropertyUtil;
 import khh.string.util.StringUtil;
 
@@ -629,5 +631,42 @@ public class FileUtil{
 		String contentType = new MimetypesFileTypeMap().getContentType(file);
 		return contentType;
 	}
+	
+	
+	//encoding을찾는다 해당 파일.
+	//http://code.google.com/p/juniversalchardet/  juniversalchardet-1.0.3.jar
+//	Chinese,	ISO-2022-CN,	BIG5,	EUC-TW,	GB18030,	HZ-GB-23121,	Cyrillic,	ISO-8859-5
+//	KOI8-R,	WINDOWS-1251,	MACCYRILLIC,	IBM866,	IBM855,	Greek,	ISO-8859-7,	WINDOWS-1253,	Hebrew,	ISO-8859-8
+//	WINDOWS-1255,	Japanese,	ISO-2022-JP,	SHIFT_JIS,	EUC-JP,	Korean,	ISO-2022-KR,	EUC-KR,	Unicode,	UTF-8
+//	UTF-16BE / UTF-16LE,	UTF-32BE / UTF-32LE / X-ISO-10646-UCS-4-34121 / X-ISO-10646-UCS-4-21431,	Others,	WINDOWS-1252
+    public static String findEncoding(String path) throws IOException{
+    	return findEncoding(new File(path));
+    }
+    public static String findEncoding(File file) throws IOException{
+    	byte[] buf = new byte[4096]; 
+		//String fileName = args[0]; 
+		java.io.FileInputStream fis = new java.io.FileInputStream(file); 
 
+		// (1) 
+		UniversalDetector detector = new UniversalDetector(null); 
+
+		// (2) 
+		int nread; 
+		while ((nread = fis.read(buf)) > 0 && !detector.isDone()) { 
+		detector.handleData(buf, 0, nread); 
+		} 
+		// (3) 
+		detector.dataEnd(); 
+
+		// (4) 
+		String encoding = detector.getDetectedCharset(); 
+		return encoding;
+//		if (encoding != null) { 
+//		System.out.println("Detected encoding = " + encoding); 
+//		} else { 
+//		System.out.println("No encoding detected."); 
+//		} 
+
+    }
+	
 }

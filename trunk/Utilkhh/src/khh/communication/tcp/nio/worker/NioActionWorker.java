@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.util.HashMap;
 
 import khh.callstack.util.StackTraceUtil;
 import khh.communication.tcp.nio.worker.msg.NioActionMsg;
@@ -152,10 +153,11 @@ public abstract class NioActionWorker extends NioWorker {
 		}catch (Exception e) {
 			if(isAutoFeedbackException() && selectionKey!=null && selectionKey.isWritable()){
 				if(msg==null){
-					msg = new NioActionMsg(NioActionMsg.ACTION.EXCEPTION.getValue());
+					msg = new NioActionMsg();
 				}
-				log.info("NioActionWorker Exception: ",e);
+				msg.setAction(NioActionMsg.ACTION.EXCEPTION.getValue());
 				
+				log.info("NioActionWorker Exception: ",e);
 				msg.clear();
 				msg.set("exception:"+e+",message:"+e.getMessage()+",trace:"+StackTraceUtil.getStackTrace(e)+",date:"+DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
 				msg.setSuccess(true);
@@ -165,7 +167,6 @@ public abstract class NioActionWorker extends NioWorker {
 			}
 		}
 	}
-	
 	
 
 

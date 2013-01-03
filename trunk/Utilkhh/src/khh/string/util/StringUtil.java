@@ -16,6 +16,8 @@ import java.util.regex.PatternSyntaxException;
 import khh.conversion.util.ConversionUtil;
 import khh.std.adapter.AdapterMap;
 
+import org.mozilla.universalchardet.UniversalDetector;
+
 public class StringUtil {
 
     static public final String SET_UTF_8 = "UTF-8"; 
@@ -32,6 +34,7 @@ public class StringUtil {
     public static String urlEncode(String data, String encodetype) throws UnsupportedEncodingException{
         return  URLEncoder.encode(data,encodetype);
     }
+
     //msg = StringUtil.stringCharSetConversion(msg, StringUtil.SET_UTF_8, StringUtil.SET_8859_1);
     public static String stringCharSetConversion(String data,String ecodetype,String decodetype) throws UnsupportedEncodingException{
 //      Charset          charset =  Charset.forName("UTF-8");

@@ -31,7 +31,7 @@ public class NioActionMsg extends Formater<ByteBuffer>{
         ECHO(1000002),
         
         GET_SERVERTIME(2000001),//서버시간 yyyy/MM/dd HH:mm:ss/SSS
-        GET_SERVERS(2000003),//서버정보요청 열려있는 서버이름s!   
+        GET_SERVERS(2000003),//멀티모니터에 등록된 서버정보요청 열려있는 서버이름s!   
         GET_CLIENTS(2000004),//서버에 붙어있는 클라이언트이름s!   
         
         NOSUCH_EXCEPTION(3000001),
@@ -188,6 +188,13 @@ public class NioActionMsg extends Formater<ByteBuffer>{
                 data.position(startposition);
                 //set(data.slice());
                 break;
+            }
+            
+            
+            
+            
+            if(data.position()>= data.limit()){
+            	break;
             }
         }
         

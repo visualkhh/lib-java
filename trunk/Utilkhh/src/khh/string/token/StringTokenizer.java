@@ -2,6 +2,7 @@ package khh.string.token;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,6 +53,42 @@ public class StringTokenizer extends java.util.StringTokenizer{
 			
 			Object key = iter.next();
 			buf.append(key+getConcat()+param.get(key));
+			isFirst=false;
+		}
+		return buf.toString();
+	}
+	
+	public String makeString(Hashtable param){
+		Iterator iter = param.keySet().iterator();
+		StringBuffer buf = new StringBuffer();
+		boolean isFirst=true;
+		
+		while(iter.hasNext()){
+			if(isFirst==false){
+				buf.append(getToken());
+			}
+			
+			Object key = iter.next();
+			buf.append(key+getConcat()+param.get(key));
+			isFirst=false;
+		}
+		return buf.toString();
+	}
+	
+	
+	
+	public String makeKeyString(Hashtable param){
+		Iterator iter = param.keySet().iterator();
+		StringBuffer buf = new StringBuffer();
+		boolean isFirst=true;
+		
+		while(iter.hasNext()){
+			if(isFirst==false){
+				buf.append(getToken());
+			}
+			
+			Object key = iter.next();
+			buf.append(key);
 			isFirst=false;
 		}
 		return buf.toString();

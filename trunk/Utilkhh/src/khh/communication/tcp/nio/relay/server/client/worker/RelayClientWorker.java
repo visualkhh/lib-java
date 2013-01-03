@@ -1,8 +1,9 @@
-package khh.communication.tcp.nio.relay.server.client;
+package khh.communication.tcp.nio.relay.server.client.worker;
 
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import khh.communication.tcp.nio.monitor.NioMonitor;
 import khh.communication.tcp.nio.worker.NioActionWorker;
@@ -10,13 +11,13 @@ import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.date.util.DateUtil;
 import khh.debug.LogK;
 import khh.string.token.StringTokenizer;
-public class ClientRelayWorker extends NioActionWorker{
+public class RelayClientWorker extends NioActionWorker{
 	private LogK log = LogK.getInstance();
-    public ClientRelayWorker(int firestMode){
+    public RelayClientWorker(int firestMode){
 		super(firestMode);
 		init();
 	}
-    public ClientRelayWorker(){
+    public RelayClientWorker(){
     	init();
     }
     public void init(){
@@ -52,12 +53,12 @@ public class ClientRelayWorker extends NioActionWorker{
 		}
 		
 		else if(NioActionMsg.ACTION.GET_SERVERS.getValue() == msg.getAction()){
-			HashMap<String, NioMonitor> monitors = getNioCommunication().getMultimonitor().getMonitors();
+			Hashtable<String, NioMonitor> monitors = getNioCommunication().getMultimonitor().getMonitors();
 			StringTokenizer token = new StringTokenizer(",");
 			msg.set(token.makeKeyString(monitors));
 			sendNioActionMsg(msg, selectionKey);
 		}else if(NioActionMsg.ACTION.GET_CLIENTS.getValue() == msg.getAction()){
-			HashMap<String, SelectableChannel> clients = getNioCommunication().getMultimonitor().getClientSocketChannels(msg.getString());
+			Hashtable<String, SelectableChannel> clients = getNioCommunication().getMultimonitor().getClientSocketChannels(msg.getString());
 			StringTokenizer token = new StringTokenizer(",");
 			msg.set(token.makeString(clients));
 			sendNioActionMsg(msg, selectionKey);
@@ -84,6 +85,11 @@ public class ClientRelayWorker extends NioActionWorker{
 			}
 		}
 		return msg;
+	}
+	@Override
+	public void receiveTelegram(HashMap<String, Object> telegram, SelectionKey selectionKey)
+			throws Exception{
+		
 	}
 	
 }
