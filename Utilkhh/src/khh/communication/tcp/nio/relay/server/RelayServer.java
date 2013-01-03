@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import khh.communication.Communication_I;
 import khh.communication.tcp.nio.monitor.NioMultiMonitor;
-import khh.communication.tcp.nio.relay.server.client.ClientRelayServer;
-import khh.communication.tcp.nio.relay.server.client.ClientRelayWorker;
+import khh.communication.tcp.nio.relay.server.client.RelayClientServer;
+import khh.communication.tcp.nio.relay.server.client.worker.RelayClientWorker;
 
 
 
@@ -20,7 +20,7 @@ public class RelayServer implements Communication_I {
 		NioMultiMonitor multimonitor = new NioMultiMonitor();
 		ArrayList<Integer> serverPort=getPort();
 		for(int i = 0; serverPort!=null && i < serverPort.size(); i++){
-			ClientRelayServer clientRelayServer = new ClientRelayServer(serverPort.get(i),ClientRelayWorker.class);
+			RelayClientServer clientRelayServer = new RelayClientServer(serverPort.get(i),RelayClientWorker.class);
 			clientRelayServer.setMultimonitor(multimonitor);
 			clientRelayServer.setName("ClientRelayServer"+serverPort.get(i));
 			clientRelayServer.setSelectorManagerSize(getSelectorPoolSize());

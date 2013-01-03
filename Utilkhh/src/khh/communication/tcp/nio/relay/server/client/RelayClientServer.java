@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import khh.communication.tcp.nio.server.NioServer;
 import khh.communication.tcp.nio.worker.NioWorker;
 
-public class ClientRelayServer extends NioServer{
+public class RelayClientServer extends NioServer{
 
-	public ClientRelayServer(int port,Class clientRelayWorkerClass){
+	public RelayClientServer(int port,Class clientRelayWorkerClass){
 		super(port,clientRelayWorkerClass);
 	}
-	public ClientRelayServer(int port,ArrayList<NioWorker> clientRelayWorkerList){
+	public RelayClientServer(int port,ArrayList<NioWorker> clientRelayWorkerList){
 		super(port,clientRelayWorkerList);
 	}
 	

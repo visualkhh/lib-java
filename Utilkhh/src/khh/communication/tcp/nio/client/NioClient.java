@@ -36,6 +36,42 @@ public class NioClient extends NioCommunication{
 		setNioWorkerClass(nioWorkerClass);
 		init();
 	}
+	public NioClient(String serverAddr, int serverPort,int serverConnectionTimeout,NioWorker nioWorker) throws IOException{
+		try{
+			setIp(serverAddr);
+		}catch(Exception e){
+		}
+		setPort(serverPort);
+		setConnectionTimeout(serverConnectionTimeout);
+		ArrayList<NioWorker> a= new ArrayList<NioWorker>();
+		a.add(nioWorker);
+		try{
+			setNioWorkerList(a);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		init();
+	}
+	public NioClient(String ServerAddr, int ServerPort,NioWorker nioWorker) throws IOException{
+		try{
+			setIp(ServerAddr);
+		}catch(Exception e){
+		}
+		setPort(ServerPort);
+		setConnectionTimeout(0);
+		ArrayList<NioWorker> a= new ArrayList<NioWorker>();
+		a.add(nioWorker);
+		try{
+			setNioWorkerList(a);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		init();
+	}
+	
+	
+	
+	
 	public void init() throws IOException{
 		try{
 			super.setSelectorManagerSize(1);
@@ -95,10 +131,12 @@ public class NioClient extends NioCommunication{
 	}
 	@Override
 	public void setSelectorManagerSize(int selectorManagerSize) throws Exception{
+		if(selectorManagerSize>1)
 		throw new Exception("NioClient  SelectorManagerSize Only 1  sorry  No Input plz");
 	}
 	@Override
 	public void setWorkerManagerSize(int workerManagerSize) throws Exception{
+		if(workerManagerSize>1)
 		throw new Exception("NioClient WorkerManagerSize Only 1 Size sorry No Input plz");
 	}
 	@Override

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.channels.SelectionKey;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -15,13 +16,16 @@ import khh.communication.tcp.nio.monitor.NioMultiMonitor;
 import khh.communication.tcp.nio.selector.NioSelectorManager;
 import khh.communication.tcp.nio.worker.NioWorker;
 import khh.communication.tcp.nio.worker.NioWorkerManager;
+import khh.filter.Filter;
+import khh.listener.action.ActionListener;
 import khh.reflection.ReflectionUtil;
+import khh.std.Action;
 
 public abstract class NioCommunication implements Communication_I{
 	private int port 					= 9090;
 	private String ip					= "127.0.0.1";
 	private String name					= null;
-	private Queue<Object> telegramQueue	= new Queue<Object>();
+	private Queue<HashMap<String, Object>> telegramQueue	= new Queue<HashMap<String, Object>>();
 	private NioMonitor monitor			= new NioMonitor();
 	private NioMultiMonitor multimonitor= null;
 	private Class nioWorkerClass       							= null;
@@ -31,6 +35,9 @@ public abstract class NioCommunication implements Communication_I{
 	private RoundRobin<NioSelectorManager> selectorManagerList 	= new RoundRobin<NioSelectorManager>();
 	private int selectorManagerSize = 10;
 	private int workerManagerSize	= 10;
+	private ArrayList<ActionListener> actionEventListenerList = new ArrayList<ActionListener>();
+	
+	
 	public int getPort(){
 		return port;
 	}
@@ -43,15 +50,15 @@ public abstract class NioCommunication implements Communication_I{
 	public void setName(String name){
 		this.name = name;
 	}
-	public void pushTelegram(Object telegram){
+	public void pushTelegram(HashMap<String, Object> telegram){
 		getTelegramQueue().push(telegram);
 	}
-	public Queue<Object> getTelegramQueue(){
+	public Queue<HashMap<String, Object>> getTelegramQueue(){
 		return telegramQueue;
 	} 
-	public void setTelegramQueue(Queue<Object> telegramQueue){
-		this.telegramQueue = telegramQueue;
-	}
+//	public void setTelegramQueue(Queue<Object> telegramQueue){
+//		this.telegramQueue = telegramQueue;
+//	}
 	public NioMultiMonitor getMultimonitor(){
 		return multimonitor;
 	}
@@ -151,6 +158,25 @@ public abstract class NioCommunication implements Communication_I{
 		getMonitor().setSelectorManagerList(getSelectorManagerList());
 //		addSelectorM(getSelectorManagerList().get(i).getSelector());
 	}
+	
+	public void addActionEventListener(ActionListener listener){
+		actionEventListenerList.add(listener);
+	}
+	public void sendActionEventToListener(Action event){
+		for(int i = 0; i < actionEventListenerList.size(); i++){
+			actionEventListenerList.get(i).actionPerformed(event);
+		}
+	}
+	public void sendActionEventToListener(Filter<ActionListener> filter,Action event){
+		for(int i = 0; i < actionEventListenerList.size(); i++){
+			ActionListener listener = actionEventListenerList.get(i);
+			if(filter.accept(listener)){
+				actionEventListenerList.get(i).actionPerformed(event);
+			}
+		}
+	}
+	
+	
 	@Override
 	public String toString(){
 		return getIp()+":"+getPort()+" name:"+getName()+" SelectorMngSize"+getSelectorManagerSize()+" WorkerMngSize"+getWorkerManagerSize();

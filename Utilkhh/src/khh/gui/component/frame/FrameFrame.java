@@ -41,7 +41,7 @@ abstract public class FrameFrame extends Frame implements GuiFrame{
 	}
 
 	private void defaultFlow(){
-
+//jframe 경우 this.setDefaultCloseOperation(EXIT_ON_CLOSE);  (swing)
 		context = this;
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
@@ -235,6 +235,12 @@ abstract public class FrameFrame extends Frame implements GuiFrame{
 	
 	public FrameFrame getContext(){
 		return context;
+	}
+
+	//다시 보여라.
+	@Override
+	public void validate(){
+		super.validate();
 	}
 	
 	
