@@ -1,17 +1,19 @@
 package khh.hui;
 
-import khh.hui.flesh.HuiFlesh;
-import khh.hui.input.HuiInput;
-import khh.hui.memory.HuiMemory;
-import khh.hui.output.HuiOutput;
-import khh.hui.think.HuiThink;
+import khh.hui.action.HuiAction;
+import khh.hui.part.flesh.HuiFlesh;
+import khh.hui.part.input.HuiInput;
+import khh.hui.part.memory.HuiMemory;
+import khh.hui.part.output.HuiOutput;
+import khh.hui.part.think.HuiThink;
+import khh.std.realworld.Info;
 
-public class Hui{
-	HuiFlesh huiflesh = null;
-	HuiInput huiinput = null;
-	HuiMemory huimemory = null;
-	HuiOutput huioutput = null;
-	HuiThink huithink = null;
+public class Hui<T>{
+	HuiFlesh	<HuiAction<T>>  huiflesh = null;
+	HuiInput	<HuiAction<T>>  huiinput = null;
+	HuiMemory	<String,Info,HuiAction<T>>  huimemory = null;
+	HuiOutput	<HuiAction<T>>   huioutput = null;
+	HuiThink 	<HuiAction<T>>  huithink = null;
 	
 	public Hui(){
 	}
