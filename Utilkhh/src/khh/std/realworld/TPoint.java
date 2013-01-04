@@ -8,7 +8,6 @@ public class TPoint {
 	public int z;
 	Date date;
 	
-	
 	public TPoint() {
     }
    public TPoint(int x, int y) {

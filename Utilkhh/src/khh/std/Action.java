@@ -1,55 +1,31 @@
 package khh.std;
 
-public class Action<T>{
-	private T source;
+import java.util.Date;
+
+import khh.std.realworld.Info;
+
+public class Action<T> extends Info<T>{
+	public static enum ACTIONSTATE{
+		START,RETURN
+	}
 	private int id;
-	private String actionCommand;
-	private long when;
-
-	public Action(T source, int id, String actionCommand){
-		this(source, id, actionCommand, 0);
+	public Action(){
+		
 	}
-
-	public Action(T source, int id, String actionCommand, long when){
-		this.source=source;
-		this.id=id;
-		this.actionCommand=actionCommand;
-		this.when=when;
+	public Action(String command){
+		super(command);
 	}
-
-	public T getSource(){
-		return source;
+	public Action(String command,T source){
+		super(command,source);
 	}
-
-	public void setSource(T source){
-		this.source = source;
+	public Action(String command,T source,Date date){
+		super(command,source,date);
 	}
-
 	public int getId(){
 		return id;
 	}
-
 	public void setId(int id){
 		this.id = id;
 	}
-
-
-	public String getActionCommand(){
-		return actionCommand;
-	}
-
-	public void setActionCommand(String actionCommand){
-		this.actionCommand = actionCommand;
-	}
-
-	public long getWhen(){
-		return when;
-	}
-
-	public void setWhen(long when){
-		this.when = when;
-	}
-
-	
 	
 }
