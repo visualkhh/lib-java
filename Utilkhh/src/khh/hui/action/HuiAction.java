@@ -8,7 +8,7 @@ import khh.std.Action;
 import khh.std.realworld.Info;
 
 public class HuiAction<T> extends Action<T>{
-
+//arrayList말고 백터쓰면 동기화됨
 	private Info startPoint; 
 	private Info endPoint; 
 	private HashMap<String,ArrayList<Info>> nodeBase=null;
