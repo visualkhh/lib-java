@@ -16,8 +16,6 @@ import java.util.regex.PatternSyntaxException;
 import khh.conversion.util.ConversionUtil;
 import khh.std.adapter.AdapterMap;
 
-import org.mozilla.universalchardet.UniversalDetector;
-
 public class StringUtil {
 
     static public final String SET_UTF_8 = "UTF-8"; 
