@@ -23,10 +23,10 @@ import java.util.HashMap;
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 
-import org.mozilla.universalchardet.UniversalDetector;
-
 import khh.property.util.PropertyUtil;
 import khh.string.util.StringUtil;
+
+import org.mozilla.universalchardet.UniversalDetector;
 
 public class FileUtil{
 	/** 1 KB */
