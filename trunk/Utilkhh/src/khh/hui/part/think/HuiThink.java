@@ -10,7 +10,7 @@ public abstract class HuiThink<T> implements HuiInterface<T>{
 	private Hui hui = null;
 	public Hui getHui(){
 		return hui;
-	}
+	} 
 
 	public void setHui(Hui hui){
 		this.hui = hui;
