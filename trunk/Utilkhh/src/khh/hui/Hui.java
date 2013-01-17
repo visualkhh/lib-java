@@ -3,57 +3,60 @@ package khh.hui;
 import khh.hui.action.HuiAction;
 import khh.hui.part.flesh.HuiFlesh;
 import khh.hui.part.input.HuiInput;
-import khh.hui.part.memory.HuiMemory;
 import khh.hui.part.output.HuiOutput;
+import khh.hui.part.think.HuiMemory;
 import khh.hui.part.think.HuiThink;
 import khh.std.realworld.Info;
 
 public class Hui<T>{
-	HuiFlesh	<HuiAction<T>>  huiflesh = null;
-	HuiInput	<HuiAction<T>>  huiinput = null;
-	HuiMemory	<String,Info,HuiAction<T>>  huimemory = null;
-	HuiOutput	<HuiAction<T>>   huioutput = null;
-	HuiThink 	<HuiAction<T>>  huithink = null;
+	HuiFlesh	<T>  huiflesh 	= null;
+	HuiInput	<T>  huiinput 	= null;
+	HuiOutput	<T>  huioutput 	= null;
+	HuiThink 	<T>  huithink 	= null;
 	
 	public Hui(){
 	}
-	public Hui(HuiFlesh huiflesh,HuiInput huiinput,HuiMemory huimemory,HuiOutput huioutput,HuiThink huithink){
-		this.huiflesh=huiflesh;
-		this.huiinput=huiinput;
-		this.huimemory=huimemory;
-		this.huioutput=huioutput;
-		this.huithink=huithink;
+	public Hui(HuiFlesh<T> huiflesh,HuiInput<T> huiinput,HuiOutput<T> huioutput,HuiThink<T> huithink){
+		this.huiflesh		=	huiflesh;
+		this.huiinput		=	huiinput;
+		this.huioutput		=	huioutput;
+		this.huithink		=	huithink;
+		
+		this.huiflesh	.setHui(this);		
+		this.huiinput	.setHui(this);	
+		this.huioutput	.setHui(this);	
+		this.huithink	.setHui(this);	
+		
 	}
-	public HuiFlesh getHuiflesh(){
+	public HuiFlesh<T> getHuiflesh(){
 		return huiflesh;
 	}
-	public void setHuiflesh(HuiFlesh huiflesh){
-		this.huiflesh = huiflesh;
+	public void setHuiflesh(HuiFlesh<T> huiflesh){
+		this.huiflesh 	= huiflesh;
+		this.huiflesh	.setHui(this);	
 	}
-	public HuiInput getHuiinput(){
+	public HuiInput<T> getHuiinput(){
 		return huiinput;
 	}
-	public void setHuiinput(HuiInput huiinput){
-		this.huiinput = huiinput;
+	public void setHuiinput(HuiInput<T> huiinput){
+		this.huiinput 	= huiinput;
+		this.huiinput	.setHui(this);	
 	}
-	public HuiMemory getHuimemory(){
-		return huimemory;
-	}
-	public void setHuimemory(HuiMemory huimemory){
-		this.huimemory = huimemory;
-	}
-	public HuiOutput getHuioutput(){
+	public HuiOutput<T> getHuioutput(){
 		return huioutput;
 	}
-	public void setHuioutput(HuiOutput huioutput){
-		this.huioutput = huioutput;
+	public void setHuioutput(HuiOutput<T> huioutput){
+		this.huioutput 	= huioutput;
+		this.huioutput	.setHui(this);	
 	}
-	public HuiThink getHuithink(){
+	public HuiThink<T> getHuithink(){
 		return huithink;
 	}
-	public void setHuithink(HuiThink huithink){
-		this.huithink = huithink;
+	public void setHuithink(HuiThink<T> huithink){
+		this.huithink 	= huithink;
+		this.huithink	.setHui(this);	
 	}
+
 	
 	
 	
