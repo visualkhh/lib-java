@@ -16,9 +16,12 @@ import khh.gui.GuiFrame;
 abstract public class FrameFrame extends Frame implements GuiFrame{
 
 	private HashMap<String, Object> viewContainer = new HashMap<String, Object>();
+	private HashMap<String, FrameFrame> frameList = new HashMap<String, FrameFrame>();
 	public FrameFrame context = null;
 	boolean isfinish = false;
 
+	
+	
 	public FrameFrame(){
 		super();
 		defaultFlow();
@@ -123,7 +126,7 @@ abstract public class FrameFrame extends Frame implements GuiFrame{
 		for(int i = 0; i < componnents.length; i++){
 			Component atcom = componnents[i];
 			// System.out.println("이름이랑께"+atcom.getName());
-			if(name.equals(atcom.getName()) || name.equals(atcom.getName())){
+			if(name.equals(atcom.getName()) || name==atcom.getName()){
 				is_matching = true;
 				returnc = atcom;
 				// System.out.println("맞췄당께.");
@@ -157,7 +160,16 @@ abstract public class FrameFrame extends Frame implements GuiFrame{
 		}
 		return r;
 	}
-
+	
+	public void addFrame(FrameFrame frame){
+		frameList.put(frame.getName(), frame);
+	}
+	public void addFrame(String name,FrameFrame frame){
+		frameList.put(name, frame);
+	}
+	public FrameFrame getFrame(String name){
+		return frameList.get(name);
+	}
 	// @Override
 	// public Component add(Component arg0)
 	// {

@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hui>
-	<actions>
-		<action id=""></action>
-	</actions>
-	
-	
-	
-	<flesh>	</flesh>
-	
-	<input>	</input>
-	
-	<think>	</think>
+<hui version="1" sdk="1.5">
 
-	<output> </output>
-	
-	<memory>
+
+	<application>
+		<input>
+			<actions>
+				<action id="" class="aa"></action>
+				<action id="" class="aa"></action>
+				<action id="" class="aa"></action>
+			</actions>
+		</input>
 		
-	</memory>
+		<flesh>
+			<frames>
+				<frame id="ggg" icon="aa" class="a" ></frame>
+				<frame id="bbb" icon="aa" class="a" ></frame>
+				<frame id="ccc" icon="aa" class="a" ></frame>
+			</frames>
+		</flesh>
+		
+		<think>
+			<actions>
+				<action id="" class="aa"></action>
+				<action id="" class="aa"></action>
+				<action id="" class="aa"></action>
+			</actions>
+		</think>
+		
+		<output>
+			<actions>
+				<action id="" class="aa"></action>
+				<action id="" class="aa"></action>
+				<action id="" class="aa"></action>
+			</actions>
+		</output>
+
+	</application>
 </hui>
