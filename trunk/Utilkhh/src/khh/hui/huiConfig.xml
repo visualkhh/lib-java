@@ -2,7 +2,8 @@
 <hui version="1" sdk="1.5">
 
 	<runer></runer>
-
+	<bean></bean>
+	
 	<infos>
 		<info command="ggg">
 			<source>
