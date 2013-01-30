@@ -1,11 +1,14 @@
 package khh.conversion.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
@@ -326,7 +329,7 @@ public class ConversionUtil {
    } 
    
    public static int toInt(String data,int read_bit){
-       return Integer.parseInt(data, 16);
+       return Integer.parseInt(data, read_bit);
    }
    
    
@@ -470,7 +473,8 @@ public class ConversionUtil {
     
     
     //stream
-   public static BufferedReader InputStreamToBufferedReader(InputStream inputstream){
+//   public static BufferedReader InputStreamToBufferedReader(InputStream inputstream){
+   public static BufferedReader toBufferedReader(InputStream inputstream){
 	   BufferedReader in = new BufferedReader(new InputStreamReader(inputstream));
 	   return in;
 //	   BufferedReader in = new BufferedReader(new InputStreamReader(getInputStream()));
@@ -482,11 +486,72 @@ public class ConversionUtil {
 //         }
 //       }
    }
+//   public static InputStream toInputStream(String data){
+//	   InputStream input = new ByteArrayInputStream(data.getBytes());
+//	return input;
+//   }
     
-    
+//   BufferedWriter out 
     
     
 
+   
+   
+   
+   
+   
+   
+   
+   
+
+   static public int toInt(String str) {
+       return Integer.parseInt(str);
+   }
+
+
+
+
+   static public float toloat(String val) {
+	   return Float.parseFloat(val);
+       //return Float.valueOf(val);
+   }
+
+
+   static public double createDouble(String val) {
+	   return Double.parseDouble(val);
+       //return Double.valueOf(val);
+   }
+
+
+   static public Integer createInteger(String val) {
+       return Integer.decode(val);
+   }
+
+   static public Long toLong(String val) {
+	   return Long.parseLong(val);
+//       return Long.valueOf(val);
+   }
+
+
+   static public BigInteger createBigInteger(String val) {
+	   return new BigInteger(val);
+   }
+
+   static public BigDecimal createBigDecimal(String val) {
+       return new BigDecimal(val);
+   }
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     
     
     
