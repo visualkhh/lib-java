@@ -15,7 +15,7 @@ public class UnitUtil{
      * @param    대상 값.
      * @return   변경된 한국 통화단위 값, "###,##0".
      */	
-	public static String getWon (double w) {
+	public static String toWon (double w) {
 		return df.format(w);
 	}
 
@@ -26,7 +26,7 @@ public class UnitUtil{
      * @param    대상 값.
      * @return   변경된 한국 통화단위 값, "###,##0".
      */	
-	public static String getWon (int w) {
+	public static String toWon (int w) {
 		
 		return df.format(w);
 	}
@@ -38,7 +38,7 @@ public class UnitUtil{
      * @param    대상 값.
      * @return   변경된 한국 통화단위 값, "###,##0".
      */	
-	public static String getWon (long w) {
+	public static String toWon (long w) {
 		
 		return df.format(w);
 	}
@@ -50,7 +50,7 @@ public class UnitUtil{
      * @param    대상 값.
      * @return   변경된 한국 통화단위 값, "###,##0".
      */	
-	public static String getWon (String w) {
+	public static String toWon (String w) {
 
         if (w == null || w.equals("") )
             return "";
@@ -64,13 +64,13 @@ public class UnitUtil{
 			d = 0;
 		}
 		
-		return getWon(d);
+		return toWon(d);
 	}
 	
 	/**
 	 * 외화에서 소숫점이하 2째 자리까지 리턴한다.
 	 */
-	public static String getWoi(String s){
+	public static String toWoi(String s){
 		String temp = null;
 
 		if (s == null)
