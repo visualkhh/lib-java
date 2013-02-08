@@ -11,7 +11,8 @@ public static void main(String[] args) {
 //    System.out.println(a);
 //    
     
-    
+    String gg="001100";
+    System.out.println(gg.replaceFirst("^0*", ""));
     
 
     String a ="/Appl/usrtech/web/index.jsp.pdf";
