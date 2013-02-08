@@ -23,7 +23,7 @@ public class TelnetKClient  extends TelnetClient{
             
             try{
                     while(true){
-                        Thread.sleep(1000);
+                        Thread.sleep(0);
                         if(isConnected()){
                             int c=0;
                             byte[] buf = new byte[getReadbuffersize()];
@@ -56,7 +56,7 @@ public class TelnetKClient  extends TelnetClient{
         public void run() {
             try{
                 while(true){
-                    Thread.sleep(1000);
+                    Thread.sleep(10);
                     if(isConnected()){
                         int c=0;
                         byte[] buf = new byte[getWritebuffersize()];
