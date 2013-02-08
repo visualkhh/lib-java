@@ -1,6 +1,7 @@
 package interfacetest;
 
 interface StrEvent_Interface {
+	int a=40;
     public void event(String id, Object o);
 }
 
