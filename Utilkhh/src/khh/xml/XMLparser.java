@@ -354,6 +354,8 @@ public class XMLparser
 		String t = String.format("%f", nodesresult).split("\\.")[0];
 		return new Integer(t);//Integer.pnodesresult;
 	}
+	//String targetxpath="//target";
+	//Integer targetcnt = parser.getInt("count("+targetxpath+")");
 	public String getString(String xPathUrl) throws XPathExpressionException,NoClassDefFoundError{
 		String nodesresult=null;
 //		try
