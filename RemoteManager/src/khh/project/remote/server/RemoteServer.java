@@ -13,6 +13,8 @@ public class RemoteServer{
 		port.add(80);
 		
 		RelayServer relayServer = new RelayServer();
+		relayServer.setSelectorPoolSize(1);
+		relayServer.setWorkerPoolSize(1);
 		relayServer.setPort(port);
 		relayServer.start();
 	}
