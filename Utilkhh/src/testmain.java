@@ -32,7 +32,14 @@ class tt {
 
 public class testmain {
     public static void main(String[] args) throws InterruptedException {
-        new tt().gogo();
-//�׽�Ʈ�Դϴ�.
+    	
+    	String menu_cd = "3101 ";
+    	if(menu_cd!=null && menu_cd.trim().length()>0 && menu_cd.trim().equals("3101") ){ 
+    		System.out.println(1);
+    	}
+    	
+    	
+//        new tt().gogo();
+//�׽�Ʈ�Դϴ�.
     }
 }
