@@ -150,6 +150,14 @@ public class ByteUtil {
 		return dest;
 	}
 	
+	 public static final byte[] toBytes(short s)
+	    {
+	        byte dest[] = new byte[2];
+	        dest[1] = (byte)(s & 0xff);
+	        dest[0] = (byte)(s >>> 8 & 0xff);
+	        return dest;
+	    }
+	
 	/**
 	 * <p>long 형의 값을 바이트 배열(8바이트)로 변환한다.</p>
 	 * 
