@@ -1,0 +1,462 @@
+<div id="contents">
+				<!-- 태그 -->
+						
+				<!-- 지역로그 -->
+						
+						
+				<!-- 본문검색리스트 -->
+						
+				<!-- 댓글검색리스트 -->
+						
+				<!-- 공지사항글 -->
+						
+				<!-- 보호글 -->
+										<!-- 포스트의 본문 시작 -->
+						
+							<div class="entry">
+								<div class="titleWrap">
+									<!--<h2><a href="/22">JMF 공부 [1] JMF의 소개</a></h2>-->
+<script language="javascript" src="http://ts.daumcdn.net/custom/blog/36/367499/skin/images/viewTitle.js" type="text/javascript">
+</script>
+<script language="javascript">
+showTitle("http://ts.daumcdn.net/custom/blog/36/367499/skin/images/", "viewTitle.swf", 600, 32, "JMF 공부 [1] JMF의 소개", "/22", "left", "0x000ff");
+</script><embed id="viewTitle" name="viewTitle" type="application/x-shockwave-flash" src="http://ts.daumcdn.net/custom/blog/36/367499/skin/images/viewTitle.swf" width="600" height="32" wmode="transparent" allowscriptaccess="always" flashvars="articleTitle=JMF 공부 [1] JMF의 소개&amp;linkTo=/22&amp;hAlign=left&amp;tColor=0x000ff"><br><br>
+							<span class="category"><a href="/category/Computer/Computer%20A">Computer/Computer A</a></span> <span class="date">2009/07/16 18:04</span>		
+								</div><!-- close titleWrap -->
+						<!-- 포스트관리 -->
+								
+				<!-- 포스트 본문 내용 -->
+
+				<!-- 구글 광고  -->
+<br><br><!-- 
+<DIV align=center>
+<embed src="http://www.jjanglive.com/flash/webClient.swf?widgetseq=986886&movieseq=4392152&defaultMute=0"  quality="high" width="480" height="360"  name="widgetFlash" align="middle" play="false" loop="false"  allowFullScreen="true" allowScriptAccess="always" scale="noscale" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed> 
+</div> -->
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-0519317281548070";
+/* 메인ㅇ */
+google_ad_slot = "0772641644";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px"><iframe width="336" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+<br><br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0519317281548070";
+/* 468x15, 작성됨 10. 8. 22 */
+google_ad_slot = "4854272020";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><ins id="aswift_2_anchor" style="display:block;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:468px"><iframe width="468" height="15" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+<br>
+
+</div>
+<br>
+<br>
+
+   
+									<strong><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java Media API</span></span><br>
+</span><br>
+</strong><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF에 대해 소개하기 전에 먼저 Java에서 멀티미디어 데이터를 다루기 위해 발표된 모든 기술들에 간략히 살펴보자. Java에서는 멀티미디어 제어를 위해 Java Media API라는 이름으로 패키지들을 발표했다. Java Media API는 크게 8개의 세부적인 API들로 분류할 수 있다. 세부적인 API의 목록은 표 1과 같다.</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">표 1과 같이 많은 기술들이 발표되었다. 본 강좌에서는 위와 같은 Java의 Media 처리 기술 중에서도 </span></span><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF (Java Media Framework)</span></span></strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">를 집중적으로 다루어 보겠다. 그럼 JMF는 과연 어떻게 개발되었고, 현재 어떻게 구성되어있는지 살펴보기로 하자.</span></span><br>
+</span>
+<p class="MsoNormal" style="MARGIN-TOP: 3pt; MARGIN-BOTTOM: 2pt; MARGIN-RIGHT: 0cm"><font size="2"><span lang="EN-US" style="FONT-FAMILY: 굴림체"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java </span></span></span><span style="FONT-FAMILY: 굴림체"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">에서는 멀티미디어를 제어하기 위해</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Java Media API</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">를 발표했습니다</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">. Java Media API</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">는 크게</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> 8</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">개의 세부로 분류할 수 있습니다</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">. </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">세부적인 목록은 다음과 같습니다</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">.</span></span><!--?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /--><o:p></o:p></span></span></font></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 17pt"><span lang="EN-US" style="FONT-FAMILY: 굴림체"><o:p><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">&nbsp;</span></span></font></o:p></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">1) </span></span></span></span><span lang="EN-US" style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java 2D</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- 2D </span></span></font></span><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">그래픽과</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Image</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">의 조작</span></span></font><span lang="EN-US"><br>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- Graphics 2D </span></span></font></span><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">에서 확장된</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Graphics </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">이용부분</span></span><span lang="EN-US"><o:p></o:p></span></font></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">2) </span></span></span></span><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java Media Framework</span></span></font></span></b><span lang="EN-US" style="FONT-FAMILY: 굴림체"><br>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- 1.0 API </span></span></font></span><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">에서는 단순히 동기화된 미디어 데이터에 대한</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> playback </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">기능만 제공</span></span></font><span lang="EN-US"><br>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- 2.0 API </span></span></font></span><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">에서는 오디오 및 비디오데이터에 대한</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> capture , streaming </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">기능 제공</span></span><span lang="EN-US"><o:p></o:p></span></font></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">3) </span></span></span></span><span lang="EN-US" style="FONT-FAMILY: 굴림체"><font size="2"><span style="mso-spacerun: yes"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">&nbsp;</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java 3D</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- </span></span></font></span><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">객체</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">(Object) </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">기반의</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> 3D </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">그래픽 </span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">runtime </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">제공</span></span></font><span lang="EN-US"><br><span id="callbacknestkarsvvtistorycom221232" style="width:1px; height:1px; float:right"><embed allowscriptaccess="always" id="bootstrapperkarsvvtistorycom221232" src="http://karsvv.tistory.com/plugin/CallBack_bootstrapperSrc?nil_profile=tistory&amp;nil_type=copied_post" width="1" height="1" wmode="transparent" type="application/x-shockwave-flash" enablecontextmenu="false" flashvars="&amp;callbackId=karsvvtistorycom221232&amp;host=http://karsvv.tistory.com&amp;embedCodeSrc=http%3A%2F%2Fkarsvv.tistory.com%2Fplugin%2FCallBack_bootstrapper%3F%26src%3Dhttp%3A%2F%2Fs1.daumcdn.net%2Fcfs.tistory%2Fv%2F0%2Fblog%2Fplugins%2FCallBack%2Fcallback%26id%3D22%26callbackId%3Dkarsvvtistorycom221232%26destDocId%3Dcallbacknestkarsvvtistorycom221232%26host%3Dhttp%3A%2F%2Fkarsvv.tistory.com%26float%3Dleft" swliveconnect="true"></span>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- Java </span></span></font></span><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">기술로 제작된</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> VRML97 reference brower</span></span><o:p></o:p></span></font></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">4) </span></span></span></span><span lang="EN-US" style="FONT-FAMILY: 굴림체"><font size="2"><span style="mso-spacerun: yes"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">&nbsp;</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java Sound</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- software </span></span></font></span><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">로 구현된</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> sound processor </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">와</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> MIDI synthesizer </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">제공</span></span></font><span lang="EN-US"><br>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- sound engine(java 2 SDK 1.2)</span></span></font></span><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">과</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> sound API (beginning in java 2 SDK 1.3 )</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">제공</span></span><span lang="EN-US"><o:p></o:p></span></font></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">5) </span></span></span></span><font size="2"><span lang="EN-US" style="FONT-FAMILY: 굴림체"><span style="mso-spacerun: yes"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">&nbsp;</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java Speech</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- </span></span></span><span style="FONT-FAMILY: 굴림체"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">음성의 인식과 합성 기능 제공</span></span><span lang="EN-US"><o:p></o:p></span></span></font></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">6) </span></span></span></span><span lang="EN-US" style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java Advanced Imaging</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- </span></span></font></span><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">확장된</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> 2D Image processing </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">기능</span></span></font><span lang="EN-US"><br>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- java 2D API Interfaces </span></span></font></span><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">들의 구현</span></span><span lang="EN-US"><o:p></o:p></span></font></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">7) </span></span></span></span><span lang="EN-US" style="FONT-FAMILY: 굴림체"><font size="2"><span style="mso-spacerun: yes"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">&nbsp;</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java Telephony</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- computer </span></span></font></span><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">와 전화 단말기의 통함</span></span></font><span lang="EN-US"><br>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- javaphone API </span></span></font></span><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">의 하위</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> API</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">로서 향후 발표될 </span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">J2ME </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">기반의</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Mobile information device profile </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">제공</span></span><span lang="EN-US"><o:p></o:p></span></font></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt 33.45pt; TEXT-INDENT: -16.45pt; mso-list: l2 level2 lfo1"><span lang="EN-US" style="FONT-SIZE: 11pt; FONT-FAMILY: 굴림체; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: 굴림체"><span style="mso-list: Ignore"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">8) </span></span></span></span><span lang="EN-US" style="FONT-FAMILY: 굴림체"><font size="2"><span style="mso-spacerun: yes"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">&nbsp;</span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java Shared Data Toolkit</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- </span></span></font></span><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">애플리케이션 기반</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Java </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">기술로서 사용자간 협동 작업을 가능하게 하는 개발</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Tool </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">제공</span></span></font><span lang="EN-US"><br>
+<font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">- Session , URL , Registry </span></span></font></span><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">를 통한 객체</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">(Object) </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">데이터의 공유기능</span></span><span lang="EN-US"><o:p></o:p></span></font></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt"><span lang="EN-US" style="FONT-FAMILY: 굴림체"><o:p><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">&nbsp;</span></span></font></o:p></span></p>
+<p class="MsoNormal" style="MARGIN: 3pt 0cm 2pt"><span style="FONT-FAMILY: 굴림체"><font size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">위 사항에서와 같이</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> JMF </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">는</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Java Media API </span></span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">의 일부분으로 보아 두시면 좋을것입니다</span></span><span lang="EN-US"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">. </span></span>
+</span></font></span></p><div class="autosourcing-stub"><font size="2">
+<p style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 11px 0px 7px; PADDING-TOP: 0px; FONT-STYLE: normal; FONT-FAMILY: Dotum"><a href="http://blog.naver.com/hjy7942s" target="_blank"></a>&nbsp;</p></font></div><font size="2"><o:p></o:p></font>
+<p></p><br>
+
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">왜 JMF를 이용해야 하는가?</span></span></strong></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">이제껏 발표된 JDK는 주로 디지털 오디오의 재생 기능을 주된 목적으로 생각하였지만, 디지털 비디오나 심지어 MIDI(Musical Instru ment Digital Interface)에 대한 중요성을 인식하지 못하였다. 또한 이전에 발표된 오디오 관련 API 역시 단순한 디지털 오디오의 재생기능(playback)만을 수행하고, 어떠한 포맷으로도 저장하는 기능을 제공하지 못하였다. 이러한 상황에서 Sun의 Java 진영에서는 당시의 멀티미디어 관련 API들이 불합리하다는 생각을 하게 되었고, 결국 객체지향, 풍부한 기능, 구조적인 멀티미디어 포맷을 지원하며, 단순한 오디오 데이터의 재생 기능 뿐만이 아니라 현재 이용되는 거의 모든 종류의 멀티미디어 데이터를 처리하기 위한 기능을 수행하는 API를 만들게 되었다. 그러한 구조가 바로 Sun의 Java Media API이며 , 대부분의 주된 관심이 Java Media API의 하부 구조인 JMF의 탄생으로 이어지게 된 것이다.</span></span></span></p><br>
+
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF의 세팅 방법</span></span></strong></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">① 먼저 JMF를 설치할 대상 컴퓨터의 하드웨어 및 소프트웨어 사양을 확인한다.</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">② 만약 이전버젼의 JMF가 설치되어있다면 모두 제거한다. </span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">③ 윈도우 버전의 JMF설치파일을 구동시키면 InstallShield가 구동 되며 설치를 시작한다. </span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">④ CLASSPATH와 PATH를 반드시 확인해 주시기 바란다. 실제로 프로그램을 설치하는 과정에서 InstallShield 가 자동적으로 CLASSPATH와 PATH를 설정해 준다.&nbsp; 만약 설치 후에 JMF의 올바른 설치 확인을 위해 다음과 같은 내용을 확인해야 한다.</span></span></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">set CLASSPATH=%WINDIR%\java\classes\jmf.jar;%WINDIR% </span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">\java\classes\sound.jar;.;%CLASSPATH%</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">또한 PATH에서도 아래와 같은 사항을 확인해야 한다. </span></span></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">set PATH=%WINDIR%\System32;%PATH% (on Windows NT) </span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">set PATH=%WINDIR%\System;%PATH%&nbsp;&nbsp; (on Windows 95/98)</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">올바른 JMF 세팅 확인방법</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">위와 같은 과정을 통하여 jmf를 모두 설치한 이후에는 SUN의 JMF 사이트를 방문하여 JMF Diagnostics 애플릿 프로그램을 구동시켜 보아야 한다. 실제로 JMF 설치가 모두 올바르게 되었는지를 판별해주는 프로그램이다. 테스트 해볼 프로그램이 있는 </span></span></span><a class="con_link" href="http://java.sun/" target="_blank"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"></span></a><a href="http://java.sun.com/products/java-media/jmf/2.1/jmfdiagnostics.html"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">http://java.sun</span></span></a><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">.com/products/java-media/jmf/2.1/jmfdiagnostics.html</span></span><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> 주소로 방문하여 인터넷 브라우저 역시 JMF를 알맞게 인식하고 있는지 확인해야 한다.</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">위의 사이트를 방문하면, JMF Diagnostics Applet이 구동 되며, 현재 시스템에 설치된 JMF와 버전, 그리고 Native Libraries를 검사하게 된다. 검사를 마치면 아래와 비슷한 검사 결과를 표시하게 된다.</span></span></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF Diagnostics:</span></span></strong></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java 1.1 compliant browser.....Maybe</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF classes.....Found</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF Version... 2.1</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Win32 Build</span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Native Libraries Found</span></span></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">만약 위와는 다르게 에러 메시지 혹은 관련 라이브러리 파일을 찾을 수 없다고 메시지가 나오는 경우 상황에 맞게 다시 JMF를 설치하거나 적절한 조치를 취해 주어야 한다.</span></span></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF Diagnostics Applet의 문제 해결 방법</span></span></strong></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Browser not compatible</span></span></strong></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF는 자바 1.1 호환 브라우저를 요구한다. 추천되는 웹 브라우저는 Netscape Navigator 4.06 or later, MS Internet Explorer 4.0 or later, Sun's Hotjava 1.1.x. 이다. 만약 이전 버전의 브라우저를 사용한다면 최신 버전의 브라우저로 다시 설치해야 한다. 또 하나 주의해야 할 점은 실제 이전 버전의 브라우저를 사용한다면, 최신 버전의 브라우저를 설치한다. 그런 다음에 다시 JMF를 재 설치 해야 한다. 이와 같은 과정을 통해서만 JMF를 설치하는 과정에서 Netscape를 인식해서 필요한 파일들도 다시 정리해 준다.</span></span></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Classes not found</span></span></strong></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF classes 및 CLASSPATH 환경 변수에 제대로 설정이 되어있지 않을 경우 발생합니다.&nbsp; CLASSPAT H에서&nbsp; jmf.jar 를 기록해 주었는지 확인해야 한다. 일반적으로 JMF를 설치하면 이 부분은 자동 세팅 되고 컴퓨터를 재부팅하는데, 혹시라도 이 부분에서 에러메시지가 발생했다면 , 여러분은 수동으로 CLASSPATH를 적어 주어야 한다.&nbsp; </span></span></span></p>
+<p align="justify"><span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><strong><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Libraries not found</span></span></strong></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">JMF를 설치 후에 생성되는 JMStudio 프로그램이 캡처가 안된다고 할 때, 가장 흔하게 나타나는 문제점이 바로 이 부분이다. 이 부분에서 에러가 발생하면 캡처 프로그램을 수행하는 경우 예측하지 못하는 에러가 발생한다. 만약 윈도우나 솔라리스같은 환경에서 캡처 관련 프로그램을 작성한다면 JMF 자체도 역시 Native Version의 JMF를 다운 받아 설치해야 한다. </span></span></span><br>
+<span style="FONT-SIZE: 11pt; FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">다음으로 이 에러가 발생하는 이유는 JMF의 lib 디렉토리를 브라우저가 제대로 확인하지 못해서 NativeCode를 찾지 못하기 때문이다. 이러한 라이브러리들은 \lib 밑에 있다. 이 디렉토리를 여러분의 bat 파일에 기록해 주어야 한다. 하지만 문제점이 하나있다. 만약 ‘IE를 사용하고 있고, 분명히 제대로 설정도 다 해주었는데 왜 안되는가' 하는 질문에 대한 답변은 가장 최신 버전의 IE용 java VM을 다시 다운로드 받아야 한다는 것이다(</span></span><a href="http://www.microsoft.com/java"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">http://www.microsoft.com/java</span></span></a><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> 이곳에서 다시 java VM을 다운로드 받아 설치하면 된다).</span></span><br>
+<br><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">참조:</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">[1]http://www.pention.co.kr/article/JAVA_Tip/124313774789004</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">[2]http://blog.naver.com/hjy7942s?Redirect=Log&amp;logNo=33426858</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">[3]http://www.jstorm.pe.kr</span></span><br>
+<span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">[4] </span></span><span lang="EN-US" style="COLOR: #003366"><font face="Times New Roman" size="2"><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">Java</span></span><sup><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">TM</span></span></sup><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt"> Media Framework API Guide (</span></span></font></span><span lang="EN-US" style="FONT-SIZE: 9pt; FONT-FAMILY: 굴림체; mso-bidi-font-weight: bold"><a class="con_link" href="http://java.sun.com/products/java-media/jmf/2.1.1/guide/JMFTOC.html" target="_blank"><u><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">http://java.sun.com/products/java-media/jmf/2.1.1/guide/JMFTOC.html</span></span></u></a><span style="FONT-FAMILY: Verdana"><span style="FONT-SIZE: 11pt">) </span></span></span></span></p>
+<div class="autosourcing-stub">
+<p style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 11px 0px 7px; PADDING-TOP: 0px; FONT-STYLE: normal; FONT-FAMILY: Dotum">&nbsp;</p></div><o:p></o:p>
+<p></p>
+<p align="justify"><br>
+</p>	<div id="container_socialPost51988e14462ef" style="display:none; padding:40px 0">
+		<div style="padding:17px 20px 10px 20px; border:1px solid #E7E7E7;">
+			<h3 style="font-size:12px; margin:0; padding:0; color:#424242; border:0 none;">소셜웹 반응글 <span id="count_socialPost51988e14462ef" style="font-weight:normal"></span></h3>
+			<div id="wrap_socialPost51988e14462ef" style="margin-top:11px; overflow:hidden; padding-top:10px; border-top:1px solid #DCDCDC;"></div>
+		</div>
+		<div style="height:20px; border:1px solid #E7E7E7; border-top:none;">
+				<div id="toggleBtn_socialPost51988e14462ef" onclick="socialPost_socialPost51988e14462ef.reset(); return false;" style="cursor:default; padding-top:2px; height:18px; text-align:center; width:100px; border-left:1px solid #E7E7E7; float:right; color:#A5A5A5;"><span style="display:block;">접기▲</span></div>
+				<div id="moreViewBtn_socialPost51988e14462ef" onclick="socialPost_socialPost51988e14462ef.getData('more'); return false;" style="cursor:default; padding-top:2px; height:18px; text-align:center; color:#A5A5A5;"><span>소셜웹 더보기▼</span></div>
+		</div>
+	</div>
+<script type="text/javascript">
+	var socialPost_socialPost51988e14462ef = {
+		pageNumber : 1,
+		container : document.getElementById('container_socialPost51988e14462ef'),
+		countWrap : document.getElementById('count_socialPost51988e14462ef'),
+		entryWrap : document.getElementById('wrap_socialPost51988e14462ef'),
+		toggleBtn : document.getElementById('toggleBtn_socialPost51988e14462ef'),
+		moreViewBtn : document.getElementById('moreViewBtn_socialPost51988e14462ef'),
+		getData : function(action) {
+			var items = this.entryWrap.getElementsByTagName('li');
+			var isRequireRequest = !(items.length > this.pageNumber * 5);
+			if (action == 'more' && !isRequireRequest) {
+				for (var i = this.pageNumber * 5, l = ++this.pageNumber * 5; i < l; i++) {
+					if (items[i]) {items[i].style.display = '';}
+				}
+				this.changeStatus(this.toggleBtn, 'on');
+				if (this.totalCount && this.totalCount == items.length && items[(items.length -1)].style.display != 'none') {
+					this.changeStatus(this.moreViewBtn, 'off');
+				}
+			} else {
+				if (action == 'more') {
+					if (items.length == this.totalCount || this.moreViewBtn.isPossibleSocialPost) {return false;}
+					this.pageNumber++;
+					this.moreViewBtn.isPossibleSocialPost = true;
+				}
+				var request = new HTTPRequest('JSON', 'http://api.v.daum.net/open/comment_list.js?type=twitter&type=yozm&type=view&nurl=http://karsvv.tistory.com/22&page_size=5&page_no=' + this.pageNumber + '&callback=?', 'euc-kr');
+				request.parent = this;
+				request.onSuccess = function () {
+					if (this.jsonData && this.jsonData.id) {
+						if (!this.parent.totalCount) {
+							this.parent.totalCount = this.jsonData.total_count;
+						}
+						var data = this.jsonData.message_list;
+						var entry = action == 'more' ? '' : '<ul style="margin:0; padding:0; list-style:none;">';
+						for (var i = 0, l = data.length; i < l; i++) {
+							var border = this.parent.pageNumber == 1 && i == 0 ? '' : ' border-top:1px solid #E7E7E7;';
+							data[i].reg_date = data[i].reg_date.split('-').join('.').substr(0, data[i].reg_date.length -3);
+							entry += '<li style="padding:10px 0;' + border + ' overflow:hidden;">';
+							entry += '<div style="float:left;"><a href="' + data[i].user_permlink + '" target="_blank"><img width="35" height="35" src="' + data[i].profile_img + '" alt="' + data[i].user_name + '" \/><\/a><\/div>';
+							entry += '<div style="margin-left:50px;">';
+							entry += '<div style="color:#424242;">' + data[i].message + '<\/div>';
+							entry += '<div><a href="' + data[i].message_permlink + '" target="_blank"><img style="vertical-align:middle; margin-right:4px;" src="http://i1.daumcdn.net/cfs.tistory/static/images/' + data[i].service + '_icon.png" alt="' + data[i].service + '" /><\/a>';
+							entry += '<a href="' + data[i].user_permlink + '" target="_blank" style="text-decoration:none;"><span style="color:#424242;">' + data[i].user_name + '<\/span><\/a><span style="padding:0 6px; color:#DDDDDD;">|<\/span><span style="color:#A5A5A5;">' + data[i].reg_date + '<\/span><\/div>';
+							entry += '</div><\/li>';
+						}
+
+						if (action == 'more') {
+							this.parent.entryWrap.firstChild.innerHTML += entry;
+							this.parent.moreViewBtn.isPossibleSocialPost = false;
+							this.parent.changeStatus(this.parent.toggleBtn, 'on')
+							if (items.length == this.parent.totalCount) {
+								this.parent.changeStatus(this.parent.moreViewBtn, 'off');
+							}
+						} else {
+							entry += '<\/ul>';
+							this.parent.entryWrap.innerHTML = entry;
+							this.parent.countWrap.innerHTML = '(' + this.parent.totalCount + ')';
+							if (this.parent.totalCount > 5) {
+								this.parent.changeStatus(this.parent.moreViewBtn, 'on');
+							} else {
+								this.parent.moreViewBtn.isPossibleSocialPost = false;
+							}
+							if (this.parent.totalCount && this.parent.totalCount > 0) {
+								this.parent.container.style.display = 'block';
+							}
+						}
+					} else {}
+				};
+				request.onError = function () {
+					if (action == 'more') {
+						this.parent.moreViewBtn.isPossibleSocialPost = false;
+					}
+				};
+				request.send();
+			}
+		},
+
+		reset : function() {
+			var items = this.entryWrap.getElementsByTagName('li');
+			for (var i = 0, l = items.length; i < l; i++) {
+				if (i > 4) {
+					items[i].style.display = 'none';
+				}
+			}
+			this.changeStatus(this.toggleBtn, 'off');
+			this.changeStatus(this.moreViewBtn, 'on');
+			this.pageNumber = 1;
+		},
+
+		changeStatus : function(node, type) {
+			if (type == 'on' && !node.isSocialMethodUsed) {
+				node.style.color = '#424242';
+				node.style.cursor = 'pointer';
+				node.isSocialMethodUsed = true;
+			} else if (type == 'off' && node.isSocialMethodUsed) {
+				node.style.color = '#A5A5A5';
+				node.style.cursor = 'default';
+				node.isSocialMethodUsed = false;
+			}
+		}
+	};
+	socialPost_socialPost51988e14462ef.getData();
+</script><div class="another_category another_category_color_blue">
+<h4>'<a href="/category/Computer">Computer</a>&nbsp;&gt;&nbsp;<a href="/category/Computer/Computer%20A">Computer A</a>' 카테고리의 다른 글</h4>
+<table>
+<tbody><tr>
+<th>
+<a href="/24">JMF 공부 [3] JMF의 Player ,Controller ,Processer</a>&nbsp;&nbsp;<span>(1)</span>
+</th>
+<td>
+2009/07/16</td>
+</tr>
+<tr>
+<th>
+<a href="/23">JMF 공부 [2] JMF의 구조</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2009/07/16</td>
+</tr>
+<tr>
+<th>
+<a href="/22" class="current">JMF 공부 [1] JMF의 소개</a>&nbsp;&nbsp;<span>(1)</span>
+</th>
+<td>
+2009/07/16</td>
+</tr>
+<tr>
+<th>
+<a href="/21">JMF 동영상 전송</a>&nbsp;&nbsp;<span>(1)</span>
+</th>
+<td>
+2009/07/14</td>
+</tr>
+<tr>
+<th>
+<a href="/18">Java Streaming (JMF)예제 소스</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2009/07/13</td>
+</tr>
+<tr>
+<th>
+<a href="/17">기타 스트리밍서비스</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2009/07/07</td>
+</tr>
+</tbody></table></div>
+<br>
+
+<div id="mobile_google_ad" style="position:fixed;vertical-align: bottom; left:0px; bottom:0px; width:320px; height:50px; z-index:1">
+<script type="text/javascript"><!--
+  // XHTML should not attempt to parse these strings, declare them CDATA.
+  /* <![CDATA[ */
+  window.googleAfmcRequest = {
+    client: 'ca-mb-pub-0519317281548070',
+    format: '320x50_mb',
+    output: 'HTML',
+    slotname: '7467829187',
+  };
+  /* ]]> */
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script><div align="center"><iframe name="google_ads_frame" width="320" height="50" id="google_ads_frame" src="http://googleads.g.doubleclick.net/pagead/ads?format=320x50_mb&amp;slotname=7467829187&amp;client=ca-mb-pub-0519317281548070&amp;correlator=1368952341438&amp;dt=1368952341438&amp;ea=0&amp;flash=0&amp;frm=1&amp;js=afmc-v1.2&amp;output=html&amp;ref=https%3A%2F%2Fwww.google.co.kr%2F&amp;u_ah=996&amp;u_aw=1280&amp;u_cd=32&amp;u_h=1024&amp;u_w=1280&amp;u_his=1&amp;u_tz=540&amp;url=http%3A%2F%2Fkarsvv.tistory.com%2F22&amp;dtd=1" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="position:relative" align="center"></iframe></div>
+</div>
+<style>#daumAd, #searchRankArea{display:none;}</style>&nbsp;
+
+
+
+
+
+
+
+
+
+<div class="txc-textbox" style="border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(203, 203, 203); border-right-color: rgb(203, 203, 203); border-bottom-color: rgb(203, 203, 203); border-left-color: rgb(203, 203, 203); background-color: rgb(255, 255, 255); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; ">
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; ">
+<script type="text/javascript"><!--
+google_ad_client = "pub-0519317281548070";
+/* 300x250, 작성됨 10. 8. 16 */
+google_ad_slot = "4721990872";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px"><ins id="aswift_3_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px"><iframe width="300" height="250" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0519317281548070";
+/* 300x250, 작성됨 10. 8. 16 */
+google_ad_slot = "7720527569";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px"><ins id="aswift_4_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px"><iframe width="300" height="250" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+<br>
+</p></div>
+
+
+
+<!-- 구글 광고  -->
+
+
+
+
+
+								<div class="article">
+
+								</div><!-- close article -->
+								<div class="clear"></div>
+								<div class="author"><span class="text">Posted by</span> 칼스곰</div>
+				<!-- 태그트레일 -->
+								
+								<div class="actionTrail">
+									<a href="#tb" onclick="toggleLayerForEntry(22, 'trackback'); return false" title="트랙백" class="tb"><span id="trackbackCount22"><span class="hide">트랙백</span><span class="cnt">0</span></span></a> |
+									<a href="#rp" onclick="toggleLayerForEntry('22', 'comment'); return false" title="댓글" class="rp"><span id="commentCount22"><span class="hide">댓글</span><span class="cnt">1</span></span></a>
+								</div>
+				<!-- 트랙백 -->
+								<div id="entry22Trackback" style="display:block">
+									<div class="trackback">
+										<h3><span class="hide">Trackback : </span>	<span class="trackback-url" style="cursor: text">http://karsvv.tistory.com/trackback/22</span>
+	<span id="TrackbackCopyHolder22" style="vertical-align: -4px; margin-left: 1px">
+	<script type="text/javascript">
+	//<![CDATA[
+	AC_FL_RunContent(
+		'src','http://s1.daumcdn.net/cfs.tistory/v/0/blog/script/copyTrackback',
+		'Flashvars','url=http://karsvv.tistory.com/trackback/22&mode=whiteButton',
+		'width','29',
+		'height','18',
+		'id', 'TrackbackCopyButton22',
+		'wmode','transparent',
+		'allowScriptAccess','always',
+		'type','application/x-shockwave-flash',
+		'pluginspage','http://www.macromedia.com/go/getflashplayer'
+	);
+	//]]>
+	</script><embed src="http://s1.daumcdn.net/cfs.tistory/v/0/blog/script/copyTrackback.swf" flashvars="url=http://karsvv.tistory.com/trackback/22&amp;mode=whiteButton" width="29" height="18" id="TrackbackCopyButton22" wmode="transparent" allowscriptaccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"> 
+	</span>
+	<span>
+		<a href="http://www.tistory.com/gateway/?trackback=http%3A%2F%2Fkarsvv.tistory.com%2Ftrackback%2F22&amp;defaultAdmin=%2Fadmin" onclick="window.open(this.href); return false">
+	<img src="http://i1.daumcdn.net/cfs.tistory/v/0/static/admin/btn_track_white.gif" alt="관련글 쓰기" title="" style="_margin-left: 5px; vertical-align: -4px">
+	</a></span>
+</h3>
+										
+									</div><!-- close trackback -->
+								</div><script type="text/javascript">loadedTrackbacks[22]=true;</script>
+								<div id="entry22Comment" style="display:block">
+									<div class="comment">
+										<h3 class="hide">댓글을 달아 주세요 </h3>
+				<!-- 댓글읽기 -->
+										<div class="commentList">
+											
+												<ol>
+													
+														<li id="comment11121413">
+															<div class="rp_general">
+																<span class="name">  <a href="http://vem.pkdj.net" onclick="return openLinkInNewWindow(this)">ghd</a></span>
+																<span class="control">
+																	<a href="/22#comment11121413" class="address" title="댓글주소">&nbsp;<span class="hide">댓글주소</span></a><a href="#" onclick="deleteComment(11121413);return false" class="modify" title="수정/삭제">&nbsp;<span class="hide">수정/삭제</span></a><a href="#" onclick="commentComment(11121413); return false" class="write" title="댓글쓰기">&nbsp;<span class="hide">댓글쓰기</span></a>
+																</span>
+																<span class="date"> 2013/04/20 22:22</span>
+																<p>운명사랑을 잘 모르겠어</p>
+															</div>
+															
+														</li>
+													
+												</ol>
+											
+										</div><!-- close commentList -->
+				<!-- 댓글쓰기 -->
+										<form method="post" action="/comment/add/22" onsubmit="return false" style="margin: 0">
+											<div class="commentWrite">
+												
+													
+														<p class="name floatWrapper">
+															<label for="name_22" class="head">Name</label>
+															<input type="text" name="name" value="" id="name_22" class="text">
+														</p>
+														<p class="password floatWrapper">
+															<label for="password_22" class="head">Password</label>
+															<input type="password" maxlength="8" name="password" value="" id="password_22" class="text">
+														</p>
+														<p class="homepage floatWrapper">
+															<label for="homepage_22" class="head">Homepage</label>
+															<input type="text" name="homepage" value="http://" id="homepage_22" class="text">
+														</p>
+													
+													<p class="secretWrap">
+														<input type="checkbox" name="secret" id="secret_22" class="checkbox">
+														<label for="secret_22">secret</label>
+													</p>
+												
+												<p class="comment-write"><label for="comment" class="head">Comment</label><textarea name="comment" rows="6" cols="50"></textarea></p>
+												<p class="btn-write"><input type="submit" value="댓글 달기" onclick="addComment(this, 22); return false;" class="submit"></p>
+											</div><!-- close commentWrite -->
+										</form>
+									</div><!-- close comment -->
+								</div><script type="text/javascript">loadedComments[22]=true;highlight()</script>
+							</div><!-- close entry -->
+						
+				<!-- 페이지 -->
+						
+							<div id="paging">
+								<a href="/23" class="" id="prevPage" title="이전페이지">&nbsp;<span class="hide">이전</span></a>
+								<span class="numbox">
+									<a href="/383" class="num"><span>1</span></a> <span class="interword">...</span> <a href="/27" class="num"><span>280</span></a><a href="/26" class="num"><span>281</span></a><a href="/24" class="num"><span>282</span></a><a href="/23" class="num"><span>283</span></a><a class="num"><span class="selected">284</span></a><a href="/21" class="num"><span>285</span></a><a href="/19" class="num"><span>286</span></a><a href="/18" class="num"><span>287</span></a><a href="/17" class="num"><span>288</span></a> <span class="interword">...</span> <a href="/2" class="num"><span>299</span></a>
+								</span>
+								<a href="/21" class="" id="nextPage" title="다음페이지">&nbsp;<span class="hide">다음</span></a>
+							</div>
+						
+					</div>
