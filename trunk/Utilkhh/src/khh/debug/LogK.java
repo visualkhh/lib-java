@@ -113,55 +113,55 @@ public class LogK  implements Serializable {
                     LogKTarget atTarget = new LogKTarget();
                     atTarget.setId(parser.getString(targetxpath+"["+j+"]/@id"));
                     atTarget.setCategory(parser.getString(targetxpath+"["+j+"]/@category"));
-                    atTarget.setExtendcategory(parser.getString(targetxpath+"["+j+"]/@extendcategory"));
+                    atTarget.setExtends(parser.getString(targetxpath+"["+j+"]/@extends"));
                     
                     
                     Object value=null;
-                    if(atTarget.getExtendcategory()!=null){
-                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/loger/level");
+                    if(atTarget.getExtends()!=null){
+                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/loger/level");
                         if(value!=null){
                             String s = ((String)value).replaceAll("\\p{Space}", "");
                             s = s.replaceAll(" ", "");
                             atTarget.setLoger_level(s.split(","));
                         }
                         
-                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/loger/dateformat");
+                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/loger/dateformat");
                         if(value!=null)
                         atTarget.setLoger_dateformat((String)value);
                         
-                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/loger/logformat");
+                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/loger/logformat");
                         if(value!=null)
                         atTarget.setLoger_logformat((String)value);
                         
-                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/loger/exception_stacktrace");
+                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtends()+"']/loger/exception_stacktrace");
                         if(value!=null)
                             atTarget.setException_stacktrace((Boolean)value);
                         
                         
-                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/saver/dateformat");
+                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/dateformat");
                         if(value!=null)
                         atTarget.setSaver_dateformat((String)value);
                         
-                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/saver/save");
+                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/save");
                         if(value!=null)
                         atTarget.setSaver_save((Boolean)value);
                         
-                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/saver/append");
+                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/append");
                         if(value!=null)
                         atTarget.setSaver_append((Boolean)value);
                         
                         
-                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/saver/savepath");
+                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/savepath");
                         if(value!=null)
                         atTarget.setSaver_savepath((String)value);
                         
                         
-                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/saver/filename");
+                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/filename");
                         if(value!=null)
                         atTarget.setSaver_filename((String)value);
                         
                         //추가20120925
-                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtendcategory()+"']/loger/outputstream");
+                        value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/loger/outputstream");
                         if(value!=null&& !value.equals(""))
                         atTarget.setOutputstream((OutputStream)ReflectionUtil.newClass((String)value));
                         
