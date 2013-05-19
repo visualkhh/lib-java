@@ -313,6 +313,17 @@ public class ImageUtil {
         return return_data;
     }
     
+    public static byte[] toByteArray(BufferedImage bufferedImage_r,String type) throws IOException{
+    	//type :jpg
+    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    	//ImageIO.write( bufferedImage_r, "jpg", baos );
+    	ImageIO.write( bufferedImage_r, type, baos );
+    	baos.flush();
+    	byte[] imageInByte = baos.toByteArray();
+    	baos.close();
+    	return imageInByte;
+    }
+    
     
     
     
