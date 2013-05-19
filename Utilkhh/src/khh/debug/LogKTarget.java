@@ -40,7 +40,7 @@ public class LogKTarget{
 
 	String id					= null;
 	String category				= null;
-	String extendcategory		= null;
+	String extends_				= null;
 	OutputStream outputstream 	= System.out;
 
 	public String getLoger_dateformat(){
@@ -99,12 +99,12 @@ public class LogKTarget{
 		this.category = category;
 	}
 
-	public String getExtendcategory(){
-		return extendcategory;
+	public String getExtends(){
+		return extends_;
 	}
 
-	public void setExtendcategory(String extendcategory){
-		this.extendcategory = extendcategory;
+	public void setExtends(String extends_){
+		this.extends_ = extends_;
 	}
 
 	public Boolean isSaver_save(){
