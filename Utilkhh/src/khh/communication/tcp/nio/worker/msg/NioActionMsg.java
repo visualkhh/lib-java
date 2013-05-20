@@ -1,21 +1,24 @@
 package khh.communication.tcp.nio.worker.msg;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
+import khh.debug.LogK;
 import khh.format.Formater;
 import khh.std.Standard;
 import khh.util.ByteUtil;
 
 public class NioActionMsg extends Formater<ByteBuffer>{
-	public static final byte STX = (byte)0x19;
-	public static final byte ETX = (byte)0x86;
-    public static final byte PARAM_STX=(byte) 0x04;
-    public static final byte PARAM_CTX=(byte) 0x25;
-    public static final byte PARAM_ETX=(byte) 0x12;
+	LogK log = LogK.getInstance();
+	public static final byte[] STX 		= { (byte)0x01, (byte)0x09, (byte)0x08, (byte)0x06 };
+	public static final byte[] ETX 		= { (byte)0x00, (byte)0x04, (byte)0x02, (byte)0x05 };
+    public static final byte[] PARAM_STX= { (byte)0x60, (byte)0x12, (byte)0x27, (byte)0x25 };
+    public static final byte[] PARAM_CTX= { (byte)0x65, (byte)0x92, (byte)0x08, (byte)0x40 };
+    public static final byte[] PARAM_ETX= { (byte)0x62, (byte)0x42, (byte)0x58, (byte)0x60 };
     
 	private int action = 0;
 	private boolean success = false;
@@ -123,62 +126,86 @@ public class NioActionMsg extends Formater<ByteBuffer>{
         
         
         while(true)  {
+        	
+        	
+        	if(data.position()>= data.limit()){
+            	break;
+            }
+        	
+        	
             int startposition = data.position();
             //name 
-            if(data.get()!=PARAM_STX){
-                data.position(startposition);
-                set(data.slice());
-                break;
+            
+            if( data.limit()>=4 && data.get(startposition+0)==PARAM_STX[0] && data.get(startposition+1)==PARAM_STX[1] && data.get(startposition+2)==PARAM_STX[2] && data.get(startposition+3)==PARAM_STX[3] ){
+            	data.position(startposition+4); //param stx 빼고.
+            }else{
+            	data.position(startposition);
+            	set(data.slice());
+            	break;
             }
+
+        	
             
             int paramNamelength=0;
             int paramNamePosition = data.position();
-            for(int i = paramNamePosition; i < data.limit(); i++){
-                byte get = data.get();
-                if(get == PARAM_CTX){
+            for(int i = paramNamePosition; i < data.limit()-4; i++){ //param ctx는빼고..
+                //byte get = data.get();
+                if(data.get(i)==PARAM_CTX[0] && data.get(i+1)==PARAM_CTX[1] && data.get(i+2)==PARAM_CTX[2] && data.get(i+3)==PARAM_CTX[3]){
                     break;
                 }else{
                     paramNamelength++;
+                    data.position(i);//포지션 정하고 뒤쪽에 CXT남았고.
                 }
             }
-            
+            //파라미터 이름넣고
             byte[] paramNamebyte=null;
             if(paramNamelength>0){
                 paramNamebyte = new byte[paramNamelength];
                 data.position(paramNamePosition);
                 data.get(paramNamebyte);
             }
-            
-            if(data.get()!=PARAM_CTX){ //ext빼기
-                data.position(startposition);
-                //set(data.slice());
-                break;
+            //ctx check 다시한번 체크하고
+            byte pctx0 = data.get();
+            byte pctx1 = data.get();
+            byte pctx2 = data.get();
+            byte pctx3 = data.get();
+            if(pctx0==PARAM_CTX[0] && pctx1==PARAM_CTX[1] && pctx2==PARAM_CTX[2] && pctx3==PARAM_CTX[3]){ //ext빼기
+            }else{
+            	data.position(startposition);
+            	break;
             }
+            
+            
             
             // value
             int paramValuelength=0;
             int paramValuePosition = data.position();
-            for(int i = paramValuePosition; i < data.limit(); i++){
-                byte get = data.get();
-                if(get == PARAM_ETX){
-                    break;
+            for(int i = paramValuePosition; i < data.limit()-4; i++){ //pram etx 빼고
+                //byte get = data.get();
+            	if(data.get(i)==PARAM_ETX[0] && data.get(i+1)==PARAM_ETX[1] && data.get(i+2)==PARAM_ETX[2] && data.get(i+3)==PARAM_ETX[3]){
+            		break;
                 }else{
                     paramValuelength++;
+                    data.position(i);//포지션 정하고 뒤쪽에 EXT남았고.
                 }
             }
-            
+            //값담고
             byte[] paramValuebyte=null;
             if(paramValuelength>0){
                 paramValuebyte = new byte[paramValuelength];
                 data.position(paramValuePosition);
                 data.get(paramValuebyte);
             }
+            //etx check 다시한번체크하고
+            byte petx0 = data.get();
+            byte petx1 = data.get();
+            byte petx2 = data.get();
+            byte petx3 = data.get();
             
-            
-            if(data.get()!=PARAM_ETX){ //ext빼기
-                data.position(startposition);
-                //set(data.slice());
-                break;
+            if(petx0==PARAM_ETX[0] && petx1==PARAM_ETX[1] && petx2==PARAM_ETX[2] && petx3==PARAM_ETX[3]){ //ext빼기
+            }else{
+            	data.position(startposition);
+            	break;
             }
             
             
@@ -193,39 +220,26 @@ public class NioActionMsg extends Formater<ByteBuffer>{
             
             
             
-            if(data.position()>= data.limit()){
-            	break;
-            }
+            
         }
         
         
         
         set(data.slice());
         
+        data.clear();
         
         
+       /* 
+        Iterator<String> iter = param.keySet().iterator();
+        while(iter.hasNext()){
+        	String key = iter.next();
+        	log.debug("key : "+key+" , value :",(byte[])param.get(key));
+        }
+        log.debug("data",get());
+        */
         
         
-        
-//    	//read해서 그냥바로넣기때문에 여긴안쓴다.  아래검증안됨 쓰지마!
-//		if(data==null)
-//			return;
-//		//from! stx str etx
-//		if(data!=null && data.get()!=STX){
-//			data.clear();
-//			set(data);
-//			return;
-//		}
-//		setAction(data.getInt());
-//		int length = data.getInt();
-//		ByteBuffer datas =  ByteBuffer.allocateDirect(length);
-//		datas.put(datas);
-//		set(datas);
-//		if(data.get()!=ETX){
-//			setSuccess(false);
-//		}else{
-//			setSuccess(true);
-//		}
     }
 
     
@@ -243,10 +257,11 @@ public class NioActionMsg extends Formater<ByteBuffer>{
         while(iter.hasNext()){
             String key = iter.next();
             byte[] value = param.get(key);
-            param_length += 1 + (key != null ? key.getBytes().length : 0) + 1 + (value != null ? value.length : 0) + 1; //stx + paramname + ctx + paramvalue + etx
+          //4pstx + paramname + 4pctx + paramvalue + 4petx
+            param_length += 4 + (key != null ? key.getBytes().length : 0) + 4 + (value != null ? value.length : 0) + 4; 
         }
         
-        length += 1 + 4 + 4 + 1; //1 stx,  4 action, 4 length, 1 etx
+        length += 4 + 4 + 4 + 4; //4 stx,  4 action, 4 length, 4 etx
         length+=param_length+getLength();   //paramlength + datalength
         
         
