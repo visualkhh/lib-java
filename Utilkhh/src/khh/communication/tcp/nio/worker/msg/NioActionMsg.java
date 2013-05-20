@@ -20,7 +20,7 @@ public class NioActionMsg extends Formater<ByteBuffer>{
     public static final byte[] PARAM_CTX= { (byte)0x65, (byte)0x92, (byte)0x08, (byte)0x40 };
     public static final byte[] PARAM_ETX= { (byte)0x62, (byte)0x42, (byte)0x58, (byte)0x60 };
     
-	private int action = 0;
+	private int 	action 	= 0;
 	private boolean success = false;
 	
 	   //int        부호 있는 정수    32 bits      -2147483648 ~ 2147483647
