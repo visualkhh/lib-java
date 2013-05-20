@@ -59,19 +59,33 @@ public abstract class NioActionWorker extends NioWorker {
      long startms=System.currentTimeMillis();
      int timeoutms = getReadTimeout();
 //     if(selectionKey.isReadable()){
-         ByteBuffer buffer = ByteBuffer.allocateDirect(1);
-         int i = read(buffer, timeoutms,socket); //stx Read
+	ByteBuffer buffer = ByteBuffer.allocateDirect(4);
+	buffer.order(ByteOrder.BIG_ENDIAN);
+	
+	
+	//stx check
+	int cnt=0;
+	int readLength = 0;
+	while(cnt!=4){
+		buffer.position(cnt);
+		buffer.limit(cnt+1);
+		timeoutms 		= timeoutms - (int)(System.currentTimeMillis()-startms);
+		readLength 		= read(buffer, timeoutms,socket); //stx Read
+		if(readLength == 1 && NioActionMsg.STX[cnt] == buffer.get(cnt)){
+			cnt++;
+		}else{
+			cnt=0;
+		}
+	}
+         
          buffer.clear();
-         
-         timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
-         
          log.debug("SEX",buffer);
-         if(i==1 && NioActionMsg.STX == buffer.get(0)){
+//         if(readLength==1 && NioActionMsg.STX == buffer.get(0)){
              msg = new NioActionMsg();
-             
-             buffer = ByteBuffer.allocateDirect(4);
-             buffer.order(ByteOrder.BIG_ENDIAN);
-             i = read(buffer, timeoutms,socket);         //action Code Read
+//             buffer = ByteBuffer.allocateDirect(4);
+//             buffer.order(ByteOrder.BIG_ENDIAN);
+             timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
+             readLength = read(buffer, timeoutms,socket);         //action Code Read
              buffer.clear();
              int actionCode = buffer.getInt();
              buffer.clear();
@@ -80,42 +94,60 @@ public abstract class NioActionWorker extends NioWorker {
              
              
              
+             
+             
+             buffer.clear();
+             //buffer = ByteBuffer.allocateDirect(4);    //length Code Read
+             //buffer.order(ByteOrder.BIG_ENDIAN);
              timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
-             
-             
-             
-             buffer = ByteBuffer.allocateDirect(4);    //length Code Read
-             buffer.order(ByteOrder.BIG_ENDIAN);
-             i = read(buffer, timeoutms,socket);
+             readLength = read(buffer, timeoutms,socket);
              buffer.clear();
              int length = buffer.getInt();
              buffer.clear();
             log.debug("LENGTH("+length+")",buffer);
              
              
-             timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
              
+            //데이터있을시.ㅎㅎ
              if(length>0){
-	             buffer = ByteBuffer.allocateDirect(length);//data Read
-	             i = read(buffer, timeoutms,socket);
-	             buffer.clear();
-	             msg.format(buffer);
+            	 ByteBuffer bufferBody = ByteBuffer.allocateDirect(length);//data Read
+            	 timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
+	             readLength = read(bufferBody, timeoutms,socket);
+	             bufferBody.clear();
+	             msg.format(bufferBody);
 //	             msg.set(buffer);
-	             log.debug("DATA",buffer);
+	             log.debug("DATA",bufferBody);
              }
              
              
-             timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
-             
-             buffer = ByteBuffer.allocateDirect(1);        //etx Read
-             i = read(buffer, timeoutms,socket);
+             buffer.clear();
+         	cnt=0;
+        	readLength = 0;
+        	while(cnt!=4){
+        		buffer.position(cnt);
+        		buffer.limit(cnt+1);
+        		timeoutms 		= timeoutms - (int)(System.currentTimeMillis()-startms);
+        		readLength 		= read(buffer, timeoutms,socket); //stx Read
+        		if(readLength == 1 && NioActionMsg.ETX[cnt] == buffer.get(cnt)){
+        			cnt++;
+        		}else{
+        			msg.setSuccess(false);
+        			log.debug("ETX Fail Unknown Action Msg ETX:"+NioActionMsg.ETX);
+        			throw new IOException("ETX Fail Unknown Action Msg");
+        		}
+        	}
+            //buffer = ByteBuffer.allocateDirect(1);        //etx Read
+//             timeoutms = timeoutms - (int)(System.currentTimeMillis()-startms);
+//             readLength = read(buffer, timeoutms,socket);
              buffer.clear();
              log.debug("ETX",buffer);
              
-             if(i==1 && NioActionMsg.ETX ==buffer.get(0)){
+             if(cnt==4){
                  msg.setSuccess(true);
+             }else{
+            	 msg.setSuccess(false);
              }
-         }
+//         }
 //     }
      return msg;
  }
@@ -144,11 +176,13 @@ public abstract class NioActionWorker extends NioWorker {
 					log.info("NioMsg  [msg == null || msg.isSuccess() == false] (Before receiveNioMsg) "+msg);
 					return ;
 				}else{
-					onReceiveAction(msg,selectionKey);
+					msg = onReceiveAction(msg,selectionKey);
 				}
 			}
 			if(selectionKey.isWritable()){
-				onSendAction(msg, selectionKey);
+				msg = onSendAction(msg, selectionKey);
+				if(msg!=null)
+				sendNioActionMsg(msg);
 			}
 		}catch (Exception e) {
 			if(isAutoFeedbackException() && selectionKey!=null && selectionKey.isWritable()){
