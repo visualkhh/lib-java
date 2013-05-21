@@ -23,6 +23,7 @@ public class PropertiesUtil extends Properties
 //		props = new Properties();
 		load(this.is);
 		
+		
 	}
 	
 
