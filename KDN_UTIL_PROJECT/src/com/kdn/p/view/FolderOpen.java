@@ -206,7 +206,7 @@ public class FolderOpen extends FrameFrame
 						if(osname.indexOf("Window")>=0){
 							try
 							{
-								Util.executeSystem("explorer "+url);
+								System.executeSystem("explorer "+url);
 							}
 							catch (IOException e1)
 							{
