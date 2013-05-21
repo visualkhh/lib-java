@@ -59,7 +59,7 @@ public class LogK  implements Serializable {
     ArrayList<LogKTarget> targets = new ArrayList<LogKTarget>();
     Scheduler scheduler = new Scheduler();
     long recycle_ms=10000;
-    boolean recycle=true;
+    boolean recycle=false;
     
     DuplicationArrayList<String> configfile_add = new DuplicationArrayList<String>();
     //ArrayList<String> configfile_add = new ArrayList<String>();
