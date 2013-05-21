@@ -15,7 +15,7 @@ import khh.file.util.FileUtil;
 import khh.image.ImageUtil;
 import khh.util.ByteUtil;
 
-public class CloudImageData {
+public class CloudImage {
 
     private byte[] stximage = new byte[]{0x19, (byte) 0x86,0x04,0x25};
     private byte[] etximage  = new byte[]{0x25, 0x04,(byte) 0x86,0x19};
