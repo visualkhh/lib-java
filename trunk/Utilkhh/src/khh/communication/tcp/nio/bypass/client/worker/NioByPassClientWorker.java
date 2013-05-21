@@ -24,7 +24,7 @@ public class NioByPassClientWorker extends NioWorker {
 				int i = read(b);
 				if(i>=1){
 					bff.put(b);
-				}
+				} 
 			}
 		}catch (Exception e) {
 		}
