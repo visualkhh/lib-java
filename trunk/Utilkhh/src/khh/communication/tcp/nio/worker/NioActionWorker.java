@@ -181,7 +181,7 @@ public abstract class NioActionWorker extends NioWorker {
 			}
 			if(selectionKey.isWritable()){
 				msg = onSendAction(msg, selectionKey);
-				if(msg!=null)
+				if(msg!=null && msg.isSuccess()==true)
 				sendNioActionMsg(msg);
 			}
 		}catch (Exception e) {

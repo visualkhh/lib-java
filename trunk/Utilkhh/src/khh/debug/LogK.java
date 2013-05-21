@@ -540,7 +540,7 @@ public class LogK  implements Serializable {
        debug(message,ByteUtil.toByteArray(buffer));
    }
    synchronized public void debug(Object message,byte[] data){
-	   logByte(LogKTarget.INFO,message,data);
+	   logByte(LogKTarget.DEBUG,message,data);
    }
    synchronized public void debug(Object message,Throwable e){
        log(LogKTarget.DEBUG,message,e);
