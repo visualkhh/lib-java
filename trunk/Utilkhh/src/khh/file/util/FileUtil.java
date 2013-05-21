@@ -747,9 +747,10 @@ public class FileUtil{
 		return is;
 	}
 
-	// by
+	// by 같은 패키지안에 있는 파일을 가져온다 
 	public static String getFilePath(Class atclass, String filename){
 		return atclass.getResource(filename).getFile();
+		//String path = testmain.class.getResource("testmain.java").getPath();
 	}
 
 	public static boolean isExists(String path){
