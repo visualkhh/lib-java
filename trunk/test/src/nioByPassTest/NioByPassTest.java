@@ -12,8 +12,9 @@ public class NioByPassTest {
 	private void start() {
 		
 	}
-	public static void main(String[] args) throws Exception {
-		new NioByPassTest();
+	public static void main(String[] args) {
+//		new NioByPassTest();
+		System.out.println("a");
 
 	}
 
