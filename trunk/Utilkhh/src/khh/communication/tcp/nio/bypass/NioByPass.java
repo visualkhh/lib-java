@@ -57,7 +57,7 @@ public class NioByPass implements Communication_I {
 		serverWorker.setClient(clientWorker);
 		clientWorker.setServer(serverWorker);
 		
-		
+		 
 		ArrayList<NioWorker> serverlist = new ArrayList<NioWorker>();
 		serverlist .add (serverWorker);
 		
