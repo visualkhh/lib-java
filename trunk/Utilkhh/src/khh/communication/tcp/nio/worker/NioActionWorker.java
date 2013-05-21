@@ -14,13 +14,12 @@ import khh.debug.LogK;
 
 public abstract class NioActionWorker extends NioWorker {
 	private LogK log = LogK.getInstance();
-	private int readTimeout_ms =5000; 
+//	private int readTimeout_ms =5000; 
 	private boolean autoFeedbackException=false;
 	public NioActionWorker(int firestMode) {
 	   super(firestMode);
     }
 	public NioActionWorker(){
-		
 	}
 	
 	
@@ -34,12 +33,12 @@ public abstract class NioActionWorker extends NioWorker {
 	public void setAutoFeedbackException(boolean autoFeedbackException){
 		this.autoFeedbackException = autoFeedbackException;
 	}
-	public int getReadTimeout(){
-		return readTimeout_ms;
-	}
-	public void setReadTimeout(int readTimeout_ms){
-		this.readTimeout_ms = readTimeout_ms;
-	}
+//	public int getReadTimeout(){
+//		return readTimeout_ms;
+//	}
+//	public void setReadTimeout(int readTimeout_ms){
+//		this.readTimeout_ms = readTimeout_ms;
+//	}
 
 
 

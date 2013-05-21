@@ -26,7 +26,7 @@ abstract public class NioWorker{
 	private SocketChannel socketChannel			= null;
 	private LogK log 							= LogK.getInstance();
 	private NioCommunication niocommunication 					= null;
-	
+	private int readTimeout_ms =5000; 
 	
 	public NioWorker(int firestMode) {
 	    setFirestMode(firestMode);
@@ -74,17 +74,27 @@ abstract public class NioWorker{
 	
 	
 	
+	final synchronized public  int read(byte[] buffer) throws IOException{
+		return read(buffer,getReadTimeout());
+	}
 	final synchronized public  int read(byte[] buffer, int timeout_daly_ms) throws IOException{
 		ByteBuffer bytebuff  = ByteBuffer.allocateDirect(buffer.length);
 		bytebuff.clear();
-		int r = read(buffer, timeout_daly_ms);
+		int r = read(bytebuff, timeout_daly_ms);
 		bytebuff.clear();
 		bytebuff.get(buffer);
 		bytebuff.clear();
 		return r;
 	}
+	
+	final synchronized public  int read(ByteBuffer buffer) throws IOException{
+		return read(buffer,getReadTimeout());
+	}
 	final synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms) throws IOException{
 		return read(buffer,timeout_daly_ms,getSocketChannel());
+	}
+	final synchronized public  int read(ByteBuffer buffer,SelectionKey selectionKey) throws IOException{
+		return read(buffer,getReadTimeout(),selectionKey);
 	}
 	final synchronized public  int read(ByteBuffer buffer, int timeout_daly_ms,SelectionKey selectionKey) throws IOException{
 		return read(buffer,timeout_daly_ms,(SocketChannel)selectionKey.channel());
@@ -122,7 +132,12 @@ abstract public class NioWorker{
 	
 	
 	
-	
+	public int getReadTimeout(){
+		return readTimeout_ms;
+	}
+	public void setReadTimeout(int readTimeout_ms){
+		this.readTimeout_ms = readTimeout_ms;
+	}
 	
 	
 	
