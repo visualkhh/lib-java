@@ -23,7 +23,7 @@ public class ActionClient extends NioActionWorker {
 		while(iter.hasNext()){
 			String key = iter.next();
 			log.debug("key: "+key,param.get(key));
-			msg.putParam(key,new String(param.get(key))+key);
+			msg.putParam(key,new String(param.get(key))+key+new String(param.get(key))+new String(param.get(key))+new String(param.get(key))+new String(param.get(key))+new String(param.get(key))+new String(param.get(key)));
 		}
 		return msg;
 		
@@ -35,10 +35,10 @@ public class ActionClient extends NioActionWorker {
 		
 		if(msg==null){
 			msg = new NioActionMsg(1);	
+			msg.putParam("a", "b");
+			msg.putParam("b", "c");
 			setFirestMode(MODE_FIREST_R);
 		}
-		msg.putParam("a", "b");
-		msg.putParam("b", "c");
 		msg.setSuccess(true);
 		
 		return msg;

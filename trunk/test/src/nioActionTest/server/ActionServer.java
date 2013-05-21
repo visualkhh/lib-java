@@ -24,7 +24,7 @@ public class ActionServer extends NioActionWorker {
 		while(iter.hasNext()){
 			String key = iter.next();
 			log.debug("key: "+key,param.get(key));
-			msg.putParam(key,new String(param.get(key))+key);
+			msg.putParam(key,new String(param.get(key))+key+"1"+new String(param.get(key)));
 		}
 		return msg;
 	}
