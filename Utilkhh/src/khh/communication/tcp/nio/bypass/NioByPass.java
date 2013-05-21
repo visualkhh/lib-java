@@ -18,7 +18,8 @@ public class NioByPass implements Communication_I {
 	NioServer server;
 	NioClient client;
 	
-	
+	public NioByPass() {
+	}
 	public NioByPass(int serverPort,String targetAddr,int targetPort) {
 		this.serverPort = serverPort;
 		this.targetAddr = targetAddr;
