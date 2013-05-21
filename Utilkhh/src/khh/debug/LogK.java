@@ -372,7 +372,7 @@ public class LogK  implements Serializable {
                    String saver_date = DateUtil.getDate(saver_dateformat);
                    
                    String saver_filename = attarget.getSaver_filename();
-                   saver_filename = saver_filename.replaceAll("%d", date);
+                   saver_filename = saver_filename.replaceAll("%d", saver_date);
                    saver_filename = saver_filename.replaceAll("%l", level);
                    saver_filename = saver_filename.replaceAll("%c", StringUtil.regexMetaCharToEscapeChar(classpath));
                    saver_filename = saver_filename.replaceAll("%k", filename);
@@ -391,7 +391,7 @@ public class LogK  implements Serializable {
                 		   FileUtil.mkdirs(attarget.getSaver_savepath());
                 	   };
                 	   
-                        FileUtil.writeFile(savepath, logerformat+PropertyUtil.getSeparator(),append);
+                        FileUtil.writeFile(savepath, logerformat,append);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
