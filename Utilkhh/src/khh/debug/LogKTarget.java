@@ -2,23 +2,36 @@ package khh.debug;
 
 import java.io.OutputStream;
 
-//<!-- Level can be  ALL, DEBUG, INFO, WARN, ERROR, FATAL, OFF -->
+//<!-- Level can be  A, D, I, W, E, F, O -->
 //<!--
 //
-//    logk는 다양한 로깅레벨을 지원합니다.
-//    ① FATAL : 가장 크리티컬한 에러가 일어 났을 때 사용합니다.
-//    ② ERROR : 일반 에러가 일어 났을 때 사용합니다.
-//    ③ WARN : 에러는 아니지만 주의할 필요가 있을 때 사용합니다.
-//    ④ INFO : 일반 정보를 나타낼 때 사용합니다.
-//    ⑤ DEBUG : 일반 정보를 상세히 나타낼 때 사용합니다.
+//파일명은 logk 로시작해서 .xml으로 끝나야한다     클래스페스에 logk 폴더안에 생성되어야한다.
+//logk는 다양한 로깅레벨을 지원합니다.
 //
-//    Pattern to output
-//        %d : date
-//        %l : priority (level)
-//        %c : class,name  category (where the log is from)
-//        %m : message
-//        %n : line_separator
-// -->
+// O = OFF
+// A = ALL
+//① F = FATAL : 가장 크리티컬한 에러가 일어 났을 때 사용합니다.   
+//② E = ERROR : 일반 에러가 일어 났을 때 사용합니다.
+//③ W = WARN : 에러는 아니지만 주의할 필요가 있을 때 사용합니다.
+//④ I = INFO : 일반 정보를 나타낼 때 사용합니다.
+//⑤ D = DEBUG : 일반 정보를 상세히 나타낼 때 사용합니다.
+//
+//Pattern to output
+//	%d : date
+//	%l : priority (level)
+//	%c : class,name   category (where the log is from) fullclassname 
+//	%k : filename
+//	%m : message
+//	%n : line_number
+//	%e : exception message
+//	%f : MethodName
+//	%r : EnterChar
+//	category는 자바형  정규식으로 가능하다. =		^com\\.[A-Za-z0-9\\.\\@_\\-~#]+\\.hhk
+//	
+//		target > loger > outputstream 의 기본값은   System.out
+//	java.io.OutputStream 를 상속받은 애들을... 가따놔야한다.
+//-->
+//<!--logkattribute 속성은 마지막파일에만 적용된속성값을 가짐 한곳에서만 적어주길원합니다. -->
 public class LogKTarget{
 	public static final String ALL 		= "A";
 	public static final String OFF 		= "O";
