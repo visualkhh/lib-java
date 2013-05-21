@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.ext.fingercms.security.Crypt;
+
 import khh.encryption.CryptUtil;
 import khh.file.util.FileUtil;
 import khh.gui.component.frame.FrameFrame;
@@ -102,9 +104,21 @@ public class CryptConversion extends FrameFrame{
 		JTextField result =  (JTextField)getComponent(VIEWID.RESULTTEXT.getValue());
 		JTextField jb = (JTextField)getComponent(VIEWID.INPUTTEXT.getValue());
 		if(gb == 1){
-			result.setText(CryptUtil.encrypt(jb.getText()));
+			try {
+				result.setText(Crypt.toEncrypt(jb.getText()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			result.setText(CryptUtil.encrypt(jb.getText()));
 		}else if(gb == 2){
-			result.setText(CryptUtil.decrypt(jb.getText()));
+			try {
+				result.setText(Crypt.toDecrypt(jb.getText()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			result.setText(CryptUtil.decrypt(jb.getText()));
 		}
 	}
 
