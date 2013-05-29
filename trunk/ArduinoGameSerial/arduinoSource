@@ -1,0 +1,103 @@
+// digital pin 2 has a pushbutton attached to it. Give it a name:
+//int pushButton = 2;
+boolean startFlag = false;
+boolean startGame = false;
+int selected_led = 0;
+
+int gled_1 = 2;
+int gled_2 = 3;
+int gled_3 = 4;
+
+int uled_1 = 5;
+int uled_2 = 6;
+int uled_3 = 7;
+boolean sw = true;
+
+int incomingByte = 0; 
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+//  pinMode(pushButton, INPUT);
+  pinMode(gled_1, OUTPUT); 
+  pinMode(gled_2, OUTPUT); 
+  pinMode(gled_3, OUTPUT); 
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+
+ incomingByte = Serial.read();
+ if(incomingByte==0x1){//start
+   startFlag = true;
+ }else if(incomingByte==0x2){//end
+    startFlag = false;
+ }else if(incomingByte==0x03){ //game start
+   startGame = true;
+ }else if(incomingByte==uled_1 || incomingByte==uled_2 || incomingByte==uled_3){
+   selected_led=incomingByte;
+ }
+ 
+delay(500); 
+ if(startFlag){
+  gledLED(LOW);
+  uledLED(LOW);
+  digitalWrite(selected_led,HIGH);
+  if(startGame){
+    int r = random(2, 5);
+    digitalWrite(r,HIGH);
+    if(selected_led == r+3){
+      Serial.write(0x1);
+    }else{
+      Serial.write(0x2);
+    }
+   startFlag=false;
+   delay(3000);
+   
+
+  }
+ }else{
+   uledLED(LOW);
+    if(sw){
+      gledLED(HIGH);
+    }else{
+      gledLED(LOW);
+    }
+    sw=!sw;
+    selected_led=0;
+    startGame=false;
+ }
+
+
+
+  /*
+  int buttonState = digitalRead(pushButton);
+  Serial.println(buttonState);
+  if(buttonState==1){
+     digitalWrite(led, HIGH);
+   }else{
+    digitalWrite(led, LOW);
+  }
+  Serial.println(buttonState);
+  */
+}
+
+
+
+
+//GameLED
+void gledLED(int action){
+  digitalWrite(gled_1, action);
+  digitalWrite(gled_2, action);
+  digitalWrite(gled_3, action);
+}
+
+
+//userLED
+void uledLED(int action){
+  digitalWrite(uled_1, action);
+  digitalWrite(uled_2, action);
+  digitalWrite(uled_3, action);
+}
+
+
