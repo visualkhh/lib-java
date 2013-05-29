@@ -65,7 +65,7 @@ public abstract class NioActionWorker extends NioWorker {
 	//stx check
 	int cnt=0;
 	int readLength = 0;
-	while(cnt!=4){
+	while(cnt!=NioActionMsg.STX.length){//NioActionMsg.STX.length = 4
 		buffer.position(cnt);
 		buffer.limit(cnt+1);
 		timeoutms 		= timeoutms - (int)(System.currentTimeMillis()-startms);
@@ -122,7 +122,7 @@ public abstract class NioActionWorker extends NioWorker {
              buffer.clear();
          	cnt=0;
         	readLength = 0;
-        	while(cnt!=4){
+        	while(cnt!=NioActionMsg.ETX.length){ //NioActionMsg.ETX.length = 4
         		buffer.position(cnt);
         		buffer.limit(cnt+1);
         		timeoutms 		= timeoutms - (int)(System.currentTimeMillis()-startms);
@@ -188,12 +188,8 @@ public abstract class NioActionWorker extends NioWorker {
 				if(msg==null){
 					msg = new NioActionMsg();
 				}
-				msg.setAction(NioActionMsg.ACTION.EXCEPTION.getValue());
-				
-				log.info("NioActionWorker Exception: ",e);
-				msg.clear();
-				msg.set("exception:"+e+",message:"+e.getMessage()+",trace:"+StackTraceUtil.getStackTrace(e)+",date:"+DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
-				msg.setSuccess(true);
+				msg = makeFeedBackExceptionActionMsg(msg, e); 
+				log.debug("NioActionWorker Exception: ",e);
 				sendNioActionMsg(msg);
 			}else{
 			    throw e;
@@ -201,7 +197,13 @@ public abstract class NioActionWorker extends NioWorker {
 		}
 	}
 	
-
+	public NioActionMsg makeFeedBackExceptionActionMsg(NioActionMsg msg,Exception e){
+		msg.setAction(NioActionMsg.ACTION.EXCEPTION.getValue());
+		msg.clear();
+		msg.set("exception:"+e+",message:"+e.getMessage()+",trace:"+StackTraceUtil.getStackTrace(e)+",date:"+DateUtil.getDate("yyyy/MM/dd HH:mm:ss/SSS"));
+		msg.setSuccess(true);
+		return msg;
+	}
 
 
 	public abstract NioActionMsg onReceiveAction(NioActionMsg msg, SelectionKey selectionKey) throws Exception;
