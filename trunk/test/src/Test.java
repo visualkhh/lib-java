@@ -1,5 +1,6 @@
 import java.awt.AWTException;
 
+import khh.debug.LogK;
 import khh.string.util.StringUtil;
 
 public class Test {
@@ -8,5 +9,7 @@ public class Test {
         String g = "poll_aa.xml";
 //        System.out.println( StringUtil.isFind(p, g));
         System.out.println( StringUtil.isMatches(g, p));
+        
+        LogK.getInstance().debug("\r\n","\r\n".getBytes());
     }
 }

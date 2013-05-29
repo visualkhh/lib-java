@@ -6,12 +6,18 @@ import java.util.StringTokenizer;
 
 public class StringTokenizerTest {
     public static void main(String[] args) {
-        String data="GET /* HTTP /* 1.1";
-        StringTokenizer tok = new StringTokenizer(data,"/*");
-//        tok.
-        while(tok.hasMoreTokens()){
-        	System.out.println(tok.nextToken()+"  "+tok.countTokens());
-        }
+    	String[] g = "Host: 122233.33.33.55:555".split(": ");
+    	System.out.println(g[0]);
+    	System.out.println(g[1]);
+    	
+    	
+    	
+//        String data="GET /* HTTP /* 1.1";
+//        StringTokenizer tok = new StringTokenizer(data,"/*");
+////        tok.
+//        while(tok.hasMoreTokens()){
+//        	System.out.println(tok.nextToken()+"  "+tok.countTokens());
+//        }
 //        System.out.println(tok.nextToken(" "));
 //        System.out.println(tok.nextToken(" "));
 //        System.out.println(tok.nextToken(" "));
@@ -20,7 +26,7 @@ public class StringTokenizerTest {
         
 //        Object a= new String("a");
         
-        khh.string.token.StringTokenizer hhkTok = new khh.string.token.StringTokenizer("vv,aa",",");
+    	khh.string.token.StringTokenizer  hhkTok = new khh.string.token.StringTokenizer("\r\n");
         ArrayList ggg = new ArrayList();
         ggg.add("aa");
         ggg.add("aba");
@@ -29,18 +35,18 @@ public class StringTokenizerTest {
         System.out.println(hhkTok.makeString(ggg));
         
         
-        
-        khh.string.token.StringTokenizer hhkTok2 = new khh.string.token.StringTokenizer("vv,aa",",");
-        LinkedHashMap  h = new LinkedHashMap ();
-        h.put("a","aa");
-        h.put("b","bb");
-        h.put("c","cc");
-        h.put("d",1);
-        System.out.println(hhkTok.makeString(h));
-        hhkTok2.nextToken();
-        hhkTok2.nextToken();
-        hhkTok2.nextToken();
-        hhkTok2.nextToken();
+//        
+//        khh.string.token.StringTokenizer hhkTok2 = new khh.string.token.StringTokenizer("vv,aa",",");
+//        LinkedHashMap  h = new LinkedHashMap ();
+//        h.put("a","aa");
+//        h.put("b","bb");
+//        h.put("c","cc");
+//        h.put("d",1);
+//        System.out.println(hhkTok.makeString(h));
+//        hhkTok2.nextToken();
+//        hhkTok2.nextToken();
+//        hhkTok2.nextToken();
+//        hhkTok2.nextToken();
     }
     
     private String getValue(String origin, String key){
