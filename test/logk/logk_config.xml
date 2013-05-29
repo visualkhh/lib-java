@@ -42,51 +42,21 @@
 			<!-- <dateformat>yyyy-MM-dd_HH:mm:s,SSS</dateformat> -->
 			 <dateformat>mm:s,SSS</dateformat> -->
 			<!-- <logformat>%d [%l] %c(%f)(line %n)  >>  %m   %e  </logformat> -->
-			 <logformat>%d %k:%n (%f)▶ %m   %e  %r</logformat> -->
+			 <logformat>%d %k:%n (%f)▶ %m%e%r</logformat> -->
 			<exception_stacktrace>true</exception_stacktrace>
 			<!-- <outputstream>com.o.MyOutputStreame</outputstream> -->
 		</loger>
 		<saver>
 			<dateformat>yyyy-MM-dd</dateformat>
-			<save>false</save>
+			<save>true</save>
 			<savepath>c:\logk</savepath>
 			<append>true</append>
-			<filename>hhk_%c_%d.log</filename>
+			<filename>hhk_%d_.log</filename>
 		</saver>
 	</target>
 
 	
-<!-- 	<target id="agg"  category="^*"  extendcategory="super_target" ></target> --> 
-	<target id="agg"  category="^nioRelayServerTest.*"  extendcategory="super_target" ></target> 
-	<target id="agg"  category="^khh.communication.tcp.nio.*"  extendcategory="super_target" ></target> 
-<!-- 
- -->
-
-<!-- 
-	<target id="gg"  category="^com.khh.util.file.pack"  extendcategory="super_target" ></target>
-	
-	<target id="ConnectionMultiPool"  category="^com.kdn.util.db.connection.pool.*"  extendcategory="super_target" >
-		<loger>
-			<level>A</level>
-			<logformat>%d [%l] %c(line %n)  connectionmultipool  %m   %e </logformat>
-			<exception_stacktrace>true</exception_stacktrace>
-		</loger>
-		<saver>
-			<save>false</save>
-		</saver>
-	</target>
-	
-	
-	<target id="DBTerminalTest"  category="^com.kdn.util.db.terminal.*"  extendcategory="super_target" >
-		<loger>
-			<level>A</level>
-			<exception_stacktrace>false</exception_stacktrace>
-		</loger>
-		<saver>
-			<save>false</save>
-		</saver>
-	</target>
- -->
+	<target id="agg"  category="^*"  extends="super_target" ></target> 
 	
 
 
