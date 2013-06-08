@@ -29,6 +29,14 @@ public class ReflectionUtil
 //	      }
 	      return methods;
 	}
+	public static Method[] getDeclaredMethods(Class at){
+	    Method[] methods = at.getDeclaredMethods();
+//	      for(Method m : methods )
+//	      {
+//	         System.out.println( "Found a public method: " + m );
+//	      }
+	    return methods;
+	}
 	public static Field[] getFields(Class at){
 		Field[] fields = at.getFields();
 //		for(Field m : fields )
@@ -51,6 +59,20 @@ public class ReflectionUtil
 			e.printStackTrace();
 		}
 		return setSalaryMethod;
+	}
+	public static Method getDeclaredMethod(Class at,String methodName){
+	    return getDeclaredMethod(at, methodName, null);
+	}
+	public static Method getDeclaredMethod(Class at,String methodName,Class[] paramsTypes){
+	    Method setSalaryMethod = null;
+	    try {
+	        setSalaryMethod = at.getDeclaredMethod(methodName, paramsTypes);
+	    } catch (SecurityException e) {
+	        e.printStackTrace();
+	    } catch (NoSuchMethodException e) {
+	        e.printStackTrace();
+	    }
+	    return setSalaryMethod;
 	}
 
 	public static Field getField(Class at,String fieldName){
@@ -102,19 +124,33 @@ public class ReflectionUtil
 	}
 	
 	
-	public static void executeMathod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
-		executeMathod(object,mathodname,null,null);
-	}
-	public static void executeMathod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
-//		try{
-//				Object object = newClass(classclass);
-				Class klass =object.getClass();
-				Method setSalaryMethod =  klass.getMethod(methodName, paramTypes);
-				setSalaryMethod.invoke(object, parameters);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-	}
+    public static void executeMathod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+        executeMathod(object,mathodname,null,null);
+    }
+    public static void executeMathod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+//      try{
+//              Object object = newClass(classclass);
+                Class klass =object.getClass();
+                Method setSalaryMethod =  klass.getMethod(methodName, paramTypes);
+                setSalaryMethod.invoke(object, parameters);
+//      }catch(Exception e){
+//          e.printStackTrace();
+//      }
+    }
+    
+    public static void executeDeclaredMethod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+        executeDeclaredMethod(object,mathodname,null,null);
+    }
+    public static void executeDeclaredMethod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+//      try{
+//              Object object = newClass(classclass);
+                Class klass =object.getClass();
+                Method setSalaryMethod =  klass.getDeclaredMethod(methodName, paramTypes);
+                setSalaryMethod.invoke(object, parameters);
+//      }catch(Exception e){
+//          e.printStackTrace();
+//      }
+    }
 	
 	public static Object getField(Object object, Field field) throws IllegalArgumentException, IllegalAccessException{
 		Object value=null;
