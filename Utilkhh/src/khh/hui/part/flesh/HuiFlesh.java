@@ -9,19 +9,19 @@ import khh.hui.interfaces.HuiInterface;
 /*
  * 육체를. 대신한다.
  */
-public abstract class HuiFlesh<T> extends FrameFrame implements HuiInterface<T>{
+public abstract class HuiFlesh<T> implements HuiInterface<T>{
 	private Hui hui = null;
 	public HuiFlesh(){
 		super();
 	}
 
-	public HuiFlesh(GraphicsConfiguration gc){
-		super(gc);
-	}
-
-	public HuiFlesh(String title){
-		super(title);
-	}
+//	public HuiFlesh(GraphicsConfiguration gc){
+//		super(gc);
+//	}
+//
+//	public HuiFlesh(String title){
+//		super(title);
+//	}
 
 	public Hui getHui(){
 		return hui;
