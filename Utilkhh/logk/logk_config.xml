@@ -38,13 +38,13 @@
 	 
 	<target id="super_target">
 		<loger>
-			<level>A,F</level>
+			<level>A</level>
 			<!-- <dateformat>yyyy-MM-dd_HH:mm:s,SSS</dateformat> -->
 			 <dateformat>mm:s,SSS</dateformat> -->
 			<!-- <logformat>%d [%l] %c(%f)(line %n)  >>  %m   %e  </logformat> -->
 			 <logformat>%d %k:%n (%f)▶ %m   %e  %r</logformat> -->
 			<exception_stacktrace>true</exception_stacktrace>
-			<!-- <outputstream>com.o.MyOutputStreame</outputstream> -->
+			 <!-- <outputstream>System.out</outputstream>  --> 
 		</loger>
 		<saver>
 			<dateformat>yyyy-MM-dd</dateformat>
@@ -56,7 +56,7 @@
 	</target>
 
 	
-	<target id="agg"  category="^*"  extendcategory="super_target" ></target> 
+	<target id="agg"  category="^*"  extends="super_target" ></target> 
 	 <!--<target id="agg"  category="^niotest.ReadWorker"  extendcategory="super_target" ></target>-->  
 
 
