@@ -1,12 +1,9 @@
 package khh.hui;
 
-import khh.hui.action.HuiAction;
 import khh.hui.part.flesh.HuiFlesh;
 import khh.hui.part.input.HuiInput;
 import khh.hui.part.output.HuiOutput;
-import khh.hui.part.think.HuiMemory;
 import khh.hui.part.think.HuiThink;
-import khh.std.realworld.Info;
 
 public class Hui<T>{
 	HuiFlesh	<T>  huiflesh 	= null;
