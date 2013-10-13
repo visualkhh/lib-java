@@ -33,6 +33,7 @@
 
 	<application>
 		<input>
+			<schedual></schedual>
 		</input>
 
 		<flesh>
