@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamick>
+	<class id="a" classpath="java.long.String"></class>
+	<class id="b" classpath="java.long.Integer"></class>
+	<class id="c" classpath="java.long.Boolean"></class>
+
+	<class id="d" classpath="">
+		<constructor>
+			<class ref="a"></class>
+			<class ref="c"></class>
+			<class ref="b"></class>
+			<class id="uca" classpath="java.long.Boolean"></class>
+		</constructor>
+		<methoad name="go1">
+			<class ref="a"></class>
+			<class id="uma" classpath="java.long.Boolean"></class>
+		</methoad>
+		<methoad name="go2">
+			<class ref="b"></class>
+			<class id="umb" classpath="java.long.Boolean"></class>
+		</methoad>
+		<methoad name="go3">
+			<class ref="c"></class>
+			<class id="umc" classpath="java.long.Boolean"></class>
+		</methoad>
+	</class>
+	
+	
+	
+	
+	
+	<scrtipt>
+		<![CDATA[
+		asdasdas
+		dasd
+		asd
+		]]>
+	</scrtipt>
+</dynamick>
