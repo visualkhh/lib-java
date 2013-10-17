@@ -3,9 +3,11 @@ package khh.xml;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,16 +25,32 @@ import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+
+import static org.w3c.dom.Node.ATTRIBUTE_NODE;
+import static org.w3c.dom.Node.CDATA_SECTION_NODE;
+import static org.w3c.dom.Node.COMMENT_NODE;
+import static org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
+import static org.w3c.dom.Node.ELEMENT_NODE;
+import static org.w3c.dom.Node.ENTITY_NODE;
+import static org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
+import static org.w3c.dom.Node.NOTATION_NODE;
+import static org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
+import static org.w3c.dom.Node.TEXT_NODE;
+
 
 public class XMLparser
 {
 	private Document document;
-	private String filePath;
+//	private String filePath;
 	private File file;
 	private URL url;
 	private InputStream inputStream;
@@ -43,8 +61,9 @@ public class XMLparser
 	public XMLparser (Document document){
 		setDocument(document);
 	}
-	public XMLparser (String filePath) throws SAXException, IOException{
-		setFilePath(filePath);
+	public XMLparser (String xmlString) throws SAXException, IOException{
+	    setXMLString(xmlString);
+//		setFilePath(filePath);
 	}
 	public XMLparser (InputStream fileStream) throws SAXException, IOException{
 		setInputStrem(fileStream);
@@ -90,16 +109,11 @@ public class XMLparser
 	}
 	
 	
-	private void makeDocument(String filePath) throws SAXException, IOException{
+	private void makeDocument(String xmlString) throws SAXException, IOException{
 		DocumentBuilder docBuilder=getBuilder();
-//		try {
-			File file = new File(filePath);
-			this.document = docBuilder.parse(file);
-//		} catch (SAXException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		this.document = docBuilder.parse(new InputSource(new StringReader(xmlString)));
+//			File file = new File(xmlString);
+//			this.document = docBuilder.parse(file);
 	}
 	private void makeDocument(File file) throws SAXException, IOException{
 		DocumentBuilder docBuilder=getBuilder();
@@ -125,7 +139,7 @@ public class XMLparser
 		
 	}
 	
-	
+	//XPATH예제   http://msdn.microsoft.com/ko-kr/library/ms256086.aspx  
 //	다음은 DOM을 사용할 때 가장 많이 사용하게 될 메소드들이다.
 //	-          Document.getDocumentElement()
 //	: XML 문서의 루트(root)엘리먼트를 리턴한다.
@@ -135,15 +149,19 @@ public class XMLparser
 //	: 주어진 노드의 전과 다음 노드를 리턴한다.
 //	-          Node.getAttribute(attrName)
 //	: 주어진 노드에 파라미터로 들어온 attrName을 가진 속성(attribute)을 리턴한다.(예를 들어 id라는 이름의 속성을 얻으려면 getAttribute(“id”) 를 사용하면된다.)
-	
+/*
+
+
+
+ */
 	
 ///////////////
 	public Document getDocument() {
 		return document;
 	}
-	public String getFilePath() {
-		return filePath;
-	}
+//	public String getFilePath() {
+//		return filePath;
+//	}
 	public InputStream getInputStream() {
 		return inputStream;
 	}
@@ -157,10 +175,14 @@ public class XMLparser
 	public void setString(String stringXML) throws SAXException, IOException {
 		makeDocument(ConversionUtil.toInputStream(stringXML));
 	}
-	public void setFilePath(String filePath) throws SAXException, IOException {
+	public void setXMLString(String xmlString) throws SAXException, IOException {
+//	    this.filePath = filePath;
+	    makeDocument(xmlString);
+	}
+	/*public void setFilePath(String filePath) throws SAXException, IOException {
 		this.filePath = filePath;
 		makeDocument(filePath);
-	}
+	}*/
 	public void setInputStrem(InputStream inputStream) throws SAXException, IOException {
 		this.inputStream = inputStream;
 		makeDocument(inputStream);
@@ -278,19 +300,35 @@ public class XMLparser
 		return nodesresult;
 		
 	}
-	public Node getNode(String xPathUrl) throws XPathExpressionException,NoClassDefFoundError{
-		Node nodesresult=null;
-//		try
-//		{
-			XPathExpression expr=xPathCompile(xPathUrl);
-			nodesresult = (Node) expr.evaluate(document, XPathConstants.NODE);
-//		}
-//		catch (XPathExpressionException e)
-//		{
-//			e.printStackTrace();
-//		}
-		return nodesresult;
-	}
+    public Node getNode(String xPathUrl) throws XPathExpressionException,NoClassDefFoundError{
+        Node nodesresult=null;
+//      try
+//      {
+            XPathExpression expr=xPathCompile(xPathUrl);
+            nodesresult = (Node) expr.evaluate(document, XPathConstants.NODE);
+//      }
+//      catch (XPathExpressionException e)
+//      {
+//          e.printStackTrace();
+//      }
+        return nodesresult;
+    }
+    
+    public HashMap<String, String> getAttributes(String xPathUrl) throws XPathExpressionException,NoClassDefFoundError{
+        Node nodesresult=null;
+            XPathExpression expr=xPathCompile(xPathUrl);
+            nodesresult = (Node) expr.evaluate(document, XPathConstants.NODE);
+            
+            NamedNodeMap attrs = nodesresult.getAttributes();  
+            HashMap<String,String> attrMap = new HashMap<String, String>();
+            for(int i = 0 ; i<attrs.getLength() ; i++) {
+              Attr attribute = (Attr)attrs.item(i);     
+              attrMap.put(attribute.getName(), attribute.getValue());
+            }
+        return attrMap;
+    }
+    
+    
 	public Boolean getBoolean(String xPathUrl) throws XPathExpressionException,NoClassDefFoundError{
 		Boolean nodesresult=null;
 //		try
@@ -374,6 +412,51 @@ public class XMLparser
 //		}
 		return nodesresult;
 	}
+	
+	
+	public static String nodeType(short type) {
+	    switch(type) {
+	      case ELEMENT_NODE:                return "Element";
+	      case DOCUMENT_TYPE_NODE:          return "Document type";
+	      case ENTITY_NODE:                 return "Entity";
+	      case ENTITY_REFERENCE_NODE:       return "Entity reference";
+	      case NOTATION_NODE:               return "Notation";
+	      case TEXT_NODE:                   return "Text";
+	      case COMMENT_NODE:                return "Comment";
+	      case CDATA_SECTION_NODE:          return "CDATA Section";
+	      case ATTRIBUTE_NODE:              return "Attribute";
+	      case PROCESSING_INSTRUCTION_NODE: return "Attribute";
+	    }
+	    return "Unidentified";
+	  }
+	
+	public static void listNodes(Node node, String indent) {
+	    String nodeName = node.getNodeName();
+	    System.out.println(indent+" Node: "+nodeName);
+	    short type =node.getNodeType();
+	    System.out.println(indent+" Node Type: " + nodeType(type));
+	    if(type == TEXT_NODE){
+	      System.out.println(indent+" Content is: "+((Text)node).getWholeText());
+	    } else if(node.hasAttributes()) {
+	      System.out.println(indent+" Element Attributes are:");
+	      NamedNodeMap attrs = node.getAttributes();  
+	      for(int i = 0 ; i<attrs.getLength() ; i++) {
+	        Attr attribute = (Attr)attrs.item(i);     
+	        System.out.println(indent+ " " + attribute.getName()+" = "+attribute.getValue());
+	      }
+	    }
+	    
+	    NodeList list = node.getChildNodes();       
+	    if(list.getLength() > 0) {                  
+	      System.out.println(indent+" Child Nodes of "+nodeName+" are:");
+	      for(int i = 0 ; i<list.getLength() ; i++) {
+	        listNodes(list.item(i),indent+"  ");      
+	      }
+	    }         
+	  }
+	
+	
+	
 	
 	
 	public String getString() throws IOException{

@@ -4,7 +4,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+
+import khh.collection.StandardArrayList;
+import khh.std.Standard;
 
 public class ReflectionUtil
 {
@@ -97,6 +99,23 @@ public class ReflectionUtil
 	public static Object newClass(String classpath,Class[] constructorParamType ,Object[] constructorArgs) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
 		return newClass(getClass(classpath), constructorParamType,constructorArgs);
 	}
+	
+	public static Object newClass(String classpath,StandardArrayList<Class,Object> parameter) throws SecurityException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	    return newClass(getClass(classpath),parameter);
+	}
+	public static Object newClass(Class classclass,StandardArrayList<Class,Object> parameter) throws SecurityException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	    
+	    Class[] classs = new Class[parameter.size()];
+	    Object[] objects = new Object[parameter.size()];
+	    
+	    for (int i = 0; i < parameter.size(); i++) {
+	        Standard<Class, Object> standardAt = parameter.get(i);
+	        classs[i]  =   standardAt.getKey();
+	        objects[i] =   standardAt.getValue();
+        }
+	    
+	    return newClass(classclass,classs,objects);
+	}
 	public static Object newClass(Class classclass,Class[] constructorParamType ,Object[] constructorArgs) throws SecurityException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 //		  Class[] paramTypes = {
 //		            String.class, 
@@ -124,15 +143,27 @@ public class ReflectionUtil
 	}
 	
 	
-    public static void executeMathod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
-        executeMathod(object,mathodname,null,null);
+    public static Object executeMathod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+        return executeMathod(object,mathodname,null,null);
     }
-    public static void executeMathod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+    
+    public static Object executeMathod(Object object,String methodName, StandardArrayList<Class,Object>parameter) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+        Class[] classs = new Class[parameter.size()];
+        Object[] objects = new Object[parameter.size()];
+        
+        for (int i = 0; i < parameter.size(); i++) {
+            Standard<Class, Object> standardAt = parameter.get(i);
+            classs[i]  =   standardAt.getKey();
+            objects[i] =   standardAt.getValue();
+        }
+       return executeMathod(object, methodName, classs, objects);
+    }
+    public static Object executeMathod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
 //      try{
 //              Object object = newClass(classclass);
                 Class klass =object.getClass();
                 Method setSalaryMethod =  klass.getMethod(methodName, paramTypes);
-                setSalaryMethod.invoke(object, parameters);
+              return  setSalaryMethod.invoke(object, parameters);
 //      }catch(Exception e){
 //          e.printStackTrace();
 //      }
