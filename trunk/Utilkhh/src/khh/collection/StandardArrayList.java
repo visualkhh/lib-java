@@ -20,5 +20,8 @@ public class StandardArrayList<K,V> extends ArrayList<Standard<K,V>> {
         }
         return v;
     }
+    public boolean add(K key,V value) {
+        return add(new Standard(key, value));
+    }
 
 }
