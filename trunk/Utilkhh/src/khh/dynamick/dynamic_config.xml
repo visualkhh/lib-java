@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dynamick>
-	<class id="a" classpath="java.long.String"></class>
-	<class id="b" classpath="java.long.Integer"></class>
-	<class id="c" classpath="java.long.Boolean"></class>
+	<class id="f" classpath="java.lang.String" value="f_string"></class>
+	<class id="a" classpath="java.lang.String" value="a_string"></class>
+	<class id="b" classpath="java.lang.Integer" value="500"></class>
+	<class id="c" classpath="java.lang.Boolean" value="true"></class>
 
-	<class id="d" classpath="">
+	<class id="d" classpath="khh.dynamick.DynamicInputTest">
 		<constructor>
 			<class ref="a"></class>
-			<class ref="c"></class>
 			<class ref="b"></class>
-			<class id="uca" classpath="java.long.Boolean"></class>
+			<class id="ggg" classpath="java.lang.Boolean" value="false"></class>
 		</constructor>
-		<methoad name="go1">
+		<methoad name="setA">
 			<class ref="a"></class>
-			<class id="uma" classpath="java.long.Boolean"></class>
 		</methoad>
-		<methoad name="go2">
-			<class ref="b"></class>
-			<class id="umb" classpath="java.long.Boolean"></class>
+		<methoad name="setB">
+			<class id="umb" classpath="java.lang.Integer" value="670"></class>
 		</methoad>
-		<methoad name="go3">
+		<methoad name="setC">
 			<class ref="c"></class>
-			<class id="umc" classpath="java.long.Boolean"></class>
 		</methoad>
+		
+		<methoad name="getA"></methoad>
+		<methoad name="getB"></methoad>
+		<methoad name="getC"></methoad>
 	</class>
 	
 	
-	
-	
-	
-	<scrtipt>
-		<![CDATA[
-		asdasdas
-		dasd
-		asd
-		]]>
-	</scrtipt>
+
 </dynamick>
