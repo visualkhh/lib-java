@@ -4,7 +4,6 @@
 	<class id="a" classpath="java.lang.String" value="a_string"></class>
 	<class id="b" classpath="java.lang.Integer" value="500"></class>
 	<class id="c" classpath="java.lang.Boolean" value="true"></class>
-
 	<class id="d" classpath="khh.dynamick.DynamicInputTest">
 		<constructor>
 			<class ref="a"></class>
@@ -25,7 +24,4 @@
 		<methoad name="getB"></methoad>
 		<methoad name="getC"></methoad>
 	</class>
-	
-	
-
 </dynamick>
