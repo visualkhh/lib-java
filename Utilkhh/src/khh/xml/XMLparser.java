@@ -90,10 +90,12 @@ public class XMLparser
 		}
 	}
 	public void close(){
-		try {
-			inputStream.close();
-		} catch (IOException e) {
-		}
+	    if (inputStream != null) {
+    		try {
+    			inputStream.close();
+    		} catch (IOException e) {
+    		}
+	    }
 	}
 	
 	private DocumentBuilder getBuilder(){
@@ -314,12 +316,14 @@ public class XMLparser
         return nodesresult;
     }
     
-    public HashMap<String, String> getAttributes(String xPathUrl) throws XPathExpressionException,NoClassDefFoundError{
-        Node nodesresult=null;
+    public HashMap<String, String> getAttribute(String xPathUrl) throws XPathExpressionException,NoClassDefFoundError{
+        Node node=null;
             XPathExpression expr=xPathCompile(xPathUrl);
-            nodesresult = (Node) expr.evaluate(document, XPathConstants.NODE);
-            
-            NamedNodeMap attrs = nodesresult.getAttributes();  
+            node = (Node) expr.evaluate(document, XPathConstants.NODE);
+            return getAttribute(node);
+    }
+    public HashMap<String, String> getAttribute(Node node) throws XPathExpressionException,NoClassDefFoundError{
+            NamedNodeMap attrs = node.getAttributes();  
             HashMap<String,String> attrMap = new HashMap<String, String>();
             for(int i = 0 ; i<attrs.getLength() ; i++) {
               Attr attribute = (Attr)attrs.item(i);     
@@ -434,7 +438,7 @@ public class XMLparser
 	    String nodeName = node.getNodeName();
 	    System.out.println(indent+" Node: "+nodeName);
 	    short type =node.getNodeType();
-	    System.out.println(indent+" Node Type: " + nodeType(type));
+	    System.out.println(indent+" Node Type: " + nodeType(type)+"     ("+type+")");
 	    if(type == TEXT_NODE){
 	      System.out.println(indent+" Content is: "+((Text)node).getWholeText());
 	    } else if(node.hasAttributes()) {
