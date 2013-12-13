@@ -129,7 +129,7 @@ public class ReflectionUtil
 		Class klass =classclass;
 		Object theNewObject = null;
 //		try {
-			if(constructorParamType!=null){
+			if(constructorParamType!=null && constructorParamType.length>0){
 				 Constructor cons = klass.getConstructor(constructorParamType);
 				 theNewObject = cons.newInstance(constructorArgs);
 			}else{
