@@ -17,6 +17,11 @@
 		delete from insert_test where seq=#seq#;
 	</delete>
 	
+	
+	<select id="gg">
+	select * from example;
+	</select>
+	
 </sqlmap>
 
 
