@@ -21,6 +21,13 @@
 	<select id="gg">
 	select * from example;
 	</select>
+	<select id="gogo">
+	select * from example where id=#id#;
+	</select>
+	
+	<update id="gogoup">
+	update example set data=CONCAT(data,'--') where id=#id#;
+	</update>
 	
 </sqlmap>
 
