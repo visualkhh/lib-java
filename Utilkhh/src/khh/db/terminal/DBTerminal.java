@@ -9,11 +9,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import khh.collection.DuplicationArrayList;
 import khh.collection.StandardArrayList;
 import khh.db.connection.ConnectionCreator_I;
 import khh.db.statement.LogPreparedStatement;
+import khh.db.terminal.resultset.DBTResultRecord;
 import khh.db.terminal.resultset.DBTResultSetContainer;
 import khh.db.util.DBUtil;
 import khh.debug.LogK;
@@ -23,6 +35,7 @@ import khh.sort.SortUtil;
 import khh.sort.comparator.CompareBase;
 import khh.sort.comparator.CompareIntegerStandard;
 import khh.std.Standard;
+import khh.std.adapter.AdapterMap;
 import khh.std.adapter.AdapterMapBase;
 import khh.string.util.StringUtil;
 import khh.xml.XMLparser;
@@ -372,12 +385,88 @@ public class DBTerminal {
     }
     
     
+    //어떻게구현해야될까.. 루트에있는 data로 처리한다
+    public Document execute(Document doc) throws Exception{
+        Document newDoc=null;
+        try{
+            newDoc = executeQuery(doc);
+        }catch (Exception e) {
+            newDoc = executeUpdate(doc);
+        }
+        return newDoc;
+    }
+    public Document executeUpdate(Document doc) throws Exception{
+        XMLparser xml = new XMLparser(doc);
+        String id = xml.getString("//@id");
+        int rc = executeMapUpdate(id, toAdapterMap(doc));
+        Document newDoc = toDocument(rc);
+        return newDoc;
+    }
+    
+    public Document executeQuery(Document doc) throws Exception{
+        XMLparser xml = new XMLparser(doc);
+        String id = xml.getString("//@id");
+        DBTResultSetContainer rc = executeMapQuery(id, toAdapterMap(doc));
+        Document newDoc = toDocument(rc);
+        return newDoc;
+    }
+    
+    public Document toDocument(DBTResultSetContainer rc) throws Exception{
+        XMLparser xml = new XMLparser();
+        Document newDoc = xml.getDocument();
+        Element rootElement = newDoc.createElement("table");
+        newDoc.appendChild(rootElement);
+        
+        for (int i = 0; i < rc.size(); i++) {
+            DBTResultRecord r = rc.get(i);
+            for (int j = 0; j < r.size(); j++) {
+                Element data = newDoc.createElement("data");
+                rootElement.appendChild(data);
+                
+                Attr attr = newDoc.createAttribute(r.getKey(j));
+                attr.setValue(r.get(j));
+                data.setAttributeNode(attr);
+         
+            }
+        }
+        return newDoc;
+    }
+    public Document toDocument(int rc_cnt) throws Exception{
+        XMLparser xml = new XMLparser();
+        Document newDoc = xml.getDocument();
+        Element rootElement = newDoc.createElement("table");
+        newDoc.appendChild(rootElement);
+        Element data = newDoc.createElement("data");
+        rootElement.appendChild(data);
+        Attr attr = newDoc.createAttribute("update");
+        attr.setValue(String.valueOf(rc_cnt));
+        data.setAttributeNode(attr);
+        return newDoc;
+    }
     
 
+    public  AdapterMapBase<String,Object>  toAdapterMap(Document doc) throws Exception{
+        XMLparser xml = new XMLparser(doc);
+        NodeList list = xml.getNodes("//data");
+        
+        AdapterMapBase<String,Object> param = new AdapterMap<String, Object>();
+        for (int i = 0; i < list.getLength(); i++) {
+            Node node = list.item(i);
+           HashMap<String,String> map =  xml.getAttribute(node);
+           Set keys = map.keySet();
+           Iterator<String> it =  keys.iterator();
+           while(it.hasNext()){
+               String key      = it.next();
+               String value    = map.get(key);
+               param.add(key, value);
+//             System.out.println("key:"+key+"    value:"+value);  
+           }
+           //map.g
+        }
+        
+        return param;
+    }
     
-    
-    
-
     public Connection getConnection() throws Exception{
         
         //오토커밋시 다른 커넥션으로 사용하면안되니깐.. 열려있고 오토커밋이 펄스인놈
