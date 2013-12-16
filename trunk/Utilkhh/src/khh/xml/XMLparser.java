@@ -1,8 +1,23 @@
 package khh.xml;
 
+import static org.w3c.dom.Node.ATTRIBUTE_NODE;
+import static org.w3c.dom.Node.CDATA_SECTION_NODE;
+import static org.w3c.dom.Node.COMMENT_NODE;
+import static org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
+import static org.w3c.dom.Node.ELEMENT_NODE;
+import static org.w3c.dom.Node.ENTITY_NODE;
+import static org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
+import static org.w3c.dom.Node.NOTATION_NODE;
+import static org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
+import static org.w3c.dom.Node.TEXT_NODE;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,6 +27,11 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -35,17 +55,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import static org.w3c.dom.Node.ATTRIBUTE_NODE;
-import static org.w3c.dom.Node.CDATA_SECTION_NODE;
-import static org.w3c.dom.Node.COMMENT_NODE;
-import static org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
-import static org.w3c.dom.Node.ELEMENT_NODE;
-import static org.w3c.dom.Node.ENTITY_NODE;
-import static org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
-import static org.w3c.dom.Node.NOTATION_NODE;
-import static org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
-import static org.w3c.dom.Node.TEXT_NODE;
-
 
 public class XMLparser
 {
@@ -56,7 +65,12 @@ public class XMLparser
 	private InputStream inputStream;
 	private int connectionTimeout=10000;
 	private int readTimeout=3000;
-	public XMLparser() {
+	public XMLparser() throws ParserConfigurationException {
+	    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        // root elements
+        Document doc = docBuilder.newDocument();
+        setDocument(doc);
 	}
 	public XMLparser (Document document){
 		setDocument(document);
@@ -460,16 +474,36 @@ public class XMLparser
 	  }
 	
 	
-	
-	
-	
-	public String getString() throws IOException{
-		if(inputStream!=null){
+	public String getString() throws IOException, TransformerException{
+		/* 아래거이거 뭐지 왜해놨지 내가..ㅠㅠ
+	    if(inputStream!=null){
 			inputStream.reset();
 			return ConversionUtil.toString(inputStream);
 		}
 		return null;
+		*/
+//	    StringOutputStream s = new StringOutputStream();
+//	    saveOutputStream(s);
+	    ByteArrayOutputStream s = new ByteArrayOutputStream();
+	    saveOutputStream(s);
+	    return s.toString();
+	    
 	}
 	
+	//system out 으로 찍어볼수있다.
+	//StreamResult result =  new StreamResult(System.out);
+	//transformer.transform(source, result);
+    public void saveOutputStream(OutputStream outputstrame) throws TransformerException{
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(getDocument());
+        StreamResult result = new StreamResult(outputstrame);
+        transformer.transform(source, result);
+    }
+    public void saveFile(File file) throws TransformerException, FileNotFoundException{
+        saveOutputStream(new FileOutputStream(file));
+    }
+    
+//    public String getXMLString
 	
 }
