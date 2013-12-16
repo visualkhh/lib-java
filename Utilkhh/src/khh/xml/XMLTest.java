@@ -1,5 +1,6 @@
 package khh.xml;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +37,7 @@ public class XMLTest {
      */
     public static void main(String[] args) throws SAXException, IOException, XPathExpressionException, NoClassDefFoundError, ParserConfigurationException, TransformerException {
         XMLparser xml = new XMLparser(new File("src/khh/xml/xmlfile.xml"));
-        //XMLparser xml = new XMLparser(new URL("http://stackoverflow.com/feeds/question/216894"));
+//        XMLparser xml = new XMLparser(new URL("http://stackoverflow.com/feeds/question/216894"));
 //        System.out.println(xml.getString());
         Document doc = xml.getDocument();
         Node node = xml.getNode("//gogo");
@@ -48,6 +49,8 @@ public class XMLTest {
           System.out.println(xml.getString());
         //System.out.println( xml.getString("//feed") );
           
+//          xml.setString(stringXML);
+//          ByteArrayOutputStream a = null;
         
         
           
