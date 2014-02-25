@@ -408,7 +408,7 @@ public class FileUtil{
 	public static void writeFile(File file, InputStream is) throws IOException{
 		OutputStream out = new FileOutputStream(file);
 		int c = 0;
-		byte[] buf = new byte[100];
+		byte[] buf = new byte[1024];
 		while((c = is.read(buf)) != -1){
 			// System.out.println(file.length());
 			out.write(buf, 0, c);
