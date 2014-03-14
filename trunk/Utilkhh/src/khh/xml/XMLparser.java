@@ -27,11 +27,13 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -154,7 +156,7 @@ public class XMLparser
 //		}
 		
 	}
-	
+	//http://www.zvon.org/xxl/XPathTutorial/General/examples.html
 	//XPATH예제   http://msdn.microsoft.com/ko-kr/library/ms256086.aspx  
 //	다음은 DOM을 사용할 때 가장 많이 사용하게 될 메소드들이다.
 //	-          Document.getDocumentElement()
@@ -503,6 +505,28 @@ public class XMLparser
     public void saveFile(File file) throws TransformerException, FileNotFoundException{
         saveOutputStream(new FileOutputStream(file));
     }
+    
+    
+    public String transFormer(XMLparser formatXSL) throws TransformerException, ParserConfigurationException, SAXException, IOException{
+    	TransformerFactory tFactory = TransformerFactory.newInstance();
+    	DOMSource source = new DOMSource(getDocument());
+    	
+    	StringReader reader = new StringReader(formatXSL.getString());
+    	Source format_source = new StreamSource(reader);
+//    	Source format_source = new StreamSource("xml/catalog_xsl.xml");
+//    	DOMSource format_source = new DOMSource(formatXSL.getDocument());
+    	
+    	ByteArrayOutputStream out = new ByteArrayOutputStream();
+//    	StringWriter stringWriter=new StringWriter();
+    	
+    	
+    	Transformer transformer = tFactory.newTransformer(format_source);
+    	transformer.transform(source, new StreamResult(out));
+    	
+//    	System.out.println(stringWriter.toString());
+    	return out.toString();
+    }
+    
     
 //    public String getXMLString
 	
