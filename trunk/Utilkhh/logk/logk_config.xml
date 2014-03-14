@@ -31,7 +31,7 @@
 			java.io.OutputStream 를 상속받은 애들을... 가따놔야한다.
 	 -->
 	 <!--logkattribute 속성은 마지막파일에만 적용된속성값을 가짐 한곳에서만 적어주길원합니다. -->
-	 <logkattribute>
+	 <logkattribute >
 		<recycle_ms>5000</recycle_ms> <!-- 10sec -->
 		<recycle>false</recycle> <!-- 10sec -->
 	 </logkattribute>
@@ -47,7 +47,7 @@
 			 <!-- <outputstream>System.out</outputstream>  --> 
 		</loger>
 		<saver>
-			<dateformat>yyyy-MM-dd</dateformat>
+			<dateformat >yyyy-MM-dd</dateformat>
 			<save>false</save>
 			<savepath>c:\logk</savepath>
 			<append>true</append>
