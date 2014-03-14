@@ -2,6 +2,9 @@ package khh.std.adapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import khh.std.Standard;
 
@@ -30,6 +33,15 @@ public abstract class AdapterMapBase<K,T>  implements Serializable {
         			set(i,key,value);
         		}
 	    }
+	}
+	final public void add(HashMap<K,T> map) throws Exception{
+		Set<K> keySet = map.keySet();
+		Iterator<K> it = keySet.iterator();
+		while(it.hasNext()){
+			K key = it.next();
+			T value = map.get(key);
+			add(key,value);
+		}
 	}
 	final public void add(int index, K key,T value) throws Exception{
 	    synchronized (container) {
