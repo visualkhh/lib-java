@@ -529,6 +529,13 @@ public class XMLparser
     }
     
     
+    
+    
+    
+    
+    
+    
+    
 //    public String getXMLString
 	
 }
