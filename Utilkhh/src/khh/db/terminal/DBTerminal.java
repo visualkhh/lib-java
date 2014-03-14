@@ -235,7 +235,7 @@ public class DBTerminal {
            for (int j = 0; j < size.size(); j++) {
              datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
            }
-           sql_get = StringUtil.replaceAll(sql_get, findstr, "?");
+           sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
         }
         
         SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
@@ -310,7 +310,7 @@ public class DBTerminal {
            for (int j = 0; j < size.size(); j++) {
              datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
            }
-           sql_get = StringUtil.replaceAll(sql_get, findstr, "?");
+           sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
         }
         
         SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
