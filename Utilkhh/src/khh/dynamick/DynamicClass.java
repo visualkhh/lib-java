@@ -1,23 +1,16 @@
 package khh.dynamick;
 
-import static org.w3c.dom.Node.TEXT_NODE;
-import static org.w3c.dom.Node.ELEMENT_NODE;
-import static org.w3c.dom.Node.CDATA_SECTION_NODE;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-
-import org.apache.poi.hslf.record.ExAviMovie;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 
 import khh.collection.StandardArrayList;
 import khh.debug.LogK;
 import khh.reflection.ReflectionUtil;
 import khh.std.Standard;
 import khh.std.adapter.AdapterMap;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Node;
 
 public class DynamicClass {
     private Node node          = null;
