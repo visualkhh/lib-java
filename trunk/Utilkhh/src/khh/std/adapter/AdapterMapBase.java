@@ -1,15 +1,18 @@
 package khh.std.adapter;
 
 import java.io.Serializable;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import khh.cast.CastMap_I;
 import khh.std.Standard;
 
 
-public abstract class AdapterMapBase<K,T>  implements Serializable {
+public abstract class AdapterMapBase<K,T>  implements CastMap_I<K>,Serializable {
 	private ArrayList<Standard<K,T>> container = null;
 	
 	public AdapterMapBase() {
@@ -169,69 +172,204 @@ public abstract class AdapterMapBase<K,T>  implements Serializable {
 	
 	
 	
-	
 	///////conversion// int - >integer duble , ...등등 리턴값  kdn에서 바꿈
-	final public Integer getInt(K key) throws Exception{
-		return conversionInt(get(key));
-	}
-	final public Integer getInt(int index) throws Exception{
-		return conversionInt(get(index));
-	}
-	public Integer conversionInt(T value) throws Exception{
-	    if(value==null)
-            return null;
+	public Integer getInt(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		 if(value==null)
+           return null;
 		return (Integer)value;
 	}
+	public Integer getInt(int index) throws ClassCastException{
+		return getInt(getKey(index));
+	}
 	
-	final public Double getDouble(K key) throws Exception{
-		return conversionDouble(get(key));
-	}
-	final public Double getDouble(int index) throws Exception{
-		return conversionDouble(get(index));
-	}
-	public Double conversionDouble(T value) throws Exception{
-	    if(value==null)
-            return null;
+	
+	public Double getDouble(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		 if(value==null)
+           return null;
 		return (Double)value;
 	}
 	
+	public Double getDouble(int index) throws ClassCastException{
+		return getDouble(getKey(index));
+	}
 	
-	final public Float getFloat(K key) throws Exception{
-		return conversionFloat(get(key));
-	}
-	final public Float getFloat(int index) throws Exception{
-		return conversionFloat(get(index));
-	}
-	public Float conversionFloat(T value) throws Exception{
-	    if(value==null)
-            return null;
+	public Float getFloat(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		 if(value==null)
+           return null;
 		return (Float)value;
 	}
-	
-	
-	final public String getString(K key) throws Exception{
-		return conversionString(get(key));
+	public Float getFloat(int index) throws ClassCastException{
+		return getFloat(getKey(index));
 	}
-	final public String getString(int index) throws Exception{
-		return conversionString(get(index));
+	
+	public Short getShort(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(value==null)
+			return null;
+		return (Short)value;
 	}
-	public String conversionString(T value) throws Exception{
-	    if(value==null)
-            return null;
+	public Short getShort(int index) throws ClassCastException{
+		return getShort(getKey(index));
+	}
+	
+	public String getString(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		 if(value==null)
+           return null;
 		return (String)value;
 	}
-	
-	final public Boolean getBoolean(K key) throws Exception{
-		return conversionBoolean(get(key));
+	public String getString(int index) throws ClassCastException{
+		return getString(getKey(index));
 	}
-	final public Boolean getBoolean(int index) throws Exception{
-		return conversionBoolean(get(index));
-	}
-	public Boolean conversionBoolean(T value) throws Exception{
-	    if(value==null)
-	        return null;
+	public Boolean getBoolean(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		 if(value==null)
+           return null;
 		return (Boolean)value;
 	}
+	public Boolean getBoolean(int index) throws ClassCastException{
+		return getBoolean(getKey(index));
+	}
+	
+	public Byte getByte(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		 if(value==null)
+           return null;
+		return (Byte)value;
+	}
+	public Byte getByte(int index) throws ClassCastException{
+		return getByte(getKey(index));
+	}
+	
+	public ByteBuffer getByteBuffer(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		 if(value==null)
+           return null;
+		return (ByteBuffer)value;
+	}
+	public ByteBuffer getByteBuffer(int index) throws ClassCastException{
+		return getByteBuffer(getKey(index));
+	}
+	
+	public byte[] getByteArray(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(value==null)
+			return null;
+		return (byte[])value;
+	}
+	public byte[] getByteArray(int index) throws ClassCastException{
+		return getByteArray(getKey(index));
+	}
+	public Standard getStandard(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(value==null)
+			return null;
+		return (Standard)value;
+	}
+	public Standard getStandard(int index) throws ClassCastException{
+		return getStandard(getKey(index));
+	}
+	
+	
+	public Object getObject(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(value==null)
+			return null;
+		return (Object)value;
+	}
+	public Object getObject(int index) throws ClassCastException{
+		return getObject(getKey(index));
+	}
+	
+	
+	public Date getDate(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(value==null)
+			return null;
+		return (Date)value;
+	}
+	public Date getDate(int index) throws ClassCastException{
+		return getDate(getKey(index));
+	}
+	
+	
+	
+	
 	
 	//////////
 	public  ArrayList<Standard<K,T>> getList(){
