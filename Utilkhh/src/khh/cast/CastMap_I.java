@@ -17,6 +17,7 @@ public interface CastMap_I<K>{
 	public Float getFloat(K key) throws ClassCastException;
 
 	public Short getShort(K key) throws ClassCastException;
+	
 	public String getString(K key) throws ClassCastException;
 
 	public Boolean getBoolean(K key) throws ClassCastException;
@@ -31,5 +32,6 @@ public interface CastMap_I<K>{
 
 	public Object getObject(K key) throws ClassCastException;
 	public Date getDate(K key) throws ClassCastException;
+
 
 }

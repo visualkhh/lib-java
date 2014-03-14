@@ -7,34 +7,34 @@ public class DBTResultRecord extends AdapterMapBase<String, String> {
 
 
     @Override
-    public Integer conversionInt(String value) throws Exception {
+    public Integer getInt(String value) throws ClassCastException {
         if(value==null)
             return null;
         return Integer.parseInt(value);
     }
     
     @Override
-    public Float conversionFloat(String value) throws Exception {
+    public Float getFloat(String value) throws ClassCastException {
         if(value==null)
             return null;
         return Float.parseFloat(value);
     }
     @Override
-    public Double conversionDouble(String value) throws Exception {
+    public Double getDouble(String value) throws ClassCastException {
         if(value==null)
             return null;
         return Double.parseDouble(value);
     }
     
     @Override
-    public Boolean conversionBoolean(String value) throws Exception {
+    public Boolean getBoolean(String value) throws ClassCastException {
         if(value==null)
             return null;
         return Boolean.parseBoolean(value);
     }
     
     @Override
-    public String conversionString(String value) throws Exception {
+    public String getString(String value) throws ClassCastException {
         if(value==null)
             return null;
         return value;
