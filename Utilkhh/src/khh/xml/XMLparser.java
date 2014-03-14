@@ -262,6 +262,7 @@ public class XMLparser
 	public void getElementList(){
 //		try{
 			Document document = getDocument();
+			
 			Node node = document.getDocumentElement().getFirstChild();
 //			System.out.println(node.getNodeName()+"1");
 			while(node!=null){
