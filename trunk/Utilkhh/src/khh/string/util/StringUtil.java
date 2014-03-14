@@ -550,7 +550,7 @@ public class StringUtil {
             return convStr = src;
         }else if("L:;:;R".indexOf(direction) < 0) { // pad 방향값이 L / R 이 아닐때 원본 반환.
             return convStr = src;
-        }else if(ConversionUtil.nullToString(src,"").length() != 1) { // 첨가 문자열 길이가 0이거나 2이상일  때 원본 반환.
+        }else if(ConversionUtil.nullToString(padStr,"").length() != 1) { // 첨가 문자열 길이가 0이거나 2이상일  때 원본 반환.
             return convStr = src;
         }
 
