@@ -42,19 +42,20 @@ public class GA {
 		 
 		
 		NodeList nodeList = node.getChildNodes();
-		
-		
-		
-		System.out.println(nodeList.getLength());
+//		System.out.println(nodeList.getLength());
 		for (int i = 0; nodeList!=null && i < nodeList.getLength(); i++) {
 			Node atNode = nodeList.item(i);
+			if(atNode.getNodeType()!=Node.ELEMENT_NODE){
+				continue;
+			}
+			System.out.println(atNode.getNodeName()+"---"+atNode.getNodeType());
 			Element childElement = new Element();
 			try{
-				childElement.add(xml.getAttribute(node));
+				childElement.add(xml.getAttribute(atNode));
 			}catch (Exception e) {}
 			f.addChildElement(childElement);
 			
-			//loop(atNode);
+			loop(atNode);
 			
 //			f.addChildElement());
 		}
