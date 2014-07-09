@@ -1,0 +1,53 @@
+Jaunt 0.9.7.1 Release Notes
+
+Jaunt Beta is a free software project (Java API) to make web scraping & automation easier.
+
+Jaunt 0.9.7.1 public release date: July 2, 2014
+Jaunt 0.9.7.1 software expiry date: July 31, 2014
+
+Installation Instructions & Quickstart Tutorial
+http://jaunt-api.com/jaunt-tutorial.htm
+
+OVERVIEW
+This release contains the following enhancements:
+- support for custom content handlers.  
+- UserAgent.download(String, File) now supports downloading any content-type.
+- disabled form fields no longer contribute name-value pairs when the form is submitted.
+
+CHANGES TO THE API FOR v.0.9.7
+
+Added to UserAgent:
+  setHandler(String, Handler)
+  getHandler(String)
+Added to package com.jaunt.util:
+  Handler
+  HandlerForText
+  HandlerForBinary
+
+EXAMPLE OF USING CONTENT HANDLERS:
+
+  public static void main(String[] args) throws Exception{
+    //create UserAgent and content handlers.
+    UserAgent userAgent = new UserAgent();    
+    HandlerForText handlerForText = new HandlerForText();
+    HandlerForBinary handlerForBinary = new HandlerForBinary();
+
+    //register each handler with a specific content-type
+    userAgent.setHandler("text/css", handlerForText);
+    userAgent.setHandler("text/javascript", handlerForText);
+    userAgent.setHandler("application/x-javascript", handlerForText);
+    userAgent.setHandler("image/gif", handlerForBinary);
+    userAgent.setHandler("image/jpeg", handlerForBinary);
+
+    //retrieve CSS content as String
+    userAgent.visit("http://jaunt-api.com/syntaxhighlighter/styles/shCore.css");
+    System.out.println(handlerForText.getContent());
+    
+    //retrieve JS content as String
+    userAgent.visit("http://jaunt-api.com/syntaxhighlighter/scripts/shCore.js");
+    System.out.println(handlerForText.getContent());
+    
+    //retrieve GIF content as byte[], and print its length
+    userAgent.visit("http://jaunt-api.com/background.gif");
+    System.out.println(handlerForBinary.getContent().length);    
+  }
