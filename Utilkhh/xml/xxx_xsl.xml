@@ -7,6 +7,6 @@
  
  <!-- Copy everything -->
 <xsl:entity-ref name="nbsp" select="catalog/cd"></xsl:entity-ref>
-
+ 
 </xsl:template>
 </xsl:stylesheet>
