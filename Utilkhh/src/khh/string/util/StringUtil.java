@@ -574,4 +574,46 @@ public class StringUtil {
     }
     
     
+	/*
+	 * msg		템플릿되어진 문자열
+	 * param	Object  키값으로 해당 프로퍼티찾아서 값넣어줌
+	 * prefix 키시작을 알리는 값   ,기본값${
+	 * postfix 키끝을 알리는 값 ,기본값}
+	 */
+	 /* 예 prefix {    postfix }   param...
+	 var msg ="dd{d{g{visu}g}d}dggagasdgdf{gd}fg{visu}gasdad{visu}";
+	 var param =  new Object();  
+	 param["visu"] = "show";
+	 var sss = StringUtil.injection(msg,param);
+	 alert(sss); 
+	 결과 ddshowdggagasdgdffgshowgasdadshow
+	 */
+	public static String inJection(String msg, String prefix, String postfix, HashMap<String,String> param){
+		int openIndex = msg.lastIndexOf(prefix);
+		int closeIndex = msg.indexOf(postfix,openIndex);
+		
+		if(openIndex < 0 || closeIndex < 0 || openIndex > closeIndex){
+			return msg;
+		}
+		
+		String key 	= msg.substring(openIndex+prefix.length(), closeIndex);
+		String fullKey	= msg.substring(openIndex, closeIndex+postfix.length());
+		//String regexp	= new RegExp(fullKey,"gi");
+		if(param.get(key)!=null){
+			msg = msg.replace(fullKey,param.get(key));
+		}else{
+			msg = msg.replace(fullKey,"");
+		}
+		
+		//return injection(msg, param, openChar, closeChar);
+		return inJection(msg, prefix, postfix, param);
+	}
+	
+	public static String inJection(String msg, HashMap<String,String> param){
+		String prefix="${";
+		String postfix="}";
+		return inJection(msg,prefix,postfix,param);
+	}
+
+	
 }
