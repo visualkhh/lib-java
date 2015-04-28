@@ -48,9 +48,8 @@
 		</loger>
 		<saver>
 			<dateformat >yyyy-MM-dd</dateformat>
-			<save>false</save>
+			<save>true</save>
 			<savepath>c:\logk</savepath>
-			<append>true</append>
 			<filename>hhk_%c_%d.log</filename>
 		</saver>
 	</target>
