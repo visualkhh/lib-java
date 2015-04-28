@@ -842,7 +842,7 @@ public class FileUtil{
 		//String fileName = args[0]; 
 		java.io.FileInputStream fis = new java.io.FileInputStream(file); 
 
-		// (1) 
+		// (1) //juniversalchardet-1.0.3.jar
 		UniversalDetector detector = new UniversalDetector(null); 
 
 		// (2) 
