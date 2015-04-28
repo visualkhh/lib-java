@@ -47,7 +47,7 @@ public class LogKTarget{
 	String saver_dateformat 	= null;
 	Boolean saver_save 			= null;
 	String saver_savepath 		= null;
-	Boolean saver_append 		= null;
+//	Boolean saver_append 		= null;
 	String saver_filename 		= null;
 	Boolean exception_stacktrace= null;
 
@@ -128,13 +128,13 @@ public class LogKTarget{
 		this.saver_save = saver_save;
 	}
 
-	public Boolean isSaver_append(){
-		return saver_append;
-	}
-
-	public void setSaver_append(Boolean saver_append){
-		this.saver_append = saver_append;
-	}
+//	public Boolean isSaver_append(){
+//		return saver_append;
+//	}
+//
+//	public void setSaver_append(Boolean saver_append){
+//		this.saver_append = saver_append;
+//	}
 
 	public String[] getLoger_level(){
 		return loger_level;
