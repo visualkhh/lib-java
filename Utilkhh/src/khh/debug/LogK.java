@@ -1,12 +1,15 @@
 package khh.debug;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import khh.callstack.util.StackTraceUtil;
 import khh.collection.DuplicationArrayList;
@@ -65,6 +68,7 @@ public class LogK  implements Serializable {
     //ArrayList<String> configfile_add = new ArrayList<String>();
     ArrayList<String> path_add = new ArrayList<String>();
     
+    HashMap<String, LogKFile> files = new HashMap<String, LogKFile>();
     private LogK(){
         setting();
     }
@@ -146,9 +150,9 @@ public class LogK  implements Serializable {
                         if(value!=null)
                         atTarget.setSaver_save((Boolean)value);
                         
-                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/append");
-                        if(value!=null)
-                        atTarget.setSaver_append((Boolean)value);
+//                        value=parser.getBoolean(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/append");
+//                        if(value!=null)
+//                        atTarget.setSaver_append((Boolean)value);
                         
                         
                         value=parser.getString(targetxpath+"[@id='"+atTarget.getExtends()+"']/saver/savepath");
@@ -196,9 +200,9 @@ public class LogK  implements Serializable {
                     if(value!=null)
                     atTarget.setSaver_save((Boolean)value);
                     
-                    value = parser.getBoolean(targetxpath+"["+j+"]/saver/append");
-                    if(value!=null)
-                    atTarget.setSaver_append((Boolean)value);
+//                    value = parser.getBoolean(targetxpath+"["+j+"]/saver/append");
+//                    if(value!=null)
+//                    atTarget.setSaver_append((Boolean)value);
                     
                     value = parser.getString(targetxpath+"["+j+"]/saver/savepath");
                     if(value!=null)
@@ -367,7 +371,7 @@ public class LogK  implements Serializable {
            
                
                if(attarget.isSaver_save()){
-                   boolean append= attarget.isSaver_append()==null?true:attarget.isSaver_append();
+//                   boolean append= attarget.isSaver_append()==null?true:attarget.isSaver_append();
                    String saver_dateformat = attarget.getSaver_dateformat();
                    String saver_date = DateUtil.getDate(saver_dateformat);
                    
@@ -386,12 +390,17 @@ public class LogK  implements Serializable {
 //                   saver_filename= saver_filename.replaceAll("%d", saver_date);
                    
                    String savepath = attarget.getSaver_savepath()+PropertyUtil.getFileSeparator()+saver_filename;
+                   LogKFile file = files.get(savepath);
                    try {
                 	   if(!FileUtil.isExists(attarget.getSaver_savepath())){
                 		   FileUtil.mkdirs(attarget.getSaver_savepath());
                 	   };
                 	   
-                        FileUtil.writeFile(savepath, logerformat,append);
+                	   if(file==null){
+                		   file = new LogKFile(savepath);
+                		   files.put(savepath, file);
+                	   }
+                	   file.log(logerformat);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -587,7 +596,15 @@ public class LogK  implements Serializable {
     protected void finalize() throws Throwable {
         if(scheduler!=null)
         scheduler.cancel();
+
+        Set<String> keys = files.keySet();
+        for (String atKey : keys) {
+        	files.get(atKey).close();
+		}
+        
         super.finalize();
+        
+        
     }
     
     
