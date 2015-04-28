@@ -571,7 +571,6 @@ public class LogK  implements Serializable {
                 sw=true;
             }
         }
-       // System.out.println(sw);
         return sw;
     }
 
