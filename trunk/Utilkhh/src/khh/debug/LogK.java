@@ -392,11 +392,12 @@ public class LogK  implements Serializable {
                    String savepath = attarget.getSaver_savepath()+PropertyUtil.getFileSeparator()+saver_filename;
                    LogKFile file = files.get(savepath);
                    try {
-                	   if(!FileUtil.isExists(attarget.getSaver_savepath())){
-                		   FileUtil.mkdirs(attarget.getSaver_savepath());
-                	   };
+                	   
                 	   
                 	   if(file==null){
+                		   if(!FileUtil.isExists(attarget.getSaver_savepath())){
+                    		   FileUtil.mkdirs(attarget.getSaver_savepath());
+                    	   };
                 		   file = new LogKFile(savepath);
                 		   files.put(savepath, file);
                 	   }
