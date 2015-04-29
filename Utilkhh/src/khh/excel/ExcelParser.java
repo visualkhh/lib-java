@@ -52,7 +52,7 @@ abstract class ExcelParser {
         byte[] a = img.getImageData();
         return a;
     }
-    public Image getImages(int sheetindex,int imgindex){
+    public Image getImage(int sheetindex,int imgindex){
         Sheet sheet  = getSheet(sheetindex);
         Image img = sheet.getDrawing(imgindex);
         return img;
