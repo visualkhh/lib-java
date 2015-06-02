@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hui version="1" sdk="1.5">
+
+	<flesh id="hhk">
+		<!-- 접근 -->
+		<gateway>
+			<action id="leftBrind" class="asd.asd.i" matches="visual"  aclass=""  bclass="" min="1" max="1"/>
+			<action id="leftBrind" class="asd.asd.i" matches="visual"  aclass=""  bclass="" min="2" max="4"/>
+			<action id="leftBrind" class="asd.asd.i" matches="visual"  aclass=""  bclass=""/>
+			<action id="leftBrind" class="asd.asd.i" matches="visual"  aclass=""  bclass=""/>
+		</gateway>
+		
+		<!-- 스케줄러단 -->		
+		<rhythm mode="flow random class" pulse="1000">
+			<action id="leftBrind" matches="vvvv" class="asd.asd.i"/>
+			<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+			<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+			<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+		</rhythm>
+	</flesh>
+	
+	<flesh id="kkb">
+	
+		<gateway>
+			<action id="leftBrind" class="asd.asd.i" matches="^*"  aclass=""  bclass="" min="1" max="1"/>
+			<action id="leftBrind" class="asd.asd.i" matches="visual"  aclass=""  bclass="" min="2" max="4"/>
+			<action id="leftBrind" class="asd.asd.i" matches="visual"  aclass=""  bclass=""/>
+			<action id="leftBrind" class="asd.asd.i" matches="visual"  aclass=""  bclass=""/>
+		</gateway>
+		
+		<!-- 스케줄러단 -->		
+		<rhythm pulse="1000" class="asd.ccc.ass.RhythmFlow">
+			<action id="leftBrind" matches="vvvv" class="asd.asd.i"/>
+			<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+			<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+			<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+		</rhythm>
+		
+		
+		
+	</flesh>
+	
+	
+	
+	
+	
+	
+	<rhythm pulse="1000">
+		<action id="leftBrind" matches="vvvv" class="asd.asd.i"/>
+		<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+		<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+		<action id="leftBrind" matches="visual" class="asd.asd.i"/>
+	</rhythm>
+		
+		
+	
+	
+	<item id="" matches="" />
+	
+	
+	
+</hui>
