@@ -2,7 +2,7 @@
 <logk:configuration xmlns:logk="http://twitter.com/visualkhh/">
 
 	<!-- Level can be  A, D, I, W, E, F, O -->
-	<!-- logk welcom
+	<!-- logk welcom ggg
 	
 	파일명은 logk 로시작해서 .xml으로 끝나야한다     클래스페스에 logk 폴더안에 생성되어야한다.
 		logk는 다양한 로깅레벨을 지원합니다.
