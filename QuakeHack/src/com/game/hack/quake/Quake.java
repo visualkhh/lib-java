@@ -6,23 +6,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.media.Format;
-import javax.media.Player;
+import khh.gui.component.frame.FrameFrame;
+import khh.gui.component.view.ImageView;
+import khh.image.ImageUtil;
+import khh.io.display.util.DisPlayUtil;
+import khh.io.mouse.util.MouseUtil;
+import khh.schedule.Scheduler;
+import khh.util.Util;
 
-import com.kdn.gui.frame.FrameFrame;
-import com.kdn.util.image.ImageUtil;
-import com.kdt.util.Utilities;
-import com.kdt.util.schedule.Scheduler;
-import com.khm.gui.component.ImageView;
-import com.khm.util.io.display.DisPlayUtil;
-import com.khm.util.io.mouse.MouseUtil;
+import com.sun.glass.ui.Pixels.Format;
+
+
 
 public class Quake  extends FrameFrame{
     
@@ -42,7 +41,7 @@ public class Quake  extends FrameFrame{
     };
     
     public static enum ACTION{
-        CAPTURE(Utilities.getNextNumber()) ;
+        CAPTURE(Util.getNextNumber()) ;
         int id;
         ACTION(int id){
             this.id=id;
@@ -53,7 +52,6 @@ public class Quake  extends FrameFrame{
     };
     
     
-    private Player player =null;
     private Format[] formats =null;
     public Quake(String title) {
         super(title);
@@ -231,12 +229,6 @@ Runnable run = new Runnable() {
         if(scheduler!=null){
             scheduler.cancel();
         }
-        if ( player != null )
-        {
-            player.close();
-            player.deallocate();
-            player = null;
-        }
         super.dispose();
     }
 
@@ -244,12 +236,6 @@ Runnable run = new Runnable() {
     {
         if(scheduler!=null){
             scheduler.cancel();
-        }
-        if ( player != null )
-        {
-            player.close();
-            player.deallocate();
-            player = null;
         }
         super.finalize();
     }
