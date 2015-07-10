@@ -103,7 +103,7 @@ abstract public class NioWorker{
 		int len = 0;
 		long start_mm = System.currentTimeMillis();
 		while (true){
-			len = getSocketChannel().read(buffer);
+			len = socketChannel.read(buffer);
 			if(len > 0){
 				if ( buffer.position() == buffer.limit() ) {
 					return len;
@@ -123,6 +123,17 @@ abstract public class NioWorker{
 		}
 	}	
 	
+	final synchronized public  ByteBuffer read() throws IOException{
+		return read(getSocketChannel());
+	}
+
+	final synchronized public  ByteBuffer read(SocketChannel socketChannel) throws IOException{
+		byte[] data = new byte[0];
+		ByteBuffer buffer = ByteBuffer.allocate(1024);
+		int len = socketChannel.read(buffer);
+		return buffer; 
+
+	}
 	
 	
 	

@@ -17,30 +17,22 @@ public class NioByPassClientWorker extends NioWorker {
 	}
 	@Override
 	public void execute(SelectionKey selectionKey) throws Exception {
-		ByteBuffer bff = ByteBuffer.allocate(10000);
-		try{
-			while(selectionKey.isReadable()){
-				byte[] b = new byte[1];
-				int i = read(b);
-				if(i>=1){
-					bff.put(b);
-				} 
-			}
-		}catch (Exception e) {
-		}
+
 		
+		ByteBuffer bff = read();
 		bff.flip();
-		if(server!=null){
+		if(server!=null&&bff.limit()>0){
 			HashMap map = new HashMap<String,ByteBuffer>();
 			map.put("rcvData",bff );
 			server.receiveTelegram(map,selectionKey);
 		}
+		
+
 	}
 
 	@Override
-	public void receiveTelegram(HashMap<String, Object> telegram,
-			SelectionKey selectionKey) throws Exception {
-		if(telegram!=null && telegram.get("sendData")!=null){
+	public void receiveTelegram(HashMap<String, Object> telegram, SelectionKey selectionKey) throws Exception {
+		if(selectionKey.isWritable()==true&&telegram!=null && telegram.get("sendData")!=null){
 			ByteBuffer bff = (ByteBuffer) telegram.get("sendData");
 			write(bff);
 		}
