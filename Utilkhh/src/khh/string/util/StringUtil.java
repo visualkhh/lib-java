@@ -342,14 +342,22 @@ public class StringUtil {
     
     
     public static int getMatchingCount(String matching_keyword,String full_str){
-    		int count = 0;
-    		int index = 0;
-
-    		while( (index = full_str.indexOf(matching_keyword, index)) > 0 ) {
-    		count++;
-    		index += matching_keyword.length();
-    		}
-    		return count;
+    	//20150826
+//    		int count = 0;
+//    		int index = 0;
+//
+//    		while( (index = full_str.indexOf(matching_keyword, index)) > 0 ) {
+//    		count++;
+//    		index += matching_keyword.length();
+//    		}
+//    		return count;
+		Pattern p = Pattern.compile(matching_keyword);
+		Matcher m = p.matcher(full_str);
+		int cnt=0;
+		for (int i = 0; m.find(i); i=m.end()) {
+			cnt ++;
+		}
+		return cnt;
     }
     
     
