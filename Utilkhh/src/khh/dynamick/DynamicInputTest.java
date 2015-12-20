@@ -4,7 +4,9 @@ public class DynamicInputTest {
     String  a = null;
     Integer b = null;
     Boolean c = null;
-
+    public DynamicInputTest() {
+    	System.out.println("DynamicInputText new");
+	}
     public DynamicInputTest(String a, Integer b, Boolean c) {
         this.a = a;
         this.b = b;
@@ -19,6 +21,10 @@ public class DynamicInputTest {
 
     public void setA(String a) {
         System.out.println("setA"+a);
+        this.a = a;
+    }
+    public void setA(String a, String b) {
+        System.out.println("setAAA**********"+a+"  "+b);
         this.a = a;
     }
 

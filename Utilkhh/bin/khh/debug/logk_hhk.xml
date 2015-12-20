@@ -55,10 +55,10 @@
 	</target>
 
 	
-<!--	<target id="agg"  category="^*"  extendcategory="super_target" ></target> -->
-	<target id="gg"  category="^com.khh.util.file.pack"  extendcategory="super_target" ></target>
+<!--	<target id="agg"  category="^*"  extends="super_target" ></target> -->
+	<target id="gg"  category="^com.khh.util.file.pack"  extends="super_target" ></target>
 	
-	<target id="ConnectionMultiPool"  category="^com.kdn.util.db.connection.pool.*"  extendcategory="super_target" >
+	<target id="ConnectionMultiPool"  category="^com.kdn.util.db.connection.pool.*"  extends="super_target" >
 		<loger>
 			<level>A</level>
 			<logformat>%d [%l] %c(line %n)  connectionmultipool  %m   %e </logformat>
@@ -70,7 +70,7 @@
 	</target>
 	
 	
-	<target id="DBTerminalTest"  category="^com.kdn.util.db.terminal.*"  extendcategory="super_target" >
+	<target id="DBTerminalTest"  category="^com.kdn.util.db.terminal.*"  extends="super_target" >
 		<loger>
 			<level>A</level>
 			<exception_stacktrace>false</exception_stacktrace>

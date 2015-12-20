@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 import khh.collection.StandardArrayList;
 import khh.std.Standard;
@@ -130,7 +131,36 @@ public class ReflectionUtil
 		Object theNewObject = null;
 //		try {
 			if(constructorParamType!=null && constructorParamType.length>0){
-				 Constructor cons = klass.getConstructor(constructorParamType);
+				 Constructor cons = null;
+				 
+				 try{
+					 cons = klass.getConstructor(constructorParamType);
+				 }catch(NoSuchMethodException e){
+	                	//System.out.println("noSuchMethod");
+					 Constructor[] constructors = klass.getConstructors();
+	                	for (int i = 0; i < constructors.length; i++) {
+	                		Constructor atConstructor = constructors[i];
+	                		Parameter[] atParameters = atConstructor.getParameters();
+	                		boolean isPass = true;
+							if(atParameters.length==constructorArgs.length){//이름과 파라미터개수가 똑같아야된다.
+								for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
+									Parameter atParameter = atParameters[pCnt];
+									if(constructorParamType[pCnt].isInstance(constructorArgs[pCnt])){
+										isPass = true;
+									}else{
+										isPass = false;
+									}
+									
+								}
+								if(isPass){
+									cons = atConstructor;
+								}else{
+									throw new NoSuchMethodException();
+								}
+							}
+						}
+				 }
+				 
 				 theNewObject = cons.newInstance(constructorArgs);
 			}else{
 				theNewObject = klass.newInstance();
@@ -143,11 +173,11 @@ public class ReflectionUtil
 	}
 	
 	
-    public static Object executeMathod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
-        return executeMathod(object,mathodname,null,null);
+    public static Object executeMethod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+        return executeMethod(object,mathodname,null,null);
     }
     
-    public static Object executeMathod(Object object,String methodName, StandardArrayList<Class,Object>parameter) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+    public static Object executeMethod(Object object,String methodName, StandardArrayList<Class,Object>parameter) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
         Class[] classs = new Class[parameter.size()];
         Object[] objects = new Object[parameter.size()];
         
@@ -156,13 +186,55 @@ public class ReflectionUtil
             classs[i]  =   standardAt.getKey();
             objects[i] =   standardAt.getValue();
         }
-       return executeMathod(object, methodName, classs, objects);
+       return executeMethod(object, methodName, classs, objects);
     }
-    public static Object executeMathod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+    public static Object executeMethod(Object object, String methodName, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+        Class[] classs = new Class[parameters.length];
+        for (int i = 0; i < parameters.length; i++) {
+            classs[i]  =   parameters[i].getClass();
+        }
+       return executeMethod(object, methodName, classs, parameters);
+    }
+    public static Object executeMethod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
 //      try{
 //              Object object = newClass(classclass);
                 Class klass =object.getClass();
-                Method setSalaryMethod =  klass.getMethod(methodName, paramTypes);
+                Method setSalaryMethod =  null;
+                try{
+                	setSalaryMethod = klass.getMethod(methodName, paramTypes);
+                }catch(NoSuchMethodException e){
+                	//System.out.println("noSuchMethod");
+                	Method[] methods = klass.getMethods();
+                	for (int i = 0; i < methods.length; i++) {
+                		Method atMethod = methods[i];
+                		Parameter[] atParameters = atMethod.getParameters();
+                		boolean isPass = true;
+						if(methodName.equals(atMethod.getName()) && atParameters.length==parameters.length){//이름과 파라미터개수가 똑같아야된다.
+							for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
+								Parameter atParameter = atParameters[pCnt];
+								if(paramTypes[pCnt].isInstance(parameters[pCnt])){
+									isPass = true;
+								}else{
+									isPass = false;
+								}
+								//Parameter atInputParameter = paramTypes[pCnt];
+//								System.out.println(atParameter.getType()+ "    "+paramTypes[pCnt]);
+//								System.out.println(paramTypes[pCnt].isInstance(parameters[pCnt]));
+								//System.out.println(paramTypes[pCnt].isInstance(atParameter.getType()));
+//								System.out.println(atParameter.getType().isInstance(paramTypes[pCnt]));
+//								if(atParameter.getType().isInstance(paramTypes[pCnt].getClass())){
+//									System.out.println("-------");
+//								}
+								
+							}
+							if(isPass){
+								setSalaryMethod = atMethod;
+							}else{
+								throw new NoSuchMethodException();
+							}
+						}
+					}
+                }
               return  setSalaryMethod.invoke(object, parameters);
 //      }catch(Exception e){
 //          e.printStackTrace();
@@ -176,7 +248,33 @@ public class ReflectionUtil
 //      try{
 //              Object object = newClass(classclass);
                 Class klass =object.getClass();
-                Method setSalaryMethod =  klass.getDeclaredMethod(methodName, paramTypes);
+                Method setSalaryMethod = null;
+                try{
+                	setSalaryMethod = klass.getDeclaredMethod(methodName, paramTypes);
+                }catch(NoSuchMethodException e){
+                	Method[] methods = klass.getMethods();
+                	for (int i = 0; i < methods.length; i++) {
+                		Method atMethod = methods[i];
+                		Parameter[] atParameters = atMethod.getParameters();
+                		boolean isPass = true;
+						if(methodName.equals(atMethod.getName()) && atParameters.length==parameters.length){//이름과 파라미터개수가 똑같아야된다.
+							for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
+								Parameter atParameter = atParameters[pCnt];
+								if(paramTypes[pCnt].isInstance(parameters[pCnt])){
+									isPass = true;
+								}else{
+									isPass = false;
+								}
+								
+							}
+							if(isPass){
+								setSalaryMethod = atMethod;
+							}else{
+								throw new NoSuchMethodException();
+							}
+						}
+					}
+                }
                 setSalaryMethod.invoke(object, parameters);
 //      }catch(Exception e){
 //          e.printStackTrace();

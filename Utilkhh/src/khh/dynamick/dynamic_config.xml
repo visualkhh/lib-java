@@ -10,18 +10,22 @@
 			<class ref="b"></class>
 			<class id="ggg" classpath="java.lang.Boolean" value="false"></class>
 		</constructor>
-		<methoad name="setA">
-			<class ref="a"></class>
-		</methoad>
-		<methoad name="setB">
-			<class id="umb" classpath="java.lang.Integer" value="670"></class>
-		</methoad>
-		<methoad name="setC">
-			<class ref="c"></class>
-		</methoad>
+<!-- 		<method id="d_a" name="setA"> -->
+<!-- 			<class ref="a"></class> -->
+<!-- 		</method> -->
+<!-- 		<method id="d_b" name="setA"> -->
+<!-- 			<class ref="a"></class> -->
+<!-- 			<class id="fff" classpath="java.lang.String" value="f_string"></class> -->
+<!-- 		</method> -->
+		<method id="vv" name="setB">
+			<class  classpath="java.lang.Integer" value="670"></class>
+		</method>
+<!-- 		<method name="setC"> -->
+<!-- 			<class ref="c"></class> -->
+<!-- 		</method> -->
 		
-		<methoad name="getA"></methoad>
-		<methoad name="getB"></methoad>
-		<methoad name="getC"></methoad>
+		<method id="vvv" name="getA"></method>
+<!-- 		<method name="getB"></method> -->
+<!-- 		<method id="d_g" name="getC"></method> -->
 	</class>
 </dynamick>

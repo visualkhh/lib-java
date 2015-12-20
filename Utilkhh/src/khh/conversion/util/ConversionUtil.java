@@ -541,8 +541,31 @@ public class ConversionUtil {
        return new BigDecimal(val);
    }
 
+//   static public String toMorse(String msg){
+//	   String[] alpha = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+//	            "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+//	            "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8",
+//	            "9", "0", " " };
+//	    String[] dottie = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+//	            "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+//	            "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
+//	            "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
+//	            "-....", "--...", "---..", "----.", "-----", "|" };
+//	   return null;
+//   }
+//
+//   
+//	public static String toMorse(char[] translates, String[] dottie) {
+//		String morse = "";
+//		for (int j = 0; j < translates.length; j++) {
+//			char a = translates[j];
+//			if (Character.isLetter(a)) {
+//				morse = dottie[a + 'a'];
+//			}
+//		}
+//		return morse;
+//	}
 
-   
    
    
    

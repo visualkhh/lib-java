@@ -22,8 +22,10 @@ public class DynamicClass {
     private LogK log = LogK.getInstance();
     
     private ArrayList<DynamicClass> constructorParameter        = null;
-    private AdapterMap<String,ArrayList<DynamicClass>> methoadParameter    = null;
+//    private AdapterMap<String, Standard<String, ArrayList<DynamicClass>>> methoadParameter    = null;
+    private AdapterMap<Node, ArrayList<DynamicClass>> methodParameter    = null;
     
+    public int newClassObjectCnt = 0;
     public DynamicClass() {
     }
 
@@ -74,20 +76,28 @@ public class DynamicClass {
         return this.classObject;
     }
 
-    private void setClassObject(Object classObject) {
+    public void setClassObject(Object classObject) {
         this.classObject = classObject;
     }
     
     
     
     public String getAttribute(String attrname){
+    	return getAttribute(this.node, attrname);
+    }
+    public String getAttribute(Node node, String attrname){
+    	Attr at = (Attr) node.getAttributes().getNamedItem(attrname);
+    	return getAttribute(at, attrname);
+    }
+    public String getAttribute(Attr at,String attrname){
         try{
-        Attr at = (Attr) this.node.getAttributes().getNamedItem(attrname);
             return at.getValue();
         }catch (Exception e) {
             return null;
         }
     }
+    
+    
     
 //    public  StandardArrayList<Class,Object> getParameter(DynamicClass dynamicclass){
 //        return null;
@@ -101,21 +111,16 @@ public class DynamicClass {
     }
 
 
-    public AdapterMap<String, ArrayList<DynamicClass>> getMethoadParameter() {
-        return methoadParameter;
-    }
 
-    public void setMethoadParameter(AdapterMap<String, ArrayList<DynamicClass>> methoadParameter) {
-        this.methoadParameter = methoadParameter;
-    }
 
     public void newClassObject() throws Exception{
         log.debug("NewClassObject   id:"+getAttribute("id")+"  classpath:"+getAttribute("classpath"));
         ArrayList<DynamicClass> constructorParameter = getConstructorParameter();
         StandardArrayList<Class, Object> conParamList = new StandardArrayList<Class, Object>();
         
-        //생성자 없고  value Attribute있을때에만.
-        if( constructorParameter.size()==0 && ( getAttribute("value")!=null || getAttribute("value").length()>0 )){
+        //생성자 없다  
+//        if( constructorParameter.size()==0 && ( getAttribute("value")!=null || getAttribute("value").length()>0 )){
+        if(constructorParameter.size()==0){
             String classPath = getAttribute("classpath");
             String id = getAttribute("id");
             String value = getAttribute("value");
@@ -123,7 +128,9 @@ public class DynamicClass {
             if(classPath==null || classPath.length()<=0){
                 throw new Exception("NewClassObject  classpath IsNull or length<=0  ERROR: "+getAttribute("classpath"));
             }
-            conParamList.add(new Standard<Class,Object>(value.getClass(), value));
+            if(value != null){ //value Attribute있을때에만.
+            	conParamList.add(new Standard<Class,Object>(value.getClass(), value));
+            }
             setClassObject( newClass(conParamList) );
             return;
         }
@@ -136,7 +143,7 @@ public class DynamicClass {
             String id = null;
             //안쪽  다음text타입 노드일때 안쪽내용을..초기값으로
             Node node = conParam.getNode();
-            short type =node.getNodeType();
+            short type = node.getNodeType();
             classPath = conParam.getAttribute("classpath");
             id = conParam.getAttribute("id");
             log.debug(" Constructor NewClassObject   id:"+id+"  classpath:"+classPath);
@@ -155,44 +162,102 @@ public class DynamicClass {
             Class classAt = objAt.getClass();
             conParamList.add(new Standard<Class,Object>(classAt, objAt));
         }
-        setClassObject( newClass(conParamList) );
-        
+        setClassObject(newClass(conParamList));
+        newClassObjectCnt++;
 //        getConstructorParameter()
     }
+
     
-    public void executeMethoad() throws Exception{
-        
-        AdapterMap<String, ArrayList<DynamicClass>> methoadParameter = getMethoadParameter();
+    
+    
+    
+    //methoad---------
+    public Node getMethodNode(String id) throws Exception {
+    	Node metHodNode = null;
+    	for (int i = 0; i < getMethodParameter().size(); i++) {
+    		Node node =  getMethodParameter().getKey(i);
+    		ArrayList<DynamicClass> methodParameters =  getMethodParameter().get(i);
+			if(id.equals(getAttribute(node, "id"))){
+				metHodNode = node;
+				break;
+			}
+		}
+    	return metHodNode;
+    }
+    
+    public ArrayList<DynamicClass> getMethodParameter(String id) throws Exception {
+    	ArrayList<DynamicClass> list = null;
+    	for (int i = 0; i < getMethodParameter().size(); i++) {
+    		Node node =  getMethodParameter().getKey(i);
+    		ArrayList<DynamicClass> methodParameters =  getMethodParameter().get(i);
+			if(id.equals(getAttribute(node, "id"))){
+				list = methodParameters;
+				break;
+			}
+		}
+    	return list;
+    }
+
+    public AdapterMap<Node, ArrayList<DynamicClass>> getMethodParameter() {
+        return methodParameter;
+    }
+
+    public void setMethodParameter(AdapterMap<Node, ArrayList<DynamicClass>> methodParameter) {
+        this.methodParameter = methodParameter;
+    }
+    
+    
+    public void executeMethod() throws Exception{
+    	AdapterMap<Node, ArrayList<DynamicClass>> methodParameter = getMethodParameter();
 //        StandardArrayList<Class, Object> methoadParamList = new StandardArrayList<Class, Object>();
-        for (int i = 0; i < methoadParameter.size(); i++) { //methoad start
-            String methoadName  = methoadParameter.getKey(i);
-            ArrayList<DynamicClass> methoadDynamicParamList = methoadParameter.get(methoadName);
-            
-            StandardArrayList<Class, Object> methoadParamList = new StandardArrayList<Class, Object>();
-            
-            for (int j = 0; j < methoadDynamicParamList.size(); j++) {
-                Object objAt = null;
-                DynamicClass dynamicclassAt = methoadDynamicParamList.get(j);
-                if(dynamicclassAt.getClassObject()==null){
-                    dynamicclassAt.newClassObject();
-                }
-                objAt = dynamicclassAt.getClassObject();
-                Class classAt = objAt.getClass();
-                methoadParamList.add(new Standard<Class, Object>(classAt, objAt));
-                
-            }
-            executeMathod(methoadName, methoadParamList);
-            
-//            Class classAt = ReflectionUtil.getClass(conParam.getAttribute("classpath"));
-//            Object objAt = ReflectionUtil.newClass(classAt) ;
-//            methoadParamList.add(new Standard<Class,Object>(classAt, objAt));
+        for (int i = 0; i < methodParameter.size(); i++) { //methoad start
+        	Node key = methodParameter.getKey(i);
+        	ArrayList<DynamicClass> parameters = methodParameter.get(i);
+        	executeMethod(key);
+        	//executeMethod(getAttribute(key, "name") ,parameters);
         }
 //        setClassObject( newClass(methoadParamList) );
-        
 //        getConstructorParameter()
     }
     
+    public Object executeMethod(String id) throws Exception {
+    	Node methodNode = getMethodNode(id);
+    	return executeMethod(methodNode);
+    }
+    public Object executeMethod(Node methodNode) throws Exception {
+    	String id = getAttribute(methodNode, "id");
+    	String name = getAttribute(methodNode, "name");
+    	return executeMethod(name, getMethodParameter(id));
+    }
     
+    public Object executeMethod(String methodName, ArrayList<DynamicClass> methodParameters) throws Exception{
+    	//String methoadId  = methoadParameter.getKey(i);
+        StandardArrayList<Class, Object> methodParamList = new StandardArrayList<Class, Object>();
+        
+        for (int j = 0; j < methodParameters.size(); j++) {
+            Object objAt = null;
+            DynamicClass dynamicclassAt = methodParameters.get(j);
+            if(dynamicclassAt.getClassObject()==null){
+                dynamicclassAt.newClassObject();
+            }
+            objAt = dynamicclassAt.getClassObject();
+            //Class classAt = objAt.getClass();
+            Class classAt = ReflectionUtil.getClass(dynamicclassAt.getAttribute("classpath"));
+            methodParamList.add(new Standard<Class, Object>(classAt, objAt));
+        }
+        return executeMethod(methodName, methodParamList);
+    }
+    
+
+    //public Object executeMethod(String mathodName , Object[] parameterArgs) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    //	return ReflectionUtil.executeMethod(this.classObject, mathodName, parameterArgs);
+    //}
+    public Object executeMethod(String mathodName ,Class[] parameterType, Object[] parameterArgs) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        return ReflectionUtil.executeMethod(this.classObject, mathodName,parameterType,parameterArgs);
+    }
+    private Object executeMethod(String mathodName ,StandardArrayList<Class, Object> parameter) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        return ReflectionUtil.executeMethod(this.classObject, mathodName,parameter);
+    }
     
     
     private Object newClass() throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
@@ -205,14 +270,9 @@ public class DynamicClass {
         return ReflectionUtil.newClass(getAttribute("classpath"),parameter);
     }
     
-    public Object executeMathod(String mathodName) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        return ReflectionUtil.executeMathod(this.classObject, mathodName);
-    }
-    public Object executeMathod(String mathodName ,Class[] parameterType, Object[] parameterArgs) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        return ReflectionUtil.executeMathod(this.classObject, mathodName,parameterType,parameterArgs);
-    }
-    public Object executeMathod(String mathodName ,StandardArrayList<Class, Object> parameter) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        return ReflectionUtil.executeMathod(this.classObject, mathodName,parameter);
-    }
+    
+    
+
+
 
 }

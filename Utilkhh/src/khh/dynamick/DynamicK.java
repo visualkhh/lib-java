@@ -6,21 +6,22 @@ import java.util.ArrayList;
 import khh.debug.LogK;
 import khh.std.adapter.AdapterMap;
 import khh.xml.XMLparser;
+import khh.std.Standard;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
+
 
 public class DynamicK {
-   private AdapterMap<String,File> configlist=null;
-   private LogK log = LogK.getInstance();
-   private AdapterMap<String,DynamicClass> classlist=null;
-    public DynamicK() {
+	private AdapterMap<String,File> configlist = null;
+	private LogK log = LogK.getInstance();
+	private AdapterMap<String,DynamicClass> classlist = null;
+	private String rootElementName="/";
+	public DynamicK() {
         configlist      = new AdapterMap<String,File>();
         classlist       = new AdapterMap<String,DynamicClass>();
     }
-    
     
     
     
@@ -37,7 +38,6 @@ public class DynamicK {
     
     
     
-    
     public void setting() {
         if(configlist!=null && configlist.size()>0){
             setConfig();
@@ -49,12 +49,24 @@ public class DynamicK {
     
     
     
-    
-    
-    
-    
 
-  private String classxpath="/dynamick/class";
+  public String getRootElementName() {
+		return rootElementName;
+	}
+
+
+
+	public void setRootElementName(String rootElementName) {
+		this.rootElementName = rootElementName;
+	}
+
+
+
+
+
+
+
+private String classxpath="/class";
   private void setConfig() {
       
       //Global settingConfig
@@ -65,7 +77,7 @@ public class DynamicK {
               XMLparser parser = new XMLparser(configlist.get(i));
               
               //global class
-              String contextpath      =   classxpath+"[@id]";
+              String contextpath      =   getRootElementName()+classxpath+"[@id]";
               NodeList nodes = parser.getNodes(contextpath);
               log.debug("Class Global Element  xpath:"+contextpath+ "   size:"+nodes.getLength());
               
@@ -95,7 +107,7 @@ public class DynamicK {
       }
       
       
-
+      /*
       //Class 생성
       for (int i = 0; i < classlist.size(); i++){
           try{
@@ -103,7 +115,7 @@ public class DynamicK {
               String classpath = classlist.get(i).getAttribute("classpath");
              
               classlist.get(i).newClassObject();
-//              getClass(classlist.get(i));
+			//getClass(classlist.get(i));
               
           }catch (Exception e) {
             log.error("Class 생성 Error ",e);
@@ -120,7 +132,7 @@ public class DynamicK {
               String classpath = classlist.get(i).getAttribute("classpath");
              
               classlist.get(i).executeMethoad();
-//              getClass(classlist.get(i));
+			//getClass(classlist.get(i));
               
           }catch (Exception e) {
             log.error("methoad 실행 Error ",e);
@@ -129,10 +141,58 @@ public class DynamicK {
       }
       
         log.debug(classlist.size());
-   
+  */
   }
     
+  public void newClassObject(){
+	  newClassObject(getClasslist());
+  }
+  public void newClassObject(AdapterMap<String, DynamicClass> classlist){
+      for (int i = 0; i < classlist.size(); i++){
+          try{
+              //String id = classlist.get(i).getAttribute("id");
+              //String classpath = classlist.get(i).getAttribute("classpath");
+              newClassObject(classlist.get(i));
+          }catch (Exception e) {
+            log.error("Class 생성 Error ",e);
+          }finally{
+          }
+      }
+      
+  }
   
+  private void newClassObject(DynamicClass dclass){
+	  try{
+		  dclass.newClassObject();
+      }catch (Exception e) {
+        log.error("methoad 실행 Error ",e);
+      }finally{
+      }
+  }
+  
+  public void executeMethod(){
+	  executeMethod(getClasslist());
+  }
+  public void executeMethod(AdapterMap<String, DynamicClass> classlist){
+      for (int i = 0; i < classlist.size(); i++){
+          try{
+              //String id = classlist.get(i).getAttribute("id");
+              //String classpath = classlist.get(i).getAttribute("classpath");
+              executeMethod(classlist.get(i));
+          }catch (Exception e) {
+            log.error("methoad List 실행 Error ("+i+"번째)",e);
+          }finally{
+          }
+      }
+  }
+  private void executeMethod(DynamicClass dclass){
+	  try{
+		  dclass.executeMethod();
+      }catch (Exception e) {
+        log.error("methoad 실행 Error ",e);
+      }finally{
+      }
+  }
   
   
   
@@ -142,7 +202,8 @@ public class DynamicK {
         NodeList list = node.getChildNodes();    
         
         ArrayList<DynamicClass> constructorParameter = new ArrayList<DynamicClass>();
-        AdapterMap<String, ArrayList<DynamicClass>> methoadParameter = new AdapterMap<String, ArrayList<DynamicClass>>();
+        AdapterMap<Node, ArrayList<DynamicClass>> methoadParameter = new AdapterMap<Node, ArrayList<DynamicClass>>();
+//        AdapterMap<String, Standard<String, ArrayList<DynamicClass>> > methoadParameter = new AdapterMap<String, Standard<String, ArrayList<DynamicClass>> >();
         
           for(int i = 0 ; i<list.getLength() ; i++) {
               
@@ -177,35 +238,36 @@ public class DynamicK {
                 }
                  
                  
-             }else if("methoad".equals(classSubNode.getNodeName()) ||  "methoad"==classSubNode.getNodeName()){
-                 ArrayList<DynamicClass> methoadSubClassList= new ArrayList<DynamicClass>();
-                 NodeList methoadSubList = classSubNode.getChildNodes();
-                 for(int y = 0; y < methoadSubList.getLength(); y++){
-                     Node methoadSubNode = methoadSubList.item(y);
+             }else if("method".equals(classSubNode.getNodeName()) ||  "method"==classSubNode.getNodeName()){
+                 ArrayList<DynamicClass> methodSubClassList= new ArrayList<DynamicClass>();
+                 NodeList methodSubList = classSubNode.getChildNodes();
+                 for(int y = 0; y < methodSubList.getLength(); y++){
+                     Node methodSubNode = methodSubList.item(y);
 //                     log.debug(methoadSubNode.getNodeName()+"     ("+methoadSubNode.getNodeType()+")");
-                     if( methoadSubNode.getNodeType()==org.w3c.dom.Node.ELEMENT_NODE){
+                     if( methodSubNode.getNodeType()==org.w3c.dom.Node.ELEMENT_NODE){
                      }else{
                          continue;
                      }
-                     DynamicClass sdclass = new DynamicClass(methoadSubNode);
+                     DynamicClass sdclass = new DynamicClass(methodSubNode);
                      String ref = sdclass.getAttribute("ref");
                      if(ref!=null && ref.length()>0){
                          sdclass = classlist.get(ref);
                      }
-                     methoadSubClassList.add(sdclass);
+                     methodSubClassList.add(sdclass);
                      getClass(sdclass);
                  }
-                 methoadParameter.add(
-                         ((Attr)classSubNode.getAttributes().getNamedItem("name")).getValue()
-                         , methoadSubClassList
-                         );
+                 //중요 methoad도 ID를부여
+//                 String methoadId = ((Attr)classSubNode.getAttributes().getNamedItem("id")).getValue();
+//                 String methoadName = ((Attr)classSubNode.getAttributes().getNamedItem("name")).getValue();
+//                 methoadParameter.add(methoadId, new Standard<String,ArrayList<DynamicClass>>(methoadName, methoadSubClassList));
+                 methoadParameter.add(classSubNode, methodSubClassList);
                  
                  
              }
           }
           
           dclass.setConstructorParameter(constructorParameter);
-          dclass.setMethoadParameter(methoadParameter);
+          dclass.setMethodParameter(methoadParameter);
         
 //        return null;
     }
