@@ -43,7 +43,7 @@ import khh.xml.XMLparser;
 public class DBTerminal {
 
     
-    
+    //config쪽을 왜 static으로 잡았냐면   DBTerminal을 생성할때마다 매번 xml을 읽을 필요가 없기때문이다.
     
     //static fild
     private static String configfolder ="dbt";
@@ -418,13 +418,13 @@ public class DBTerminal {
         newDoc.appendChild(rootElement);
         
         for (int i = 0; i < rc.size(); i++) {
-            DBTResultRecord r = rc.get(i);
-            for (int j = 0; j < r.size(); j++) {
+            DBTResultRecord atRecord = rc.get(i);
+            for (int j = 0; j < atRecord.size(); j++) {
                 Element data = newDoc.createElement("data");
                 rootElement.appendChild(data);
                 
-                Attr attr = newDoc.createAttribute(r.getKey(j));
-                attr.setValue(r.get(j));
+                Attr attr = newDoc.createAttribute(atRecord.getKey(j));
+                attr.setValue(atRecord.get(j));
                 data.setAttributeNode(attr);
          
             }

@@ -4,7 +4,7 @@
 	<class id="a" classpath="java.lang.String" value="a_string"></class>
 	<class id="b" classpath="java.lang.Integer" value="500"></class>
 	<class id="c" classpath="java.lang.Boolean" value="true"></class>
-	<class id="d" classpath="khh.dynamick.DynamicInputTest">
+	<class id="d" classpath="khh.dynamick.DynamicInputTest"	newConstructor="" returnMethod="">
 		<constructor>
 			<class ref="a"></class>
 			<class ref="b"></class>
@@ -28,4 +28,5 @@
 <!-- 		<method name="getB"></method> -->
 <!-- 		<method id="d_g" name="getC"></method> -->
 	</class>
+	<class id="za" extends="d"></class>
 </dynamick>

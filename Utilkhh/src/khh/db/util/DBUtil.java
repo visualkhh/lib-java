@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import khh.collection.StandardArrayList;
 import khh.db.terminal.resultset.DBTResultRecord;
 import khh.db.terminal.resultset.DBTResultSetContainer;
+import khh.property.util.PropertiesUtil;
+import khh.property.util.PropertyUtil;
 import khh.sort.SortUtil;
 import khh.sort.comparator.CompareBase;
 import khh.sort.comparator.CompareIntegerStandard;
@@ -173,6 +175,23 @@ public class DBUtil {
                 rstc.add(index++, row);
             }
         return rstc;
+    }
+    
+    public static String getXMLTagString(DBTResultSetContainer dbtResultSetContiner) throws SQLException, Exception {
+    	StringBuffer rstr = new StringBuffer();
+    	String enter = PropertyUtil.getSeparator();
+    	rstr.append("<TABLE>"+enter);
+    	
+    	for (int i = 0; i < dbtResultSetContiner.size(); i++) {
+    		 DBTResultRecord row = dbtResultSetContiner.get(i);
+    		 rstr.append("<RECODE>");
+    		 for (int j = 0; j < row.size(); j++) {
+    			 rstr.append("<"+row.getKey(j)+"><![CDATA["+row.getString(j)+"]]></"+row.getKey(j)+">");
+    		 }
+    		 rstr.append("</RECODE>"+enter);
+		}
+    	rstr.append("</TABLE>");
+        return rstr.toString();
     }
     
     // table 테그

@@ -623,5 +623,12 @@ public class StringUtil {
 		return inJection(msg,prefix,postfix,param);
 	}
 
+	public static String loopString(Object o, int cnt){
+		StringBuffer b = new StringBuffer();
+		for (int i = 0; i < cnt; i++) {
+			b.append(o);
+		}
+		return b.toString();
+	}		
 	
 }

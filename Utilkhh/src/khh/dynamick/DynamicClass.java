@@ -13,16 +13,12 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 
 public class DynamicClass {
+	private LogK log = LogK.getInstance();
+	
     private Node node          = null;
-//    private String id          = null;
-//    private String classPath   = null;
-//    private String ref         = null;
     private Object classObject = null;
-
-    private LogK log = LogK.getInstance();
-    
     private ArrayList<DynamicClass> constructorParameter        = null;
-//    private AdapterMap<String, Standard<String, ArrayList<DynamicClass>>> methoadParameter    = null;
+    private AdapterMap<Node, ArrayList<DynamicClass>> constructor    = null;
     private AdapterMap<Node, ArrayList<DynamicClass>> methodParameter    = null;
     
     public int newClassObjectCnt = 0;
@@ -33,8 +29,6 @@ public class DynamicClass {
         setNode(node);
     }
     
-    
-    
     public Node getNode() {
         return node;
     }
@@ -43,34 +37,6 @@ public class DynamicClass {
         this.node = node;
     }
     
-//    public void getConstructorParameter(){
-//        
-//    }
-
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-//
-//    public String getClassPath() {
-//        return classPath;
-//    }
-//
-//    public void setClassPath(String classPath) {
-//        this.classPath = classPath;
-//    }
-//
-//
-//    public String getRef() {
-//        return ref;
-//    }
-//
-//    public void setRef(String ref) {
-//        this.ref = ref;
-//    }
     
     public Object getClassObject() {
         return this.classObject;
@@ -198,7 +164,17 @@ public class DynamicClass {
     	return list;
     }
 
-    public AdapterMap<Node, ArrayList<DynamicClass>> getMethodParameter() {
+    
+    
+    public AdapterMap<Node, ArrayList<DynamicClass>> getConstructor() {
+		return constructor;
+	}
+
+	public void setConstructor(AdapterMap<Node, ArrayList<DynamicClass>> constructor) {
+		this.constructor = constructor;
+	}
+
+	public AdapterMap<Node, ArrayList<DynamicClass>> getMethodParameter() {
         return methodParameter;
     }
 

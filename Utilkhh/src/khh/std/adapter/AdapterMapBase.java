@@ -25,6 +25,25 @@ public abstract class AdapterMapBase<K,T>  implements CastMap_I<K>,Serializable 
 	public void isGetValidate(T returnval)throws Exception {
 	}
 	
+	
+	final public void add(AdapterMapBase<K,T> list)  throws Exception {
+		ArrayList<Standard<K,T>> listObjects = list.getList();
+		add(listObjects);
+	}
+	final public void add(ArrayList<Standard<K,T>> listObjects)  throws Exception {
+		for (int i = 0; i < listObjects.size(); i++) {
+			add(listObjects.get(i));
+		}
+	}
+	final public void add(Standard<K,T> object)  throws Exception {
+		 synchronized (container) {
+     		isAddValidate(object.getKey(),object.getValue());
+     		int i = getIndex(object.getKey());
+     		if(i<0){		
+     			container.add(object);
+     		}
+	    }
+	}
 	final public void add(K key,T value)  throws Exception {
 	    synchronized (container) {
         		isAddValidate(key,value);

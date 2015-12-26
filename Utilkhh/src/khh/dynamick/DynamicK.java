@@ -14,13 +14,13 @@ import org.w3c.dom.NodeList;
 
 
 public class DynamicK {
-	private AdapterMap<String,File> configlist = null;
+	private AdapterMap<String,File> configlist 			= null;
+	private AdapterMap<String, DynamicClass> classlist 	= null;
+	private String rootElementName						= "/";
 	private LogK log = LogK.getInstance();
-	private AdapterMap<String,DynamicClass> classlist = null;
-	private String rootElementName="/";
 	public DynamicK() {
-        configlist      = new AdapterMap<String,File>();
-        classlist       = new AdapterMap<String,DynamicClass>();
+        configlist      = new AdapterMap<String, File>();
+        classlist       = new AdapterMap<String, DynamicClass>();
     }
     
     
@@ -71,23 +71,23 @@ private String classxpath="/class";
       
       //Global settingConfig
       // 우선 전체적인 config파일에서  뭐든 class파일을 불러서 넣는다.
-      for (int i = 0; i < configlist.size(); i++) {
+      for (int configCnt = 0; configCnt < configlist.size(); configCnt++) {
           try{
-              log.debug("ConfigFile["+i+"]   size("+configlist.size()+")");
-              XMLparser parser = new XMLparser(configlist.get(i));
+              log.debug("ConfigFile["+configCnt+"]   size("+configlist.size()+")");
+              XMLparser parser = new XMLparser(configlist.get(configCnt));
               
               //global class
-              String contextpath      =   getRootElementName()+classxpath+"[@id]";
+              //String contextpath = getRootElementName()+classxpath+"[@id]";
+              String contextpath = getRootElementName()+classxpath;
+              
               NodeList nodes = parser.getNodes(contextpath);
               log.debug("Class Global Element  xpath:"+contextpath+ "   size:"+nodes.getLength());
               
               
-              for (int j = 0; j < nodes.getLength(); j++) {
+              for (int classCnt = 0; classCnt < nodes.getLength(); classCnt++) {
+            	  Node atClassNode = nodes.item(classCnt);
                   DynamicClass dynamicClass = new DynamicClass();
-                  dynamicClass.setNode(nodes.item(j));
-//                  dynamicClass.setId(attr.get("id"));
-//                  dynamicClass.setClassPath(attr.get("classpath"));
-//                  dynamicClass.setRef(attr.get("ref"));
+                  dynamicClass.setNode(nodes.item(classCnt));
                   classlist.add(dynamicClass.getAttribute("id"), dynamicClass);
               }
               parser.close();
@@ -143,7 +143,30 @@ private String classxpath="/class";
         log.debug(classlist.size());
   */
   }
-    
+
+  
+  public AdapterMap<String, DynamicClass> getType(String typeValue){
+	  return getEqualsAttribute("type",typeValue);
+  }
+  public AdapterMap<String, DynamicClass> getEqualsAttribute(String attributeName, String attributeValue){
+	  AdapterMap<String, DynamicClass> list = new AdapterMap<String, DynamicClass>();
+	  AdapterMap<String, DynamicClass> dclassList = getClasslist();
+	  for (int i = 0; i < dclassList.size(); i++) {
+		  try{
+			  String key = dclassList.getKey(i);
+			  DynamicClass dclass = dclassList.get(i); 
+			  if(attributeValue.equals(dclass.getAttribute(attributeName))){
+					list.add(key, dclass);
+			  }
+		  }catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  
+	  }
+	  
+	  return list;
+  }
+
   public void newClassObject(){
 	  newClassObject(getClasslist());
   }

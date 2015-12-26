@@ -1,6 +1,6 @@
 package khh.filter;
 
-
+@FunctionalInterface
 public interface Filter<T>{
-	public boolean accept(T arg0);
+	public boolean test(T arg0);
 }

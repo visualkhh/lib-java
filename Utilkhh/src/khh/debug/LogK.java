@@ -339,7 +339,7 @@ public class LogK  implements Serializable {
            logerformat = logerformat.replaceAll("%l", level);
            logerformat = logerformat.replaceAll("%c", StringUtil.regexMetaCharToEscapeChar(classpath));
            logerformat = logerformat.replaceAll("%k", filename);
-           logerformat = logerformat.replaceAll("%f", methodname);
+           logerformat = logerformat.replaceAll("%f", StringUtil.regexMetaCharToEscapeChar(methodname));
            logerformat = logerformat.replaceAll("%n", classlinenumber+"");
            logerformat = logerformat.replaceAll("%r", PropertyUtil.getSeparator());
            message = (message==null?"null":message);

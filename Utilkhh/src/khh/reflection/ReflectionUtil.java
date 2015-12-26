@@ -5,8 +5,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 
 import khh.collection.StandardArrayList;
+import khh.conversion.util.ConversionUtil;
 import khh.std.Standard;
 
 public class ReflectionUtil
@@ -97,6 +99,20 @@ public class ReflectionUtil
 	public static Object newClass(Class classclass) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
 		return newClass(classclass, null,null);
 	}
+	public static Object newClass(String classpath, ArrayList parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+		//Object[] paramObject = new Object[parameters.size()];
+		return newClass(getClass(classpath),parameters.toArray());
+	}
+	public static Object newClass(String classpath, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+		return newClass(getClass(classpath),parameters);
+	}
+	public static Object newClass(Class classclass, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+        Class[] classs = new Class[parameters.length];
+        for (int i = 0; i < parameters.length; i++) {
+            classs[i]  =   parameters[i].getClass();
+        }
+       return newClass(classclass, classs, parameters);
+    }
 	public static Object newClass(String classpath,Class[] constructorParamType ,Object[] constructorArgs) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
 		return newClass(getClass(classpath), constructorParamType,constructorArgs);
 	}
@@ -173,8 +189,8 @@ public class ReflectionUtil
 	}
 	
 	
-    public static Object executeMethod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
-        return executeMethod(object,mathodname,null,null);
+    public static Object executeMethod(Object object,String methodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+        return executeMethod(object,methodname,null,null);
     }
     
     public static Object executeMethod(Object object,String methodName, StandardArrayList<Class,Object>parameter) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
@@ -187,6 +203,9 @@ public class ReflectionUtil
             objects[i] =   standardAt.getValue();
         }
        return executeMethod(object, methodName, classs, objects);
+    }
+    public static Object executeMethod(Object object, String methodName,  ArrayList parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+    	return executeMethod(object,methodName,parameters.toArray());
     }
     public static Object executeMethod(Object object, String methodName, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
         Class[] classs = new Class[parameters.length];
@@ -241,8 +260,8 @@ public class ReflectionUtil
 //      }
     }
     
-    public static void executeDeclaredMethod(Object object,String mathodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
-        executeDeclaredMethod(object,mathodname,null,null);
+    public static void executeDeclaredMethod(Object object,String methodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+        executeDeclaredMethod(object,methodname,null,null);
     }
     public static void executeDeclaredMethod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
 //      try{

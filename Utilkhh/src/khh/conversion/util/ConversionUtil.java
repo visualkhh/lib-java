@@ -14,6 +14,7 @@ import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -361,6 +362,19 @@ public class ConversionUtil {
 		}
 	}
 		return childitem;
+   }
+	
+	
+   //child에 없는걸 super에서 가져와라  즉   super에있는것중에 child에 없으면 거기에넣어라	KEY값으로.
+	public static Map mergeToNewMap(Map superitem, Map childitem){
+		HashMap map = new HashMap(); 
+		Iterator iter = superitem.keySet().iterator();
+		while(iter.hasNext()){
+			Object key = iter.next();
+			map.put(key, superitem.get(key));
+		}
+		map.putAll(childitem);
+		return map;
    }
    
    

@@ -2,7 +2,13 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
@@ -11,45 +17,38 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import org.mozilla.javascript.edu.emory.mathcs.backport.java.util.Arrays;
+
+
 public class Test {
-	public static byte[] bang() {
-	    byte[] buf = new byte[8050];
-	    Random r = new Random();
-	    boolean silence = true;
-	    for (int i = 0; i < 8000; i++) {
-	        while (r.nextInt() % 10 != 0) {
-	            buf[i] =
-	                    silence ? 0
-	                    : (byte) Math.abs(r.nextInt()
-	                    % (int) (1. + 63. * (1. + Math.cos(((double) i)
-	                    * Math.PI / 8000.))));
-	            i++;
-	        }
-	        silence = !silence;
-	    }
-	    return buf;
+
+	
+	public void s(StringBuffer a){
+		a.append("vvvvvvv");
 	}
 
-
-	private static void save(byte[] data, String filename) throws IOException, LineUnavailableException, UnsupportedAudioFileException {
-	    InputStream byteArray = new ByteArrayInputStream(data);
-	    AudioInputStream ais = new AudioInputStream(byteArray, getAudioFormat(), (long) data.length);
-	    AudioSystem.write(ais, AudioFileFormat.Type.WAVE, new File(filename));
+	public void s(String a){
+		a+="v";
 	}
-
-	private static AudioFormat getAudioFormat() {
-	    return new AudioFormat(
-	            8000f, // sampleRate
-	            8, // sampleSizeInBits
-	            1, // channels
-	            true, // signed
-	            false);      // bigEndian  
-	}
-
 	public static void main(String[] args) throws Exception {
-	    byte[] data  = bang();
-	    save(data, "test.wav");
-	    System.out.println("--");
+		ArrayList<String> a = new ArrayList<>();
+		a.add("a");
+		a.add("b");
+		a.add("c");
+		a.add("d");
+		a.add("e");
+		a.add("f");
+		a.add("g");
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i);
+			if(b.equals("g")){
+				a.remove(i);
+				i--;
+			}
+			System.out.println(i+" "+a.get(i));
+		}
+		
 	}
+
        
 }

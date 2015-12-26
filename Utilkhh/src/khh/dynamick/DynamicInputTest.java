@@ -1,12 +1,21 @@
 package khh.dynamick;
 
 public class DynamicInputTest {
-    String  a = null;
+    String  a = "a_default";
     Integer b = null;
     Boolean c = null;
     public DynamicInputTest() {
     	System.out.println("DynamicInputText new");
 	}
+    
+    public DynamicInputTest(DynamicInputTest d) {
+    	System.out.println("DynamicInputText Dyn-->"+d);
+	}
+    
+    public DynamicInputTest(String a) {
+    	System.out.println("DynamicInputText new  A:"+a);
+    	this.a=a;
+    }
     public DynamicInputTest(String a, Integer b, Boolean c) {
         this.a = a;
         this.b = b;
@@ -15,7 +24,7 @@ public class DynamicInputTest {
     }
 
     public String getA() {
-        System.out.println("getA"+a);
+        System.out.println("getA Call : "+a);
         return a;
     }
 
@@ -29,7 +38,7 @@ public class DynamicInputTest {
     }
 
     public Integer getB() {
-        System.out.println("getB"+b);
+        System.out.println("getB Call"+b);
         return b;
     }
 
@@ -48,4 +57,7 @@ public class DynamicInputTest {
         this.c = c;
     }
 
+    public void print(String a){
+    	System.out.println("----"+a);
+    }
 }

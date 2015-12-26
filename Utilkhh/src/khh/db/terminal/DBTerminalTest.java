@@ -39,5 +39,16 @@ public class DBTerminalTest {
 //            System.out.println(r.get("data"));
 //        }
         
+        
+        
+        /*
+         DBTResultSetContainer g = db.executeMapQuery("test");
+		String a = "";
+		for (int i = 0; i < g.size(); i++) {
+			DBTResultRecord r = g.get(i);
+			log.debug("--> "+r.getString("A"));
+			a+="_"+r.getString("A");
+		}
+         */
     }
 }
