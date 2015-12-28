@@ -3,6 +3,8 @@ package khh.xml;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import khh.std.adapter.AdapterMapBase;
@@ -14,10 +16,10 @@ public class Element<T> {
 	Map<String, String> attr	= new HashMap<String, String>();
 	ArrayList<Element> childElement	= new ArrayList<Element>();
 	T object = null;
+	
+	
 	public Element() {
 	}
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -108,10 +110,47 @@ public class Element<T> {
 		childElement.add(e);
 	}
 	public void addAllChildElement(ArrayList<Element<T>> arrayList){
-		this.childElement.addAll(arrayList);
+		this.childElement.addAll(0,arrayList);
 	}
-
 	
+	public void loopNode(Consumer<Element> ce){
+		loopNode(getChildElement(),ce);
+	}
+	private void loopNode(ArrayList<Element> el, Consumer<Element> ce) {
+		for (int i = 0; i < el.size(); i++) {
+			Element e = el.get(i);
+			if(null!=ce)
+				ce.accept(e);
+			if(e.getChildElement().size()>0){
+				loopNode(e.getChildElement(),ce);
+			}
+		}
+		//return el;
+	}
+	
+	public void loopNode(BiConsumer<Element, Integer> bce) {
+		loopNode(getChildElement(),bce);
+	}
+	public void loopNode(ArrayList<Element> el, BiConsumer<Element, Integer> bce) {
+		loopNode(el,0,bce);
+	}
+	public void loopNode(ArrayList<Element> el, int depth, BiConsumer<Element, Integer> bce) {
+/*
+ (Element e,Integer depth)->{
+			log.debug(StringUtil.loopString("\t",depth)+e);
+		}
+ */
+		for (int i = 0; i < el.size(); i++) {
+			Element e = el.get(i);
+			bce.accept(e, depth);
+			//System.out.print(StringUtil.loopString("\t",depth));
+			//log.debug(e);
+			if(e.getChildElement().size()>0){
+				loopNode(e.getChildElement(),depth+1,bce);
+			}
+		}
+		//return el;
+	}
 	@Override
 	public String toString() {
 		return "Element [name=" + name + ", type=" + type + ", object=" + object + ", attr=" + attr + ", childElement=" + childElement+"]";

@@ -20,7 +20,7 @@ class childElement
 	
  -->
 <dynamin>
-
+	<class bind="a"/>
 	<class id="f" classpath="java.lang.String" value="f_string"></class>
 	<class id="a" classpath="java.lang.String" value="a_string"></class>
 	<class id="b" classpath="java.lang.Integer" value="500"></class>
@@ -30,21 +30,27 @@ class childElement
 		<constructor>
 			<class id="f" extends="a"></class>
 		</constructor>
-		<method name="print">
-			<class id="a" classpath="java.lang.String" value="zzzz"></class>
-		</method>
+<!-- 		<method name="print"> -->
+<!-- 			<class  classpath="java.lang.String" value="zzzz"></class> -->
+<!-- 		</method> -->
+		<method val="gagaMM"></method>
 		<rmethod name="getA">
 		</rmethod>
 	</class>
-	
-	<class id="gbgb" classpath="khh.dynamick.TT">
+	<class id="gggg" extends="gaga">
 		<constructor>
-			<class extends="gaga">
-				<rmethod name="getA"></rmethod>
-			</class>
+			<class id="fzzzz" extends="a"></class>
 		</constructor>
-		<rmethod name="getId"></rmethod>
+		<method val="ggMM"></method>
 	</class>
+<!-- 	<class id="gbgb" classpath="khh.dynamick.TT"> -->
+<!-- 		<constructor> -->
+<!-- 			<class extends="gaga"> -->
+<!-- 				<rmethod name="getA"></rmethod> -->
+<!-- 			</class> -->
+<!-- 		</constructor> -->
+<!-- 		<rmethod name="getId"></rmethod> -->
+<!-- 	</class> -->
 	
 <!-- 	<class id="z" extends="gaga"> -->
 <!-- 	</class> -->

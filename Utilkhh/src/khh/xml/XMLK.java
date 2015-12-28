@@ -12,10 +12,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import khh.debug.LogK;
-import khh.filter.FilterCheckArray;
-import khh.filter.FilterCheckPair;
 import khh.std.adapter.AdapterMap;
-import khh.string.util.StringUtil;
 
 public class XMLK {
 
@@ -25,24 +22,20 @@ public class XMLK {
 	private String targetXPath = "/xmlk/*";
 	LogK log = null;
 
-	Predicate<Node> filterAddElement = new Predicate<Node>() {
-		public boolean test(Node t) {
+	Predicate<Node> filterAddElement = t -> {
 			if (Node.ELEMENT_NODE == t.getNodeType()) {
 				return true;
 			} else {
 				return false;
 			}
-		}
 	};
-	BiPredicate<Element, Element> filterExtends = new BiPredicate<Element, Element>() {
-		public boolean test(Element target, Element thiss) {
+	BiPredicate<Element, Element> filterExtends = (Element target, Element thiss) -> {
 			String targetId 		= target.getAttr("id");
 			String targetExtends	= target.getAttr("extends");
 			String thisId			= thiss.getAttr("id");
 			String thisExtends		= thiss.getAttr("extends");
 			//맞는거 넣는다..아이디가 있어야하고.., 아이디와 상속이 같지 않아야하며, 타겟의 상속값이 상대방의 id와같은거
 			return (target.isAttr("id")&&!targetId.equals(targetExtends) && thiss.isAttr("extends")&&thisExtends.equals(targetId));
-		}
 	};
 	
 	BiConsumer<Element, Element> logicExtendsAddChild = new BiConsumer<Element, Element>() {

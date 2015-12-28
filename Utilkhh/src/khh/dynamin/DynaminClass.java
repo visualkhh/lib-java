@@ -26,9 +26,13 @@ public class DynaminClass {
 
 	//rmethod호출을해준값 리턴
 	public Object call() throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
-		return call(null);
+		if(null == element.getObject()){
+			return newClass();
+		}else{
+			return call(null);
+		}
 	}
-	public Object call(Element callerE) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+	private Object call(Element callerE) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		Object object = null;
 		if(null == element.getObject()){
 			object = newClass(element,callerE);
@@ -36,13 +40,13 @@ public class DynaminClass {
 		//rmethod실행시켜서 호출해야함.
 		Element rmethod = (callerE==null?element:callerE).getChildElementByTagNameAtLast("rmethod");
 		if(null!=rmethod&&rmethod.isAttr("name")){
-			object = executeMethod(rmethod.getAttr("name"), rmethod.getChildElementByTagName("class"));
+			object = executeMethodInElement(rmethod.getAttr("name"), rmethod.getChildElementByTagName("class"));
 		}else{
 			object = element.getObject();
 		}
 		return object;
 	}
-	public Object executeMethod(String methodName,ArrayList<Element> param) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+	public Object executeMethodInElement(String methodName,ArrayList<Element> param) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		ArrayList<Object> conParam = new ArrayList<>();
 		for (int i = 0; i < param.size(); i++) {
 			Object ob = null;
@@ -59,6 +63,9 @@ public class DynaminClass {
 	public Object executeMethod(String methodName,Object[]param) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
 		return ReflectionUtil.executeMethod(element.getObject(),methodName,param);
 	}
+//	public Object executeMethod(String methodName) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+//		
+//	}
 	public Object getObject() {
 		return element.getObject();
 	}
@@ -83,12 +90,12 @@ public class DynaminClass {
 	public Object newClass() throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		return newClass(element);
 	}
-	public Object newClass(Element et) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+	private Object newClass(Element et) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		return newClass(et,null);
 	}
 	private Object newClass(Element et,Element callerE) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		//아이디있고, 클래스패스 있고 , 자식없고 상속안받으면 그냥 생성
-		if(null==et.getObject()&&et.isAttr("id") && et.isAttr("classpath") && et.getChildElementSize()<=0 && !et.isAttr("extends")){
+		if(null==et.getObject()&& et.isAttr("classpath") && et.getChildElementSize()<=0 && !et.isAttr("extends")){
 			et.setObject(newNormalTypeClass(et));
 			return et.getObject();
 		}
@@ -128,7 +135,7 @@ public class DynaminClass {
 			ArrayList<Element> method = et.getChildElementByTagName("method");
 			method.stream().filter(atMethod->atMethod.isAttr("name")).forEach(atMethod->{//매서드들..
 				try {
-					executeMethod(atMethod.getAttr("name"), atMethod.getChildElementByTagName("class"));
+					executeMethodInElement(atMethod.getAttr("name"), atMethod.getChildElementByTagName("class"));
 				} catch (Exception e) {e.printStackTrace();}
 			});
 			
@@ -161,7 +168,7 @@ public class DynaminClass {
 			ArrayList<Element> method = et.getChildElementByTagName("method");
 			method.stream().filter(atMethod->atMethod.isAttr("name")).forEach(atMethod->{//매서드들..
 				try {
-					executeMethod(atMethod.getAttr("name"), atMethod.getChildElementByTagName("class"));
+					executeMethodInElement(atMethod.getAttr("name"), atMethod.getChildElementByTagName("class"));
 				} catch (Exception e) {e.printStackTrace();}
 			});
 			
