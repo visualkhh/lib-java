@@ -75,6 +75,20 @@ public class Element<T> {
 	public ArrayList<Element> getChildElementByAttr(String attrName, String value) {
 		return childElement.stream().filter(at->value.equals(at.getAttr(attrName))).collect(Collectors.toCollection(ArrayList::new));
 	}
+	public void removeChildElement(Element e){
+		childElement.remove(e);
+	}
+	public void removeChildElement(ArrayList<Element> e){
+		e.stream().forEach(at->{
+			childElement.remove(at);
+		});
+	}
+	public void removeChildElementByAttr(String attrName, String value) {
+		ArrayList<Element> list = childElement.stream().filter(at->value.equals(at.getAttr(attrName))).collect(Collectors.toCollection(ArrayList::new));
+		list.stream().forEach(at->{
+			childElement.remove(at);
+		});
+	}
 	
 	public ArrayList<Element> getChildElement() {
 		return childElement;

@@ -34,32 +34,32 @@ public class Test {
 		a+="v";
 	}
 	public static void main(String[] args) throws Exception {
-//		String requestURI="/ajax";
-//		String atUrl="/ajax.*IN=info.*";
-////		String atUrl=null;
-//		boolean s = StringUtil.isMatches(requestURI, atUrl);
-//		System.out.println(s);
-		
-		LinkedHashMap<String, String> c = new LinkedHashMap<>();
-		LinkedHashMap<String, String> m = new LinkedHashMap<>();
-		m.put("a_m","aa");
-		m.put("b_m","ba");
-		m.put("c_m","ca");
-		LinkedHashMap<String, String> mm = new LinkedHashMap<>();
-		mm.put("a_mm","aa");
-		mm.put("b_mm","ba");
-		mm.put("c_mm","ca");
-		mm.put("b_m","ba");
-		mm.put(null,null);
-		
-		
-		c.putAll(m);;
-		c.putAll(mm);;
-
-		
-		LinkedHashMap<String, LinkedHashMap<String,String>> aaa = new LinkedHashMap<>();
-		aaa.put("zz", c);
-		System.out.println(aaa);
+		String requestURI="/ajax/sign";
+		String atUrl="/ajax/.*"; 
+//		String atUrl=null;
+		boolean s = StringUtil.isMatches(requestURI, atUrl);
+		System.out.println(s);
+		 
+//		LinkedHashMap<String, String> c = new LinkedHashMap<>();
+//		LinkedHashMap<String, String> m = new LinkedHashMap<>();
+//		m.put("a_m","aa");
+//		m.put("b_m","ba");
+//		m.put("c_m","ca");
+//		LinkedHashMap<String, String> mm = new LinkedHashMap<>();
+//		mm.put("a_mm","aa");
+//		mm.put("b_mm","ba");
+//		mm.put("c_mm","ca");
+//		mm.put("b_m","ba");
+//		mm.put(null,null);
+//		
+//		
+//		c.putAll(m);;
+//		c.putAll(mm);;
+//
+//		
+//		LinkedHashMap<String, LinkedHashMap<String,String>> aaa = new LinkedHashMap<>();
+//		aaa.put("zz", c);
+//		System.out.println(aaa);
 //		c.entrySet().stream().forEach(v->{
 //			System.out.println(v);
 //		});
