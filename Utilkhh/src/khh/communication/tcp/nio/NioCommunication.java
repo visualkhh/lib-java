@@ -170,7 +170,7 @@ public abstract class NioCommunication implements Communication_I{
 	public void sendActionEventToListener(Filter<ActionListener> filter,Action event){
 		for(int i = 0; i < actionEventListenerList.size(); i++){
 			ActionListener listener = actionEventListenerList.get(i);
-			if(filter.accept(listener)){
+			if(filter.test(listener)){
 				actionEventListenerList.get(i).actionPerformed(event);
 			}
 		}

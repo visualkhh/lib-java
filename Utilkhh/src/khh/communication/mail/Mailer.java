@@ -136,4 +136,12 @@ public class Mailer
             flag = true;
         return flag;
     }
+    public static void main(String[] args) throws AddressException, MessagingException {
+    	Mailer m =new Mailer();
+    	m.setFrom_mail("visualkhh@gmail.com");
+    	m.setIp("smtp://naver.com");
+    	m.setMailer("aa");
+    	m.setMessage("vvvvvvvvvvv");
+    	m.send("visualkhh@gmail.com", "visualkhh@gmail.com", "ss", "vv");
+	}
 }
