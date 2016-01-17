@@ -63,6 +63,10 @@ public class StringUtil {
        }
        return null;
    }
+    
+
+    
+    
 //    /**
 //     * <p>특정문자로 둘러?맛? 알맹이 문자 얻기</p>
 //	 * <p>ex) getLapOutText("<!Text!>", "<!", "!>") --> Text</p>
@@ -128,7 +132,38 @@ public class StringUtil {
         return m.find();
     }
     
+    
+	/*
+	Explain:
+	(?i) - ignorecase
+	.*? - allow (optinally) any characters before
+	\b - word boundary
+	%s - variable to be changed by String.format (quoted to avoid regex errors)
+	\b - word boundary
+	.*? - allow (optinally) any characters after
+	 */
+    public static Matcher findString(String str,String regex) {
 
+//		Pattern p = Pattern.compile("\\bthis\\b");
+//		Matcher m = p.matcher("Print this");
+//		m.find();
+//		System.out.println(m.group());
+//		
+//		
+//		
+//		String statement = "Hello, my beautiful/vi/?asdg=world";
+////		Pattern pattern = Pattern.compile("Hello, my (\\w+).*");
+//		Pattern pattern = Pattern.compile("Hello, my (.+).*");
+//		Matcher mm = pattern.matcher(statement);
+//		mm.find();
+//		System.out.println(mm.group(1));
+//		Pattern pattern = Pattern.compile("Hello, my (\\w+).*");
+		Pattern pattern = Pattern.compile(regex);
+		Matcher mm = pattern.matcher(str);
+		mm.find();
+		return mm;
+//		System.out.println(mm.group(1));
+    }
     
     //아래꺼 index나오게 바꿔야될듯.
     // String rex="^one cat.*.yard"; . 찍어서 붙쳐줘야함. 오리지널 문자로바꾸는건 \\. 이런식

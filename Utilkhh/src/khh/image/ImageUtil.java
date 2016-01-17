@@ -10,6 +10,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,7 @@ import javax.swing.ImageIcon;
 
 import jxl.format.RGB;
 import khh.conversion.util.ConversionUtil;
+import khh.util.Util;
 
 import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
@@ -40,6 +42,44 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 public class ImageUtil {
     static public final String SET_PNG_NAME= "png"; 
     
+    //BufferedImage.TYPE_INT_ARGB
+    public static BufferedImage getRandomImage(int width, int height,int type){
+    	  BufferedImage thum = new BufferedImage(width, height, type); 
+	      //가상으로 이미지 만듬 
+	        Graphics2D g = thum.createGraphics(); // 가상이미지에 씀 
+	        g.setRenderingHint(
+	        	    RenderingHints.KEY_ANTIALIASING,
+	        	    RenderingHints.VALUE_ANTIALIAS_ON);
+	        g.setComposite(AlphaComposite.Src);
+	        g.setColor(ImageUtil.getRandomColor());
+	        g.fillRect(0, 0, 50, 50);
+	        for (int i = 0; i < 10; i++) {
+	        	int a =Util.getRandomInt(50);
+	        	int b =Util.getRandomInt(50);
+	        	int c =Util.getRandomInt(50);
+	        	int d =Util.getRandomInt(50);
+	        	g.setColor(ImageUtil.getRandomColor(255));
+	        	g.fillRect(a, b, c, d);
+	        }
+	        for (int i = 0; i < 10; i++) {
+	        	int a =Util.getRandomInt(50);
+	        	int b =Util.getRandomInt(50);
+	        	int c =Util.getRandomInt(50);
+	        	int d =Util.getRandomInt(50);
+	        	int e =Util.getRandomInt(50);
+	        	int f =Util.getRandomInt(50);
+	        	g.setColor(ImageUtil.getRandomColor(255));
+	        	g.fillArc(a, b, c, d, e, f);
+	        }
+			return thum;
+    }
+    
+    public static Color getRandomColor(){
+    	return getRandomColor(255);
+    }
+    public static Color getRandomColor(int alpha){
+    	return new Color(Util.getRandomInt(255),Util.getRandomInt(255),Util.getRandomInt(255),alpha);
+    }
     
     public static BufferedImage resize (BufferedImage buff,  int width, int height ){
         return resize(buff, 0, 0, width, height);

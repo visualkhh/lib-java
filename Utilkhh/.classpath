@@ -66,5 +66,8 @@
 	<classpathentry kind="lib" path="lib/selenium-2.48.2/libs/xalan-2.7.2.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-2.48.2/libs/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-2.48.2/libs/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="lib/NetComponents-1.3.8.jar"/>
+	<classpathentry kind="lib" path="lib/juniversalchardet-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/htmlcleaner-2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
