@@ -1,5 +1,6 @@
 package khh.conversion.util;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -14,6 +15,7 @@ import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -101,6 +103,9 @@ public class ConversionUtil {
       return Boolean.toString(data);
   }
    
+   public static void reverse(List list){
+	   Collections.reverse((java.util.List<?>) list);
+   }
    
    
    

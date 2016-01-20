@@ -56,7 +56,7 @@ import khh.xml.XMLparser;
 // <!--logkattribute 속성은 마지막파일에만 적용된속성값을 가짐 한곳에서만 적어주길원합니다. -->
 
 public class LogK  implements Serializable {
-    public static  LogK instance =null;
+    private static  LogK instance =null;
     String configfolder ="logk";
     ArrayList<File> configfile = new ArrayList<File>();
     ArrayList<LogKTarget> targets = new ArrayList<LogKTarget>();

@@ -16,7 +16,6 @@ public class ConnectionUtil {
 	public final static String ORACLE_DAFAULT_PORT="1521"; 
 	public final static String MYSQL_DAFAULT_PORT="3306"; 
 	
-	
 	public static Connection getConnection(int dbtype, String ip, String port, String sid, String id, String passwd) throws ClassNotFoundException, SQLException{
 		String driverPath = getDriverPath(dbtype);
 		String jdbcConnectionURL = getJDBCConnectionURL(dbtype, ip, port, sid);
