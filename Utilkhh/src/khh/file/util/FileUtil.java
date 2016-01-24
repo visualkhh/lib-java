@@ -468,7 +468,7 @@ public class FileUtil{
 			throws IOException{
 		FilenameFilter fnf = new FilenameFilter(){
 			public boolean accept(File dir, String name){
-				StringUtil.isFind(rexFilenamefilter, name);
+				StringUtil.isFind(name,rexFilenamefilter);
 				return false;
 			}
 		};

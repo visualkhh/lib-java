@@ -26,6 +26,12 @@ class childElement
 	<class id="b" classpath="java.lang.Integer" value="500"></class>
 	<class id="c" classpath="java.lang.Boolean" value="true"></class>
 	<class id="c8" extends="c"></class>
+	<class id="gazzzzga" classpath="khh.dynamick.DynamicInputTest">
+		<constructor>
+			<class id="f" extends="a"></class>
+			<class  classpath="java.lang.String" value="/WEB-INF/config/fluid_config.xml"/>
+		</constructor>
+	</class>
 	<class id="gaga" classpath="khh.dynamick.DynamicInputTest">
 		<constructor>
 			<class id="f" extends="a"></class>

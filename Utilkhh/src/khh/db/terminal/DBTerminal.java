@@ -86,7 +86,7 @@ public class DBTerminal {
         configfile.clear();
         FilenameFilter filenamefilter = new FilenameFilter() {
             public boolean accept(File arg0, String filename) {
-                return StringUtil.isFind("^dbt[A-Za-z0-9\\.\\@_\\-~#]+\\.xml", filename);
+                return StringUtil.isFind(filename,"^dbt[A-Za-z0-9\\.\\@_\\-~#]+\\.xml");
             }
         };
         
@@ -206,11 +206,11 @@ public class DBTerminal {
     }
     
  
-    private void closeConnection() throws SQLException, Exception {
-       getConnection().close();
-       logk.debug("CloseConnection");
-        
-    }
+//    private void closeConnection() throws SQLException, Exception {
+//       getConnection().close();
+//       logk.debug("CloseConnection");
+//        
+//    }
 
 
 
@@ -276,7 +276,7 @@ public class DBTerminal {
             if(connection!=null){
                 if(connection.getAutoCommit()==true){
                     connection.close();
-                    closeConnection();
+                    //closeConnection();
                 }
             }
         }
@@ -354,7 +354,7 @@ public class DBTerminal {
             if(connection!=null){
                 if(connection.getAutoCommit()==true){
                     connection.close();
-                    closeConnection();
+                    //closeConnection();
                 }
             }
         }
@@ -363,25 +363,29 @@ public class DBTerminal {
     
     
     public void commit() throws Exception{
-        
-        if(getConnection()!=null && getConnection().isClosed()==false){
-        	if(getConnection().getAutoCommit()==false){
-        		getConnection().commit();
-        	}
-        	getConnection().close();
-            closeConnection();
-        }
+    	if(null!=connection){
+    		connection.commit();
+    	}
+//        if(getConnection()!=null && getConnection().isClosed()==false){
+//        	if(getConnection().getAutoCommit()==false){
+//        		getConnection().commit();
+//        	}
+//        	getConnection().close();
+//            closeConnection();
+//        }
     }
     
     public void rollback() throws Exception{
-        if(getConnection()!=null && getConnection().isClosed()==false ){
-        	if(getConnection().getAutoCommit()==false){
-        		getConnection().rollback();
-        	}
-        	
-        	getConnection().close();
-            closeConnection();
-        }
+       	if(null!=connection){
+    		connection.rollback();
+    	}
+//        if(getConnection()!=null && getConnection().isClosed()==false ){
+//        	if(getConnection().getAutoCommit()==false){
+//        		getConnection().rollback();
+//        	}
+//        	getConnection().close();
+//            closeConnection();
+//        }
     }
     
     

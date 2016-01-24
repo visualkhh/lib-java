@@ -119,7 +119,11 @@ public class DynaminClass {
 					if(null!=extendsClass){	//상속찾으면
 							conParam.add(extendsClass.call(conParamClass));
 					}else{//상속못찾으면 그냥 생성
-						conParam.add(newClass(conParamClass));
+						if(null!=conParamClass.getObject()){
+							conParam.add(conParamClass.getObject());
+						}else{
+							conParam.add(newClass(conParamClass));
+						}
 					}
 				} catch (Exception e) {e.printStackTrace();}
 				//extendsClass.

@@ -18,7 +18,9 @@ import khh.std.adapter.AdapterMap;
 
 public class StringUtil {
 
-    static public final String SET_UTF_8 = "UTF-8"; 
+    
+	
+	static public final String SET_UTF_8 = "UTF-8"; 
     static public final String SET_UTF_16 = "UTF-16";   
     static public final String SET_EUC_KR = "EUC-KR";   
     static public final String SET_8859_1 = "8859_1";   
@@ -126,11 +128,11 @@ public class StringUtil {
     }
     //아래꺼 index나오게 바꿔야될듯.
     // String rex="^one cat.*.yard"; . 찍어서 붙쳐줘야함. 오리지널 문자로바꾸는건 \\. 이런식
-    public static boolean getFind(String rex, String str) {
-        Pattern p = Pattern.compile(rex);
-        Matcher m = p.matcher(str);
-        return m.find();
-    }
+//    public static boolean getFind(String rex, String str) {
+//        Pattern p = Pattern.compile(rex);
+//        Matcher m = p.matcher(str);
+//        return m.find();
+//    }
     
     
 	/*
@@ -142,7 +144,10 @@ public class StringUtil {
 	\b - word boundary
 	.*? - allow (optinally) any characters after
 	 */
-    public static Matcher findString(String str,String regex) {
+    public static Matcher find(String str,String regex) {
+    	return find(str,regex,0);
+    }
+    public static Matcher find(String str,String regex, int startIndex) {
 
 //		Pattern p = Pattern.compile("\\bthis\\b");
 //		Matcher m = p.matcher("Print this");
@@ -160,14 +165,14 @@ public class StringUtil {
 //		Pattern pattern = Pattern.compile("Hello, my (\\w+).*");
 		Pattern pattern = Pattern.compile(regex);
 		Matcher mm = pattern.matcher(str);
-		mm.find();
+		mm.find(startIndex);
 		return mm;
 //		System.out.println(mm.group(1));
     }
     
     //아래꺼 index나오게 바꿔야될듯.
     // String rex="^one cat.*.yard"; . 찍어서 붙쳐줘야함. 오리지널 문자로바꾸는건 \\. 이런식
-    public static boolean isFind(String rex, String str) {
+    public static boolean isFind(String str,String rex) {
         Pattern p = Pattern.compile(rex);
         Matcher m = p.matcher(str);
         return m.find();
@@ -317,6 +322,22 @@ public class StringUtil {
     
     
     
+    public static String escapeCharToregexMetaChar(String h){
+    	String in = (String)h;
+    	in = in.replaceAll("\\\\\\|", "\\|");
+    	in = in.replaceAll("\\\\\\+", "\\+");
+    	in = in.replaceAll("\\\\\\*", "\\*");
+    	in = in.replaceAll("\\\\\\^", "\\^");
+    	in = in.replaceAll("\\\\\\$", "\\$");
+    	in = in.replaceAll("\\\\\\[", "\\[");
+    	in = in.replaceAll("\\\\\\{", "\\{");
+    	in = in.replaceAll("\\\\\\)", "\\)");
+    	in = in.replaceAll("\\\\\\(", "\\(");
+    	in = in.replaceAll("\\\\\\?", "\\?");
+    	in = in.replaceAll("\\\\\\.", "\\.");
+    	in = in.replaceAll("\\\\\\\\", "\\\\");
+    	return in;
+    }
     public static String regexMetaCharToEscapeChar(String h){
         String in = (String)h;
         in = in.replaceAll("\\\\", "\\\\\\\\");
@@ -616,7 +637,144 @@ public class StringUtil {
         return convStr;
     }
     
+    //변수는 ${visualkhh} 이렇게..
+    //	String msg="/view/log/form/bbb/ddd/ccc/grg.jsp";
+	//	String transRegex = "/view.*form/${visualkhh}/bbb.*\\.${html}";
+    // --> /view/log/form/visualkhh/bbb/ddd/ccc/grg.html
+    public static String transRegex(String msg, String transRegex){
+    	return transRegex(msg,transRegex,null);
+    }
+    public static String transRegex(String msg, String transRegex, HashMap<String,String> param){
+//    	msg = inJection(msg, param);
+//    	System.out.println(msg);
+    	if(null==param){
+    		param = new HashMap<String, String>();
+    	}
+    	
+    	
+    	String[] varList = StringUtil.findScope(transRegex); //변수값찾음
+		String[] regexList = StringUtil.splitScope(transRegex); //스코프에 따라 짜른다.
+		
+		
+//		for (int i = 0; i < varList.length; i++) {
+//			System.out.println(varList[i]);
+//		}
+//		
+//		for (int i = 0; i < varList.length; i++) { //기존에 있으면 ..안덮고 ..
+//			if(null==param.get(varList[i]))
+//				param.put(varList[i], varList[i]);
+//		} 
+//		msg = StringUtil.inJection(msg, param);
+//		System.out.println("----"+msg);
+	
+		
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < regexList.length; i++) {
+			String[] ll = StringUtil.findScopeSubPattern(msg, regexList[i]);
+			for (int j = 0; j < ll.length; j++) {
+				buf.append(ll[j]);
+//				System.out.println(ll[j]);
+			}
+			//변수셋팅
+			if(i<varList.length){
+				String val = varList[i];
+				if(null!=param && null!=param.get(val)){
+					val = param.get(val);
+				}
+				buf.append(val);
+			}
+		}
+		
+		return (buf.toString());
+    }
     
+    
+	public static String[] splitScope(String msg){
+		String prefix="${";
+		String postfix="}";
+		return splitScope(msg,prefix,postfix);
+	}
+	public static String[] splitScope(String msg, String prefix, String postfix){
+		return splitScope(msg,StringUtil.regexMetaCharToEscapeChar(prefix)+"([\\/\\w\\.\\-\\_\\s\\\\]*)"+StringUtil.regexMetaCharToEscapeChar(postfix));
+	}
+    //String str ="aasdasd${asdasd}-vVav+${bbb}z234v${vvvv}";
+    //String[] l = splitScope(str, "\\$\\{[\\w\\.\\s]+\\}");
+	public static String[] splitScope(String s, String regex){
+		
+		ArrayList<String> list = new ArrayList<String>();
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(s); // get a matcher object
+		
+		int start=0;
+		while(m.find()){
+//			list.add(m.group());
+			list .add( s.substring(start,m.start()) );
+			start = m.end();
+//			s = s.substring(m.end(),ss.length()-5);
+//		     System.out.println("start(): "+m.start());
+//		 	System.out.println("end(): "+m.end());
+		}
+		
+		if(start<s.length())
+		list.add(s.substring(start,s.length()) );
+		
+		String[] a = new String[list.size()];
+		list.toArray(a);
+		return a;
+	}
+	
+	
+	public static String[] findScope(String msg){
+		String prefix="${";
+		String postfix="}";
+		return findScope(msg,prefix,postfix);
+	}
+	public static String[] findScope(String msg, String prefix, String postfix){
+		return findScope(msg,StringUtil.regexMetaCharToEscapeChar(prefix)+"([\\/\\w\\.\\-\\_\\s\\\\]*)"+StringUtil.regexMetaCharToEscapeChar(postfix),1);
+	}
+	
+	//String str ="aasdasd${asdasd} vVav ${bbb} 234 ${vvvv}";
+	//String[] l = split(str, "\\$\\{[\\w\\.\\s]+\\}");
+	public static String[] findScope(String msg, String regex){
+		return findScope(msg,regex,0);
+	}
+	//regex="\\$\\{([\\w\\.\\s]*)\\}";  그룹처리해서 알맹이만 빼올려면  () 들어가있어야한다.
+    public static String[] findScope(String msg, String regex, int group){
+		ArrayList<String> list = new ArrayList<String>();
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(msg); // get a matcher object
+		while(m.find()) {
+			list.add(m.group(group));
+//		     System.out.println("start(): "+m.start());
+//		 	System.out.println("end(): "+m.end());
+		}
+	       
+		String[] a = new String[list.size()];
+		list.toArray(a);
+		return a;
+    }
+    public static String[] findScopeSubPattern(String msg, String regex){
+    	ArrayList<String> list = new ArrayList<String>();
+    	Pattern p = Pattern.compile(regex);
+    	Matcher m = p.matcher(msg); // get a matcher object
+    	while(m.find()) {
+    		StringBuffer sp = new StringBuffer();
+    		if(m.groupCount()>0){
+	    		for (int i = 1; i <= m.groupCount(); i++) {
+	    			sp.append(m.group(i));
+				}
+    		}else{
+    			sp.append(m.group());
+    		}
+    		list.add(sp.toString());
+//		     System.out.println("start(): "+m.start());
+//		 	System.out.println("end(): "+m.end());
+    	}
+    	
+    	String[] a = new String[list.size()];
+    	list.toArray(a);
+    	return a;
+    }
 	/*
 	 * msg		템플릿되어진 문자열
 	 * param	Object  키값으로 해당 프로퍼티찾아서 값넣어줌

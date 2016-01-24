@@ -48,7 +48,7 @@ public class ConnectionUtil {
 		String driverUrl=null;
 		switch (dbtype) {
 		case MYSQL:
-			driverUrl = "jdbc:mysql://"+ip+":"+port+"/"+sid;
+			driverUrl = "jdbc:mysql://"+ip+":"+port+"/"+sid+"?autoReconnect=true";
 			break;
 			
 		case ORACLE:

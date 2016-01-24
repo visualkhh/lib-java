@@ -18,7 +18,7 @@ public class DynaminTest {
 		d.addConfigFile("Z:\\git\\javautil-visualkhh\\Utilkhh\\src\\khh\\dynamin\\dynamin_config.xml");
 		d.start();
 		LinkedHashMap<String, DynaminClass> dclassList = d.getTargetDClass();
-		DynaminClass atDclass = dclassList.get("gaga");
+		DynaminClass atDclass = dclassList.get("gazzzzga");
 		//atDclass.newClass();
 		Object o =atDclass.call();
 		log.debug(o);

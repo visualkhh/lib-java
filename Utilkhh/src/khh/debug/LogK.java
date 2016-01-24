@@ -240,7 +240,7 @@ public class LogK  implements Serializable {
             public boolean accept(File arg0, String filename) {
 //                System.out.println(Util.isFind("^logk.*.\\.xml", filename)+"    "+filename);
 //            	 System.out.println("LOGK --- > "+filename);
-                return StringUtil.isFind("^logk[A-Za-z0-9\\.\\@_\\-~#]+\\.xml", filename);
+                return StringUtil.isFind(filename,"^logk[A-Za-z0-9\\.\\@_\\-~#]+\\.xml");
 //                return filename.startsWith("logk") && filename.endsWith(".xml"); 
             }
         };
@@ -297,7 +297,7 @@ public class LogK  implements Serializable {
             LogKTarget target = (LogKTarget)targets.get(i);
             if(target.getCategory()!=null){
 //                if(Util.isFind("^"+(target.getCategory().replaceAll("\\.", "\\\\\\.")), classpath)){
-                if(StringUtil.isFind(target.getCategory(), classpath)){
+                if(StringUtil.isFind(classpath,target.getCategory())){
                     g.add(target);
                 }
                 //System.out.println(Util.isFind("^"+target.getCategory(), classpath)+"   "+classpath+"   "+"^"+target.getCategory());

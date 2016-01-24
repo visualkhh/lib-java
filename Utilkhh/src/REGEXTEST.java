@@ -17,6 +17,17 @@ public class REGEXTEST {
 		mm.find();
 		System.out.println(mm.group(1));
 		
+		System.out.println("==============");
+		statement = "He${123123}llo,${srfhgvsd asd} my${g.dfv1234.23445gg} beautiful/${aaa}vi/?asdg=world";
+//		pattern = Pattern.compile("\\$\\{[\\w\\.\\#\\$\\%}]+\\}");
+		pattern = Pattern.compile("\\$\\{[\\w\\.\\s]+\\}");
+		mm = pattern.matcher(statement);
+       while(mm.find()) {
+    	   System.out.println("group(): "+mm.group());
+	         System.out.println("start(): "+mm.start());
+	         System.out.println("end(): "+mm.end());
+      }
+		
 		
 		/*
 		Explain:

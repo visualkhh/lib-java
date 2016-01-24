@@ -1,24 +1,6 @@
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import org.mozilla.javascript.edu.emory.mathcs.backport.java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import khh.string.util.StringUtil;
 
@@ -33,45 +15,65 @@ public class Test {
 	public void s(String a){
 		a+="v";
 	}
+	//String forward_url = "\\$\\{(\\w+)*(\\w+)*\\}";
 	public static void main(String[] args) throws Exception {
-		String requestURI="/ajax/sign";
-		String atUrl="/ajax/.*"; 
-//		String atUrl=null;
-		boolean s = StringUtil.isMatches(requestURI, atUrl);
-		System.out.println(s);
-		 
-//		LinkedHashMap<String, String> c = new LinkedHashMap<>();
-//		LinkedHashMap<String, String> m = new LinkedHashMap<>();
-//		m.put("a_m","aa");
-//		m.put("b_m","ba");
-//		m.put("c_m","ca");
-//		LinkedHashMap<String, String> mm = new LinkedHashMap<>();
-//		mm.put("a_mm","aa");
-//		mm.put("b_mm","ba");
-//		mm.put("c_mm","ca");
-//		mm.put("b_m","ba");
-//		mm.put(null,null);
-//		
-//		
-//		c.putAll(m);;
-//		c.putAll(mm);;
-//
-//		
-//		LinkedHashMap<String, LinkedHashMap<String,String>> aaa = new LinkedHashMap<>();
-//		aaa.put("zz", c);
-//		System.out.println(aaa);
-//		c.entrySet().stream().forEach(v->{
-//			System.out.println(v);
-//		});
-//		
-//		
-//		System.out.println(mm.size());
-//		System.out.println("-------------");
-//		ArrayList list=	mm.entrySet().stream().map(at->at.getValue()).collect(Collectors.toCollection(ArrayList::new));
-//		for (int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i));
+//		String requestURI="/view/log/form/bbb/ddd/ccc/grg.jsp";
+//		String requestURI="/view/log/form/bbb/ddd/ccc/grg.jsp";
+		String requestURI="/user/profile.jpg";
+//		String requestURI="/user/p${aa}rofi${vv}le.jp.g";
+//		String requestURI="${bcd}1${bcd}2${bc}${d}3${bcd}";
+//		String forward_url = "/view.*form/${visualkhh}/bbb.*\\.${html}";
+		String forward_url = "${/WEB-INF/users/}/user/(.*).*";
+//		String forward_url = ".*/user/(.+).*";
+//		String forward_url = "/user/(.+)*.*";
+//		String forward_url = "\\$\\{[.+]*\\}";
+//		String forward_url = "\\$\\{[.]*\\}";
+
+//		Pattern pattern = Pattern.compile(forward_url);
+//		Matcher mm = pattern.matcher(requestURI);
+//		while(mm.find()) {
+//			System.out.println(mm.groupCount());
+//			System.out.println(mm.group());
+//			System.out.println(mm.group(1));
 //		}
-	
+		
+		
+		System.out.println(StringUtil.transRegex(requestURI,forward_url));
+		
+//		HashMap<String,String> param = new HashMap<String,String>();
+//		param.put("visu234alkhh", "zzzzzz");
+//		System.out.println(StringUtil.transRegex(requestURI,forward_url,param));
+		
+		
+		
+		
+//		String regex ="${/WEB-INF/}";
+//		regex ="/view.*form/";
+//		String regex =".*form/";
+//		String[] m = StringUtil.findScope(requestURI,regex);
+//		String[] m = StringUtil.findScope(requestURI,"/","/");
+		
+//		for (int i = 0; i < m.length; i++) {
+//			System.out.println(m[i]);
+//		}
+//		System.out.println(m.group());
+		
+		
+//		regex ="/bbb.*\\.";
+//		m = StringUtil.find(requestURI,regex);
+//		System.out.println(m.group());
+		
+		
+//		String regex="\\$\\{([\\w\\.\\s]*)\\}";
+//		String[] lsl = StringUtil.getScope(requestURI);
+//		for (int i = 0; i < lsl.length; i++) {
+//			System.out.println(lsl[i]);
+//		}
+		
+		
+		
+		
+		
 	}
 
        

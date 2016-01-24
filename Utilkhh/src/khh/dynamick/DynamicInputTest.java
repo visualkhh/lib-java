@@ -12,6 +12,10 @@ public class DynamicInputTest {
     	System.out.println("DynamicInputText Dyn-->"+d);
 	}
     
+    public DynamicInputTest(String d,String a) {
+    	System.out.println("DynamicInputText str,str-->"+d+"      "+a);
+    }
+    
     public DynamicInputTest(String a) {
     	System.out.println("DynamicInputText new  A:"+a);
     	this.a=a;
