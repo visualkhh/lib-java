@@ -32,7 +32,7 @@
 	 -->
 	 <!--logkattribute 속성은 마지막파일에만 적용된속성값을 가짐 한곳에서만 적어주길원합니다. -->
 	 <logkattribute >
-		<recycle_ms>5000</recycle_ms> <!-- 10sec -->
+		<recycle_ms>10000</recycle_ms> <!-- 10sec -->
 		<recycle>false</recycle> <!-- 10sec -->
 	 </logkattribute>
 	 
@@ -42,7 +42,7 @@
 			<!-- <dateformat>yyyy-MM-dd_HH:mm:s,SSS</dateformat> -->
 			 <dateformat>yyyy-MM-dd_HH:mm:s,SSS</dateformat> -->
 			<!-- <logformat>%d [%l] %c(%f)(line %n)  >>  %m   %e  </logformat> -->
-			 <logformat>%d %k:%n (%f)▶ %m   %e  %r</logformat> -->
+			 <logformat>%d %k:%n (%f)[%l]▶ %m   %e  %r</logformat> -->
 			<exception_stacktrace>true</exception_stacktrace>
 			 <!-- <outputstream>System.out</outputstream>  --> 
 		</loger>

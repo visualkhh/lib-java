@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -33,7 +34,6 @@ import khh.string.util.StringUtil;
 public class TimeLine extends Thread{
 	CloseableHttpClient httpclient = null;
 	LogK log = LogK.getInstance();
-	DBTerminal db = null;
 	LinkedBlockingQueue<String> queue;
 	public TimeLine(LinkedBlockingQueue queue) {
 		this.queue=queue;
@@ -41,10 +41,9 @@ public class TimeLine extends Thread{
 //		String keyword
 //		log.debug("start Twitter : "+keyword);
 //		this.keyword=keyword;
-		db = new DBTerminal(new ConCre());
 	}
 	
-	public String getLastTwitt(String keyword) throws Exception{
+	public String getLastTwitt(DBTerminal db, String keyword) throws Exception{
 		String query="";
 		query+=" SELECT NUM, CNT, CONTENT, INSERT_DATE FROM TIMELINE  ";
 		query+=" WHERE NUM = (SELECT NUM FROM STOCK WHERE KOR_COR_NM ='"+keyword+"') ORDER BY CNT DESC";
@@ -73,17 +72,19 @@ public class TimeLine extends Thread{
 		while(true){
 			String keyword = null;
 			wcnt++;
+			DBTerminal db = new DBTerminal(new ConCre());
 			try{
 				keyword = queue.take();
+				log.debug(getName()+"  keyword take()"+keyword);
 				Thread.sleep(1000);
-				String lastTwitt = getLastTwitt(keyword);
-				log.debug("Twitter ("+this.getName()+")  workCnt("+wcnt+") Start "+keyword+"  lastTwitt :"+lastTwitt);
+				String lastTwitt = getLastTwitt(db,keyword);
+				log.debug(this.getName()+"Twitter  workCnt("+wcnt+") Start "+keyword+"  lastTwitt :"+lastTwitt);
 		//		String query="일본이야 눈 내리거나 비 오거나 날씨가 안정되지";//%ED%95%9C%EA%B5%AD&
 				String query=keyword;//%ED%95%9C%EA%B5%AD&
 				query =StringUtil.urlEncode(query, StringUtil.SET_UTF_8); 
 		//		log.debug(query);
 				String url = "https://twitter.com/search?f=tweets&vertical=default&q="+query+"&src=typd";
-				log.debug("otp url:"+url);
+				log.debug(this.getName()+" url:"+url);
 		        HttpGet httpGet = new HttpGet(url);
 		        CloseableHttpResponse response1 = httpclient.execute(httpGet);
 		        try {
@@ -101,16 +102,19 @@ public class TimeLine extends Thread{
 		            	String content = row.select("p").text();
 		            	
 		            	if(null!=lastTwitt && lastTwitt.trim().equals(content.trim())){
-		            		log.debug("LastTwitt !! "+lastTwitt+" break;");
+		            		log.debug(this.getName()+" LastTwitt !! "+lastTwitt+" break;");
 		            		twittlist= new ArrayList<Twitt>();
 		            	}else{
 		            		twittlist.add(new Twitt(id,content));
 		            	}
 		              }
 		            
-		            db.setAutoCommit(false);
+//		            db.setAutoCommit(false);
 		            for (int i = 0; i < twittlist.size();i++) {
 		            	Twitt twitt = twittlist.get(i);
+		            	if(twitt.getId().trim().toUpperCase().indexOf(keyword.trim().toUpperCase())>=0  && twitt.getContent().trim().toUpperCase().indexOf(keyword.trim().toUpperCase())<0){
+		            		continue;
+		            	}
 		            	ArrayList<String> param= new ArrayList();
 		            	param.add(keyword);
 		            	param.add(twitt.getId());
@@ -125,7 +129,8 @@ public class TimeLine extends Thread{
 			                //StringBuilder builder = new StringBuilder();
 		            	}
 		            }
-		            db.commit();
+//		            db.commit();
+//		            db.setAutoCommit(true);
 		            EntityUtils.consume(entity1);
 		        } finally {
 		            response1.close();
@@ -134,7 +139,14 @@ public class TimeLine extends Thread{
 			}finally {
 				try {
 					queue.put(keyword);
+					log.debug(this.getName()+"  keyword put()"+keyword);
+					if(db!=null)
+					db.getConnection().close();
 				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

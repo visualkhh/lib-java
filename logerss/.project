@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>logerss</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>khhsrc</name>
+			<type>2</type>
+			<locationURI>khhsrc</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>khhsrc</name>
+			<value>file:/Z:/git/javautil-visualkhh/Utilkhh/src</value>
+		</variable>
+	</variableList>
+</projectDescription>

@@ -156,6 +156,8 @@ public class KRX {
 			db.executeUpdate(query, param);
 		}
 		db.commit();
+		db.setAutoCommit(true);
+		db.getConnection().close();
 	}
 	
 	@Override

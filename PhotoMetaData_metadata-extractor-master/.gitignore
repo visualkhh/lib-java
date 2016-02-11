@@ -1,0 +1,10 @@
+/Releases
+/.idea
+/Output
+/out
+/TestReports
+.project
+.classpath
+.settings/
+build
+/bin/
