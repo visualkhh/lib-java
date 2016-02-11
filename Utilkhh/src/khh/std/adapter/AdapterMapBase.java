@@ -208,6 +208,22 @@ public abstract class AdapterMapBase<K,T>  implements CastMap_I<K>,Serializable 
 		return getInt(getKey(index));
 	}
 	
+	public Long getLong(K key) throws ClassCastException{
+		T value = null;
+		try {
+			value = get(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(value==null)
+			return null;
+		return (Long)value;
+	}
+	public Long getLong(int index) throws ClassCastException{
+		return getLong(getKey(index));
+	}
+	
 	
 	public Double getDouble(K key) throws ClassCastException{
 		T value = null;

@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -201,8 +203,11 @@ public class DBTerminal {
     
     
     
-    public void setAutoCommit(Boolean watnAutoCommit) {
+    public void setAutoCommit(Boolean watnAutoCommit) throws SQLException {
         autoCommit=watnAutoCommit;
+        if(null!=connection){
+        	connection.setAutoCommit(autoCommit);
+        }
     }
     
  
@@ -221,25 +226,48 @@ public class DBTerminal {
         }
         return executeQuery(sql.get(sqlid));
     }
-    public DBTResultSetContainer executeMapQuery(String sqlid,AdapterMapBase<String,Object> param) throws Exception{
-        if(sql.get(sqlid)==null){
-            log.error("not Found find SqlMap id "+sqlid);
-            throw new Exception("not Found find SqlMap id "+sqlid);
-        }
-        String sql_get  = sql.get(sqlid);
-        StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
-        for (int i = 0; i < param.size(); i++) {
-            String findstr="#"+param.getKey(i)+"#";
-            ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
-           log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
-           for (int j = 0; j < size.size(); j++) {
-             datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
-           }
-           sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
-        }
-        
-        SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
-        return executeQuery(sql_get,datafull.getValueArrayList());
+//    public DBTResultSetContainer executeMapQuery(String sqlid,AdapterMapBase<String,Object> param) throws Exception{
+//        if(sql.get(sqlid)==null){
+//            log.error("not Found find SqlMap id "+sqlid);
+//            throw new Exception("not Found find SqlMap id "+sqlid);
+//        }
+//        String sql_get  = sql.get(sqlid);
+//        StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
+//        for (int i = 0; i < param.size(); i++) {
+//            String findstr="#"+param.getKey(i)+"#";
+//            ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
+//           log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
+//           for (int j = 0; j < size.size(); j++) {
+//             datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
+//           }
+//           sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
+//        }
+//        
+//        SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
+//        return executeQuery(sql_get,datafull.getValueArrayList());
+//    }
+    public DBTResultSetContainer executeMapQuery(String sqlid,Map<String,Object> param) throws Exception{
+    	if(sql.get(sqlid)==null){
+    		log.error("not Found find SqlMap id "+sqlid);
+    		throw new Exception("not Found find SqlMap id "+sqlid);
+    	}
+    	String sql_get  = sql.get(sqlid);
+    	StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
+    	
+    	Iterator<Entry<String, Object>> iterator = param.entrySet().iterator();
+    	while(iterator.hasNext()){
+    		Map.Entry entry = (Map.Entry) iterator.next();
+    		String findstr="#"+entry.getKey()+"#";
+    		ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
+    		log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
+    		for (int j = 0; j < size.size(); j++) {
+    			datafull.add(new Standard<Integer, Object>(size.get(j),entry.getValue()));
+    		}
+    		sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
+    	}
+    	
+    	SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
+    	return executeQuery(sql_get,datafull.getValueArrayList());
     }
     
     
@@ -294,27 +322,52 @@ public class DBTerminal {
             log.error("not Found find SqlMap id "+sqlid);
             throw new Exception("not Found find SqlMap id "+sqlid);
         }
-        return executeMapUpdate(sql.get(sqlid));
+        return executeUpdate(sql.get(sqlid));
     }
-    public int executeMapUpdate(String sqlid,AdapterMapBase<String,Object> param) throws Exception{
-        if(sql.get(sqlid)==null){
-            log.error("not Found find SqlMap id "+sqlid);
-            throw new Exception("not Found find SqlMap id "+sqlid);
-        }
-        String sql_get  = sql.get(sqlid);
-        StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
-        for (int i = 0; i < param.size(); i++) {
-            String findstr="#"+param.getKey(i)+"#";
-            ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
-           log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
-           for (int j = 0; j < size.size(); j++) {
-             datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
-           }
-           sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
-        }
-        
-        SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
-        return executeUpdate(sql_get,datafull.getValueArrayList());
+//    public int executeMapUpdate(String sqlid,AdapterMapBase<String,Object> param) throws Exception{
+//        if(sql.get(sqlid)==null){
+//            log.error("not Found find SqlMap id "+sqlid);
+//            throw new Exception("not Found find SqlMap id "+sqlid);
+//        }
+//        String sql_get  = sql.get(sqlid);
+//        StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
+//        for (int i = 0; null!=param && i < param.size(); i++) {
+//            String findstr="#"+param.getKey(i)+"#";
+//            ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
+//           log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
+//           for (int j = 0; j < size.size(); j++) {
+//             datafull.add(new Standard<Integer, Object>(size.get(j),param.get(i)));
+//           }
+//           sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
+//        }
+//        
+//        SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
+//        return executeUpdate(sql_get,datafull.getValueArrayList());
+//    }
+    
+    
+    
+    public int executeMapUpdate(String sqlid,Map<String,Object> param) throws Exception{
+    	if(sql.get(sqlid)==null){
+    		log.error("not Found find SqlMap id "+sqlid);
+    		throw new Exception("not Found find SqlMap id "+sqlid);
+    	}
+    	String sql_get  = sql.get(sqlid);
+    	StandardArrayList<Integer,Object> datafull = new StandardArrayList<Integer,Object>();
+    	
+    	Iterator<Entry<String, Object>> iterator = param.entrySet().iterator();
+    	while(iterator.hasNext()){
+    		Entry entry = (Entry) iterator.next();
+    		String findstr="#"+entry.getKey()+"#";
+    		ArrayList<Integer> size = StringUtil.getFindIndex(findstr, sql_get);
+    		log.debug( findstr +"  "+ sql_get.indexOf(findstr)+"    "+size.size() );
+    		for (int j = 0; j < size.size(); j++) {
+    			datafull.add(new Standard<Integer, Object>(size.get(j),entry.getValue()));
+    		}
+    		sql_get = StringUtil.replaceAll(sql_get, findstr, StringUtil.lpad(" ",findstr.length(),"?"));
+    	}
+    	SortUtil.sort(datafull, new CompareIntegerStandard(CompareBase.TYPE_ASC));
+    	return executeUpdate(sql_get,datafull.getValueArrayList());
     }
     
     
@@ -364,7 +417,8 @@ public class DBTerminal {
     
     public void commit() throws Exception{
     	if(null!=connection){
-    		connection.commit();
+			if(!connection.getAutoCommit())
+				connection.commit();
     	}
 //        if(getConnection()!=null && getConnection().isClosed()==false){
 //        	if(getConnection().getAutoCommit()==false){
@@ -377,7 +431,8 @@ public class DBTerminal {
     
     public void rollback() throws Exception{
        	if(null!=connection){
-    		connection.rollback();
+       		if(!connection.getAutoCommit())
+       			connection.rollback();
     	}
 //        if(getConnection()!=null && getConnection().isClosed()==false ){
 //        	if(getConnection().getAutoCommit()==false){
@@ -449,11 +504,11 @@ public class DBTerminal {
     }
     
 
-    public  AdapterMapBase<String,Object>  toAdapterMap(Document doc) throws Exception{
+    public Map<String,Object>  toAdapterMap(Document doc) throws Exception{
         XMLparser xml = new XMLparser(doc);
         NodeList list = xml.getNodes("//data");
         
-        AdapterMapBase<String,Object> param = new AdapterMap<String, Object>();
+        HashMap<String,Object> param = new HashMap<String, Object>();
         for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
            HashMap<String,String> map =  xml.getAttribute(node);
@@ -462,7 +517,7 @@ public class DBTerminal {
            while(it.hasNext()){
                String key      = it.next();
                String value    = map.get(key);
-               param.add(key, value);
+               param.put(key, value);
 //             System.out.println("key:"+key+"    value:"+value);  
            }
            //map.g
@@ -470,6 +525,27 @@ public class DBTerminal {
         
         return param;
     }
+//    public  AdapterMapBase<String,Object>  toAdapterMap(Document doc) throws Exception{
+//        XMLparser xml = new XMLparser(doc);
+//        NodeList list = xml.getNodes("//data");
+//        
+//        AdapterMapBase<String,Object> param = new AdapterMap<String, Object>();
+//        for (int i = 0; i < list.getLength(); i++) {
+//            Node node = list.item(i);
+//           HashMap<String,String> map =  xml.getAttribute(node);
+//           Set keys = map.keySet();
+//           Iterator<String> it =  keys.iterator();
+//           while(it.hasNext()){
+//               String key      = it.next();
+//               String value    = map.get(key);
+//               param.add(key, value);
+////             System.out.println("key:"+key+"    value:"+value);  
+//           }
+//           //map.g
+//        }
+//        
+//        return param;
+//    }
     
     public Connection getConnection() throws Exception{
         

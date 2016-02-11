@@ -1,6 +1,5 @@
 package khh.conversion.util;
 
-import java.awt.List;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -12,16 +11,14 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import khh.communication.telnet.TelnetKReadListener;
 import khh.file.util.FileUtil;
 import khh.std.adapter.AdapterMap;
 
@@ -86,6 +83,13 @@ public class ConversionUtil {
        return returnval;
    }
    
+   public static Class[] toClassArray(Object[] object){
+	   Class[] classs = new Class[object.length];
+       for (int i = 0; i < object.length; i++) {
+           classs[i]  =   object[i].getClass();
+       }
+	   return classs; 
+   }
    /////Casting
    public static String toString(String data){
       return data;

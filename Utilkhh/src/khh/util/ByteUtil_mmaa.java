@@ -1,5 +1,5 @@
 
-package net.util;
+package khh.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,10 +13,10 @@ import java.io.IOException;
  * ����  �̷� 	: 2009. 09. 23
  * ��      Ÿ 	: 
  */
-public class ByteUtilFINGER
+public class ByteUtil_mmaa
 {
 
-    private ByteUtil()
+    private ByteUtil_mmaa()
     {
     }
 

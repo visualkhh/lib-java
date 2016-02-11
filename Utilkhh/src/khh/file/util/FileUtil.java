@@ -863,5 +863,8 @@ public class FileUtil{
 //		} 
 
     }
+    public static String getPath(Class c) throws IOException{
+    	return c.getResource("").getPath();
+    }
 	
 }

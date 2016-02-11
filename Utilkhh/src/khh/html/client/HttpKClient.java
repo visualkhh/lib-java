@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import khh.property.util.PropertyUtil;
-import khh.string.token.StringTokenizer;
 
 
 
@@ -115,8 +114,8 @@ public class HttpKClient {
 				param.put(key,URLEncoder.encode((String) param.get(key)));
 			}
 			
-			StringTokenizer h = new StringTokenizer("&");
-				h.makeString(param);
+//			StringTokenizer h = new StringTokenizer("&");
+//				h.makeString(param);
 		}
 		return s;
 	}

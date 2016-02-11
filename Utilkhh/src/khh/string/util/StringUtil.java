@@ -13,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import khh.conversion.util.ConversionUtil;
 import khh.std.adapter.AdapterMap;
 
 public class StringUtil {
@@ -492,6 +491,37 @@ public class StringUtil {
 
 
 
+	public static String joinValue(Map param,String delimiter){
+	    	Iterator iter = param.keySet().iterator();
+    	StringBuffer buf = new StringBuffer();
+    	boolean isFirst=true;
+    	
+    	while(iter.hasNext()){
+    		if(isFirst==false){
+    			buf.append(delimiter);
+    		}
+    		Object key = iter.next();
+    		buf.append(param.get(key));
+    		isFirst=false;
+    	}
+    	return buf.toString();
+	}
+	public static String joinKey(Map param,String delimiter){
+		Iterator iter = param.keySet().iterator();
+		StringBuffer buf = new StringBuffer();
+		boolean isFirst=true;
+		
+		while(iter.hasNext()){
+			if(isFirst==false){
+				buf.append(delimiter);
+			}
+			
+			Object key = iter.next();
+			buf.append(key);
+			isFirst=false;
+		}
+		return buf.toString();
+	}
     /**
      * <p>문자열 토큰배열에 구분자를 넣어서 합친 문자열 반환. (spilit와 반대의 기능을 함)</p>
      *
@@ -608,13 +638,15 @@ public class StringUtil {
 
         String convStr = null;
 
-        if("".equals(ConversionUtil.nullToString(src,""))) {  // 원본 분자열이 null 이거나  ""이면  ""을 넘김.
+//        if("".equals(ConversionUtil.nullToString(src,""))) {  // 원본 분자열이 null 이거나  ""이면  ""을 넘김.
+        if(null==src  ||  "".equals(src)) {  // 원본 분자열이 null 이거나  ""이면  ""을 넘김.
             return convStr = "";
         }else if(!(src.length() < totLength)) {  // 원본 문자열이 전체 문자열 크기보다 같거나 작다면 원본 반환.
             return convStr = src;
         }else if("L:;:;R".indexOf(direction) < 0) { // pad 방향값이 L / R 이 아닐때 원본 반환.
             return convStr = src;
-        }else if(ConversionUtil.nullToString(padStr,"").length() != 1) { // 첨가 문자열 길이가 0이거나 2이상일  때 원본 반환.
+//        }else if(ConversionUtil.nullToString(padStr,"").length() != 1) { // 첨가 문자열 길이가 0이거나 2이상일  때 원본 반환.
+        }else if(padStr.length() != 1) { // 첨가 문자열 길이가 0이거나 2이상일  때 원본 반환.
             return convStr = src;
         }
 
@@ -659,6 +691,10 @@ public class StringUtil {
 //		for (int i = 0; i < varList.length; i++) {
 //			System.out.println(varList[i]);
 //		}
+//		System.out.println("------------");
+		for (int i = 0; i < regexList.length; i++) {
+			System.out.println(regexList[i]);
+		}
 //		
 //		for (int i = 0; i < varList.length; i++) { //기존에 있으면 ..안덮고 ..
 //			if(null==param.get(varList[i]))
@@ -681,6 +717,10 @@ public class StringUtil {
 				if(null!=param && null!=param.get(val)){
 					val = param.get(val);
 				}
+				if(val.indexOf("'")==0 && val.lastIndexOf("'")==val.length()-1){
+					val = val.substring(1, val.length()-1);
+				}
+				//싱글쿼터로 묶여진건 스트링이기때문에 처리해야된다.
 				buf.append(val);
 			}
 		}
@@ -695,7 +735,7 @@ public class StringUtil {
 		return splitScope(msg,prefix,postfix);
 	}
 	public static String[] splitScope(String msg, String prefix, String postfix){
-		return splitScope(msg,StringUtil.regexMetaCharToEscapeChar(prefix)+"([\\/\\w\\.\\-\\_\\s\\\\]*)"+StringUtil.regexMetaCharToEscapeChar(postfix));
+		return splitScope(msg,StringUtil.regexMetaCharToEscapeChar(prefix)+"([\\/\\w\\.\\'\\-\\_\\s\\\\]*)"+StringUtil.regexMetaCharToEscapeChar(postfix));
 	}
     //String str ="aasdasd${asdasd}-vVav+${bbb}z234v${vvvv}";
     //String[] l = splitScope(str, "\\$\\{[\\w\\.\\s]+\\}");
@@ -730,7 +770,7 @@ public class StringUtil {
 		return findScope(msg,prefix,postfix);
 	}
 	public static String[] findScope(String msg, String prefix, String postfix){
-		return findScope(msg,StringUtil.regexMetaCharToEscapeChar(prefix)+"([\\/\\w\\.\\-\\_\\s\\\\]*)"+StringUtil.regexMetaCharToEscapeChar(postfix),1);
+		return findScope(msg,StringUtil.regexMetaCharToEscapeChar(prefix)+"([\\/\\w\\.\\'\\-\\_\\s\\\\]*)"+StringUtil.regexMetaCharToEscapeChar(postfix),1);
 	}
 	
 	//String str ="aasdasd${asdasd} vVav ${bbb} 234 ${vvvv}";

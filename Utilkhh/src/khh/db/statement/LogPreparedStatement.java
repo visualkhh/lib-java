@@ -1240,13 +1240,11 @@ public class LogPreparedStatement implements PreparedStatement {
 	public void setBlob(int parameterIndex, InputStream inputStream) throws SQLException {}
 	public void setNClob(int parameterIndex, Reader reader) throws SQLException {}
 
-	@Override
 	public void closeOnCompletion() throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public boolean isCloseOnCompletion() throws SQLException {
 		// TODO Auto-generated method stub
 		return false;

@@ -19,12 +19,12 @@ public class POItest{
 //		for(int i = 0; i < s.length; i++){
 //			FileUtil.writeFile(i+"aa.jpg",  p.getSlideBuffredImage(s[i]), "jpg");
 //		}
-		PPTWriteParser p = new PPTWriteParser();
-		p.addTitle( p.createSlide(),"1");
-		p.addTitle( p.createSlide(),"2");
-		p.addTitle( p.createSlide(),"3");
-		p.addTitle( p.createSlide(),"4");
-		p.write("./g.ppt");
+//		PPTWriteParser p = new PPTWriteParser();
+//		p.addTitle( p.createSlide(),"1");
+//		p.addTitle( p.createSlide(),"2");
+//		p.addTitle( p.createSlide(),"3");
+//		p.addTitle( p.createSlide(),"4");
+//		p.write("./g.ppt");
 	}
 
 	public static void main(String[] args) throws Exception{

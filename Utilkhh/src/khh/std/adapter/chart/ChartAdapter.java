@@ -1,6 +1,5 @@
 package khh.std.adapter.chart;
 
-import javax.swing.text.Utilities;
 
 import khh.math.util.MathUtil;
 import khh.std.adapter.AdapterMapBase;

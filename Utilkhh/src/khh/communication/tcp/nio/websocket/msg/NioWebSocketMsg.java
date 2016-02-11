@@ -8,7 +8,7 @@ import khh.conversion.util.ConversionUtil;
 import khh.debug.LogK;
 import khh.encryption.base64.Base64;
 import khh.encryption.sha1.SHA1;
-import khh.string.token.StringTokenizer;
+import java.util.StringTokenizer;
 
 
 public class NioWebSocketMsg extends NioActionMsg {

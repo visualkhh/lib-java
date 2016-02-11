@@ -11,6 +11,7 @@ import static org.w3c.dom.Node.NOTATION_NODE;
 import static org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
 import static org.w3c.dom.Node.TEXT_NODE;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,13 +41,12 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import khh.conversion.util.ConversionUtil;
 import khh.string.util.StringUtil;
 //htmlcleaner-2.2.jar
-import org.htmlcleaner.CleanerProperties;
-import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.PrettyXmlSerializer;
-import org.htmlcleaner.TagNode;
+//import org.htmlcleaner.CleanerProperties;
+//import org.htmlcleaner.HtmlCleaner;
+//import org.htmlcleaner.PrettyXmlSerializer;
+//import org.htmlcleaner.TagNode;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -191,7 +191,7 @@ public class XMLparser
 		this.document = document;
 	}
 	public void setString(String stringXML) throws SAXException, IOException {
-		makeDocument(ConversionUtil.toInputStream(stringXML));
+		makeDocument(new ByteArrayInputStream(stringXML.getBytes()));
 	}
 	public void setXMLString(String xmlString) throws SAXException, IOException {
 //	    this.filePath = filePath;
@@ -226,23 +226,14 @@ public class XMLparser
             }
 //            System.out.println("a");
 		}catch (SAXParseException e) {
-//			System.out.println("b");
-			CleanerProperties props = new CleanerProperties();
-			props.setTranslateSpecialEntities(true);
-			props.setTransResCharsToNCR(true);
-			props.setOmitComments(true);
-		    TagNode tagNode = new HtmlCleaner(props).clean(url);
-		    PrettyXmlSerializer s = new PrettyXmlSerializer(props);
-//		    OutputMemoryStream outputstream = new OutputMemoryStream();
-//		    System.out.println( s.getAsString(tagNode));
-//		    s.writeToStream(tagNode, outputstream);
-//		    InputMemoryStream inputStream = new InputMemoryStream(outputstream.getBuffer());
-		   InputStream inputStream =  ConversionUtil.toInputStream( s.getAsString(tagNode));
-		    setInputStrem(inputStream);
-		   /*  new PrettyXmlSerializer(props).writeToFile(
-		             tagNode, "chinadaily.xml", "utf-8"
-		         );*/
-			
+//			CleanerProperties props = new CleanerProperties();
+//			props.setTranslateSpecialEntities(true);
+//			props.setTransResCharsToNCR(true);
+//			props.setOmitComments(true);
+//		    TagNode tagNode = new HtmlCleaner(props).clean(url);
+//		    PrettyXmlSerializer s = new PrettyXmlSerializer(props);
+//		   InputStream inputStream =  ConversionUtil.toInputStream( s.getAsString(tagNode));
+//		    setInputStrem(inputStream);
 		}
 	}
 	

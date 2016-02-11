@@ -10,7 +10,7 @@ import khh.communication.tcp.nio.worker.NioActionWorker;
 import khh.communication.tcp.nio.worker.msg.NioActionMsg;
 import khh.date.util.DateUtil;
 import khh.debug.LogK;
-import khh.string.token.StringTokenizer;
+import khh.string.util.StringUtil;
 public class RelayClientWorker extends NioActionWorker{
 	private LogK log = LogK.getInstance();
     public RelayClientWorker(int firestMode){
@@ -54,13 +54,11 @@ public class RelayClientWorker extends NioActionWorker{
 		
 		else if(NioActionMsg.ACTION.GET_SERVERS.getValue() == msg.getAction()){
 			Hashtable<String, NioMonitor> monitors = getNioCommunication().getMultimonitor().getMonitors();
-			StringTokenizer token = new StringTokenizer(",");
-			msg.set(token.makeKeyString(monitors));
+			msg.set(StringUtil.joinKey(monitors,","));
 			sendNioActionMsg(msg, selectionKey);
 		}else if(NioActionMsg.ACTION.GET_CLIENTS.getValue() == msg.getAction()){
 			Hashtable<String, SelectableChannel> clients = getNioCommunication().getMultimonitor().getClientSocketChannels(msg.getString());
-			StringTokenizer token = new StringTokenizer(",");
-			msg.set(token.makeString(clients));
+			msg.set(StringUtil.joinKey(clients,","));
 			sendNioActionMsg(msg, selectionKey);
 		}
 		

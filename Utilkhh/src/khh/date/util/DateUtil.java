@@ -125,6 +125,9 @@ public class DateUtil {
     
     
 //Calendar.DATE
+    public static Date modifyDate(int calendarAddType,int value){
+    	return modifyDate(new Date(),calendarAddType,value);
+    }
     public static Date modifyDate(Date date,int calendarAddType,int value){
 //      Date d = new Date ( );
         Calendar c = Calendar.getInstance ( );

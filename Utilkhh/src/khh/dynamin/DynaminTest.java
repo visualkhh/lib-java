@@ -1,6 +1,7 @@
 package khh.dynamin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import khh.debug.LogK;
@@ -15,7 +16,7 @@ public class DynaminTest {
 		Dynamin d = new Dynamin();
 //		d.addConfigFile("Z:\\me\\project\\personal\\web\\logger\\workspace\\logerss\\WebContent\\WEB-INF\\config\\compactk_ajax_config.xml");
 //		d.setRootElementName("/compact");
-		d.addConfigFile("Z:\\git\\javautil-visualkhh\\Utilkhh\\src\\khh\\dynamin\\dynamin_config.xml");
+		d.addConfigFile("Z:\\git\\javautil-visualkhh\\Utilkhh\\src\\khh\\dynamin\\dynamin_configHashMap.xml");
 		d.start();
 		LinkedHashMap<String, DynaminClass> dclassList = d.getTargetDClass();
 		DynaminClass atDclass = dclassList.get("gazzzzga");
@@ -23,6 +24,7 @@ public class DynaminTest {
 		Object o =atDclass.call();
 		log.debug(o);
 		 
+		
 //		XMLK xml = new XMLK("Z:\\git\\javautil-visualkhh\\Utilkhh\\src\\khh\\dynamin\\dynamin_config.xml");
 //		xml.setTargetXPath("/dynamin/*");
 //		xml.start();

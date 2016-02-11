@@ -17,7 +17,7 @@ import khh.std.adapter.AdapterMap;
 public class XMLK {
 
 	
-	AdapterMap<String, File> configFile = null;
+	HashMap<String, File> configFile = null;
 	ArrayList<Element> targetElements = null;
 	private String targetXPath = "/xmlk/*";
 	LogK log = null;
@@ -53,23 +53,22 @@ public class XMLK {
 	Consumer<Element> init = null;
 
 	public XMLK() {
-		log = LogK.getInstance();
-		configFile = new AdapterMap<String, File>();
-		targetElements = new ArrayList<Element>();
+		init();
 	}
 	public XMLK(String realpath) throws Exception {
-		log = LogK.getInstance();
-		configFile = new AdapterMap<String, File>();
-		targetElements = new ArrayList<Element>();
+		init();
 		addConfigFile(realpath);
 	}
 	public XMLK(File file) throws Exception {
-		log = LogK.getInstance();
-		configFile = new AdapterMap<String, File>();
-		targetElements = new ArrayList<Element>();
+		init();
 		addConfigFile(file);
 	}
 	
+	public void init(){
+		log = LogK.getInstance();
+		configFile = new HashMap<String, File>();
+		targetElements = new ArrayList<Element>();
+	}
 
 	public String getTargetXPath() {
 		return targetXPath;
@@ -87,7 +86,7 @@ public class XMLK {
 
 	public void addConfigFile(File file) throws Exception {
 		if (file != null && file.exists() && file.isFile()) {
-			configFile.add(file.getAbsolutePath(), file);
+			configFile.put(file.getAbsolutePath(), file);
 		}
 	}
 
@@ -95,11 +94,12 @@ public class XMLK {
 		log.debug("configFileSize:" + configFile.size());
 		//ArrayList<Element> list = new ArrayList<>();
 		//config에 있는 뭐든 엘리먼트들을 우선 타겟팅된것들을 새성만 시킵니다.. 
-		for (int i = 0; i < configFile.size(); i++) {
+		
+		configFile.entrySet().stream().forEach(atConfig->{
 			XMLparser xml = null;
 			try {
-				File config = configFile.get(i);
-				log.debug("configFile Setting(" + i + "):" + config);
+				File config = atConfig.getValue();
+				log.debug("configFile Setting(" + config.getAbsolutePath() + ")");
 				xml = new XMLparser(config);
 				Integer rootCnt = xml.getInt("count(" + targetXPath + ")");
 				log.debug("targetNode  xpath(" + targetXPath + "), Cnt(" + rootCnt + ")");
@@ -112,7 +112,8 @@ public class XMLK {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		});
+
 
 		
 		

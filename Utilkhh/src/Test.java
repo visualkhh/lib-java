@@ -8,15 +8,13 @@ import khh.string.util.StringUtil;
 public class Test {
 
 	
-	public void s(StringBuffer a){
-		a.append("vvvvvvv");
-	}
 
 	public void s(String a){
 		a+="v";
 	}
 	//String forward_url = "\\$\\{(\\w+)*(\\w+)*\\}";
 	public static void main(String[] args) throws Exception {
+		
 //		String requestURI="/view/log/form/bbb/ddd/ccc/grg.jsp";
 //		String requestURI="/view/log/form/bbb/ddd/ccc/grg.jsp";
 		String requestURI="/user/profile.jpg";

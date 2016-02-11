@@ -2,7 +2,7 @@ package khh.std.adapter;
 
 import java.io.Serializable;
 
-
+@Deprecated
 public class AdapterMap<K,T> extends AdapterMapBase<K,T> implements Serializable {
 //	@Override
 //	public T getAlgorithm()

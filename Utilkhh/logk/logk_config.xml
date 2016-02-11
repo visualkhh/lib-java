@@ -40,7 +40,7 @@
 		<loger>
 			<level>A</level>
 			<!-- <dateformat>yyyy-MM-dd_HH:mm:s,SSS</dateformat> -->
-			 <dateformat>mm:s,SSS</dateformat> -->
+			 <dateformat>yyyy-MM-dd mm:s,SSS</dateformat> -->
 			<!-- <logformat>%d [%l] %c(%f)(line %n)  >>  %m   %e  </logformat> -->
 			 <logformat>%d %k:%n (%f)▶ %m   %e  %r</logformat> -->
 			<exception_stacktrace>true</exception_stacktrace>
@@ -50,7 +50,7 @@
 			<dateformat >yyyy-MM-dd</dateformat>
 			<save>true</save>
 			<savepath>c:\logk</savepath>
-			<filename>hhk_%c_%d.log</filename>
+			<filename>hhk_%d.log</filename>
 		</saver>
 	</target>
 

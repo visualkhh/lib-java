@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 
 import khh.collection.StandardArrayList;
@@ -156,12 +155,13 @@ public class ReflectionUtil
 					 Constructor[] constructors = klass.getConstructors();
 	                	for (int i = 0; i < constructors.length; i++) {
 	                		Constructor atConstructor = constructors[i];
-	                		Parameter[] atParameters = atConstructor.getParameters();
+//	                		Parameter[] atParameters = atConstructor.getParameters();
+	                		Class[] atParameters = atConstructor.getParameterTypes();
 	                		boolean isPass = true;
 							if(atParameters.length==constructorArgs.length){//이름과 파라미터개수가 똑같아야된다.
 								for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
-									Parameter atParameter = atParameters[pCnt];
-									if(constructorParamType[pCnt].isInstance(constructorArgs[pCnt])){
+									Class atParameter = atParameters[pCnt];
+									if(atParameter.isInstance(constructorArgs[pCnt])){
 										isPass = true;
 									}else{
 										isPass = false;
@@ -189,10 +189,9 @@ public class ReflectionUtil
 	}
 	
 	
-    public static Object executeMethod(Object object,String methodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
-        return executeMethod(object,methodname,null,null);
-    }
-    
+	public static Object executeMethod(Object object,String methodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+		return executeMethod(object,methodname,null,null);
+	}
     public static Object executeMethod(Object object,String methodName, StandardArrayList<Class,Object>parameter) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
         Class[] classs = new Class[parameter.size()];
         Object[] objects = new Object[parameter.size()];
@@ -208,96 +207,94 @@ public class ReflectionUtil
     	return executeMethod(object,methodName,parameters.toArray());
     }
     public static Object executeMethod(Object object, String methodName, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
-        Class[] classs = new Class[parameters.length];
-        for (int i = 0; i < parameters.length; i++) {
-            classs[i]  =   parameters[i].getClass();
-        }
-       return executeMethod(object, methodName, classs, parameters);
+       return executeMethod(object, methodName, ConversionUtil.toClassArray(parameters), parameters);
     }
     public static Object executeMethod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
-//      try{
-//              Object object = newClass(classclass);
-                Class klass =object.getClass();
-                Method setSalaryMethod =  null;
-                try{
-                	setSalaryMethod = klass.getMethod(methodName, paramTypes);
-                }catch(NoSuchMethodException e){
-                	//System.out.println("noSuchMethod");
-                	Method[] methods = klass.getMethods();
-                	for (int i = 0; i < methods.length; i++) {
-                		Method atMethod = methods[i];
-                		Parameter[] atParameters = atMethod.getParameters();
-                		boolean isPass = true;
-						if(methodName.equals(atMethod.getName()) && atParameters.length==parameters.length){//이름과 파라미터개수가 똑같아야된다.
-							for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
-								Parameter atParameter = atParameters[pCnt];
-								if(paramTypes[pCnt].isInstance(parameters[pCnt])){
-									isPass = true;
-								}else{
-									isPass = false;
-								}
-								//Parameter atInputParameter = paramTypes[pCnt];
-//								System.out.println(atParameter.getType()+ "    "+paramTypes[pCnt]);
-//								System.out.println(paramTypes[pCnt].isInstance(parameters[pCnt]));
-								//System.out.println(paramTypes[pCnt].isInstance(atParameter.getType()));
-//								System.out.println(atParameter.getType().isInstance(paramTypes[pCnt]));
-//								if(atParameter.getType().isInstance(paramTypes[pCnt].getClass())){
-//									System.out.println("-------");
-//								}
-								
-							}
-							if(isPass){
-								setSalaryMethod = atMethod;
-							}else{
-								throw new NoSuchMethodException();
-							}
-						}
-					}
-                }
-              return  setSalaryMethod.invoke(object, parameters);
-//      }catch(Exception e){
-//          e.printStackTrace();
-//      }
+            Class klass =object.getClass();
+            Method setSalaryMethod =  getMethod(klass,methodName,paramTypes,parameters);//null;//getMethod(object, methodName, paramTypes);
+            //Method setSalaryMethod = klass.getMethod(methodName, paramTypes);
+            Object returnObject = setSalaryMethod.invoke(object, parameters);
+            return returnObject;
     }
     
-    public static void executeDeclaredMethod(Object object,String methodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+    public static Object executeMethod(Object object, Method setSalaryMethod, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+    	Object returnObject = setSalaryMethod.invoke(object, parameters);
+    	return returnObject;
+    }
+    
+    public static Method getMethod(Class klass, String methodName, Object[] parameters) throws NoSuchMethodException {
+    	return getMethod(klass,methodName, ConversionUtil.toClassArray(parameters),parameters);
+    }
+    public static Method getMethod(Class klass, String methodName, Class[] paramTypes, Object[] parameters) throws NoSuchMethodException {
+    	Method setSalaryMethod = null;
+    	try{
+        	setSalaryMethod = klass.getMethod(methodName, paramTypes);
+        }catch(NoSuchMethodException e){
+        	Method[] methods = klass.getMethods();
+        	for (int i = 0; i < methods.length; i++) {
+        		Method atMethod = methods[i];
+//        		Parameter[] atParameters = atMethod.getParameters();
+        		Class[] atParameters = atMethod.getParameterTypes();
+        		boolean isPass = true;
+				if(methodName.equals(atMethod.getName()) && atParameters.length==parameters.length){//이름과 파라미터개수가 똑같아야된다.
+					for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
+						Class atParameter = atParameters[pCnt];  
+//						if(paramTypes[pCnt].isInstance(parameters[pCnt])){
+						if(atParameter.isInstance(parameters[pCnt])){
+							isPass = true;
+						}else{
+							isPass = false;
+						}
+					}
+					if(isPass){
+						setSalaryMethod = atMethod;
+					}else{
+						throw new NoSuchMethodException();
+					}
+				}
+			}
+        	if(null==setSalaryMethod){
+				throw new NoSuchMethodException();
+			}
+        }
+		return setSalaryMethod;
+	}
+
+
+	public static void executeDeclaredMethod(Object object,String methodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
         executeDeclaredMethod(object,methodname,null,null);
     }
     public static void executeDeclaredMethod(Object object, String methodName, Class[] paramTypes, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
-//      try{
-//              Object object = newClass(classclass);
-                Class klass =object.getClass();
-                Method setSalaryMethod = null;
-                try{
-                	setSalaryMethod = klass.getDeclaredMethod(methodName, paramTypes);
-                }catch(NoSuchMethodException e){
-                	Method[] methods = klass.getMethods();
-                	for (int i = 0; i < methods.length; i++) {
-                		Method atMethod = methods[i];
-                		Parameter[] atParameters = atMethod.getParameters();
-                		boolean isPass = true;
-						if(methodName.equals(atMethod.getName()) && atParameters.length==parameters.length){//이름과 파라미터개수가 똑같아야된다.
-							for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
-								Parameter atParameter = atParameters[pCnt];
-								if(paramTypes[pCnt].isInstance(parameters[pCnt])){
-									isPass = true;
-								}else{
-									isPass = false;
-								}
-								
-							}
-							if(isPass){
-								setSalaryMethod = atMethod;
-							}else{
-								throw new NoSuchMethodException();
-							}
+        Class klass =object.getClass();
+        Method setSalaryMethod = null;
+        try{
+        	setSalaryMethod = klass.getDeclaredMethod(methodName, paramTypes);
+        }catch(NoSuchMethodException e){
+        	Method[] methods = klass.getMethods();
+        	for (int i = 0; i < methods.length; i++) {
+        		Method atMethod = methods[i];
+//        		Parameter[] atParameters = atMethod.getParameters();
+        		Class[] atParameters = atMethod.getParameterTypes();
+        		boolean isPass = true;
+				if(methodName.equals(atMethod.getName()) && atParameters.length==parameters.length){//이름과 파라미터개수가 똑같아야된다.
+					for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
+						Class atParameter = atParameters[pCnt];
+						if(atParameter.isInstance(parameters[pCnt])){
+							isPass = true;
+						}else{
+							isPass = false;
 						}
+						
 					}
-                }
-                setSalaryMethod.invoke(object, parameters);
-//      }catch(Exception e){
-//          e.printStackTrace();
-//      }
+					if(isPass){
+						setSalaryMethod = atMethod;
+					}else{
+						throw new NoSuchMethodException();
+					}
+				}
+			}
+        }
+        setSalaryMethod.invoke(object, parameters);
     }
 	
 	public static Object getField(Object object, Field field) throws IllegalArgumentException, IllegalAccessException{

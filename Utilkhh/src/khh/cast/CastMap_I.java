@@ -11,6 +11,8 @@ public interface CastMap_I<K>{
 //	public T get();
 
 	public Integer getInt(K key) throws ClassCastException;
+	
+	public Long getLong(K key) throws ClassCastException;
 
 	public Double getDouble(K key) throws ClassCastException;
 

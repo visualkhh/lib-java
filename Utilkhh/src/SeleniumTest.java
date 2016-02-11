@@ -28,13 +28,13 @@ public class SeleniumTest {
 	 */
 	public void login(String username, String Password) {
 
-		WebElement userName_editbox = driver.findElement(By.id("usr"));
-		WebElement password_editbox = driver.findElement(By.id("pwd"));
-		WebElement submit_button = driver.findElement(By.xpath("//input[@value='Login']"));
-
-		userName_editbox.sendKeys(username);
-		password_editbox.sendKeys(Password);
-		submit_button.click();
+//		WebElement userName_editbox = driver.findElement(By.id("usr"));
+//		WebElement password_editbox = driver.findElement(By.id("pwd"));
+//		WebElement submit_button = driver.findElement(By.xpath("//input[@value='Login']"));
+//
+//		userName_editbox.sendKeys(username);
+//		password_editbox.sendKeys(Password);
+//		submit_button.click();
 
 	}
 

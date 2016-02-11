@@ -37,14 +37,14 @@ public class SeleniumTest2 {
 //	    capabilities.setPlatform(org.openqa.selenium.Platform.ANY);
 //	    capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 //		driver = new FirefoxDriver(capabilities);
-		driver = new FirefoxDriver();
+//		driver = new FirefoxDriver();
 	}
 	/**
 	 * Open the test website.
 	 */
 	public void openTestSite() {
 //		driver.navigate().to("https://connect.garmin.com/ko-KR/signin");
-		driver.navigate().to("http://127.0.0.1:8080/webTest/");
+//		driver.navigate().to("http://127.0.0.1:8080/webTest/");
 		
 	}
 
