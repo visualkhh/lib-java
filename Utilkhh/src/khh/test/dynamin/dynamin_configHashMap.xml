@@ -20,16 +20,20 @@ class childElement
 	
  -->
 <dynamin>
-	<class id="f" classpath="java.lang.String" value="f_string"></class>
-	<class id="a" classpath="java.lang.String" value="a_string"></class>
-	<class id="b" classpath="java.lang.Integer" value="500"></class>
-	<class id="c" classpath="java.lang.Boolean" value="true"></class>
-	<class id="c8" extends="c"></class>
-	<class id="gazzzzga" classpath="java.util.HashMap">
-		<method name="put">
-			<class classpath="java.lang.String" value="visual"></class>
-			<class classpath="java.lang.String" value="khh"></class>
-		</method>
+
+
+
+	<class id="fluidResovler" classpath="khh.test.dynamin.SuperObject" >
+			<constructor>
+				<class  classpath="java.lang.String" value="/WEB-INF/config/fluid_config.xml"/>
+			</constructor>
+	</class>
+
+	<!--services start-->
+	<class id="defaultView"  extends="fluidResovler" >
+		<rmethod name="setName" >
+			<class  classpath="java.lang.String" value="/WEB-INF/config/fluid_config.xml111"/>
+		</rmethod>
 	</class>
 	
 	

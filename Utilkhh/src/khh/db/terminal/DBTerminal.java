@@ -203,9 +203,12 @@ public class DBTerminal {
     
     
     
-    public void setAutoCommit(Boolean watnAutoCommit) throws SQLException {
+    public void setAutoCommit(Boolean watnAutoCommit) throws Exception {
         autoCommit=watnAutoCommit;
         if(null!=connection){
+        	if(connection.isClosed()){
+        		connection = getConnection();
+        	}
         	connection.setAutoCommit(autoCommit);
         }
     }
@@ -417,8 +420,10 @@ public class DBTerminal {
     
     public void commit() throws Exception{
     	if(null!=connection){
-			if(!connection.getAutoCommit())
-				connection.commit();
+    		if(!connection.isClosed()){
+				if(!connection.getAutoCommit())
+					connection.commit();
+    		}
     	}
 //        if(getConnection()!=null && getConnection().isClosed()==false){
 //        	if(getConnection().getAutoCommit()==false){
@@ -431,8 +436,10 @@ public class DBTerminal {
     
     public void rollback() throws Exception{
        	if(null!=connection){
-       		if(!connection.getAutoCommit())
-       			connection.rollback();
+       		if(!connection.isClosed()){
+	       		if(!connection.getAutoCommit())
+	       			connection.rollback();
+       		}
     	}
 //        if(getConnection()!=null && getConnection().isClosed()==false ){
 //        	if(getConnection().getAutoCommit()==false){

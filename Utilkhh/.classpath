@@ -71,5 +71,6 @@
 	<classpathentry kind="lib" path="lib/htmlcleaner-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/metadata-extractor-master/metadata-extractor-master.jar"/>
 	<classpathentry kind="lib" path="lib/metadata-extractor-master/xmpcore-5.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/json_simple.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

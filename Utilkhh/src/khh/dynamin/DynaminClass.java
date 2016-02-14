@@ -46,9 +46,9 @@ public class DynaminClass {
 			return call(element,null);
 		}
 	}
-	private Object call(Element callerE) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
-		return call(element,callerE);
-	}
+//	private Object call(Element callerE) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+//		return call(element,callerE);
+//	}
 	private Object call(Element element,Element callerE) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		Object object = null;
 		if(null == element.getObject()){
@@ -67,11 +67,19 @@ public class DynaminClass {
 		
 		//call될때마다 실행된다!!!  리턴값은 마지막 rmethod의 리턴값을 리턴한다.  20160203변경
 		object = element.getObject();
-		ArrayList<Element> rmethod = (callerE==null?element:callerE).getChildElementByTagName("rmethod");
-		for (int i = 0; i < rmethod.size(); i++) {
+//		ArrayList<Element> rmethod = (callerE==null?element:callerE).getChildElementByTagName("rmethod");
+//		for (int i = 0; i < rmethod.size(); i++) {
+//			Element atRmethod = rmethod.get(i);
+//			if(null!=atRmethod&&atRmethod.isAttr("name")){
+//				object = executeMethodInElement((callerE==null?element:callerE),atRmethod.getAttr("name"), atRmethod.getChildElementByTagName("class"));
+//			}
+//		};
+		
+		ArrayList<Element> rmethod = element.getChildElementByTagName("rmethod");
+		for (int i = 0; null==callerE && i < rmethod.size(); i++) {
 			Element atRmethod = rmethod.get(i);
 			if(null!=atRmethod&&atRmethod.isAttr("name")){
-				object = executeMethodInElement((callerE==null?element:callerE),atRmethod.getAttr("name"), atRmethod.getChildElementByTagName("class"));
+				object = executeMethodInElement(element,atRmethod.getAttr("name"), atRmethod.getChildElementByTagName("class"));
 			}
 		};
 		
@@ -221,7 +229,7 @@ public class DynaminClass {
 				DynaminClass extendsClass = targetDClass.get(conParamClass.getAttr("extends"));
 				try {
 					if(null!=extendsClass){	//상속찾으면
-							conParam.add(extendsClass.call(conParamClass));
+							conParam.add(extendsClass.call(extendsClass.element,conParamClass));
 					}else{//상속못찾으면 그냥 생성
 						if(null!=conParamClass.getObject()){
 							conParam.add(conParamClass.getObject());
@@ -259,14 +267,14 @@ public class DynaminClass {
 		}else if(null==et.getObject() && et.isAttr("extends")){
 			DynaminClass dc = targetDClass.get(et.getAttr("extends"));
 			if(null!=dc.getObject()){ //부모생성되어있으면 실행시키고 
-				object = dc.call(et);//return dc.call();
+				object = dc.call(dc.element,et);//return dc.call();
 			}else{//부모 생성안되어있으면 생성시켜라
 				object = dc.newClass(dc.element,et);
 			}
 			
 
 			et.setObject(dc.getObject());
-			call(et);//부모꺼 생성됐거나 실행됐으면 내것도 실행!!
+			object = call(et,callerE);//부모꺼 생성됐거나 실행됐으면 내것도 실행!!
 			
 			
 //			Object lastO = call(et);//부모꺼 생성됐거나 실행됐으면 내것도 실행!!
@@ -289,7 +297,7 @@ public class DynaminClass {
 			});
 			
 			
-			object = call(et);
+			object = call(et,callerE);
 		}
 			
 			
