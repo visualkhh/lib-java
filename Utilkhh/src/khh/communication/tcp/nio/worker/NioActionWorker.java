@@ -13,7 +13,7 @@ import khh.date.util.DateUtil;
 import khh.debug.LogK;
 
 public abstract class NioActionWorker extends NioWorker {
-	private LogK log = LogK.getInstance();
+	public LogK log = LogK.getInstance();
 //	private int readTimeout_ms =5000; 
 	private boolean autoFeedbackException=false;
 	public NioActionWorker(int firestMode) {
@@ -78,7 +78,7 @@ public abstract class NioActionWorker extends NioWorker {
 	}
          
          buffer.clear();
-         log.debug("SEX",buffer);
+         log.debug("STX",buffer);
 //         if(readLength==1 && NioActionMsg.STX == buffer.get(0)){
              msg = new NioActionMsg();
 //             buffer = ByteBuffer.allocateDirect(4);

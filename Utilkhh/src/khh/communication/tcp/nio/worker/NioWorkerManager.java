@@ -14,8 +14,7 @@ import khh.filter.Filter;
 import khh.listener.action.ActionListener;
 import khh.std.Action;
 
-public class NioWorkerManager extends Thread
-{
+public class NioWorkerManager extends Thread{
 	private BlockingQueue<SelectionKey>	eventQueue	= null;
 	private NioWorker business = null;
 	private NioCommunication niocommunication = null;
@@ -35,6 +34,10 @@ public class NioWorkerManager extends Thread
 			try{
 				Thread.sleep(1);
 				key = getEventQueue().take();	//BlockingQueue
+				//log.debug("working start--> "+key+"   "+key.isValid());
+//				if(key.isValid()==false){
+//					continue;
+//				}
 				channel = (SocketChannel)key.channel();
 				if(channel == null){
 					finish(key);
@@ -42,6 +45,7 @@ public class NioWorkerManager extends Thread
 				}
 				socket = channel.socket();
 				business.setSocketChannel(channel);
+				business.setSelectionKey(key);
 				//긴급수신 메시지가있음 그쪽으로 telegram-_-
 				if(niocommunication.getTelegramQueue()!=null && niocommunication.getTelegramQueue().size()>0){
 					try{
@@ -70,13 +74,18 @@ public class NioWorkerManager extends Thread
 				}//if(key.isReadable()&&key.isWritable())
 				business.execute(key);
 				//log.info(String.format("Worker! END [%03d] isConnected:%b isConnectionPending:%b isOpen:%b  isClosed:%b isBound:%b isWriteble:%b"+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()));
+			}catch (java.nio.channels.CancelledKeyException e) {
+				log.error("java.nio.channels.CancelledKeyException  WorkerBusiness End ",e);
+				business.close(channel);
+				getEventQueue().remove(key);
+				//key.interestOps(ops);
 			}catch (InterruptedException e) {
 				log.error("InterruptedException  WorkerBusiness End ",e);
 				return;
 			}catch (SocketTimeoutException e) {
 				log.error("SocketTimeoutException execute WorkerBusiness End ",e);
 				//log.error(String.format("SocketTimeoutException execute WorkerBusiness End [%03d] isConnected:%b isConnectionPending:%b isOpen:%b isClosed:%b isBound:%b isWriteble:%b "+channel.socket().getInetAddress(), getId(), channel.socket().isConnected(),channel.isConnectionPending(), channel.isOpen(),channel.socket().isClosed(),channel.socket().isBound(),key.isWritable()),e);
-				business.close(channel);
+//				business.close(channel);
 //				close(channel);
 			}catch (IOException e) {
 				log.error("IOException execute WorkerBusiness End ",e);
@@ -93,8 +102,9 @@ public class NioWorkerManager extends Thread
 					//커넥트된상태
 //				}else{
 //				}
-				if(key != null)
+				if(key != null){
 					finish(key);
+				}
 				
 				if(Thread.currentThread().isInterrupted()){
 					return;

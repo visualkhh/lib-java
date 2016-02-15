@@ -126,7 +126,7 @@ public abstract class NioCommunication implements Communication_I{
 
 	private void selectorManagerSetting() throws IOException {
 		for(int i = 0 ; i < getSelectorManagerSize() ; i++){
-			NioSelectorManager selector = new NioSelectorManager(getEventQueue());
+			NioSelectorManager selector = new NioSelectorManager(this,getEventQueue());
 			selector.start();
 			getSelectorManagerList().add(selector);
 		}

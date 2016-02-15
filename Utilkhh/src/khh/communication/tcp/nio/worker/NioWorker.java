@@ -7,7 +7,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 
+
 import khh.communication.tcp.nio.NioCommunication;
+import khh.conversion.util.ConversionUtil;
 import khh.debug.LogK;
 import khh.filter.Filter;
 import khh.listener.action.ActionListener;
@@ -26,7 +28,8 @@ abstract public class NioWorker{
 	private SocketChannel socketChannel			= null;
 	private LogK log 							= LogK.getInstance();
 	private NioCommunication niocommunication 					= null;
-	private int readTimeout_ms =5000; 
+	private int readTimeout_ms =5000;
+	private SelectionKey selectionKey; 
 	
 	public NioWorker(int firestMode) {
 	    setFirestMode(firestMode);
@@ -123,15 +126,38 @@ abstract public class NioWorker{
 		}
 	}	
 	
+	
+	final synchronized public  String readString() throws IOException{
+		String s=null;
+		ByteBuffer buffer = read();
+		buffer.flip();
+		return ConversionUtil.toString(buffer);
+	}
+	
+	
 	final synchronized public  ByteBuffer read() throws IOException{
 		return read(getSocketChannel());
 	}
+	
+	
+//	final synchronized public  ByteBuffer readNolimit(ByteBuffer buffer) throws IOException{
+//		return read(buffer,getSocketChannel());
+//	}
 
 	final synchronized public  ByteBuffer read(SocketChannel socketChannel) throws IOException{
-		byte[] data = new byte[0];
-		ByteBuffer buffer = ByteBuffer.allocate(1024);
-		int len = socketChannel.read(buffer);
-		return buffer; 
+		int len = 1;
+		int oneSize=1024;
+		ByteBuffer buff = ByteBuffer.allocate(oneSize);
+		while(getSelectionKey().isReadable() && len>0){
+			len = socketChannel.read(buff);
+			if(len==oneSize){
+				buff.flip();
+				ByteBuffer newBuff = ByteBuffer.allocate(buff.remaining()+oneSize);
+				newBuff.put(buff);
+				buff = newBuff;
+			}
+		}
+		return buff; 
 
 	}
 	
@@ -163,6 +189,13 @@ abstract public class NioWorker{
 		if ( getSocketChannel() == null )
 			return false;
 		return getSocketChannel().isConnected()   ;//&& socket.isOpen()&&socket.finishConnect();
+	}
+	final public void setSelectionKey(SelectionKey selectionkey){
+		this.selectionKey = selectionkey;
+	}
+	
+	public SelectionKey getSelectionKey() {
+		return selectionKey;
 	}
 	final public void setSocketChannel(SocketChannel socketChannel){
 		this.socketChannel = socketChannel;
