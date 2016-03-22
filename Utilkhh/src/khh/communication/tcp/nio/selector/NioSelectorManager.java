@@ -46,6 +46,7 @@ public class NioSelectorManager extends Thread
 					Iterator<SelectionKey> it = getSelector().selectedKeys().iterator();
 					while (it.hasNext()){
 						if(getEventQueue().size()>=nioCommunication.getWorkerManagerSize()){
+							Thread.sleep(1);
 							break;
 						}
 						

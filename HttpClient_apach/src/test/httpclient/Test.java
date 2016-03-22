@@ -24,7 +24,6 @@ public class Test {
 	}
 
 	public void start() throws UnsupportedOperationException, IOException {
-		Calendar
 		String postUrl = "http://192.168.0.95:8080";
 		HttpPost httpPost = new HttpPost(postUrl);
 //		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
