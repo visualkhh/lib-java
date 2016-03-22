@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hui version="1" sdk="1.5">
+
+	<runer></runer>
+	<bean></bean>
+	
+	<infos>
+		<info command="ggg">
+			<source>
+				<vetor>
+				</vetor>
+			</source>
+		</info>
+	</infos>
+	
+	<actions>
+		<action></action>
+	</actions>
+
+	<swither>
+		<action id="" class="aa"></action>
+		<action id="" class="aa"></action>
+		<action id="" class="aa"></action>
+	</swither>
+
+	<frames>
+		<frame id="ggg" icon="aa" class="a"></frame>
+		<frame id="bbb" icon="aa" class="a"></frame>
+		<frame id="ccc" icon="aa" class="a"></frame>
+	</frames>
+
+
+
+	<application>
+		<input>
+			<schedual></schedual>
+		</input>
+
+		<flesh>
+		</flesh>
+
+		<think>
+		</think>
+
+		<output>
+		</output>
+	</application>
+
+</hui>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamick>
+	<class id="f" classpath="java.lang.String" value="f_string"></class>
+	<class id="a" classpath="java.lang.String" value="a_string"></class>
+	<class id="b" classpath="java.lang.Integer" value="500"></class>
+	<class id="c" classpath="java.lang.Boolean" value="true"></class>
+	<class id="d" classpath="khh.dynamick.DynamicInputTest"	newConstructor="" returnMethod="">
+		<constructor>
+			<class ref="a"></class>
+			<class ref="b"></class>
+			<class id="ggg" classpath="java.lang.Boolean" value="false"></class>
+		</constructor>
+<!-- 		<method id="d_a" name="setA"> -->
+<!-- 			<class ref="a"></class> -->
+<!-- 		</method> -->
+<!-- 		<method id="d_b" name="setA"> -->
+<!-- 			<class ref="a"></class> -->
+<!-- 			<class id="fff" classpath="java.lang.String" value="f_string"></class> -->
+<!-- 		</method> -->
+		<method id="vv" name="setB">
+			<class  classpath="java.lang.Integer" value="670"></class>
+		</method>
+<!-- 		<method name="setC"> -->
+<!-- 			<class ref="c"></class> -->
+<!-- 		</method> -->
+		
+		<method id="vvv" name="getA"></method>
+<!-- 		<method name="getB"></method> -->
+<!-- 		<method id="d_g" name="getC"></method> -->
+	</class>
+	<class id="za" extends="d"></class>
+</dynamick>

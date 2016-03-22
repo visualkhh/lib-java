@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamin>
+	<class id="AAf" classpath="java.lang.String" value="f_string"></class>
+	<class id="AAa" classpath="java.lang.String" value="a_string"></class>
+	<class id="AAb" classpath="java.lang.Integer" value="500"></class>
+	<class id="AAc" classpath="java.lang.Boolean" value="true"></class>
+	<class id="AAd" classpath="khh.dynamick.DynamicInputTest"	newConstructor="" returnMethod="">
+		<constructor>
+			<class ref="AAa"></class>
+			<class ref="AAb"></class>
+			<class id="AAggg" classpath="java.lang.Boolean" value="false"></class>
+		</constructor>
+		<method id="AAvv" name="setB">
+			<class  classpath="java.lang.Integer" value="670"></class>
+		</method>
+		
+		<method id="AAvvv" name="getA"></method>
+	</class>
+	<class id="AAza" extends="AAd"></class>
+</dynamin>

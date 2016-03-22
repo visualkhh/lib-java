@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+1dpth에있는 Element는 id를 가져야한다, id는 서로 겹치지 않아야한다.
+
+class에는 
+	constructor가 있으면  이것으로 생성하여 오브젝트를 취한다.
+	rmethod가 있을시.. 그method를 호출후 나온 값을 리턴한다.
+	rmethod가 없을시.. 그자체 object를 리턴한다.
+	
+class attr
+	- id
+	- classpath 
+	- extends  참조한다
+	- value  기본형들 값넣는다
+		
+class childElement
+	- constructor -> class 생성자
+	- method -> class  생성될때 한번씩 실행됨
+	- rmethod -> class  사용할때 리턴받아올 매서드 호출될매서드
+	
+ -->
+<dynamin>
+
+
+
+	<class id="fluidResovler" classpath="khh.test.dynamin.SuperObject" >
+			<constructor>
+				<class  classpath="java.lang.String" value="/WEB-INF/config/fluid_config.xml"/>
+			</constructor>
+	</class>
+
+	<!--services start-->
+	<class id="defaultView"  extends="fluidResovler" >
+		<rmethod name="setName" >
+			<class  classpath="java.lang.String" value="/WEB-INF/config/fluid_config.xml111"/>
+		</rmethod>
+	</class>
+	
+	
+	
+	
+</dynamin>

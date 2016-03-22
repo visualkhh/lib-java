@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+1dpth에있는 Element는 id를 가져야한다, id는 서로 겹치지 않아야한다.
+
+class에는 
+	constructor가 있으면  이것으로 생성하여 오브젝트를 취한다.
+	rmethod가 있을시.. 그method를 호출후 나온 값을 리턴한다.
+	rmethod가 없을시.. 그자체 object를 리턴한다.
+	
+class attr
+	- id
+	- classpath 
+	- extends  참조한다
+	- value  기본형들 값넣는다
+		
+class childElement
+	- constructor -> class 생성자
+	- method -> class  생성될때 한번씩 실행됨
+	- rmethod -> class  사용할때 리턴받아올 매서드 호출될매서드
+
+
+rmethod
+ - call될때마다 실행된다!!!  리턴값은 마지막 rmethod의 리턴값을 리턴한다.
+ 
+type=aop  aop가 존재한다 
+life=new -> 매번호출될때마다 생성다시한다. 
+ -->
+ 
+<!-- 	<aop id="aop1" execution="^public .* .*(.*)" > 언제 어디서 무엇을 어떻게 public void khh.test.ReflectionTargetClass.printlong(java.lang.String,java.lang.String[]) -->
+<!-- 		<class extends="gazzzzga" type="before"> -->
+<!-- 			<method name="put"> -->
+<!-- 				<class classpath="java.lang.String" value="before"></class> -->
+<!-- 				<class classpath="java.lang.String" value="b"></class> -->
+<!-- 			</method> -->
+<!-- 		</class> -->
+<!-- 	</aop> -->
+
+
+<dynamin>
+<!-- 	<class id="f" classpath="java.lang.String" value="f_string"></class> -->
+<!-- 	<class id="a" classpath="java.lang.String" value="a_string"></class> -->
+<!-- 	<class id="b" classpath="java.lang.Integer" value="500"></class> -->
+<!-- 	<class id="c" classpath="java.lang.Boolean" value="true"/> -->
+<!-- 	<class id="c8" extends="c"></class> -->
+<!-- 	<class id="super" classpath="khh.test.dynamin.SuperObject" > -->
+<!-- 		<method name="setName"> -->
+<!-- 			<class  classpath="java.lang.String"  value="superName"/> -->
+<!-- 		</method> -->
+<!-- 	</class> -->
+<!-- 	<class id="superdd" classpath="khh.test.dynamin.ChildObject" > -->
+<!-- 		<method name="setName"> -->
+<!-- 			<class  classpath="java.lang.String"  value="superNamess"/> -->
+<!-- 		</method> -->
+<!-- 	</class> -->
+	
+	
+	<class id="gazzzzga" classpath="khh.test.dynamin.ExecuteObject">
+<!-- 		<method name="addObj"> -->
+<!-- 			<class extends="super"></class> -->
+<!-- 		</method> -->
+<!-- 		<method name="addObj"> -->
+<!-- 			<class extends="superdd"></class> -->
+<!-- 		</method> -->
+		
+		<rmethod name="addObj">
+			<class classpath="khh.test.dynamin.SuperObject" life="new">
+				<constructor>
+					<class classpath="java.lang.String" value="sub_visualkhh" />
+				</constructor>
+			</class>
+		</rmethod>
+	</class>
+	
+<!-- 	<class id="ga" extends="gazzzzga"> -->
+<!-- 		<method name="add"> -->
+<!-- 			<class classpath="java.lang.String" value="5555555555"></class> -->
+<!-- 		</method> -->
+<!-- 		<rmethod name="add"> -->
+<!-- 			<class classpath="java.lang.String" value="ga1"></class> -->
+<!-- 		</rmethod> -->
+<!-- 		<rmethod name="add"> -->
+<!-- 			<class classpath="java.lang.String" value="ga2"></class> -->
+<!-- 		</rmethod> -->
+<!-- 		<rmethod name="add"> -->
+<!-- 			<class classpath="java.lang.String" value="ga3"></class> -->
+<!-- 		</rmethod> -->
+<!-- 	</class> -->
+	
+	
+	<!-- public void khh.test.ReflectionTargetClass.printlong(java.lang.String,java.lang.String[]) -->
+<!-- 	<class id="wow_before" classpath="khh.test.dynamin.AOPTest" type="aop" around="before" execution="^public .* khh.test.dynamin.ExecuteObject.*(.*)"  method="before" /> -->
+<!-- 	<class id="wow_after" extends="wow_before" type="aop" around="after" execution="^public .* khh.test.dynamin.ExecuteObject.*(.*)"  method="after"/> -->
+	
+	
+<!-- 	<aop id="aop1" execution="^public .* .*(.*)" > 언제 어디서 무엇을 어떻게 public void khh.test.ReflectionTargetClass.printlong(java.lang.String,java.lang.String[]) -->
+<!-- 		<class extends="gazzzzga" type="before"> -->
+<!-- 			<method name="put"> -->
+<!-- 				<class classpath="java.lang.String" value="before"></class> -->
+<!-- 				<class classpath="java.lang.String" value="b"></class> -->
+<!-- 			</method> -->
+<!-- 		</class> -->
+<!-- 	</aop> -->
+	
+</dynamin>

@@ -1,5 +1,7 @@
 package khh.property.util;
 
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.Properties;
 
@@ -117,6 +119,16 @@ public class PropertyUtil
     }
     public static String getClassPath(){
         return getProperty("java.class.path");
+    }
+    public static String[] getClassPathToArray(){
+		 ClassLoader cl = ClassLoader.getSystemClassLoader();
+	        URL[] urls = ((URLClassLoader)cl).getURLs();
+	        String[] paths = new String[urls.length];
+	        for(int i=0 ; i < urls.length;i++){
+	        	//System.out.println(url.getFile());
+	        	paths[i] = urls[i].getFile();
+	        }
+	        return paths;
     }
     public static String getJavaHome(){
         return getProperty("java.home");

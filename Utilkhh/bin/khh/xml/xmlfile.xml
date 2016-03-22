@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xmlk id="vv">
+	<gogo id="g0" value="g0_val" gogoattr="0">
+		<wow value="vvv" >aa</wow>
+	</gogo>
+<!-- 	<ggo id="z"></ggo> -->
+<!-- 	<gogozzz id="g5"  value="g5_val"> -->
+<!-- 		<wow id="g5subId" extends="g0" value="g5_sub_val">aa</wow> -->
+<!-- 		<wow id="z"/> -->
+<!-- 	</gogozzz> -->
+	
+<!-- 	<gogo id="g1" gogo="1"> -->
+<!-- 		<wowC extends="g5"></wowC> -->
+<!-- 		<wowC extends="g0"></wowC> -->
+<!-- 		<gogo id="g2" extends="g"/> -->
+<!-- 		<wowB extends="vv"></wowB> -->
+<!-- 	</gogo> -->
+	
+<!-- 	<gogo id="g3" value="g3_val"></gogo> -->
+	
+<!-- 	<gogo id="g4" extends="g0"></gogo> -->
+	
+	<gogo id="g6" >
+		<wow id="g6_wow" extends="g0">
+			<gogz id="g5_sub_gogz" extends="g0">
+				<gogz id="g5_sub_sub_gogz" extends="g0">
+					<ga extends="g0"></ga>
+				</gogz>
+			</gogz>
+		</wow>
+	</gogo>
+	
+<!-- 	<gogz extends="g6"></gogz> -->
+<!-- 	<gogz id="vvvvv" extends="g1"> -->
+<!-- 		<gogz extends="g0"></gogz> -->
+<!-- 	</gogz> -->
+</xmlk>
