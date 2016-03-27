@@ -1,5 +1,6 @@
 package khh.reflection;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -41,14 +42,14 @@ public class ReflectionUtil
 //	      }
 	    return methods;
 	}
+	public static Field[] getFields(Object at){
+		return getFields(at.getClass());
+	}
 	public static Field[] getFields(Class at){
 		Field[] fields = at.getFields();
-//		for(Field m : fields )
-//		{
-//			System.out.println( "Found a public Field: " + m );
-//		}
 		return fields;
 	}
+
 	
 	public static Method getMethod(Class at,String methodName){
 		return getMethod(at, methodName, null);
@@ -78,7 +79,55 @@ public class ReflectionUtil
 	    }
 	    return setSalaryMethod;
 	}
-
+	
+	
+	public static Field[] getDeclaredFields(Object at){
+		return getDeclaredFields(at.getClass());
+	}
+	public static Field[] getDeclaredFields(Class at){
+		Field[] fields = at.getDeclaredFields();
+		return fields;
+	}
+	public static Field[] getDeclaredAnnotationFields(Class classclass, Class annoClass){
+		ArrayList<Field> fieldArray = new ArrayList<>();
+		Field[] fields = getDeclaredFields(classclass);
+		
+		for (int i = 0; i < fields.length; i++) {
+			Field elem = fields[i];
+		  if (elem == null || !elem.isAnnotationPresent(annoClass)) {
+			   continue;
+		  }
+		  fieldArray.add(elem);
+		}
+		
+		return  fieldArray.toArray(new Field[fieldArray.size()]);
+	}
+	
+	public static Field getDeclaredField(Class at,String fieldname){
+		Field fields = null;
+		try {
+			fields = at.getDeclaredField(fieldname);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		}
+		return fields;
+	}
+	public static Object getDeclaredField(Object object,String fieldname) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+		return getDeclaredField(object,fieldname,Object.class);
+	}
+	public static <T> T getDeclaredField(Object object,String fieldname, Class<T> requiredType) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+		Object value=null;
+		Class klass =object.getClass();
+		Field field = getDeclaredField(klass,fieldname);
+		value = field.get(object);
+		return (T)value;
+	}
+	
+	
+	
+	
 	public static Field getField(Class at,String fieldName){
 		Field fields = null;
 		try {
@@ -93,25 +142,45 @@ public class ReflectionUtil
 	
 	
 	public static Object newClass(String classpath) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
-		return newClass(getClass(classpath), null,null);
+		return newClass(classpath,Object.class);
+	}
+	public static <T> T newClass(String classpath,Class<T> requiredType) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
+		return newClass(getClass(classpath),requiredType);
 	}
 	public static Object newClass(Class classclass) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
-		return newClass(classclass, null,null);
+		return newClass(classclass,Object.class);
+	}
+	public static <T> T newClass(Class classclass,Class<T> requiredType) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
+		return newClass(classclass, new Object[]{},requiredType);
 	}
 	public static Object newClass(String classpath, ArrayList parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
 		//Object[] paramObject = new Object[parameters.size()];
-		return newClass(getClass(classpath),parameters.toArray());
+		return newClass(classpath,parameters,Object.class);
+	}
+	public static <T> T newClass(String classpath, ArrayList parameters,Class<T> requiredType) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+		return newClass(getClass(classpath),null==parameters?new Object[]{}:parameters.toArray(),requiredType);
 	}
 	public static Object newClass(String classpath, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
-		return newClass(getClass(classpath),parameters);
+		return newClass(classpath, parameters, Object.class);
 	}
+	public static <T> T newClass(String classpath, Object[] parameters,Class<T> requiredType) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+		return newClass(getClass(classpath),parameters,requiredType);
+	}
+	
 	public static Object newClass(Class classclass, Object[] parameters) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
-        Class[] classs = new Class[parameters.length];
-        for (int i = 0; i < parameters.length; i++) {
+		return newClass(classclass,parameters, Object.class);
+    }
+	public static <T> T newClass(Class classclass, Object[] parameters,Class<T> requiredType) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException{
+        Class[] classs = new Class[null==parameters?0:parameters.length];
+        for (int i = 0; i < classs.length; i++) {
             classs[i]  =   parameters[i].getClass();
         }
-       return newClass(classclass, classs, parameters);
-    }
+       return newClass(classclass, classs, parameters,requiredType);
+	}
+	
+	public static <T> T  newClass(String classpath,Class[] constructorParamType ,Object[] constructorArgs,Class<T> requiredType) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
+		return newClass(getClass(classpath), constructorParamType,constructorArgs, requiredType);
+	}
 	public static Object newClass(String classpath,Class[] constructorParamType ,Object[] constructorArgs) throws SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
 		return newClass(getClass(classpath), constructorParamType,constructorArgs);
 	}
@@ -133,61 +202,64 @@ public class ReflectionUtil
 	    return newClass(classclass,classs,objects);
 	}
 	public static Object newClass(Class classclass,Class[] constructorParamType ,Object[] constructorArgs) throws SecurityException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-//		  Class[] paramTypes = {
-//		            String.class, 
-//		            String.class, 
-//		            Integer.TYPE };
-		
-//		 Object[] args = { 
-//		            "Fred", 
-//		            "Fintstone", 
-//		            new Integer(90000) };
-		Class klass =classclass;
-		Object theNewObject = null;
-//		try {
-			if(constructorParamType!=null && constructorParamType.length>0){
-				 Constructor cons = null;
-				 
-				 try{
-					 cons = klass.getConstructor(constructorParamType);
-				 }catch(NoSuchMethodException e){
-	                	//System.out.println("noSuchMethod");
-					 Constructor[] constructors = klass.getConstructors();
-	                	for (int i = 0; i < constructors.length; i++) {
-	                		Constructor atConstructor = constructors[i];
-//	                		Parameter[] atParameters = atConstructor.getParameters();
-	                		Class[] atParameters = atConstructor.getParameterTypes();
-	                		boolean isPass = true;
-							if(atParameters.length==constructorArgs.length){//이름과 파라미터개수가 똑같아야된다.
-								for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
-									Class atParameter = atParameters[pCnt];
-									if(atParameter.isInstance(constructorArgs[pCnt])){
-										isPass = true;
-									}else{
-										isPass = false;
-									}
-									
-								}
-								if(isPass){
-									cons = atConstructor;
-								}else{
-									throw new NoSuchMethodException();
-								}
-							}
-						}
-				 }
-				 
-				 theNewObject = cons.newInstance(constructorArgs);
-			}else{
-				theNewObject = klass.newInstance();
-			}
-			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-	      return theNewObject;
+		return newClass(classclass, constructorParamType, constructorArgs, Object.class);
 	}
 	
+	public static <T> T  newClass(Class classclass,Class[] constructorParamType ,Object[] constructorArgs, Class<T> requiredType) throws SecurityException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		//		  Class[] paramTypes = {
+		//        String.class, 
+		//        String.class, 
+		//        Integer.TYPE };
+		
+		//Object[] args = { 
+		//        "Fred", 
+		//        "Fintstone", 
+		//        new Integer(90000) };
+		Class klass =classclass;
+		T theNewObject = null;
+		//try {
+		if(constructorParamType!=null && constructorParamType.length>0){
+			 Constructor cons = null;
+			 
+			 try{
+				 cons = klass.getConstructor(constructorParamType);
+			 }catch(NoSuchMethodException e){
+		        	//System.out.println("noSuchMethod");
+				 Constructor[] constructors = klass.getConstructors();
+		        	for (int i = 0; i < constructors.length; i++) {
+		        		Constructor atConstructor = constructors[i];
+		//        		Parameter[] atParameters = atConstructor.getParameters();
+		        		Class[] atParameters = atConstructor.getParameterTypes();
+		        		boolean isPass = true;
+						if(atParameters.length==constructorArgs.length){//이름과 파라미터개수가 똑같아야된다.
+							for (int pCnt = 0; pCnt < atParameters.length; pCnt++) {
+								Class atParameter = atParameters[pCnt];
+								if(atParameter.isInstance(constructorArgs[pCnt])){
+									isPass = true;
+								}else{
+									isPass = false;
+								}
+								
+							}
+							if(isPass){
+								cons = atConstructor;
+							}else{
+								throw new NoSuchMethodException();
+							}
+						}
+					}
+			 }
+			 
+			 theNewObject = (T) cons.newInstance(constructorArgs);
+		}else{
+			theNewObject = (T) klass.newInstance();
+		}
+		
+		//} catch (Exception e) {
+		//e.printStackTrace();
+		//}
+		return theNewObject;
+	}
 	
 	public static Object executeMethod(Object object,String methodname) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException{
 		return executeMethod(object,methodname,null,null);
@@ -313,34 +385,38 @@ public class ReflectionUtil
 		return value;
 	}
 	public static Object getField(Object object, String fieldname) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
+		return getField(object, fieldname, Object.class);
+	}
+	public static <T> T getField(Object object, String fieldname, Class<T> requiredType) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
 		Object value=null;
-//		try{
-//			Object object = newClass(classfullpath,constructorParamType,constructorArgs);
 			Class klass =object.getClass();
-//			Field field =klass.getDeclaredField(fieldname);
-//			field.setAccessible(true);
 			Field field = klass.getField(fieldname);
 			value = field.get(object);
-//			field.set( object, value);
-//			setSalaryMethod.invoke(object, parameters);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-		return value;
+		return (T)value;
 	}
 	
-	public static void setField(Object object,  String fieldname,Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
-//		try{
-//			Object object = newClass(classfullpath,constructorParamType,constructorArgs);
-			Class klass =object.getClass();
-			Field field = klass.getField(fieldname);
-			 Object oldValue = field.get(object);
-			 field.set( object, value);
-//			setSalaryMethod.invoke(object, parameters);
-//		}catch(Exception e){
-//			
-//		}
+	public static void setField(Object object, String fieldname, Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
+		Field field = object.getClass().getField(fieldname);
+		setField(object, field, value);
 	}
+	public static void setField(Object object,  Field field,Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
+			Class klass =object.getClass();
+			field.setAccessible(true);
+			field.set( object, value);
+	}
+	
+	public static void setDeclaredField(Object object,  String fieldname,Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
+		Field field = object.getClass().getDeclaredField(fieldname);
+		setDeclaredField(object, field, value);
+	}
+	public static void setDeclaredField(Object object, Field field, Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
+			Class klass =object.getClass();
+			field.setAccessible(true);
+			field.set( object, value);
+	}
+	
+	
+	
 	
 //	public static Object getValue(Object clazz, String lookingForValue) throws Exception {
 //			    Field field = clazz.getClass().getField(lookingForValue);
