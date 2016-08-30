@@ -591,8 +591,10 @@ public class ConversionUtil {
 
    
    
-   
-   
+   public List toList(Map map){
+	   List list = new ArrayList(map.values());
+		return list;
+	}
    
    
    
